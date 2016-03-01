@@ -42,6 +42,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'rspec', :require => false
   gem 'rspec_junit_formatter'
+  gem 'responders', '~> 2.0'
 end
 
 # To use ActiveModel has_secure_password

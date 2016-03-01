@@ -46,5 +46,7 @@ module Csw
     end
 
     config.version = load_version
+
+    config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
   end
 end

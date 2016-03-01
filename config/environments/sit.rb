@@ -62,4 +62,6 @@ Csw::Application.configure do
   config.active_support.deprecation = :notify
 
   config.eager_load = true
+
+  config.cmr_search_endpoint = 'https://cmr.sit.earthdata.nasa.gov/search'
 end
