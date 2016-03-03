@@ -67,3 +67,5 @@ group :test do
 end
 
 gem 'bundler-audit'
+
+gem 'responders', '~> 2.0'
