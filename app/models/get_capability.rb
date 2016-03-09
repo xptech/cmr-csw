@@ -1,13 +1,14 @@
 class GetCapability
 
-  def initialize params
+  def initialize params, root_url
 
   end
 
   def get_model
     model = OpenStruct.new
-    # This just an example. In reality this would be in-lined into the template.
     model.title = 'NASA\'s CMR CSW Service'
-    model
+    ##model.csw_endpoint = Rails.application.routes.url_helpers.root_url
+
+    return model
   end
 end
