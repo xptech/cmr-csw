@@ -1,13 +1,12 @@
 class GetCapability
 
-  def initialize params, root_url
+  def initialize params
 
   end
 
   def get_model
     model = OpenStruct.new
-    model.title = 'NASA\'s CMR CSW Service'
-    ##model.csw_endpoint = Rails.application.routes.url_helpers.root_url
+    # Add additional items below
 
     return model
   end
