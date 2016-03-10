@@ -6,8 +6,8 @@ class GetCapability
 
   def get_model
     model = OpenStruct.new
-    # This just an example. In reality this would be in-lined into the template.
-    model.title = 'NASA\'s CMR CSW Service'
-    model
+    # Add additional items below
+
+    return model
   end
 end
