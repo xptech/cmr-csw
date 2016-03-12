@@ -1,5 +1,5 @@
 # Retrieves valid values for the queryable
-# CGMD ONLY Support PropertyName in GetDomain (GET or POST) and not ParameterName
+# CGMD ONLY supports PropertyName in GetDomain (GET or POST) and not ParameterName
 class GetDomain
   def initialize params
 

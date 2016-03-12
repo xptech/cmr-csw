@@ -1,123 +1,127 @@
+# This file contains data structures that are used to analye the CSW queryables support in CSW standard, CMR search and
+# GCMD CSW.  The data structure might give us some help in automating some CMR CSW request or response processing
+
 ISO_QUERYABLES_TO_CMR_QUERYABLES =
     {
         # Hash format below is: ISO_Queryable_Name => [GCMD_Queryable, CMR_Queryable, [array of XML Elements where is appears in output]]
-        # NOTE:  some of the queryables below appear in the SupportedISOQueryables or the AdditionalQueryables sections of
-        # the GCMD GetCapabilities document
+        # NOTE:  the queryables below appear in the SupportedISOQueryables section of the GCMD GetCapabilities document.
+        # The descriptions above each entry are the corresponding ISO standard description of the ISO field from the CSW
+        # standard document.
 
         # The topic of the content of the resource
-        "Subject" => ["Subject","", ["MD_Metadata.identificationInfo.AbstractMD_Identification.descriptiveKeywords.MD_Keywords .keyword",
-                                     "MD_Metadata.identificationInfo.MD_DataIdentification.topicCategory"]],
+        "Subject" => ["Subject", "", ["MD_Metadata.identificationInfo.AbstractMD_Identification.descriptiveKeywords.MD_Keywords .keyword",
+                                      "MD_Metadata.identificationInfo.MD_DataIdentification.topicCategory"]],
         # A name given to the resource
-        "Title" => ["Title","entry_title",["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_ Citation.title"]],
+        "Title" => ["Title", "entry_title", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_ Citation.title"]],
 
         # A summary of the content of the resource.
-        "Abstract" => ["Abstract","",["MD_Metadata.identificationInfo.AbstractMD_Id entification.abstract"]],
+        "Abstract" => ["Abstract", "", ["MD_Metadata.identificationInfo.AbstractMD_Id entification.abstract"]],
         # A target for full-text search of character data types in a catalogue
-        "Anytext" => ["Anytext","keyword",[]],
+        "Anytext" => ["Anytext", "keyword", []],
         # The physical or digital manifestation of the resource
-        "Format" => ["Format","","MD_Metadata.distributionInfo.MD_Distribution.distributionFormat.MD_Format.name"],
+        "Format" => ["Format", "", "MD_Metadata.distributionInfo.MD_Distribution.distributionFormat.MD_Format.name"],
 
         # A unique reference to the record within the catalogue
-        "Identifier" => ["","dif_entry_id",["MD_Metadata.fileIdentifier"]],
+        "Identifier" => ["Identifier", "concept_id", ["MD_Metadata.fileIdentifier"]],
 
         # Date on which the record was created or updated within the catalogue
-        "Modified" => ["Modified","updated_since",["MD_Metadata.dateStamp.Date"]],
+        "Modified" => ["Modified", "updated_since", ["MD_Metadata.dateStamp.Date"]],
 
         # The nature or genre of the content of the resource. Type can include general categories, genres or aggregation
         # levels of content. If MD_Metadata.hierarchyLevel.MD_ScopeCode@codeListValue is missing, default is 'Dataset'.
-        "Type" => ["Type","",["MD_Metadata.hierarchyLevel.MD_ScopeCode/@codeListValue"]],
+        "Type" => ["Type", "", ["MD_Metadata.hierarchyLevel.MD_ScopeCode/@codeListValue"]],
         # A bounding box for identifying a geographic area of interest
-        "BoundingBox" => ["","",["BoundingBox"]],
+        "BoundingBox" => ["", "", ["BoundingBox"]],
 
         # Geographic Coordinate Reference System (Authority and ID) for the BoundingBox
-        "CRS" => ["","two_d_coordinate_system_name",["CRS"]],
+        "CRS" => ["", "two_d_coordinate_system_name", ["CRS"]],
 
         # Complete statement of a one-to-one relationship
-        "Association" => ["","",[]],
+        "Association" => ["", "", []],
         # Western-most coordinate of the limit of the resource ́s extent, expressed in longitude in decimal degrees
         # (positive east)
-        "WestBoundLongitude" => ["","",["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.westBoundLongitude"]],
+        "WestBoundLongitude" => ["", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.westBoundLongitude"]],
         # Southern-most coordinate of the limit of the resource ́s extent, expressed in latitude in decimal degrees
         # (positive north)
-        "SouthBoundLatitude" => ["","",["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.southBoundLatitude"]],
+        "SouthBoundLatitude" => ["", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.southBoundLatitude"]],
         # Eastern-most coordinate of the limit of the resource ́s extent, expressed in longitude in decimal degrees
         # (positive east)
-        "EastBoundLongitude" => ["","",["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.eastBoundLongitude"]],
+        "EastBoundLongitude" => ["", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.eastBoundLongitude"]],
         # Northern-most, coordinate of the limit of the resource ́s extent, expressed in latitude in decimal degrees
         # (positive north)
-        "NorthBoundLatitue" => ["","",["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.northBoundLatitude"]],
+        "NorthBoundLatitue" => ["", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.geographicElement.EX_GeographicBoundingBox.northBoundLatitude"]],
         # Authority of the CRS
-        "Authority" => ["","",["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.codeSpace"]],
+        "Authority" => ["", "", ["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.codeSpace"]],
         # ID of the CRS
-        "ID" => ["","",["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.code"]],
+        "ID" => ["", "", ["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.code"]],
         # Version of the CRS
-        "Version" => ["","",["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.version"]],
+        "Version" => ["", "", ["MD_Metadata.referenceSystemInfo.MD_ReferenceSystem.referenceSystemIdentifier.RS_Identifier.version"]],
         # Alternate title of the resource
-        "AlternateTitle" => ["AlternateTitle","",["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.alternateTitle"]],
+        "AlternateTitle" => ["AlternateTitle", "", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.alternateTitle"]],
 
         # Revision date of the resource
-        "RevisionDate" => ["RevisionDate","revision_date",["MD_Metadata.identificationInfo.Abstrac tMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCode.@codeListValue='revision'].date.Date"]],
+        "RevisionDate" => ["RevisionDate", "revision_date", ["MD_Metadata.identificationInfo.Abstrac tMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCode.@codeListValue='revision'].date.Date"]],
 
         # Creation date of the resource
-        "CreationDate" => ["CreationDate","",["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCo de.@codeListV alue='creation'].date.Date"]],
+        "CreationDate" => ["CreationDate", "", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCo de.@codeListV alue='creation'].date.Date"]],
         # Publication date of the resource
-        "PublicationDate" => ["PublicationDate","",["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCo de.@codeListValue='publication'].date.Date"]],
+        "PublicationDate" => ["PublicationDate", "", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCo de.@codeListValue='publication'].date.Date"]],
 
         # Name of the organisation providing the resource NOT SURE provider_short_name. archive_center or data_center
-        "OrganisationName" => ["OrganisationName","data_center",["MD_Metadata.identificationInfo.AbstractMD_Identification.pointOfContact.CI_ResponsibleParty.organisationName"]],
+        "OrganisationName" => ["OrganisationName", "data_center", ["MD_Metadata.identificationInfo.AbstractMD_Identification.pointOfContact.CI_ResponsibleParty.organisationName"]],
 
         # Are there any security constraints?
-        "HasSecurityConstraints" => ["HasSecurityConstraints","",["MD_Metadata.AbstractMD_Identification.resourceConstraints.MD_SecurityConstraints"]],
+        "HasSecurityConstraints" => ["HasSecurityConstraints", "", ["MD_Metadata.AbstractMD_Identification.resourceConstraints.MD_SecurityConstraints"]],
         # Language of the metadata
-        "Language" => ["Language","",["MD_Metadata.language"]],
+        "Language" => ["Language", "", ["MD_Metadata.language"]],
 
         # Identifier of the resource
-        "ResourceIdentifier" => ["ResourceIdentifier","dif_entry_id", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.identifier.code"]],
+        "ResourceIdentifier" => ["ResourceIdentifier", "dif_entry_id", ["MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.identifier.code"]],
 
         # File identifier of the metadata to which this metadata is a subset (child)
-        "ParentIdentifier" => ["ParentIdentifier","",["MD_Metadata.parentIdentifier"]],
+        "ParentIdentifier" => ["ParentIdentifier", "", ["MD_Metadata.parentIdentifier"]],
         # Methods used to group similar keywords
-        "KeywordType" => ["KeywordType","","",["MD_Metadata.identificationInfo.Abstract.MD_Identification.descriptiveKeywords.MD_Keywords.type"]],
+        "KeywordType" => ["KeywordType", "", "", ["MD_Metadata.identificationInfo.Abstract.MD_Identification.descriptiveKeywords.MD_Keywords.type"]],
         # Main theme(s) of the dataset
-        "TopicCategory" => ["TopicCategory","",["MD_Metadata.identificationInfo.MD_DataIdentification.topicCategory"]],
+        "TopicCategory" => ["TopicCategory", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.topicCategory"]],
         # Language(s) used within the dataset
-        "ResourceLanguage" => ["ResourceLanguage","",["MD_Metadata.identificationInfo.MD_DataIdentification.language"]],
+        "ResourceLanguage" => ["ResourceLanguage", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.language"]],
 
         # Temporal extent information: begin
-        "TempExtent_begin" => ["TempExtent_begin","temporal",["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
+        "TempExtent_begin" => ["TempExtent_begin", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
 
         # Temporal extent information: end
-        "TempExtent_end" => ["TempExtent_end","temporal" ,["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
+        "TempExtent_end" => ["TempExtent_end", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
 
         # Name of a service type.
-        "ServiceType" => ["ServiceType","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType"]],
+        "ServiceType" => ["ServiceType", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType"]],
         # The version of a service type.
-        "ServiceTypeVersion" => ["ServiceTypeVersion","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceTypeVersion"]],
+        "ServiceTypeVersion" => ["ServiceTypeVersion", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceTypeVersion"]],
         # Name of a service operation.
-        "Operation" => ["Operation","",["MD_Metadata.identificationInfo.SV_Ser viceIdentification.containsOperations. SV_OperationMetadata.operationName"]],
+        "Operation" => ["Operation", "", ["MD_Metadata.identificationInfo.SV_Ser viceIdentification.containsOperations. SV_OperationMetadata.operationName"]],
         # Level of detail expressed as a scale factor or a ground distance. Here: the number below the line in a vulgar fraction.
         # Only used, if DistanceValue and DistanceUOM are not used.
-        "Denominator" => ["Denominator","",["MD_Metadata.identificationInfo.MD_ DataIdentification.spatialResolution.MD_Resolution.equivalentScale.MD_RepresentativeFraction.denominator"]],
+        "Denominator" => ["Denominator", "", ["MD_Metadata.identificationInfo.MD_ DataIdentification.spatialResolution.MD_Resolution.equivalentScale.MD_RepresentativeFraction.denominator"]],
         # Sample ground distance. Here: the distance as decimal value. Only used, if Denominator is not used.
-        "DistanceValue" => ["DistanceValue","",["MD_Metadata.identificationInfo.MD_DataIdentification.spatialResolution.MD_Resolution.distance.gco:Distance"]],
+        "DistanceValue" => ["DistanceValue", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.spatialResolution.MD_Resolution.distance.gco:Distance"]],
         # Sample ground distance. Here: the name of the unit of measure. Only used, if Denominator is not used.
-        "DistanceUOM" => ["DistanceUOM","",["MD_Metadata.identificationInfo.MD_DataIdentification.spatialResolution.MD_Resolution.distance.gco:Distance@ uom"]],
+        "DistanceUOM" => ["DistanceUOM", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.spatialResolution.MD_Resolution.distance.gco:Distance@ uom"]],
         # Name of a service operation.
-        "Operation" => ["Operation","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.containsOperations.SV_OperationMetadata.operationName"]],
+        "Operation" => ["Operation", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.containsOperations.SV_OperationMetadata.operationName"]],
         # Description of the geographic area using identifiers.
-        "GeographicDescriptionCode" => ["GeographicDescription Code","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.extent.EX_Extent.geographicElement.EX_GeographicDescripti on.geographicIdentifier.MD_Identifier.code"]],
+        "GeographicDescriptionCode" => ["GeographicDescription Code", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.extent.EX_Extent.geographicElement.EX_GeographicDescripti on.geographicIdentifier.MD_Identifier.code"]],
         # Specifies the tightly coupled dataset relation
-        "OperatesOnData" => ["","",[]],
+        "OperatesOnData" => ["", "", []],
         # The coupling type of this service.
-        "CouplingType" => ["CouplingType","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.couplingType.SV_CouplingType.code@codeListValue"]],
+        "CouplingType" => ["CouplingType", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.couplingType.SV_CouplingType.code@codeListValue"]],
         # Identifier of a dataset tightly coupled with the service instance.
-        "OperatesOn" => ["OperatesOn","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.operatesOn.MD_DataIdentification.citation.CI_Citation.identifier"]],
+        "OperatesOn" => ["OperatesOn", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.operatesOn.MD_DataIdentification.citation.CI_Citation.identifier"]],
         # Identifier of a tightly coupled dataset on which the service operates with a specific operation
-        "OperatesOnIdentifier" => ["OperatesOnIdentifier","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.coupledResource.SV_CoupledResource.identifier"]],
+        "OperatesOnIdentifier" => ["OperatesOnIdentifier", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.coupledResource.SV_CoupledResource.identifier"]],
         #
-        "OperatesOnName" => ["OperatesOnName","",["MD_Metadata.identificationInfo.SV_ServiceIdentification.coupledResource.SV_CoupledResource.operationName"]],
+        "OperatesOnName" => ["OperatesOnName", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.coupledResource.SV_CoupledResource.operationName"]],
         # CharacterString
-        "Lineage" => ["Lineage","",["MD_Metadata.dataQualityInfo.DQ_DataQuality.lineage.LI_Lineage.statement"]]
+        "Lineage" => ["Lineage", "", ["MD_Metadata.dataQualityInfo.DQ_DataQuality.lineage.LI_Lineage.statement"]]
         #
         #"" => ["","",[""]]
     }
@@ -125,117 +129,116 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
 GCMD_SPECIFIC_QUERYABLES_TO_CMR_QUERYABLES =
     {
         # Hash format below is: GCMD_Queryable => [GCMD_Queryable, CMR_Queryable, [array of XML Elements where is appears in output]]
-        # the queryables below are GCMD specific and do not exist as ISO queryables or additional queryables
+        # NOTE:  ALL of the queryables below appear the AdditionalQueryables sections of the GCMD GetCapabilities document.
+        # Since they do  not appear in the ISO standard, there is no description of the meaning of the entry
+
+        "Project" => ["Project", "project", [""]], # not sure this is the same meaning since CMR Project is campaign
         #
-        "Project" => ["Project","project",[""]], # not sure this is the same meaning since CMR Project is campaign
+        "Platform" => ["Platform", "platform", [""]],
         #
-        "Platform" => ["Platform","platform",[""]],
+        "Location" => ["Location", "spatial_keyword", [""]], # spatial_keyword OR archive_center
         #
-        "Location" => ["Location","spatial_keyword",[""]], # spatial_keyword OR archive_center
+        "ScienceKeywords" => ["ScienceKeywords", "science_keywords", [""]],
         #
-        "ScienceKeywords" => ["ScienceKeywords","science_keywords",[""]],
+        "CreationDate" => ["CreationDate", "", [""]],
         #
-        "CreationDate" => ["CreationDate","",[""]],
+        "Instrument" => ["Instrument", "instrument", [""]],
         #
-        "Instrument" => ["Instrument","instrument",[""]],
+        "ConditionApplyingToAccessAndUse" => ["ConditionApplyingToAccessAndUse", "", [""]],
         #
-        "ConditionApplyingToAccessAndUse" => ["ConditionApplyingToAccessAndUse","",[""]],
+        "AccessConstraints" => ["AccessConstraints", "", [""]],
         #
-        "AccessConstraints" => ["AccessConstraints","",[""]],
+        "OnlineResourceMimeType" => ["OnlineResourceMimeType", "", [""]],
         #
-        "OnlineResourceMimeType" => ["OnlineResourceMimeType","",[""]],
+        "ResponsiblePartyRole" => ["ResponsiblePartyRole", "", [""]],
         #
-        "ResponsiblePartyRole" => ["ResponsiblePartyRole","",[""]],
+        "OnlineResourceType" => ["OnlineResourceType", "", [""]],
         #
-        "OnlineResourceType" => ["OnlineResourceType","",[""]],
+        "SpecificationDate" => ["SpecificationDate", "", [""]],
         #
-        "SpecificationDate" => ["SpecificationDate","",[""]],
+        "MetadataPointOfContact" => ["MetadataPointOfContact", "", [""]],
         #
-        "MetadataPointOfContact" => ["MetadataPointOfContact","",[""]],
+        "Classification" => ["Classification", "", [""]],
         #
-        "Classification" => ["Classification","",[""]],
+        "OtherConstraints" => ["OtherConstraints", "", [""]],
         #
-        "OtherConstraints" => ["OtherConstraints","",[""]],
+        "Degree" => ["Degree", "", [""]],
         #
-        "Degree" => ["Degree","",[""]],
-        #
-        "SpecificationTitle" => ["SpecificationTitle","",[""]]
+        "SpecificationTitle" => ["SpecificationTitle", "", [""]]
         #
         #"" => ["","",[""]]
     }
 
-CMR_SPECIFIC_QUERYABLES_TO_ISO_QUERYABLES =
-{
-    #
-    "provider_short_name" => ["","",[""]]
-}
-
 ALL_CMR_QUERYABLES =
-{
-    #
-    "concept_id" => ["","",[""]],
-    #
-    "echo_collection_id" => ["","",[""]],
-    #
-    "provider_short_name" => ["","",[""]],
-    #
-    "entry_title" => ["","",[""]],
-    #
-    "dataset_id" => ["","",[""]],
-    #
-    "entry_id" => ["","",[""]],
-    #
-    "dif_entry_id" => ["","",[""]],
-    #
-    "archive_center" => ["","",[""]],
-    #
-    "data_center" => ["","",[""]],
-    #
-    "temporal" => ["","",[""]],
-    #
-    "project" => ["","",[""]],
-    #
-    "updated_since" => ["","",[""]],
-    #
-    "revision_date" => ["","",[""]],
-    #
-    "processing_level_id" => ["","",[""]],
-    #
-    "platform" => ["","",[""]],
-    #
-    "instrument" => ["","",[""]],
-    #
-    "spatial_keyword" => ["","",[""]],
-    #
-    "science_keywords" => ["","",[""]],
-    #
-    "two_d_coordinate_system_name" => ["","",[""]],
-    #
-    "collection_data_type" => ["","",[""]],
-    #
-    "online_only" => ["","",[""]],
-    #
-    "downloadable" => ["","",[""]],
-    #
-    "browse_only" => ["","",[""]],
-    #
-    "browsable" => ["","",[""]],
-    #
-    "keyword" => ["","",[""]],
-    #
-    "provider" => ["","",[""]],
-    #
-    "short_name" => ["","",[""]],
-    #
-    "version" => ["","",[""]],
-    #
-    "polygon" => ["","",[""]],
-    #
-    "bounding_box" => ["","",[""]],
-    #
-    "point" => ["","",[""]],
-    #
-    "line" => ["","",[""]],
-    #
-    "has_granules" => ["","",[""]]
-}
+    {
+        # Hash format below is: CMR_Queryable => [GCMD_Queryable, CMR_Queryable, [array of XML Elements where is appears in output]]
+        # NOTE:  ALL of the queryables below appear the AdditionalQueryables sections of the GCMD GetCapabilities document.
+        # Since they do  not appear in the ISO standard, there is no description of the meaning of the entry
+
+        #
+        "concept_id" => ["", "concept_id", [""]],
+        #
+        "echo_collection_id" => ["", "echo_collection_id", [""]],
+        #
+        "provider_short_name" => ["", "provider_short_name", [""]],
+        #
+        "entry_title" => ["", "entry_title", [""]],
+        #
+        "dataset_id" => ["", "dataset_id", [""]],
+        #
+        "entry_id" => ["", "entry_id", [""]],
+        #
+        "dif_entry_id" => ["", "dif_entry_id", [""]],
+        #
+        "archive_center" => ["", "archive_center", [""]],
+        #
+        "data_center" => ["", "data_center", [""]],
+        #
+        "temporal" => ["", "temporal", [""]],
+        #
+        "project" => ["", "project", [""]],
+        #
+        "updated_since" => ["", "updated_since", [""]],
+        #
+        "revision_date" => ["", "revision_date", [""]],
+        #
+        "processing_level_id" => ["", "processing_level_id", [""]],
+        #
+        "platform" => ["", "platform", [""]],
+        #
+        "instrument" => ["", "instrument", [""]],
+        #
+        "spatial_keyword" => ["", "spatial_keyword", [""]],
+        #
+        "science_keywords" => ["", "science_keywords", [""]],
+        #
+        "two_d_coordinate_system_name" => ["", "two_d_coordinate_system_name", [""]],
+        #
+        "collection_data_type" => ["", "collection_data_type", [""]],
+        #
+        "online_only" => ["", "online_only", [""]],
+        #
+        "downloadable" => ["", "downloadable", [""]],
+        #
+        "browse_only" => ["", "browse_only", [""]],
+        #
+        "browsable" => ["", "browsable", [""]],
+        #
+        "keyword" => ["", "keyword", [""]],
+        #
+        "provider" => ["", "provider", [""]],
+        #
+        "short_name" => ["", "short_name", [""]],
+        #
+        "version" => ["", "version", [""]],
+        #
+        "polygon" => ["", "polygon", [""]],
+        #
+        "bounding_box" => ["", "bounding_box", [""]],
+        #
+        "point" => ["", "point", [""]],
+        #
+        "line" => ["", "line", [""]],
+        #
+        "has_granules" => ["", "has_granules", [""]]
+    }

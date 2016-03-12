@@ -21,15 +21,15 @@ RSpec.describe GetCapability do
           cmr_search_params_mapped_to_gcmd_csw["#{gcmd_queryable_name}"] = "#{value[1]}"
         end
       end
-      # CMR Search supported a total of 13 GCMD CSW queryables
-      expect(cmr_search_params_mapped_to_gcmd_csw.size).to eq 13
+      # CMR Search supported a total of 14 GCMD CSW queryables
+      expect(cmr_search_params_mapped_to_gcmd_csw.size).to eq 14
       # supported CMR queryable names
-      expect(cmr_search_params_mapped_to_gcmd_csw.values).to eq ["entry_title", "keyword", "updated_since", "revision_date",
+      expect(cmr_search_params_mapped_to_gcmd_csw.values).to eq ["entry_title", "keyword", "concept_id","updated_since", "revision_date",
                                                                  "data_center", "dif_entry_id", "temporal","temporal",
                                                                  "project", "platform", "spatial_keyword", "science_keywords",
                                                                  "instrument"]
       # supported corresponding GCMD CSW Queryable Properties
-      expect(cmr_search_params_mapped_to_gcmd_csw.keys).to eq ["Title", "Anytext", "Modified", "RevisionDate",
+      expect(cmr_search_params_mapped_to_gcmd_csw.keys).to eq ["Title", "Anytext", "Identifier", "Modified", "RevisionDate",
                                                                "OrganisationName", "ResourceIdentifier", "TempExtent_begin", "TempExtent_end",
                                                                "Project", "Platform", "Location", "ScienceKeywords",
                                                                "Instrument"]
@@ -89,10 +89,10 @@ RSpec.describe GetCapability do
           end
         end
       end
-      expect(cmr_queryables_not_supported_by_gcmd_csw.length).to eq 20
+      expect(cmr_queryables_not_supported_by_gcmd_csw.length).to eq 19
       # CMR queryables NOT supported by CSW
       # TODO - might consider adding them to CMR CSW
-      expected_cmr_queryables_not_supported_by_gcmd_csw_set = Set.new(["concept_id", "echo_collection_id", "provider_short_name",
+      expected_cmr_queryables_not_supported_by_gcmd_csw_set = Set.new(["echo_collection_id", "provider_short_name",
                                                            "dataset_id", "entry_id", "archive_center", "processing_level_id",
                                                            "collection_data_type", "online_only", "downloadable", "browse_only",
                                                            "browsable", "provider", "short_name", "version", "polygon",
