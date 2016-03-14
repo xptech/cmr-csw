@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This XML file is here FOR REREFENCE ONLY.  It is the original GCMD GetCapabilities response.  It contains comments
+     to be used for the CMR CSW implementation as well as marks that identify queryables that were captured in the
+     initializer queryables_mapping, which was creating by comparing the CSW standard documents, the GCMD GetCapabilities
+     response and the CMR API documentation.
+-->
 <csw:Capabilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gml="http://www.opengis.net/gml"
  xmlns:ows="http://www.opengis.net/ows" xmlns:ogc="http://www.opengis.net/ogc"
@@ -171,21 +176,61 @@
                 <ows:Value>XML</ows:Value>  
             </ows:Constraint>
             <ows:Constraint name="SupportedISOQueryables">
-              <ows:Value>ResourceIdentifier</ows:Value>
-              <ows:Value>Identifier</ows:Value>
-              <ows:Value>Title</ows:Value>
-              <ows:Value>OrganisationName</ows:Value>
-              <ows:Value>AnyText</ows:Value>
-              <ows:Value>Modified</ows:Value>
-              <ows:Value>RevisionDate</ows:Value>
-              <ows:Value>TempExtent_begin</ows:Value>
-              <ows:Value>TempExtent_end</ows:Value>
-              <ows:Value>Project</ows:Value>
-              <ows:Value>Platform</ows:Value>
-              <ows:Value>Instrument</ows:Value>
-              <ows:Value>Location</ows:Value>
-              <ows:Value>ScienceKeyword</ows:Value>
+                <ows:Value>ServiceType</ows:Value> <!-- -->
+                <ows:Value>ServiceTypeVersion</ows:Value> <!-- -->
+                <ows:Value>Operation</ows:Value> <!-- -->
+                <ows:Value>GeographicDescriptionCode</ows:Value> <!-- -->
+                <ows:Value>CouplingType</ows:Value> <!-- -->
+                <ows:Value>OperatesOn</ows:Value> <!-- -->
+                <ows:Value>OperatesOnName</ows:Value> <!-- -->
+                <ows:Value>OperatesOnIdentifier</ows:Value> <!-- -->
+                <ows:Value>Format</ows:Value> <!-- -->
+                <ows:Value>OrganisationName</ows:Value> <!-- OK -->
+                <ows:Value>Type</ows:Value> <!-- -->
+                <ows:Value>ServiceType</ows:Value> <!-- -->
+                <ows:Value>ResourceLanguage</ows:Value> <!-- -->
+                <ows:Value>RevisionDate</ows:Value> <!-- -->
+                <ows:Value>AnyText</ows:Value> <!-- -->
+                <ows:Value>Modified</ows:Value> <!-- -->
+                <ows:Value>PublicationDate</ows:Value> <!-- -->
+                <ows:Value>ResourceIdentifier</ows:Value> <!-- -->
+                <ows:Value>ParentIdentifier</ows:Value> <!-- -->
+                <ows:Value>Project</ows:Value> <!-- -->
+                <ows:Value>Identifier</ows:Value> <!-- -->
+                <ows:Value>TopicCategory</ows:Value> <!-- -->
+                <ows:Value>Platform</ows:Value> <!-- -->
+                <ows:Value>TempExtent_begin</ows:Value> <!-- -->
+                <ows:Value>TempExtent_end</ows:Value> <!-- -->
+                <ows:Value>Subject</ows:Value> <!-- -->
+                <ows:Value>ScienceKeyword</ows:Value>
+                <ows:Value>Location</ows:Value> <!-- -->
+                <ows:Value>CreationDate</ows:Value> <!-- -->
+                <ows:Value>Title</ows:Value> <!-- -->
+                <ows:Value>DistanceUOM</ows:Value> <!-- -->
+                <ows:Value>DistanceValue</ows:Value> <!-- -->
+                <ows:Value>Denominator</ows:Value> <!-- -->
+                <ows:Value>AlternateTitle</ows:Value> <!-- -->
+                <ows:Value>Language</ows:Value> <!-- -->
+                <ows:Value>HasSecurityConstraints</ows:Value> <!-- -->
+                <ows:Value>Instrument</ows:Value> <!-- -->
+                <ows:Value>KeywordType</ows:Value> <!-- -->
+                <ows:Value>Abstract</ows:Value>   <!-- -->
             </ows:Constraint>
+            <ows:Constraint name="AdditionalQueryables">
+                <ows:Value>AccessConstraints</ows:Value> <!-- -->
+                <ows:Value>OnlineResourceMimeType</ows:Value> <!-- -->
+                <ows:Value>ResponsiblePartyRole</ows:Value> <!-- -->
+                <ows:Value>OnlineResourceType</ows:Value> <!-- -->
+                <ows:Value>Lineage</ows:Value> <!-- -->
+                <ows:Value>SpecificationDate</ows:Value> <!-- -->
+                <ows:Value>ConditionApplyingToAccessAndUse</ows:Value> <!-- -->
+                <ows:Value>SpecificationDateType</ows:Value> <!-- -->
+                <ows:Value>MetadataPointOfContact</ows:Value> <!-- -->
+                <ows:Value>Classification</ows:Value> <!-- -->
+                <ows:Value>OtherConstraints</ows:Value> <!-- -->
+                <ows:Value>Degree</ows:Value> <!-- -->
+                <ows:Value>SpecificationTitle</ows:Value>  <!-- -->
+            </ows:Constraint>  
         </ows:Operation>
         
         <ows:Operation name="GetRecordById">
@@ -253,12 +298,12 @@
         <ogc:Spatial_Capabilities>
             <ogc:GeometryOperands>
                 <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
-                <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand> <!-- point -->
-                <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand> <!-- line -->
+                <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
+                <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
                 <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>  
             </ogc:GeometryOperands>
             <ogc:SpatialOperators>
-                <ogc:SpatialOperator name="BBOX" /> <!-- bounding_box -->
+                <ogc:SpatialOperator name="BBOX" />
                 <ogc:SpatialOperator name="Equals" />
                 <ogc:SpatialOperator name="Overlaps" />
                 <ogc:SpatialOperator name="Disjoint" />
