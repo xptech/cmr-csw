@@ -2,10 +2,6 @@ require 'spec_helper'
 
 RSpec.describe GetCapability do
   context 'queryables mappings' do
-    let (:total_gcmd_csw_queryables) { 0 }
-    let (:total_cmr_csw_queryables) { 0 }
-    let (:total_cmr_non_csw_queryables) { 0 }
-
     # The queryables below will be in the initial CMR CSW implementation
     it 'is possible to identify the supported CMR search parameters which map to GCMD CSW GetCapabilities queryables' do
       cmr_search_params_mapped_to_gcmd_csw = Hash.new
