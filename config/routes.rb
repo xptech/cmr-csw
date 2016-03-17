@@ -3,7 +3,7 @@ require 'routes_helper'
 Rails.application.routes.draw do
 
   # user Rails 4 Advanced Constraints specification with lambda to set up the CSW routes
-  # see lib/routes_helper.rb for the RequestPostRouter
+  # see lib/routes_helper.rb for the RequestRouter
   get '/', to: 'describe_record#index', constraints: lambda { |request| RequestRouter.is_describe_record_get(request) }
   # GetCapabilities must be supported for both GET and POST
   get '/', to: 'get_capabilities#index', constraints: lambda { |request| RequestRouter.is_get_capabilities_get(request) }
