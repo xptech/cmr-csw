@@ -17,6 +17,11 @@ class RequestRouter
     return post_helper(request,'GetCapabilities')
   end
 
+  # GetDomain POST request must be supported in addition to GET
+  def self.is_get_domain_post(request)
+    return post_helper(request,'GetDomain')
+  end
+
   def self.is_get_capabilities_get(request)
     return get_helper(request,'GETCAPABILITIES')
   end

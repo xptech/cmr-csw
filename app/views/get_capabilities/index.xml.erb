@@ -136,7 +136,7 @@
             <ows:DCP>
                 <ows:HTTP>
                     <ows:Get xlink:href="<%= root_url %>" />
-                        <ows:Post xlink:href="<%= root_url %>">
+                    <ows:Post xlink:href="<%= root_url %>">
                         <ows:Constraint name="PostEncoding">
                             <ows:Value>XML</ows:Value>
                             <!-- CVD No Support for SOAP -->
@@ -164,7 +164,8 @@
             </ows:Parameter>
             <ows:Parameter name="CONSTRAINTLANGUAGE">
                 <ows:Value>FILTER</ows:Value>
-                <ows:Value>CQL_TEXT</ows:Value>    
+                <!-- CVD implement filter first -->
+                <!-- <ows:Value>CQL_TEXT</ows:Value> -->
             </ows:Parameter>
             <!-- CVD this seems to be a dupe of the PostEncoding above -->
             <ows:Constraint name="PostEncoding">
@@ -192,7 +193,7 @@
             <ows:DCP>
                 <ows:HTTP>
                     <ows:Get xlink:href="<%= root_url %>" />
-                        <ows:Post xlink:href="<%= root_url %>">
+                    <ows:Post xlink:href="<%= root_url %>">
                         <ows:Constraint name="PostEncoding">
                             <ows:Value>XML</ows:Value>
                             <!-- CVD No SOAP support for now -->
@@ -225,8 +226,8 @@
         <!--
         <ows:Operation name="Transaction"><ows:DCP><ows:HTTP><ows:Get  xlink:href="http://$HOST/csw" /><ows:Post xlink:href="http://$HOST/csw"  />
 				</ows:HTTP>
-			</ows:DCP>
-		</ows:Operation>
+			  </ows:DCP>
+		    </ows:Operation>
         -->
         <!--		
 		<ows:Operation name="Harvest"><ows:DCP><ows:HTTP><ows:Get  xlink:href="http://$HOST/csw" /><ows:Post xlink:href="http://$HOST/csw"  />
@@ -252,21 +253,26 @@
     <ogc:Filter_Capabilities>
         <ogc:Spatial_Capabilities>
             <ogc:GeometryOperands>
-                <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
-                <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand> <!-- point -->
+                <!-- CVD not supported by CMR -->
+                <!-- <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand> -->
+                <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand> <!-- CMR point -->
                 <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand> <!-- line -->
                 <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>  
             </ogc:GeometryOperands>
             <ogc:SpatialOperators>
                 <ogc:SpatialOperator name="BBOX" /> <!-- bounding_box -->
-                <ogc:SpatialOperator name="Equals" />
-                <ogc:SpatialOperator name="Overlaps" />
-                <ogc:SpatialOperator name="Disjoint" />
+                <!-- CVD NOT SUPPORTED by CMR
+                <ogc:SpatialOperator name="Equals" /> -->
+                <ogc:SpatialOperator name="Overlaps" /> <!-- map to intersects -->
+                <!-- CVD NOT SUPPORTED by CMR
+                <ogc:SpatialOperator name="Disjoint" /> -->
                 <ogc:SpatialOperator name="Intersects" />
-                <ogc:SpatialOperator name="Touches" />
-                <ogc:SpatialOperator name="Crosses" />
-                <ogc:SpatialOperator name="Within" />
-                <ogc:SpatialOperator name="Contains" />
+                <ogc:SpatialOperator name="Touches" />  <!-- map to intersects -->
+                <ogc:SpatialOperator name="Crosses" />  <!-- map to intersects -->
+                <!-- CVD NOT SUPPORTED by CMR
+                <ogc:SpatialOperator name="Within" /> -->
+                <!-- CVD NOT SUPPORTED by CMR
+                <ogc:SpatialOperator name="Contains" /> -->
             </ogc:SpatialOperators>
         </ogc:Spatial_Capabilities>
         
