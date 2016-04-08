@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   #post '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_post(request) }
   # TBD if GetRecordById will also be supported via GET
   post '/', to: 'get_record_by_id#index', constraints: lambda { |request| RequestRouter.is_get_record_by_id_post(request) }
-  # TBD if GetRecords will also be supported via GET
+  # GetRecords does not support GET but must return a meaningful exception
   post '/', to: 'get_records#index', constraints: lambda { |request| RequestRouter.is_get_records_post(request) }
-
+  get '/', to: 'get_records#index', constraints: lambda { |request| RequestRouter.is_get_records_get(request) }
   get 'health/index'
   get 'health' => 'health#index', format: 'json'
 

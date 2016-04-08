@@ -10,7 +10,7 @@ class OwsException < StandardError
     @exception_code = exception_code
     @locator = locator
     @http_code = http_code
-    Rails.logger.error("Encountered error: http_code: #{@http_code} exception_text: #{@exception_text} locator: #{@locator} exception_code: #{@exception_code}")
+    Rails.logger.error("Encountered error: http_code: #{@http_code} | exception_text: #{@exception_text} | locator: #{@locator} | exception_code: #{@exception_code}")
   end
 
   # XML representation of this exception using the CSW / OWS specification

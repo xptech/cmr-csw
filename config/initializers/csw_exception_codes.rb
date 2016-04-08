@@ -1,17 +1,19 @@
 # this file contains the CSW EXCEPTION CODES to be used for CSW request error handling
 # the CSW specification indicates the error handling approach for CSW requests
-# the codes below are custom codes to be used for OwsExceptions
+# the codes below are custom codes to be used for CMR CSW OwsExceptions
 
-# TODO add the codes below in the GetCapabilities response section for each operation OR make them more generic
 # GetCapabilities
-INVALID_GET_REQUEST_GET_CAPABILITIES = "100"
-INVALID_POST_REQUEST_GET_CAPABILITIES = "101"
-INVALID_REQUEST_TYPE_GET_CAPABILITIES = "102"
+INVALID_GET_REQUEST_GET_CAPABILITIES = "1000"
+INVALID_POST_REQUEST_GET_CAPABILITIES = "1001"
+INVALID_REQUEST_TYPE_GET_CAPABILITIES = "1002"
 
-# GetDomain
+# GetDomain # 2000
 
-# DescribeRecord
+# DescribeRecord # 3000
 
-# GetRecordById
+# GetRecordById # 4000
 
-# GerRecords
+# GetRecords
+INVALID_GET_REQUEST_GET_RECORDS = "5000"
+INVALID_POST_REQUEST_GET_RECORDS = "5001"
+INVALID_REQUEST_TYPE_GET_RECORDS = "5002"
