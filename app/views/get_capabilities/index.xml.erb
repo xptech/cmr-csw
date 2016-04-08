@@ -135,17 +135,13 @@
         <ows:Operation name="GetRecords">
             <ows:DCP>
                 <ows:HTTP>
-                    <ows:Get xlink:href="<%= root_url %>" />
                     <ows:Post xlink:href="<%= root_url %>">
                         <ows:Constraint name="PostEncoding">
                             <ows:Value>XML</ows:Value>
-                            <!-- CVD No Support for SOAP -->
-                            <!-- <ows:Value>SOAP</ows:Value> -->
                         </ows:Constraint>
                     </ows:Post>
                 </ows:HTTP>
             </ows:DCP>
-            <!-- FIXME : Gets it from enum or conf -->
             <ows:Parameter name="resultType">
                 <ows:Value>hits</ows:Value>
                 <ows:Value>results</ows:Value>
@@ -164,13 +160,7 @@
             </ows:Parameter>
             <ows:Parameter name="CONSTRAINTLANGUAGE">
                 <ows:Value>FILTER</ows:Value>
-                <!-- CVD implement filter first -->
-                <!-- <ows:Value>CQL_TEXT</ows:Value> -->
             </ows:Parameter>
-            <!-- CVD this seems to be a dupe of the PostEncoding above -->
-            <ows:Constraint name="PostEncoding">
-                <ows:Value>XML</ows:Value>  
-            </ows:Constraint>
             <ows:Constraint name="SupportedISOQueryables">
               <ows:Value>ResourceIdentifier</ows:Value>
               <ows:Value>Identifier</ows:Value>
