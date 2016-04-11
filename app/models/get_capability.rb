@@ -43,9 +43,9 @@ class GetCapability
       end
       if root_name.upcase != 'GETCAPABILITIES'
         if(exception_message != nil)
-          exception_message = exception_message + "The CSW GetCapabilities POST request must contain the 'GetCapabilities root element."
+          exception_message = exception_message + "The CSW GetCapabilities POST request must contain the 'GetCapabilities' root element."
         else
-          exception_message = "The CSW GetCapabilities POST request must contain the 'GetCapabilities root element."
+          exception_message = "The CSW GetCapabilities POST request must contain the 'GetCapabilities' root element."
         end
       end
       if version_attribute == nil || version_attribute != '2.0.2'
@@ -58,7 +58,7 @@ class GetCapability
       if(exception_message == nil)
         return true
       else
-        ex = OwsException.new(INVALID_GET_REQUEST_GET_CAPABILITIES, exception_message, 'CMR CSW:GetCapability.is_valid', 400)
+        ex = OwsException.new(INVALID_POST_REQUEST_GET_CAPABILITIES, exception_message, 'CMR CSW:GetCapability.validate_post_request', 400)
         raise ex
       end
     rescue Nokogiri::XML::SyntaxError => e
@@ -94,7 +94,7 @@ class GetCapability
     if(exception_message == nil)
       return true
     else
-      ex = OwsException.new(INVALID_GET_REQUEST_GET_CAPABILITIES, exception_message, 'CMR CSW:GetCapability.is_valid', 400)
+      ex = OwsException.new(INVALID_GET_REQUEST_GET_CAPABILITIES, exception_message, 'CMR CSW:GetCapability.validate_get_request', 400)
       raise ex
     end
   end

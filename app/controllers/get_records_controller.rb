@@ -1,10 +1,15 @@
 class GetRecordsController < ApplicationController
-  # TODO: implement this
   def index
-    # create GetRecords model
-    # set model variable to be used in the view below
-
-    # render view
-    render 'get_records/index.xml.erb', :status => :ok and return
+    gr = GetRecords.new(params, request)
+    @get_records_model = gr.get_model
+    begin
+      if gr.is_valid()
+        # TODO implement GetRecords view
+        render 'get_records/index.xml.erb', :status => :ok and return
+      end
+    # TODO might want to rescue ALL exceptions not just OwsException
+    rescue OwsException => e
+      render xml: e.to_xml, :status => e.http_code and return
+    end
   end
 end

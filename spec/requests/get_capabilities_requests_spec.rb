@@ -51,7 +51,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CSW GetCapabilities GET request must contain the 'service=CSW' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -67,7 +67,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CMR CSW GetCapabilities GET request must contain the 'version=2.0.2' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -83,7 +83,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CSW GetCapabilities GET request must contain the 'service=CSW' query parameter.The CMR CSW GetCapabilities GET request must contain the 'version=2.0.2' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -99,7 +99,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CMR CSW GetCapabilities GET request must contain the 'version=2.0.2' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -115,7 +115,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CSW GetCapabilities GET request must contain the 'service=CSW' query parameter.The CMR CSW GetCapabilities GET request must contain the 'version=2.0.2' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -131,7 +131,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_get_request" exceptionCode="1000">
     <ExceptionText>The CSW GetCapabilities GET request must contain the 'service=CSW' query parameter.The CMR CSW GetCapabilities GET request must contain the 'version=2.0.2' query parameter.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -158,7 +158,7 @@ eos
       expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_post_request" exceptionCode="1001">
     <ExceptionText>The CSW GetCapabilities POST request must contain the 'service=CSW' attribute for the 'GetCapabilities' root element.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -186,7 +186,7 @@ eos
     expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_post_request" exceptionCode="1001">
     <ExceptionText>The CMR CSW GetCapabilities POST request must contain the 'version=2.0.2' attribute for the 'GetCapabilities' root element.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -214,7 +214,7 @@ eos
     expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_post_request" exceptionCode="1001">
     <ExceptionText>The CSW GetCapabilities POST request must contain the 'service=CSW' attribute for the 'GetCapabilities' root element.The CMR CSW GetCapabilities POST request must contain the 'version=2.0.2' attribute for the 'GetCapabilities' root element.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -242,7 +242,7 @@ eos
     expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_post_request" exceptionCode="1001">
     <ExceptionText>The CMR CSW GetCapabilities POST request must contain the 'version=2.0.2' attribute for the 'GetCapabilities' root element.</ExceptionText>
   </Exception>
 </ExceptionReport>
@@ -270,7 +270,7 @@ eos
     expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetCapability.is_valid" exceptionCode="100">
+  <Exception locator="CMR CSW:GetCapability.validate_post_request" exceptionCode="1001">
     <ExceptionText>The CSW GetCapabilities POST request must contain the 'service=CSW' attribute for the 'GetCapabilities' root element.The CMR CSW GetCapabilities POST request must contain the 'version=2.0.2' attribute for the 'GetCapabilities' root element.</ExceptionText>
   </Exception>
 </ExceptionReport>

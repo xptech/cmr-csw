@@ -128,6 +128,18 @@ a bit randomly qualified in the GCMD GetCapabilities.
  
 ##### Issues #####
 
+### GetRecords ###
+##### Quick summary #####
+* The CMR CSW GetRecords request is only supported via POST.  GCMD does not support 
+GetRecords GET even though it is in the GetCapabilities.  Neither does CWIC but CWIC
+returns a meaningful error message (REQUEST_EXCEPTION: UNRECOGNIZED_REQUEST - Only Getcapabilities, 
+DescribeRecord and GetRecordById supported for HTTP GET method).  Probably the reason is that one can't 
+express meaningful queries via the query parameters unless one supports some basic CQL.  The only way CWIC
+and GCMD CSW support GetRecords is via POST and request payloads that contain the query / filter.  For now 
+the CMR CSW GetRecords GET always returns an exception stating that only POST is supported.  
+That is also reflected in the CMR CSW GetCapabilities response.
+ 
+##### Issues #####
 
 ### Who do I talk to? ###
 

@@ -46,7 +46,6 @@ eos
       post :index, valid_get_capabilities_request_xml
       expect(response).to have_http_status(:success)
     end
-
   end
 
 end
