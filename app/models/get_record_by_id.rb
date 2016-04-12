@@ -46,7 +46,7 @@ class GetRecordById
   end
 
   def submit
-    cmr_params = to_cmr_dataset_params
+    cmr_params = to_cmr_collection_params
     Rails.logger.info "CMR Params: #{cmr_params}"
     response = nil
     begin
@@ -120,7 +120,7 @@ class GetRecordById
 
   private
 
-  def to_cmr_dataset_params
+  def to_cmr_collection_params
     cmr_params = {}
     id_array = []
     # The Id parameter is a comma-separated list of concept ids. This needs to converted into a repeated number of concept_id parameters
