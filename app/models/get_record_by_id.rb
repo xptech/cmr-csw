@@ -17,17 +17,27 @@ class GetRecordById
   @response_element
 
   attr_accessor :id
+  # These validations should eventually go in a parent request class
+  attr_accessor :version
+  attr_accessor :service
 
-  validates :id, presence: true
+  validates :id, presence: {message: 'id can\'t be blank'}
+  validates :version, inclusion: {in: %w(2.0.2), message: "version '%{value}' is not supported. Supported version is '2.0.2'"}
+  validates :service, inclusion: {in: %w(CSW), message: "service '%{value}' is not supported. Supported service is 'CSW'"}
 
   def initialize (params, request)
     @request_params = params
     @request = request
     @request_body = request.body.read
 
-    @output_schema = params[:outputSchema].blank? ? 'http://www.isotc211.org/2005/gmi' : params[:outputSchema]
-    @response_element = params[:ElementSetName].blank? ? 'summary' : params[:ElementSetName]
-    @id = params[:id]
+    if (@request.get?)
+      @output_schema = params[:outputSchema].blank? ? 'http://www.isotc211.org/2005/gmi' : params[:outputSchema]
+      @response_element = params[:ElementSetName].blank? ? 'summary' : params[:ElementSetName]
+      @id = params[:id]
+      @version = params[:version]
+      @service = params[:service]
+    end
+    # Post in later sprint
   end
 
   def submit
