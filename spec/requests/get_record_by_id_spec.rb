@@ -78,4 +78,34 @@ eos
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
+
+  it 'correctly reports an error when an incorrect output schema is requested' do
+      expected_response_body =<<-eos
+<?xml version="1.0"?>
+<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
+  <Exception locator="outputSchema" exceptionCode="InvalidParameterValue">
+    <ExceptionText>Output schema 'foo' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi</ExceptionText>
+  </Exception>
+</ExceptionReport>
+eos
+
+      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'foo', :ElementSetName => 'full'
+      expect(response).to have_http_status(:bad_request)
+      expect(response.body).to eq expected_response_body
+  end
+
+  it 'correctly reports an error when an incorrect element set name is requested' do
+      expected_response_body =<<-eos
+<?xml version="1.0"?>
+<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
+  <Exception locator="ElementSetName" exceptionCode="InvalidParameterValue">
+    <ExceptionText>Element set name 'foo' is not supported. Supported element set names are brief, summary, full</ExceptionText>
+  </Exception>
+</ExceptionReport>
+eos
+
+      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'foo'
+      expect(response).to have_http_status(:bad_request)
+      expect(response.body).to eq expected_response_body
+  end
 end

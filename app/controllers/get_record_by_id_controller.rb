@@ -11,6 +11,8 @@ class GetRecordByIdController < ApplicationController
         raise OwsException.new('MissingParameterValue', grbi.errors[:id].join(' '), 'id', '400') unless grbi.errors[:id].blank?
         raise OwsException.new('InvalidParameterValue', grbi.errors[:version].join(' '), 'version', '400') unless grbi.errors[:version].blank?
         raise OwsException.new('InvalidParameterValue', grbi.errors[:service].join(' '), 'service', '400') unless grbi.errors[:service].blank?
+        raise OwsException.new('InvalidParameterValue', grbi.errors[:output_schema].join(' '), 'outputSchema', '400') unless grbi.errors[:output_schema].blank?
+        raise OwsException.new('InvalidParameterValue', grbi.errors[:response_element].join(' '), 'ElementSetName', '400') unless grbi.errors[:response_element].blank?
       end
 
     rescue OwsException => e
