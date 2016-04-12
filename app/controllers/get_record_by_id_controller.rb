@@ -1,10 +1,17 @@
 class GetRecordByIdController < ApplicationController
-  # TODO: implement this
   def index
-    # create GetRecordById model
-    # set model variable to be used in the view below
+    begin
+      grbi = GetRecordById.new(params, request)
+      if grbi.valid?
+        @model = grbi.submit
+        render 'get_record_by_id/index.xml.erb', :status => :ok and return
+      else
+        # Need to refactor this to play nicer with rails validations
+        raise OwsException.new('MissingParameterValue', "id #{grbi.errors[:id].join(" ")}", 'id', '400')
+      end
 
-    # render view
-    render 'get_record_by_id/index.xml.erb', :status => :ok and return
+    rescue OwsException => e
+      render xml: e.to_xml, :status => e.http_code and return
+    end
   end
 end

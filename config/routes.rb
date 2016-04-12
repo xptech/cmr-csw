@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_get(request) }
   #post '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_post(request) }
   # TBD if GetRecordById will also be supported via GET
+  get '/', to: 'get_record_by_id#index', constraints: lambda { |request| RequestRouter.is_get_record_by_id_get(request) }
   post '/', to: 'get_record_by_id#index', constraints: lambda { |request| RequestRouter.is_get_record_by_id_post(request) }
   # GetRecords does not support GET but must return a meaningful exception
   post '/', to: 'get_records#index', constraints: lambda { |request| RequestRouter.is_get_records_post(request) }
