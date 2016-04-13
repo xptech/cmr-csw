@@ -3,6 +3,9 @@ class RequestRouter
 
   @@CSW_NAMESPACE = "http://www.opengis.net/cat/csw/2.0.2"
 
+  def self.is_get_record_by_id_get(request)
+      return get_helper(request, 'GETRECORDBYID')
+  end
 
   def self.is_get_record_by_id_post(request)
     return post_helper(request,'GetRecordById')
