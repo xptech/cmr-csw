@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
 <csw:GetRecordsResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
     <csw:SearchStatus timestamp="2016-03-07T13:04:19" />
     <csw:SearchResults numberOfRecordsMatched="0" numberOfRecordsReturned="0" elementSet="full" nextRecord="0" />
+</csw:GetRecordsResponse>
+-->
+<csw:GetRecordsResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd">
+  <% @model.collections.each do |collection| %>
+      <!-- When we add brief and summary this will be refactored out into a helper method that returns the markup based on output schema and elementSetName -->
+      <% if @model.output_schema == 'http://www.isotc211.org/2005/gmi' && @model.response_element == 'full' %>
+        <%= raw(collection) %>
+      <% end %>
+  <% end %>
 </csw:GetRecordsResponse>

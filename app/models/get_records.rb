@@ -1,12 +1,7 @@
-class GetRecords
-  @request_params
-  @request
-  @request_body
+class GetRecords < BaseCswModel
 
   def initialize params, request
-    @request_params = params
-    @request = request
-    @request_body = request.body.read
+    super(params, request)
   end
 
   def is_valid
@@ -20,13 +15,48 @@ class GetRecords
     end
   end
 
-  def get_model
+  def submit
+    cmr_params = to_cmr_collection_params
+    Rails.logger.info "CMR Params: #{cmr_params}"
+    response = nil
+    begin
+      time = Benchmark.realtime do
+        query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"
+        Rails.logger.info "RestClient call to CMR endpoint: #{query_url}?#{cmr_params.to_query}"
+        response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{cmr_params.to_query}",
+                                               :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
+                                               :headers => {:client_id => Rails.configuration.client_id,
+                                                            :accept => 'application/iso19115+xml'}
+      end
+      Rails.logger.info "CMR dataset search took : #{time.to_f.round(2)} seconds"
+    rescue RestClient::Exception => e
+      Rails.logger.error("CMR call failure httpStatus: #{e.http_code} message: #{e.message} response: #{e.response}")
+      # TODO add error handling
+      throw new OwsException()
+    end
+
+    document = Nokogiri::XML(response)
+    # This model is an array of collections in the iso19115 format. It's up to the view to figure out how to render it
+    # Each gmi:MI_Metadata element is a collection
     model = OpenStruct.new
-    # Add additional items below
+    model.output_schema = @output_schema
+    model.response_element = @response_element
+    model.collections = []
+    document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
+      model.collections.append(collection.to_xml)
+    end
+
     return model
   end
 
-  private
+  def to_cmr_collection_params
+    cmr_params = {}
+    # TODO add keyword, spatial and temporal in subsequent work
+
+    cmr_params
+  end
+
+private
 
   def validate_post_request
     Rails.logger.info("Validating GetRecords POST request")

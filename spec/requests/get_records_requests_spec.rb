@@ -14,20 +14,6 @@ RSpec.describe "various GetRecords GET and POST requests", :type => :request do
     xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>full</csw:ElementSetName>
-        <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
-            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>CWIC</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?\" wildCard="*\">
-                        <ogc:PropertyName>Location</ogc:PropertyName>
-                        <ogc:Literal>*BRAZIL*</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                </ogc:And>
-            </ogc:Filter>
-        </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
       eos
@@ -187,5 +173,50 @@ RSpec.describe "various GetRecords GET and POST requests", :type => :request do
       capabilities_xml = Nokogiri::XML(response.body)
       expect(capabilities_xml.root.name).to eq 'ExceptionReport'
     end
+  end
+
+  describe "various POST requests" do
+
+    it 'correctly reders default FULL ISO MENDS data in response to a basic / no-constrains POST request' do
+      no_constraints_get_records_request_xml = <<-eos
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecords maxRecords="18" outputFormat="application/xml"
+    outputSchema="http://www.isotc211.org/2005/gmd" resultType="results"
+    startPosition="1" xmlns="http://www.opengis.net/cat/csw/2.0.2"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
+    <csw:Query typeNames="csw:Record">
+        <csw:ElementSetName>full</csw:ElementSetName>
+        <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+                <ogc:And>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>AnyText</ogc:PropertyName>
+                        <ogc:Literal>CWIC</ogc:Literal>
+                    </ogc:PropertyIsLike>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?\" wildCard="*\">
+                        <ogc:PropertyName>Location</ogc:PropertyName>
+                        <ogc:Literal>*BRAZIL*</ogc:Literal>
+                    </ogc:PropertyIsLike>
+                </ogc:And>
+            </ogc:Filter>
+        </csw:Constraint>
+    </csw:Query>
+</csw:GetRecords>
+      eos
+      post '/', no_constraints_get_records_request_xml
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+      # There should be no children
+      expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(0)
+
+    end
+  end
+
+  it 'correctly handles a CMR failure' do
+
   end
 end
