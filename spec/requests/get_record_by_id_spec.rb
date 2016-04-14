@@ -43,7 +43,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
     <ExceptionText>id can't be blank</ExceptionText>
   </Exception>
 </ExceptionReport>
-eos
+    eos
 
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'full'
     expect(response).to have_http_status(:bad_request)
@@ -80,32 +80,53 @@ eos
   end
 
   it 'correctly reports an error when an incorrect output schema is requested' do
-      expected_response_body =<<-eos
+    expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
   <Exception locator="outputSchema" exceptionCode="InvalidParameterValue">
     <ExceptionText>Output schema 'foo' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi</ExceptionText>
   </Exception>
 </ExceptionReport>
-eos
+    eos
 
-      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'foo', :ElementSetName => 'full'
-      expect(response).to have_http_status(:bad_request)
-      expect(response.body).to eq expected_response_body
+    get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'foo', :ElementSetName => 'full'
+    expect(response).to have_http_status(:bad_request)
+    expect(response.body).to eq expected_response_body
   end
 
   it 'correctly reports an error when an incorrect element set name is requested' do
-      expected_response_body =<<-eos
+    expected_response_body =<<-eos
 <?xml version="1.0"?>
 <ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
   <Exception locator="ElementSetName" exceptionCode="InvalidParameterValue">
     <ExceptionText>Element set name 'foo' is not supported. Supported element set names are brief, summary, full</ExceptionText>
   </Exception>
 </ExceptionReport>
-eos
+    eos
 
-      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'foo'
-      expect(response).to have_http_status(:bad_request)
-      expect(response.body).to eq expected_response_body
+    get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'foo'
+    expect(response).to have_http_status(:bad_request)
+    expect(response.body).to eq expected_response_body
+  end
+
+  describe 'GET GetRecordById using CSW brief' do
+    it 'correctly renders single CSW record as brief' do
+      VCR.use_cassette 'requests/get_record_by_id/csw/one_brief_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
+        # The brief record should have an id, title, type and bounding box
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/dc:identifier', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('C1224520098-NOAA_NCEI')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/dc:title', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq("\nGHRSST Level 2P Central Pacific Regional Skin Sea Surface Temperature from the Geostationary Operational Environmental Satellites (GOES) Imager on the GOES-15 satellite (GDS versions 1 and 2)\n")
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/dc:type', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('dataset')
+
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/ows:WGS84BoundingBox', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/ows:WGS84BoundingBox/ows:LowerCorner', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').text).to eq('146.0 -44.0')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:BriefRecord/ows:WGS84BoundingBox/ows:UpperCorner', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').text).to eq('-105.0 72.0')
+      end
+    end
   end
 end
