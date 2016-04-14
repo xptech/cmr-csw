@@ -1,23 +1,10 @@
 module GetRecordByIdHelper
   def to_records(raw_collections, output_schema, response_element)
-    if output_schema == 'http://www.isotc211.org/2005/gmi'
-      if response_element == 'full'
-        collections = translate(raw_collections, 'app/helpers/iso_gmi_full.xslt')
-      elsif response_element == 'summary'
-        collections = translate(raw_collections, 'app/helpers/iso_gmi_summary.xslt')
-      elsif response_element == 'brief'
-        collections = translate(raw_collections, 'app/helpers/iso_gmi_brief.xslt')
-      end
-    elsif output_schema == 'http://www.opengis.net/cat/csw/2.0.2'
-      if response_element == 'full'
-        collections = translate(raw_collections, 'app/helpers/csw_full.xslt')
-      elsif response_element == 'summary'
-        collections = translate(raw_collections, 'app/helpers/csw_summary.xslt')
-      elsif response_element == 'brief'
-        collections = translate(raw_collections, 'app/helpers/csw_brief.xslt')
-      end
+    output_schema_label = 'iso_gmi'
+    if output_schema == 'http://www.opengis.net/cat/csw/2.0.2'
+      output_schema_label = 'csw'
     end
-    collections
+    translate(raw_collections, "app/helpers/#{output_schema_label}_#{response_element}.xslt")
   end
 
   def translate(collections, stylesheet)
