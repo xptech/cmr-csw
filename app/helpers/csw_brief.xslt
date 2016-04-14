@@ -1,8 +1,5 @@
 <xsl:stylesheet version="1.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                xmlns:gmi="http://www.isotc211.org/2005/gmi"
-                xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
   <xsl:template match="/">
@@ -10,8 +7,11 @@
       <xsl:for-each select="results/result">
         <BriefRecord
                 xmlns="http://www.opengis.net/cat/csw/2.0.2"
+                xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                xmlns:gmi="http://www.isotc211.org/2005/gmi"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:ows="http://www.opengis.net/ows"
+                xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2
                         ../../../csw/2.0.2/record.xsd">
