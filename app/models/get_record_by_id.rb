@@ -68,12 +68,8 @@ class GetRecordById
     model = OpenStruct.new
     model.output_schema = @output_schema
     model.response_element = @response_element
-    model.collections = []
-    document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
-      model.collections.append(collection.to_xml)
-    end
-
-    return model
+    model.collections = document.root.xpath('/results', 'gmi' => 'http://www.isotc211.org/2005/gmi').to_xml
+    model
   end
 
   private
@@ -136,5 +132,4 @@ class GetRecordById
     cmr_params[:concept_id] = id_array
     cmr_params
   end
-
 end

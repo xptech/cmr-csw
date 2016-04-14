@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
-  <% @model.collections.each do |collection| %>
-      <!-- When we add brief and summary this will be refactored out into a helper method that returns the markup based on output schema and elementSetName -->
-      <% if @model.output_schema == 'http://www.isotc211.org/2005/gmi' && @model.response_element == 'full' %>
-        <%= raw(collection) %>
-      <% end %>
-  <% end %>
-</csw:GetRecordByIdResponse>
+<%= raw(to_records(@model.collections, @model.output_schema, @model.response_element)) %>
