@@ -13,7 +13,6 @@ class GetRecordById
   @request
   @request_body
 
-
   attr_accessor :id
   validates :id, presence: {message: 'id can\'t be blank'}
 
@@ -68,7 +67,7 @@ class GetRecordById
     model = OpenStruct.new
     model.output_schema = @output_schema
     model.response_element = @response_element
-    model.collections = document.root.xpath('/results', 'gmi' => 'http://www.isotc211.org/2005/gmi').to_xml
+    model.raw_collections_doc = document
     model
   end
 
