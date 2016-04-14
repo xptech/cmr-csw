@@ -60,7 +60,6 @@ class GetRecordById
       # An unknown concept id will give a bad request error
       response = e.response if e.response.include?('Concept-id') && e.response.include?('is not valid')
     end
-
     document = Nokogiri::XML(response)
     # This model is an array of collections in the iso19115 format. It's up to the view to figure out how to render it
     # Each gmi:MI_Metadata element is a collection
