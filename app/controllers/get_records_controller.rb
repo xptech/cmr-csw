@@ -1,10 +1,9 @@
 class GetRecordsController < ApplicationController
   def index
     gr = GetRecords.new(params, request)
-    @get_records_model = gr.get_model
     begin
       if gr.is_valid()
-        # TODO implement GetRecords view
+        @model = gr.submit
         render 'get_records/index.xml.erb', :status => :ok and return
       end
     # TODO might want to rescue ALL exceptions not just OwsException

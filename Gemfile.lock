@@ -133,10 +133,6 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rgeo (0.5.2)
-    rspec (3.4.0)
-      rspec-core (~> 3.4.0)
-      rspec-expectations (~> 3.4.0)
-      rspec-mocks (~> 3.4.0)
     rspec-core (3.4.2)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -216,7 +212,6 @@ DEPENDENCIES
   responders (~> 2.0)
   rest-client (~> 1.8.0)
   rgeo
-  rspec
   rspec-rails
   rspec_junit_formatter
   sass-rails

@@ -40,7 +40,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'rspec', :require => false
+  #gem 'rspec', :require => false
   gem 'rspec_junit_formatter'
 end
 
