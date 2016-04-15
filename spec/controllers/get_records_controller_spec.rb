@@ -26,7 +26,8 @@ RSpec.describe GetRecordsController, type: :controller do
 
   describe "GetRecords POST requests" do
     it "returns http success for a valid POST request" do
-      valid_get_records_request_xml  = <<-eos
+      VCR.use_cassette 'requests/get_records/gmi/controller_success', :decode_compressed_response => true, :record => :once do
+        valid_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:GetRecords maxRecords="18" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmd" resultType="results" service="CSW"
@@ -52,10 +53,10 @@ RSpec.describe GetRecordsController, type: :controller do
         </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
-      eos
-      post :index, valid_get_records_request_xml
-      expect(response).to have_http_status(:success)
+        eos
+        post :index, valid_get_records_request_xml
+        expect(response).to have_http_status(:success)
+      end
     end
   end
-
 end

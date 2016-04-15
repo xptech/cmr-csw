@@ -4,7 +4,8 @@ RSpec.describe "various GetRecords GET and POST requests", :type => :request do
 
   describe "Correct POST routing scenarios" do
     it "correctly routes a valid GetRecords POST request" do
-      valid_get_records_request_xml = <<-eos
+      VCR.use_cassette 'requests/get_records/gmi/route_test', :decode_compressed_response => true, :record => :once do
+        valid_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:GetRecords maxRecords="18" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmd" resultType="results" service="CSW"
@@ -30,12 +31,13 @@ RSpec.describe "various GetRecords GET and POST requests", :type => :request do
         </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
-      eos
-      post '/', valid_get_records_request_xml
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template('get_records/index.xml.erb')
-      records_xml = Nokogiri::XML(response.body)
-      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+        eos
+        post '/', valid_get_records_request_xml
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_records/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      end
     end
   end
 
@@ -207,7 +209,7 @@ RSpec.describe "various GetRecords GET and POST requests", :type => :request do
         <csw:ElementSetName>full</csw:ElementSetName>
     </csw:Query>
 </csw:GetRecords>
-      eos
+        eos
         post '/', no_constraints_get_records_request_xml
         expect(response).to have_http_status(:success)
         expect(response).to render_template('get_records/index.xml.erb')
