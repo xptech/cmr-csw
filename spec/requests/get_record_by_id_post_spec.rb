@@ -5,7 +5,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
     it 'correctly renders single ISO GMI record as full' do
       VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
 
-        valid_get_records_request_xml = <<-eos
+        valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
     service="CSW"
     version="2.0.2"
@@ -18,7 +18,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
     <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
         eos
-        post '/', valid_get_records_request_xml
+        post '/', valid_get_record_by_id_request_xml
 
         expect(response).to have_http_status(:success)
         expect(response).to render_template('get_record_by_id/index.xml.erb')
@@ -29,7 +29,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
     end
     it 'correctly renders two ISO GMI records as full' do
       VCR.use_cassette 'requests/get_record_by_id/gmi/two_records', :decode_compressed_response => true, :record => :once do
-        valid_get_records_request_xml = <<-eos
+        valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
     service="CSW"
     version="2.0.2"
@@ -43,7 +43,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
     <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
         eos
-        post '/', valid_get_records_request_xml
+        post '/', valid_get_record_by_id_request_xml
         expect(response).to have_http_status(:success)
         expect(response).to render_template('get_record_by_id/index.xml.erb')
         records_xml = Nokogiri::XML(response.body)
@@ -54,7 +54,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
   end
   it 'correctly renders zero ISO GMI records when unknown concept id is supplied' do
     VCR.use_cassette 'requests/get_record_by_id/gmi/no_record', :decode_compressed_response => true, :record => :once do
-      valid_get_records_request_xml = <<-eos
+      valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="CSW"
   version="2.0.2"
@@ -67,7 +67,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
   <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
       eos
-      post '/', valid_get_records_request_xml
+      post '/', valid_get_record_by_id_request_xml
       expect(response).to have_http_status(:success)
       expect(response).to render_template('get_record_by_id/index.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -87,7 +87,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
 </ExceptionReport>
     eos
 
-    valid_get_records_request_xml = <<-eos
+    valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="CSW"
   version="2.0.2"
@@ -99,7 +99,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
   <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
     eos
-    post '/', valid_get_records_request_xml
+    post '/', valid_get_record_by_id_request_xml
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
@@ -114,7 +114,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
 </ExceptionReport>
     eos
 
-    valid_get_records_request_xml = <<-eos
+    valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="CSW"
   version="2.0.x"
@@ -127,7 +127,7 @@ RSpec.describe 'Get Record By ID http POST specs', :type => :request do
   <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
 eos
-    post '/', valid_get_records_request_xml
+    post '/', valid_get_record_by_id_request_xml
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
@@ -141,7 +141,7 @@ eos
 </ExceptionReport>
     eos
 
-    valid_get_records_request_xml = <<-eos
+    valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="foo"
   version="2.0.2"
@@ -154,7 +154,7 @@ eos
   <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
 eos
-    post '/', valid_get_records_request_xml
+    post '/', valid_get_record_by_id_request_xml
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
@@ -169,7 +169,7 @@ eos
 </ExceptionReport>
     eos
 
-    valid_get_records_request_xml = <<-eos
+    valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="CSW"
   version="2.0.2"
@@ -182,7 +182,7 @@ eos
   <ElementSetName typeNames="csw:Record">full</ElementSetName>
 </csw:GetRecordById>
 eos
-    post '/', valid_get_records_request_xml
+    post '/', valid_get_record_by_id_request_xml
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
@@ -197,7 +197,7 @@ eos
 </ExceptionReport>
     eos
 
-    valid_get_records_request_xml = <<-eos
+    valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
   service="CSW"
   version="2.0.2"
@@ -210,7 +210,7 @@ eos
   <ElementSetName typeNames="csw:Record">foo</ElementSetName>
 </csw:GetRecordById>
 eos
-    post '/', valid_get_records_request_xml
+    post '/', valid_get_record_by_id_request_xml
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
@@ -218,7 +218,7 @@ eos
   describe 'POST GetRecordById using CSW brief' do
     it 'correctly renders single CSW record as brief' do
       VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
-        valid_get_records_request_xml = <<-eos
+        valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
     service="CSW"
     version="2.0.2"
@@ -231,7 +231,7 @@ eos
     <ElementSetName typeNames="csw:Record">brief</ElementSetName>
 </csw:GetRecordById>
         eos
-        post '/', valid_get_records_request_xml
+        post '/', valid_get_record_by_id_request_xml
         expect(response).to have_http_status(:success)
         expect(response).to render_template('get_record_by_id/index.xml.erb')
         records_xml = Nokogiri::XML(response.body)
@@ -252,7 +252,7 @@ eos
   describe 'POST GetRecordById using ISO GMI brief' do
     it 'correctly renders single CSW record as brief' do
       VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
-        valid_get_records_request_xml = <<-eos
+        valid_get_record_by_id_request_xml = <<-eos
 <csw:GetRecordById
     service="CSW"
     version="2.0.2"
@@ -265,7 +265,7 @@ eos
     <ElementSetName typeNames="csw:Record">brief</ElementSetName>
 </csw:GetRecordById>
         eos
-        post '/', valid_get_records_request_xml
+        post '/', valid_get_record_by_id_request_xml
         expect(response).to have_http_status(:success)
         expect(response).to render_template('get_record_by_id/index.xml.erb')
         records_xml = Nokogiri::XML(response.body)
