@@ -3,7 +3,7 @@ class GetRecordByIdController < ApplicationController
     begin
       grbi = GetRecordById.new(params, request)
       if grbi.valid?
-        @model = grbi.submit
+        @model = grbi.find
         render 'get_record_by_id/index.xml.erb', :status => :ok and return
       else
         # Need to refactor this to play nicer with rails validations
