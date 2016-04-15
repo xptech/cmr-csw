@@ -5,14 +5,13 @@ class GetRecordById
   extend ActiveModel::Naming
 
   # Supported output schemas
-  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi)
+  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
   # Supported response elements
-  RESPONSE_ELEMENTS = %w(brief, summary, full)
+  RESPONSE_ELEMENTS = %w(brief summary full)
 
   @request_params
   @request
   @request_body
-
 
   attr_accessor :id
   validates :id, presence: {message: 'id can\'t be blank'}
@@ -61,19 +60,14 @@ class GetRecordById
       # An unknown concept id will give a bad request error
       response = e.response if e.response.include?('Concept-id') && e.response.include?('is not valid')
     end
-
     document = Nokogiri::XML(response)
     # This model is an array of collections in the iso19115 format. It's up to the view to figure out how to render it
     # Each gmi:MI_Metadata element is a collection
     model = OpenStruct.new
     model.output_schema = @output_schema
     model.response_element = @response_element
-    model.collections = []
-    document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
-      model.collections.append(collection.to_xml)
-    end
-
-    return model
+    model.raw_collections_doc = document
+    model
   end
 
   private
@@ -136,5 +130,4 @@ class GetRecordById
     cmr_params[:concept_id] = id_array
     cmr_params
   end
-
 end
