@@ -12,6 +12,4 @@ VCR.configure do |c|
   #  i.response.body.force_encoding('UTF-8')    #'UTF-8' or 'ASCII-8BIT'
   #end
   c.hook_into :webmock
-
-  c.allow_http_connections_when_no_cassette = true
 end
