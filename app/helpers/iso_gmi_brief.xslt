@@ -4,7 +4,7 @@
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
   <xsl:template match="/">
-    <csw:GetRecordByIdResponse>
+    <xsl:element name="{$result_root_element}">
       <xsl:for-each select="results/result">
         <gmi:MI_Metadata
                 xmlns:gco="http://www.isotc211.org/2005/gco"
@@ -30,6 +30,6 @@
           <xsl:copy-of select="gmi:MI_Metadata/gmd:identificationInfo"/>
         </gmi:MI_Metadata>
       </xsl:for-each>
-    </csw:GetRecordByIdResponse>
+    </xsl:element>
   </xsl:template>
 </xsl:stylesheet>

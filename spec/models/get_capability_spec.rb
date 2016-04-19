@@ -25,7 +25,7 @@ RSpec.describe GetCapability do
                                                                  "project", "platform", "spatial_keyword", "science_keywords",
                                                                  "instrument"]
       # supported corresponding GCMD CSW Queryable Properties
-      expect(cmr_search_params_mapped_to_gcmd_csw.keys).to eq ["Title", "Anytext", "Identifier", "Modified", "RevisionDate",
+      expect(cmr_search_params_mapped_to_gcmd_csw.keys).to eq ["Title", "AnyText", "Identifier", "Modified", "RevisionDate",
                                                                "OrganisationName", "ResourceIdentifier", "TempExtent_begin", "TempExtent_end",
                                                                "Project", "Platform", "Location", "ScienceKeywords",
                                                                "Instrument"]

@@ -3,7 +3,7 @@
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
   <xsl:template match="/">
-    <csw:GetRecordByIdResponse>
+    <xsl:element name="{$result_root_element}">
       <xsl:for-each select="results/result">
         <BriefRecord
                 xmlns="http://www.opengis.net/cat/csw/2.0.2"
@@ -41,7 +41,7 @@
           </ows:WGS84BoundingBox>
         </BriefRecord>
       </xsl:for-each>
-    </csw:GetRecordByIdResponse>
+    </xsl:element>
 
   </xsl:template>
 
