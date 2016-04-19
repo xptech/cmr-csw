@@ -45,7 +45,7 @@ RSpec.describe OgcFilter do
     end
   end
 
-  it "is possible to transform XML with nokogiri" do
+  it "is possible to transform XML with nokogiri using XSL parameters" do
     stylesheet = <<-eos
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -72,6 +72,60 @@ RSpec.describe OgcFilter do
     result_root_element = 'csw:GetRecordsResponse'
     transformed_xml_doc = template.transform(document, Nokogiri::XSLT.quote_params(['result_root_element', result_root_element], ))
     expect(transformed_xml_doc.root.name).to eq('GetRecordsResponse')
+  end
+
+  it "is possible to have named templates and parameter based if statements with nokogiri" do
+    stylesheet = <<-eos
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+    exclude-result-prefixes="xs"
+    version="2.0">
+
+    <xsl:template match="/">
+        <xsl:element name="{$result_root_element}">
+            <xsl:if test="$result_root_element = 'csw:GetRecordsResponse'">
+                <SearchStatus attr1="{$attribute1}">
+                </SearchStatus>
+                <SearchResults attr2="{$attribute2}">
+                    <xsl:call-template name="entry"/>
+                </SearchResults>
+            </xsl:if>
+            <xsl:if test="$result_root_element = 'csw:GetRecordById'">
+                <xsl:call-template name="entry"/>
+            </xsl:if>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template name="entry">
+        <brief>
+            <identifier>1234</identifier>
+            <title>Title</title>
+        </brief>
+    </xsl:template>
+
+</xsl:stylesheet>
+    eos
+    xml = <<-eos
+<a>
+  <b>ElementB</b>
+</a>
+    eos
+
+    template = Nokogiri::XSLT(stylesheet)
+    document = Nokogiri::XML(xml)
+    result_root_element1 = 'csw:GetRecordsResponse'
+    result_root_element2 = 'csw:GetRecordById'
+    attribute1 = '1000'
+    attribute2 = 'timestamp'
+    transformed_xml_doc = template.transform(document, Nokogiri::XSLT.quote_params(['result_root_element', result_root_element1,
+                                                                                    'attribute1', attribute1,
+                                                                                    'attribute2', attribute2
+                                                                                   ]))
+    expect(transformed_xml_doc.root.name).to eq('GetRecordsResponse')
+    transformed_xml_doc1 = template.transform(document, Nokogiri::XSLT.quote_params(['result_root_element', result_root_element2,
+                                                                                   ]))
+    expect(transformed_xml_doc1.root.name).to eq('GetRecordById')
   end
 
 end

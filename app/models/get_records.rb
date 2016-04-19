@@ -68,10 +68,11 @@ class GetRecords < BaseCswModel
       # indicates that ALL records have been returned
       model.next_record = 0
     end
-    model.collections = []
-    document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
-      model.collections.append(collection.to_xml)
-    end
+    #model.collections = []
+    #document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
+    #  model.collections.append(collection.to_xml)
+    #end
+    model.raw_collections_doc = document
     return model
   end
 
