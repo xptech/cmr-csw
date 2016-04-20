@@ -17,7 +17,7 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         # A summary of the content of the resource.
         "Abstract" => ["Abstract", "", ["MD_Metadata.identificationInfo.AbstractMD_Id entification.abstract"]],
         # A target for full-text search of character data types in a catalogue
-        "Anytext" => ["Anytext", "keyword", []],
+        "AnyText" => ["AnyText", "keyword", []],
         # The physical or digital manifestation of the resource
         "Format" => ["Format", "", "MD_Metadata.distributionInfo.MD_Distribution.distributionFormat.MD_Format.name"],
 

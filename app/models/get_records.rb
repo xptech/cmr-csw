@@ -1,13 +1,19 @@
 class GetRecords < BaseCswModel
+  # Supported ISO queryables
+  # TODO Add more queryables here,TempExtent_begin, TempExtent_end
+  RESULT_TYPES = %w(ScienceKeywords)
 
   @request_body_xml
   @filter
   @start_position
   @result_type
   @max_records
+  # for now it only supports the AND between ALL CMR query parameters
+  @cmr_query_hash
 
   def initialize params, request
     super(params, request)
+    @cmr_query_hash = Hash.new
   end
 
   def is_valid
@@ -22,15 +28,15 @@ class GetRecords < BaseCswModel
     end
   end
 
-  def submit
-    cmr_params = to_cmr_collection_params
-    Rails.logger.info "CMR Params: #{cmr_params}"
+  def find
+    #cmr_params = to_cmr_collection_params
+    Rails.logger.info "CMR Params: #{@cmr_query_hash}"
     response = nil
     begin
       time = Benchmark.realtime do
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"
-        Rails.logger.info "RestClient call to CMR endpoint: #{query_url}?#{cmr_params.to_query}"
-        response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{cmr_params.to_query}",
+        Rails.logger.info "RestClient call to CMR endpoint: #{query_url}?#{@cmr_query_hash.to_query}"
+        response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{@cmr_query_hash.to_query}",
                                                :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
                                                :headers => {:client_id => Rails.configuration.client_id,
                                                             :accept => 'application/iso19115+xml'}
@@ -39,7 +45,7 @@ class GetRecords < BaseCswModel
     rescue RestClient::Exception => e
       Rails.logger.error("CMR call failure httpStatus: #{e.http_code} message: #{e.message} response: #{e.response}")
       # TODO add error handling
-      throw new OwsException()
+      throw OwsException.new(INVALID_REQUEST_TYPE_GET_RECORDS, 'GetRecords only supports POST requests', 'CMR CSW:GetRecords.is_valid', 400)
     end
 
     document = Nokogiri::XML(response)
@@ -62,16 +68,12 @@ class GetRecords < BaseCswModel
       # indicates that ALL records have been returned
       model.next_record = 0
     end
-    model.collections = []
-    document.root.xpath('/results/result/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |collection|
-      model.collections.append(collection.to_xml)
-    end
+    model.raw_collections_doc = document
     return model
   end
 
   def to_cmr_collection_params
     cmr_params = {}
-    # TODO add keyword, spatial and temporal in subsequent work
 
     cmr_params
   end
@@ -144,6 +146,8 @@ class GetRecords < BaseCswModel
                                          'ogc' => 'http://www.opengis.net/ogc')
     if @filter != nil
       Rails.logger.info("Processing filter in GetRecords POST request:  #{@request_body}")
+      filterHelper = OgcFilter.new(@filter, @cmr_query_hash)
+      filterHelper.process_any_text
     else
       Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
     end
