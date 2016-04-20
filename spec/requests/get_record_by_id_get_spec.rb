@@ -34,6 +34,16 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
       expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(0)
     end
   end
+  it 'correctly renders single ISO GMI record as full with output file format application/xml' do
+        VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+          get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'full', :outputFormat => 'application/xml'
+          expect(response).to have_http_status(:success)
+          expect(response).to render_template('get_record_by_id/index.xml.erb')
+          records_xml = Nokogiri::XML(response.body)
+          expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+          expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
+        end
+  end
 
   it 'correctly reports an error when no id parameter is present' do
     expected_response_body =<<-eos
@@ -108,6 +118,20 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
     expect(response).to have_http_status(:bad_request)
     expect(response.body).to eq expected_response_body
   end
+  it 'correctly reports an error when an incorrect output file format' do
+    expected_response_body =<<-eos
+<?xml version="1.0"?>
+<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
+  <Exception locator="outputFormat" exceptionCode="InvalidParameterValue">
+    <ExceptionText>Output file format 'foo' is not supported. Supported output file format is application/xml</ExceptionText>
+  </Exception>
+</ExceptionReport>
+    eos
+
+    get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :outputFormat => 'foo'
+    expect(response).to have_http_status(:bad_request)
+    expect(response.body).to eq expected_response_body
+  end
 
   describe 'GET GetRecordById using CSW brief' do
     it 'correctly renders single CSW record as brief' do
@@ -146,5 +170,4 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
       end
     end
   end
-
 end

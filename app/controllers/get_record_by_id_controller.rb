@@ -13,6 +13,7 @@ class GetRecordByIdController < ApplicationController
         raise OwsException.new('InvalidParameterValue', grbi.errors[:service].join(' '), 'service', '400') unless grbi.errors[:service].blank?
         raise OwsException.new('InvalidParameterValue', grbi.errors[:output_schema].join(' '), 'outputSchema', '400') unless grbi.errors[:output_schema].blank?
         raise OwsException.new('InvalidParameterValue', grbi.errors[:response_element].join(' '), 'ElementSetName', '400') unless grbi.errors[:response_element].blank?
+        raise OwsException.new('InvalidParameterValue', grbi.errors[:output_file_format].join(' '), 'outputFormat', '400') unless grbi.errors[:output_file_format].blank?
       end
 
     rescue OwsException => e
