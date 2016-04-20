@@ -16,12 +16,9 @@ class GetRecordById < BaseCswModel
       @service = params[:service]
     elsif !@request_body.empty? && @request.post?
       request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
-      @output_schema = request_body_xml.root['outputSchema']
-      @output_schema = 'http://www.isotc211.org/2005/gmi' if @output_schema.blank?
-      @output_file_format = request_body_xml.root['outputFormat']
-      @output_file_format = 'application/xml' if @output_file_format.blank?
-      @response_element = request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text unless request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').nil?
-      @response_element = 'summary' if @response_element.blank?
+      @output_schema = request_body_xml.root['outputSchema'].blank? ? 'http://www.isotc211.org/2005/gmi' : request_body_xml.root['outputSchema']
+      @output_file_format = request_body_xml.root['outputFormat'].blank? ? 'application/xml' : request_body_xml.root['outputFormat']
+      @response_element = request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text.blank? ? 'summary' : request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text
       @id = ''
       request_body_xml.root.xpath('/csw:GetRecordById/csw:Id', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').each do |id|
         @id << id.text << ','
