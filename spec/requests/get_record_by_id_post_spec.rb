@@ -215,6 +215,34 @@ eos
     expect(response.body).to eq expected_response_body
   end
 
+  it 'correctly reports an error when an incorrect output format is requested' do
+    expected_response_body =<<-eos
+<?xml version="1.0"?>
+<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
+  <Exception locator="outputFormat" exceptionCode="InvalidParameterValue">
+    <ExceptionText>Output file format 'foo' is not supported. Supported output file format is application/xml</ExceptionText>
+  </Exception>
+</ExceptionReport>
+  eos
+
+    valid_get_record_by_id_request_xml = <<-eos
+<csw:GetRecordById
+  service="CSW"
+  version="2.0.2"
+  outputFormat="foo"
+  outputSchema="http://www.isotc211.org/2005/gmi"
+  xmlns="http://www.opengis.net/cat/csw/2.0.2"
+  xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <csw:Id>foo</csw:Id>
+  <ElementSetName typeNames="csw:Record">full</ElementSetName>
+</csw:GetRecordById>
+eos
+    post '/', valid_get_record_by_id_request_xml
+    expect(response).to have_http_status(:bad_request)
+    expect(response.body).to eq expected_response_body
+  end
+
   describe 'POST GetRecordById using CSW brief' do
     it 'correctly renders single CSW record as brief' do
       VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
