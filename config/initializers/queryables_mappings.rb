@@ -88,10 +88,10 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         "ResourceLanguage" => ["ResourceLanguage", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.language"]],
 
         # Temporal extent information: begin
-        "TempExtent_begin" => ["TempExtent_begin", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
+        "TempExtent_begin" => ["TempExtent_begin", "temporal[]", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
 
         # Temporal extent information: end
-        "TempExtent_end" => ["TempExtent_end", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
+        "TempExtent_end" => ["TempExtent_end", "temporal[]", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
 
         # Name of a service type.
         "ServiceType" => ["ServiceType", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType"]],
@@ -194,7 +194,7 @@ ALL_CMR_QUERYABLES =
         #
         "data_center" => ["", "data_center", [""]],
         #
-        "temporal" => ["", "temporal", [""]],
+        "temporal[]" => ["", "temporal[]", [""]],
         #
         "project" => ["", "project", [""]],
         #
