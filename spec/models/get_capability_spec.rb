@@ -21,7 +21,7 @@ RSpec.describe GetCapability do
       expect(cmr_search_params_mapped_to_gcmd_csw.size).to eq 14
       # supported CMR queryable names
       expect(cmr_search_params_mapped_to_gcmd_csw.values).to eq ["entry_title", "keyword", "concept_id","updated_since", "revision_date",
-                                                                 "data_center", "dif_entry_id", "temporal","temporal",
+                                                                 "data_center", "dif_entry_id", "temporal[]","temporal[]",
                                                                  "project", "platform", "spatial_keyword", "science_keywords",
                                                                  "instrument"]
       # supported corresponding GCMD CSW Queryable Properties
