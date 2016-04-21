@@ -1,49 +1,24 @@
-class GetRecordById
-
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
-
-  # Supported output schemas
-  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
-  # Supported response elements
-  RESPONSE_ELEMENTS = %w(brief summary full)
-
-  @request_params
-  @request
-  @request_body
+class GetRecordById < BaseCswModel
 
   attr_accessor :id
   validates :id, presence: {message: 'id can\'t be blank'}
 
-  attr_accessor :output_schema
-  validates :output_schema, inclusion: {in: OUTPUT_SCHEMAS, message: "Output schema '%{value}' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi"}
-
-  attr_accessor :response_element
-  validates :response_element, inclusion: {in: RESPONSE_ELEMENTS, message: "Element set name '%{value}' is not supported. Supported element set names are brief, summary, full"}
-
-  # These validations should eventually go in a parent request class
-  attr_accessor :version
-  validates :version, inclusion: {in: %w(2.0.2), message: "version '%{value}' is not supported. Supported version is '2.0.2'"}
-
-  attr_accessor :service
-  validates :service, inclusion: {in: %w(CSW), message: "service '%{value}' is not supported. Supported service is 'CSW'"}
 
   def initialize (params, request)
-    @request_params = params
-    @request = request
-    @request_body = request.body.read
+    super(params, request)
 
     if (@request.get?)
       @output_schema = params[:outputSchema].blank? ? 'http://www.isotc211.org/2005/gmi' : params[:outputSchema]
+      @output_file_format = params[:outputFormat].blank? ? 'application/xml' : params[:outputFormat]
       @response_element = params[:ElementSetName].blank? ? 'summary' : params[:ElementSetName]
       @id = params[:id]
       @version = params[:version]
       @service = params[:service]
     elsif !@request_body.empty? && @request.post?
       request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
-      @output_schema = request_body_xml.root['outputSchema']
-      @response_element = request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text unless request_body_xml.root.xpath('csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').nil?
+      @output_schema = request_body_xml.root['outputSchema'].blank? ? 'http://www.isotc211.org/2005/gmi' : request_body_xml.root['outputSchema']
+      @output_file_format = request_body_xml.root['outputFormat'].blank? ? 'application/xml' : request_body_xml.root['outputFormat']
+      @response_element = request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text.blank? ? 'summary' : request_body_xml.root.xpath('/csw:GetRecordById/csw:ElementSetName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text
       @id = ''
       request_body_xml.root.xpath('/csw:GetRecordById/csw:Id', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').each do |id|
         @id << id.text << ','
