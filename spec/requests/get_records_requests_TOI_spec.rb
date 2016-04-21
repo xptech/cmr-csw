@@ -1,9 +1,8 @@
 require "spec_helper"
 
 RSpec.describe "various GetRecords POST requests based on temporal criteria", :type => :request do
-=begin
-###### START
-  it 'correctly reders FULL RESULTS ISO MENDS (GMI) data in response to a TempExtent_begin ONLY constraint POST request' do
+
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a TempExtent_begin ONLY constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/tbegin_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -20,7 +19,7 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                     <ogc:PropertyIsGreaterThanOrEqualTo>
                         <ogc:PropertyName>TempExtent_begin</ogc:PropertyName>
-                        <ogc:Literal>1990­09­03T00:00:01Z</ogc:Literal>
+                        <ogc:Literal>1990-09-03T00:00:01Z</ogc:Literal>
                     </ogc:PropertyIsGreaterThanOrEqualTo>
                     <!--
                     <ogc:PropertyIsLessThanOrEqualTo>
@@ -44,10 +43,9 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       # There should be a SearchStatus with a timestamp
       search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
-      # There should be a SearchResults with numberOfRecordsMatched="7" numberOfRecordsReturned="7" elementSet="full" nextRecord="0"
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('1014')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22606')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -55,8 +53,8 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
     end
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a keyword ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/keyword_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a TempExtent_begin ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/tbegin_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       keyword_only_constraint_get_records_request_xml = <<-eos
@@ -70,12 +68,16 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
         <csw:ElementSetName>brief</csw:ElementSetName>
         <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>MODIS</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                </ogc:And>
+                    <ogc:PropertyIsGreaterThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_begin</ogc:PropertyName>
+                        <ogc:Literal>1990-09-03T00:00:01Z</ogc:Literal>
+                    </ogc:PropertyIsGreaterThanOrEqualTo>
+                    <!--
+                    <ogc:PropertyIsLessThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_end</ogc:PropertyName>
+                        <ogc:Literal>2008­09­06T23:59:59Z</ogc:Literal>
+                    </ogc:PropertyIsLessThanOrEqualTo>
+                    -->
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -92,10 +94,9 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       # There should be a SearchStatus with a timestamp
       search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
-      # There should be a SearchResults with numberOfRecordsMatched="7" numberOfRecordsReturned="7" elementSet="full" nextRecord="0"
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('1014')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22606')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -105,72 +106,30 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
                                     'gmd' => 'http://www.isotc211.org/2005/gmd',
-                                    'gco' => 'http://www.isotc211.org/2005/gco')[0].text).to eq('C1235314678-ORNL_DAAC')
+                                    'gco' => 'http://www.isotc211.org/2005/gco')[0].text).to eq('C1224520098-NOAA_NCEI')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:MD_ScopeCode',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
                                     'gmd' => 'http://www.isotc211.org/2005/gmd')[0].text).to eq('series')
-      first_purpose_element = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:purpose',
+      first_purpose_element = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:purpose/gco:CharacterString',
                                                      'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                                      'gmi' => 'http://www.isotc211.org/2005/gmi',
                                                      'gmd' => 'http://www.isotc211.org/2005/gmd',
+                                                     'gco' => 'http://www.isotc211.org/2005/gco'
       )[0]
-      expect(first_purpose_element['gco:nilReason']).to eq('missing')
+      expect(first_purpose_element.text).to eq('BASIC RESEARCH')
     end
   end
 
-  it 'correctly reders FULL CSW RESULTS data in response to a keyword ONLY constraint POST request' do
+  it 'correctly renders FULL CSW RESULTS data in response to a TempExtent_begin ONLY constraint POST request' do
     skip("Address this example when implementing support for csw FULL results'")
-    VCR.use_cassette 'requests/get_records/gmi/keyword_records3_csw_full', :decode_compressed_response => true, :record => :once do
-      # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
-      # TODO - revisit this once CMR supports ISO 19115 gmd
-      keyword_only_constraint_get_records_request_xml = <<-eos
-<csw:GetRecords maxRecords="10" outputFormat="application/xml"
-    outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
-    startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
-    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
-    xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
-    xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
-    <csw:Query typeNames="csw:Record">
-        <csw:ElementSetName>full</csw:ElementSetName>
-        <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
-            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>MODIS</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                </ogc:And>
-            </ogc:Filter>
-        </csw:Constraint>
-    </csw:Query>
-</csw:GetRecords>
-      eos
-      post '/', keyword_only_constraint_get_records_request_xml
-      expect(response).to have_http_status(:success)
-      expect(response).to render_template('get_records/index.xml.erb')
-      records_xml = Nokogiri::XML(response.body)
-      expect(records_xml.root.name).to eq 'GetRecordsResponse'
-      # There should be 10 records
-      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
-                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
-      # There should be a SearchStatus with a timestamp
-      search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
-      expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
-      # There should be a SearchResults with numberOfRecordsMatched="7" numberOfRecordsReturned="7" elementSet="full" nextRecord="0"
-      search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
-      expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('1014')
-      expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
-      expect(search_results_node_set[0]['nextRecord']).to eq('11')
-      expect(search_results_node_set[0]['elementSet']).to eq('full')
-      expect(search_results_node_set[0]['recordSchema']).to eq('http://www.opengis.net/cat/csw/2.0.2')
-      # The full record should have ....
+    VCR.use_cassette 'requests/get_records/gmi/tbegin_records3_csw_full', :decode_compressed_response => true, :record => :once do
+
     end
   end
 
-  it 'correctly renders BRIEF CSW RESULTS data in response to a keyword ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/keyword_records4_csw_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF CSW RESULTS data in response to a TempExtent_begin ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/tbegin_records4_csw_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       keyword_only_constraint_get_records_request_xml = <<-eos
@@ -184,12 +143,16 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
         <csw:ElementSetName>brief</csw:ElementSetName>
         <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>MODIS</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                </ogc:And>
+                    <ogc:PropertyIsGreaterThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_begin</ogc:PropertyName>
+                        <ogc:Literal>1990-09-03T00:00:01Z</ogc:Literal>
+                    </ogc:PropertyIsGreaterThanOrEqualTo>
+                    <!--
+                    <ogc:PropertyIsLessThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_end</ogc:PropertyName>
+                        <ogc:Literal>2008­09­06T23:59:59Z</ogc:Literal>
+                    </ogc:PropertyIsLessThanOrEqualTo>
+                    -->
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -206,10 +169,9 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       # There should be a SearchStatus with a timestamp
       search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
-      # There should be a SearchResults with numberOfRecordsMatched="7" numberOfRecordsReturned="7" elementSet="full" nextRecord="0"
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('1014')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22606')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -218,10 +180,10 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       # The brief record should have an id, title, type and bounding box
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:identifier',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1235314678-ORNL_DAAC')
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1224520098-NOAA_NCEI')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:title',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("gov.nasa.echo:MODIS NDVI Data, Smoothed and Gap-filled, for the Conterminous US: 2000-2014")
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("\nGHRSST Level 2P Central Pacific Regional Skin Sea Surface Temperature from the Geostationary Operational Environmental Satellites (GOES) Imager on the GOES-15 satellite (GDS versions 1 and 2)\n")
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:type',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('dataset')
@@ -231,34 +193,134 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
                                     'ows' => 'http://www.opengis.net/ows').size).to eq(10)
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:LowerCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-129.89 20.85')
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('146.0 -44.0')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:UpperCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-62.56 50.56')
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-105.0 72.0')
 
     end
   end
 
-  it 'correctly reders default RESULTS SUMMARY ISO MENDS data in response to a keyword ONLY constraint POST request and specified maxRecords' do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a TempExtent_end ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/tend_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+      # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
+      # TODO - revisit this once CMR supports ISO 19115 gmd
+      keyword_only_constraint_get_records_request_xml = <<-eos
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
+    outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
+    startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
+    <csw:Query typeNames="csw:Record">
+        <csw:ElementSetName>full</csw:ElementSetName>
+        <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+                    <!--
+                    <ogc:PropertyIsGreaterThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_begin</ogc:PropertyName>
+                        <ogc:Literal>1990-09-03T00:00:01Z</ogc:Literal>
+                    </ogc:PropertyIsGreaterThanOrEqualTo>
+                    -->
+                    <ogc:PropertyIsLessThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_end</ogc:PropertyName>
+                        <ogc:Literal>2008-09-06T23:59:59Z</ogc:Literal>
+                    </ogc:PropertyIsLessThanOrEqualTo>
+            </ogc:Filter>
+        </csw:Constraint>
+    </csw:Query>
+</csw:GetRecords>
+      eos
+      post '/', keyword_only_constraint_get_records_request_xml
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      # There should be 10 records
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
+      # There should be a SearchStatus with a timestamp
+      search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
+      search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_results_node_set.size).to eq(1)
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22570')
+      expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
+      expect(search_results_node_set[0]['nextRecord']).to eq('11')
+      expect(search_results_node_set[0]['elementSet']).to eq('full')
+      expect(search_results_node_set[0]['recordSchema']).to eq('http://www.isotc211.org/2005/gmi')
+    end
+  end
+
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a TempExtent_begin TimeExtent_end range constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/tbegin_tend_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+      # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
+      # TODO - revisit this once CMR supports ISO 19115 gmd
+      keyword_only_constraint_get_records_request_xml = <<-eos
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
+    outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
+    startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
+    xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:rim="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0">
+    <csw:Query typeNames="csw:Record">
+        <csw:ElementSetName>full</csw:ElementSetName>
+        <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <ogc:And>
+                    <ogc:PropertyIsGreaterThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_begin</ogc:PropertyName>
+                        <ogc:Literal>1990-09-03T00:00:01Z</ogc:Literal>
+                    </ogc:PropertyIsGreaterThanOrEqualTo>
+                    <ogc:PropertyIsLessThanOrEqualTo>
+                        <ogc:PropertyName>TempExtent_end</ogc:PropertyName>
+                        <ogc:Literal>2008-09-06T23:59:59Z</ogc:Literal>
+                    </ogc:PropertyIsLessThanOrEqualTo>
+              </ogc:And>
+            </ogc:Filter>
+        </csw:Constraint>
+    </csw:Query>
+</csw:GetRecords>
+      eos
+      post '/', keyword_only_constraint_get_records_request_xml
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      # There should be 10 records
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
+      # There should be a SearchStatus with a timestamp
+      search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
+      search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_results_node_set.size).to eq(1)
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('19037')
+      expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
+      expect(search_results_node_set[0]['nextRecord']).to eq('11')
+      expect(search_results_node_set[0]['elementSet']).to eq('full')
+      expect(search_results_node_set[0]['recordSchema']).to eq('http://www.isotc211.org/2005/gmi')
+    end
+  end
+
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request and specified maxRecords' do
     skip("Address this example when implementing support for maxRecords mapping to cmr page_size'")
   end
 
-  it 'correctly reders default RESULTS SUMMARY ISO MENDS data in response to a keyword ONLY constraint POST request and specified maxRecords and startPosition' do
+  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request and specified maxRecords and startPosition' do
     skip("Address this example when implementing support for startPosition and CMR implements index based navigation")
   end
 
-  it 'correctly reders default RESULTS SUMMARY ISO MENDS data in response to a keyword ONLY constraint POST request' do
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request' do
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
-  it 'correctly reders default HITS ISO MENDS data in response to a keyword ONLY constraint POST request' do
+  it 'correctly renders HITS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request' do
     skip("Address this example when implementing support for resultType='results' and resultType='hits'")
   end
 
-  it 'correctly reders default RESULTS BRIEF ISO MENDS data in response to a keyword ONLY with WILDCARD support constraint POST request' do
+  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request' do
     skip("Address this example when implementing WILDCARD support in XML POST request body")
   end
-=end
-###### END
 end
 

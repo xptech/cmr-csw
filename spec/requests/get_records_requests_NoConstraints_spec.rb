@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => :request do
 
-  it 'correctly reders default RESULTS FULL ISO MENDS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders default RESULTS FULL ISO MENDS data in response to a basic / no-constrains POST request' do
     VCR.use_cassette 'requests/get_records/gmi/ten_records', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -31,16 +31,16 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
   end
 
   #TODO
-  it 'correctly reders default RESULTS SUMMARY ISO MENDS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders default RESULTS SUMMARY ISO MENDS data in response to a basic / no-constrains POST request' do
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
   #TODO
-  it 'correctly reders default RESULTS BRIEF ISO MENDS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders default RESULTS BRIEF ISO MENDS data in response to a basic / no-constrains POST request' do
     skip("Address this example when implementing support for ElementSetName BRIEF resultType='results'")
   end
 
-  it 'correctly reders default HITS ISO MENDS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders default HITS ISO MENDS data in response to a basic / no-constrains POST request' do
     skip("Address this example when implementing support for resultType='results' and resultType='hits'")
     no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
