@@ -149,6 +149,7 @@ class GetRecords < BaseCswModel
       filterHelper = OgcFilter.new(@filter, @cmr_query_hash)
       filterHelper.process_any_text
       filterHelper.process_temporal
+      filterHelper.process_spatial_bounding_box
     else
       Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
     end

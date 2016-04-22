@@ -21,6 +21,30 @@ class OgcFilter
     Rails.logger.info("OgcFilter.process_any_text: #{@cmr_query_hash}")
   end
 
+  # CMR query is: bounding_box =  lower left longitude, lower left latitude, upper right longitude, upper right latitude.
+  # gml iso:boundingbox envelope is:
+  # <gml:lowerCorner>LONG LAT</gml:lowerCorner>
+  # <gml:upperCorner>LONG (-180 to + 180) LAT (-90 to +90)</gml:upperCorner>
+  def process_spatial_bounding_box
+    cmr_bounding_box_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["BoundingBox"][1]
+    bounding_box = @ogc_filter.xpath('//ogc:PropertyName[contains(text(), "BoundingBox")]', 'ogc' => 'http://www.opengis.net/ogc')
+    if (bounding_box != nil && bounding_box[0] != nil)
+      bounding_box_envelope_node = bounding_box[0].next_element
+      if (bounding_box_envelope_node != nil)
+        iso_bounding_box = IsoBoundingBox.new(bounding_box_envelope_node)
+        if(iso_bounding_box.valid?)
+          # the cmr bounding_box only supports a single value and not an array
+          @cmr_query_hash["#{cmr_bounding_box_param}"] = iso_bounding_box.to_cmr
+        else
+          error_message = "OgcFilter.process_spatial_bounding_box errors: #{iso_bounding_box.errors.full_messages.to_s}"
+          Rails.logger.error(error_message)
+          raise OwsException.new('InvalidParameterValue', "#{error_message}", "iso:BoundingBox", '400')
+        end
+      end
+    end
+    Rails.logger.info("OgcFilter.process_spatial_bounding_box: #{@cmr_query_hash}")
+  end
+
   # CMR temporal query syntax
   # 2000-01-01T10:00:00Z, means AFTER, so does ISO 2000-01-01T10:00:00Z/
   # ,2010-03-10T12:00:00Z means BEFORE, so does ISO /2010-03-10T12:00:00Z
