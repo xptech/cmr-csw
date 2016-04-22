@@ -249,5 +249,4 @@ class OgcFilter
       raise OwsException.new('InvalidParameterValue', "#{error_message}", "#{date_string}", '400')
     end
   end
-
 end

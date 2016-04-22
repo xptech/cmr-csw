@@ -1,7 +1,5 @@
 class IsoBoundingBox
   include ActiveModel::Validations
-  #include ActiveModel::Conversion
-  #extend ActiveModel::Naming
 
   attr_accessor :lower_corner_longitude
   validates :lower_corner_longitude,
