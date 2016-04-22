@@ -31,7 +31,7 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         # levels of content. If MD_Metadata.hierarchyLevel.MD_ScopeCode@codeListValue is missing, default is 'Dataset'.
         "Type" => ["Type", "", ["MD_Metadata.hierarchyLevel.MD_ScopeCode/@codeListValue"]],
         # A bounding box for identifying a geographic area of interest
-        "BoundingBox" => ["", "", ["BoundingBox"]],
+        "BoundingBox" => ["", "bounding_box", ["BoundingBox"]],
 
         # Geographic Coordinate Reference System (Authority and ID) for the BoundingBox
         "CRS" => ["", "two_d_coordinate_system_name", ["CRS"]],

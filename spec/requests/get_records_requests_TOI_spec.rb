@@ -257,6 +257,7 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       keyword_only_constraint_get_records_request_xml = <<-eos
+<?xml version="1.0"?>
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"

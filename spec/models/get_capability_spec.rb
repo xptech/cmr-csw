@@ -85,14 +85,14 @@ RSpec.describe GetCapability do
           end
         end
       end
-      expect(cmr_queryables_not_supported_by_gcmd_csw.length).to eq 19
+      expect(cmr_queryables_not_supported_by_gcmd_csw.length).to eq 18
       # CMR queryables NOT supported by CSW
       # TODO - might consider adding them to CMR CSW
       expected_cmr_queryables_not_supported_by_gcmd_csw_set = Set.new(["echo_collection_id", "provider_short_name",
                                                            "dataset_id", "entry_id", "archive_center", "processing_level_id",
                                                            "collection_data_type", "online_only", "downloadable", "browse_only",
                                                            "browsable", "provider", "short_name", "version", "polygon",
-                                                           "bounding_box", "point", "line", "has_granules"])
+                                                           "point", "line", "has_granules"])
       expect(expected_cmr_queryables_not_supported_by_gcmd_csw_set).to eq Set.new(cmr_queryables_not_supported_by_gcmd_csw)
     end
   end

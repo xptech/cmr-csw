@@ -60,8 +60,11 @@ class RequestRouter
         # ensure we don't drain the request body with the above read
         request.body.rewind
         Rails.logger.info("RequestRouter.post_helper request_body:\n #{request_body_string}")
-        xml_request_body = Nokogiri::XML(request_body_string)
-        ret_val = (xml_request_body.root.name == csw_post_request_name)
+        # not sure why, sometimes the request_body is an empty string
+        if(!request_body_string.blank?)
+          xml_request_body = Nokogiri::XML(request_body_string)
+          ret_val = (xml_request_body.root.name == csw_post_request_name)
+        end
       end
       return ret_val
     end
