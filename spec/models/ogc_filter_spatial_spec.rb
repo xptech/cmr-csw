@@ -32,8 +32,8 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
-      helper.process_spatial_bounding_box
+      helper = OgcFilterBoundingBox.new
+      helper.process(filter, cmr_query_params)
       expect(cmr_query_params['bounding_box']).to eq('13,14,15,16')
     end
 
@@ -67,11 +67,11 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
+      helper = OgcFilterBoundingBox.new
       begin
-        helper.process_spatial_bounding_box
+        helper.process(filter, cmr_query_params)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilter.process_spatial_bounding_box errors: ["Lower corner longitude lowerCorner longitude must be between -180 and 180 degrees", "Lower corner latitude lowerCorner latitude must be between -90 and 90 degrees", "Upper corner longitude upperCorner longitude must be between -180 and 180 degrees", "Upper corner latitude upperCorner latitude must be between -90 and 90 degrees"]')
+        expect(e.exception_text).to eq('OgcFilterBoundingBox.process errors: ["Lower corner longitude lowerCorner longitude must be between -180 and 180 degrees", "Lower corner latitude lowerCorner latitude must be between -90 and 90 degrees", "Upper corner longitude upperCorner longitude must be between -180 and 180 degrees", "Upper corner latitude upperCorner latitude must be between -90 and 90 degrees"]')
         expect(e.http_code).to eq('400')
         expect(e.exception_code).to eq('InvalidParameterValue')
         expect(e.locator).to eq('iso:BoundingBox')
