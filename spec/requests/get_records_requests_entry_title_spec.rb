@@ -102,7 +102,6 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
     end
   end
 
-=begin
   it 'correctly renders FULL CSW RESULTS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing support for csw FULL results'")
     VCR.use_cassette 'requests/get_records/gmi/title_records3_csw_full', :decode_compressed_response => true, :record => :once do
@@ -125,9 +124,9 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
         <csw:ElementSetName>brief</csw:ElementSetName>
          <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="^">
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>Title</ogc:PropertyName>
-                        <ogc:Literal>MODIS</ogc:Literal>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
                     </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
@@ -147,7 +146,7 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('29436')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('775')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -156,10 +155,10 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
       # The brief record should have an id, title, type and bounding box
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:identifier',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1224520098-NOAA_NCEI')
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1224520058-NOAA_NCEI')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:title',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("\nGHRSST Level 2P Central Pacific Regional Skin Sea Surface Temperature from the Geostationary Operational Environmental Satellites (GOES) Imager on the GOES-15 satellite (GDS versions 1 and 2)\n")
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("\nGHRSST Level 2P Global Skin Sea Surface Temperature from the Moderate Resolution Imaging Spectroradiometer (MODIS) on the NASA Aqua satellite\n")
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:type',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('dataset')
@@ -169,10 +168,10 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
                                     'ows' => 'http://www.opengis.net/ows').size).to eq(10)
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:LowerCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('146.0 -44.0')
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-180.0 -90.0')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:UpperCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-105.0 72.0')
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('180.0 90.0')
     end
   end
 
@@ -207,9 +206,9 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
                             <gml:upperCorner>180 90</gml:upperCorner>
                         </gml:Envelope>
                     </ogc:BBOX>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="^">
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>Title</ogc:PropertyName>
-                        <ogc:Literal>MODIS</ogc:Literal>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
                     </ogc:PropertyIsLike>
                 </ogc:And>
             </ogc:Filter>
@@ -230,7 +229,7 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('18247')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('672')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -257,5 +256,4 @@ RSpec.describe "various GetRecords POST requests based on the Title ISO queryabl
   it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing WILDCARD support in XML POST request body")
   end
-=end
 end
