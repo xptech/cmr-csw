@@ -20,7 +20,7 @@ class OgcFilterTemporal
     if (temporal_query_string != nil)
       cmr_query_hash["#{cmr_temporal_param}"] = temporal_query_string
     end
-    Rails.logger.info("OgcFilterTempora;.process: #{cmr_query_hash}")
+    Rails.logger.info("OgcFilterTemporal.process: #{cmr_query_hash}")
   end
 
   private

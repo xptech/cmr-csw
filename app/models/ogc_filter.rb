@@ -1,7 +1,9 @@
 class OgcFilter
+  # New queryable processor classes should be added here
   @@SUPPORTED_QUERYABLE_PROCESSORS = [ OgcFilterAnyText,
                                        OgcFilterBoundingBox,
-                                       OgcFilterTemporal
+                                       OgcFilterTemporal,
+                                       OgcFilterEntryTitle
                                      ]
   @ogc_filter
   @cmr_query_hash
