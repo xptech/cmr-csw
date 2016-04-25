@@ -31,8 +31,8 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
-      helper.process_any_text
+      helper = OgcFilterAnyText.new
+      helper.process(filter, cmr_query_params)
       expect(cmr_query_params['keyword']).to eq('MODIS')
     end
 

@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe "various GetRecords POST requests based on spatial criteria", :type => :request do
+RSpec.describe "various GetRecords POST requests based on the Title ISO queryable", :type => :request do
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a BoundingBox ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/bbox_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a Title ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/title_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       bbox_constraint_get_records_request_xml = <<-eos
@@ -14,15 +14,10 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
         <csw:ElementSetName>full</csw:ElementSetName>
         <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:BBOX>
-                        <ogc:PropertyName>iso:BoundingBox</ogc:PropertyName>
-                        <gml:Envelope xmlns:gml="http://www.opengis.net/gml">
-                            <gml:lowerCorner>-180 -90</gml:lowerCorner>
-                            <gml:upperCorner>180 90</gml:upperCorner>
-                        </gml:Envelope>
-                    </ogc:BBOX>
-                </ogc:And>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>Title</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
+                    </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -41,7 +36,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('29436')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('775')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -49,8 +44,8 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
     end
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a BoundingBox ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/bbox_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a Title ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/title_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       bbox_only_constraint_get_records_request_xml = <<-eos
@@ -60,15 +55,10 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
         <csw:ElementSetName>brief</csw:ElementSetName>
         <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:BBOX>
-                        <ogc:PropertyName>iso:BoundingBox</ogc:PropertyName>
-                        <gml:Envelope xmlns:gml="http://www.opengis.net/gml">
-                            <gml:lowerCorner>-180 -90</gml:lowerCorner>
-                            <gml:upperCorner>180 90</gml:upperCorner>
-                        </gml:Envelope>
-                    </ogc:BBOX>
-                </ogc:And>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>Title</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
+                    </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -87,7 +77,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('29436')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('775')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -97,7 +87,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
                                     'gmd' => 'http://www.isotc211.org/2005/gmd',
-                                    'gco' => 'http://www.isotc211.org/2005/gco')[0].text).to eq('C1224520098-NOAA_NCEI')
+                                    'gco' => 'http://www.isotc211.org/2005/gco')[0].text).to eq("C1224520058-NOAA_NCEI")
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:MD_ScopeCode',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
@@ -108,19 +98,19 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
                                                      'gmd' => 'http://www.isotc211.org/2005/gmd',
                                                      'gco' => 'http://www.isotc211.org/2005/gco'
       )[0]
-      expect(first_purpose_element.text).to eq('BASIC RESEARCH')
+      expect(first_purpose_element.text).to eq('To serve a wide user community by providing albedo data for the continent of Africa that can be used to predict soil properties as well as for a range of other applications, including erosion and landslide risk.')
     end
   end
 
-  it 'correctly renders FULL CSW RESULTS data in response to a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders FULL CSW RESULTS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing support for csw FULL results'")
-    VCR.use_cassette 'requests/get_records/gmi/bbox_records3_csw_full', :decode_compressed_response => true, :record => :once do
+    VCR.use_cassette 'requests/get_records/gmi/title_records3_csw_full', :decode_compressed_response => true, :record => :once do
 
     end
   end
 
-  it 'correctly renders BRIEF CSW RESULTS data in response to a BoundingBox ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/bbox_records4_csw_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF CSW RESULTS data in response to a Title ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/title_records4_csw_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       bbox_only_constraint_get_records_request_xml = <<-eos
@@ -134,15 +124,10 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
         <csw:ElementSetName>brief</csw:ElementSetName>
          <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
-                    <ogc:BBOX>
-                        <ogc:PropertyName>iso:BoundingBox</ogc:PropertyName>
-                        <gml:Envelope xmlns:gml="http://www.opengis.net/gml">
-                            <gml:lowerCorner>-180 -90</gml:lowerCorner>
-                            <gml:upperCorner>180 90</gml:upperCorner>
-                        </gml:Envelope>
-                    </ogc:BBOX>
-                </ogc:And>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>Title</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
+                    </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -161,7 +146,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('29436')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('775')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -170,10 +155,10 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
       # The brief record should have an id, title, type and bounding box
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:identifier',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1224520098-NOAA_NCEI')
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('C1224520058-NOAA_NCEI')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:title',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("\nGHRSST Level 2P Central Pacific Regional Skin Sea Surface Temperature from the Geostationary Operational Environmental Satellites (GOES) Imager on the GOES-15 satellite (GDS versions 1 and 2)\n")
+                                    'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq("\nGHRSST Level 2P Global Skin Sea Surface Temperature from the Moderate Resolution Imaging Spectroradiometer (MODIS) on the NASA Aqua satellite\n")
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dc:type',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'dc' => 'http://purl.org/dc/elements/1.1/')[0].text).to eq('dataset')
@@ -183,16 +168,15 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
                                     'ows' => 'http://www.opengis.net/ows').size).to eq(10)
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:LowerCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('146.0 -44.0')
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-180.0 -90.0')
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/ows:WGS84BoundingBox/ows:UpperCorner',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('-105.0 72.0')
-
+                                    'ows' => 'http://www.opengis.net/ows')[0].text).to eq('180.0 90.0')
     end
   end
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_AnyText constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/aoi_toi_anytext_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_AnyText_Title constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/aoi_toi_anytext_title_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       bbox_only_constraint_get_records_request_xml = <<-eos
@@ -222,6 +206,10 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
                             <gml:upperCorner>180 90</gml:upperCorner>
                         </gml:Envelope>
                     </ogc:BBOX>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>Title</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
+                    </ogc:PropertyIsLike>
                 </ogc:And>
             </ogc:Filter>
         </csw:Constraint>
@@ -241,7 +229,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('18247')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('672')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -249,24 +237,23 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
     end
   end
 
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a BoundingBox ONLY constraint POST request and specified maxRecords' do
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a Title ONLY constraint POST request and specified maxRecords' do
     skip("Address this example when implementing support for maxRecords mapping to cmr page_size'")
   end
 
-  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to a BoundingBox ONLY constraint POST request and specified maxRecords and startPosition' do
+  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to a Title ONLY constraint POST request and specified maxRecords and startPosition' do
     skip("Address this example when implementing support for startPosition and CMR implements index based navigation")
   end
 
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
-  it 'correctly renders HITS ISO MENDS data in response to a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders HITS ISO MENDS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing support for resultType='results' and resultType='hits'")
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a Title ONLY constraint POST request' do
     skip("Address this example when implementing WILDCARD support in XML POST request body")
   end
 end
-

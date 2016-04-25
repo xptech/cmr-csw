@@ -244,7 +244,7 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22570')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('22569')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')

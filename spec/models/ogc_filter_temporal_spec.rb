@@ -31,8 +31,8 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
-      helper.process_temporal
+      helper = OgcFilterTemporal.new
+      helper.process(filter, cmr_query_params)
       expect(cmr_query_params['temporal[]']).to eq('1990-09-03T00:00:01Z/')
     end
 
@@ -65,8 +65,8 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
-      helper.process_temporal
+      helper = OgcFilterTemporal.new
+      helper.process(filter, cmr_query_params)
       expect(cmr_query_params['temporal[]']).to eq('/1990-09-03T00:00:01Z')
     end
 
@@ -103,8 +103,8 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
-      helper.process_temporal
+      helper = OgcFilterTemporal.new
+      helper.process(filter, cmr_query_params)
       expect(cmr_query_params['temporal[]']).to eq('1990-09-03T00:00:01Z/2016-09-06T23:59:59Z')
     end
 
@@ -137,12 +137,12 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
+      helper = OgcFilterTemporal.new
       #expect(helper.process_temporal).to raise_exception(OwsException, "message HERE")
       begin
-        helper.process_temporal
+        helper.process(filter, cmr_query_params)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilter.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
+        expect(e.exception_text).to eq('OgcFilterTemporal.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
         expect(e.http_code).to eq('400')
         expect(e.exception_code).to eq('InvalidParameterValue')
         expect(e.locator).to eq('INVALID_DATE_HERE')
@@ -178,12 +178,12 @@ RSpec.describe OgcFilter do
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
       cmr_query_params = Hash.new
-      helper = OgcFilter.new(filter, cmr_query_params)
+      helper = OgcFilterTemporal.new
       #expect(helper.process_temporal).to raise_exception(OwsException, "message HERE")
       begin
-        helper.process_temporal
+        helper.process(filter, cmr_query_params)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilter.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
+        expect(e.exception_text).to eq('OgcFilterTemporal.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
         expect(e.http_code).to eq('400')
         expect(e.exception_code).to eq('InvalidParameterValue')
         expect(e.locator).to eq('INVALID_DATE_HERE')
