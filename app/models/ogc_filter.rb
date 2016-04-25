@@ -1,4 +1,10 @@
 class OgcFilter
+  # New queryable processor classes should be added here
+  @@SUPPORTED_QUERYABLE_PROCESSORS = [ OgcFilterAnyText,
+                                       OgcFilterBoundingBox,
+                                       OgcFilterTemporal,
+                                       OgcFilterEntryTitle
+                                     ]
   @ogc_filter
   @cmr_query_hash
 
@@ -7,17 +13,15 @@ class OgcFilter
     @cmr_query_hash = cmr_query_hash
   end
 
-  def process_any_text
-    cmr_keyword_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["AnyText"][1]
-    any_text = @ogc_filter.xpath('//ogc:PropertyName[contains(text(), "AnyText")]', 'ogc' => 'http://www.opengis.net/ogc')
-    if (any_text != nil && any_text[0] != nil)
-      any_text_literal_node = any_text[0].next_element
-      if (any_text_literal_node != nil)
-        literal_value = any_text_literal_node.text
-        # the cmr keyword only supports a single value and not an array
-        @cmr_query_hash["#{cmr_keyword_param}"] = literal_value
-      end
+  def process_queryables
+    @@SUPPORTED_QUERYABLE_PROCESSORS.each do |queryable_processor|
+      queryable_processor_instance = queryable_processor.new
+      Rails.logger.info "#{queryable_processor.class.to_s} start queryable processing: #{@cmr_query_hash.to_s}"
+      queryable_processor_instance.process(@ogc_filter, @cmr_query_hash)
+      Rails.logger.info "#{queryable_processor.class.to_s} end queryable processing: #{@cmr_query_hash.to_s}"
+
+      #TODO might need to add post_processing for @cmr_query_hash once we add support for logical operators
     end
-    Rails.logger.info("OgcFilter.process_any_text: #{@cmr_query_hash}")
   end
+
 end

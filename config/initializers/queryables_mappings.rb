@@ -31,7 +31,7 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         # levels of content. If MD_Metadata.hierarchyLevel.MD_ScopeCode@codeListValue is missing, default is 'Dataset'.
         "Type" => ["Type", "", ["MD_Metadata.hierarchyLevel.MD_ScopeCode/@codeListValue"]],
         # A bounding box for identifying a geographic area of interest
-        "BoundingBox" => ["", "", ["BoundingBox"]],
+        "BoundingBox" => ["", "bounding_box", ["BoundingBox"]],
 
         # Geographic Coordinate Reference System (Authority and ID) for the BoundingBox
         "CRS" => ["", "two_d_coordinate_system_name", ["CRS"]],
@@ -88,10 +88,10 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         "ResourceLanguage" => ["ResourceLanguage", "", ["MD_Metadata.identificationInfo.MD_DataIdentification.language"]],
 
         # Temporal extent information: begin
-        "TempExtent_begin" => ["TempExtent_begin", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
+        "TempExtent_begin" => ["TempExtent_begin", "temporal[]", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.beginPosition"]],
 
         # Temporal extent information: end
-        "TempExtent_end" => ["TempExtent_end", "temporal", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
+        "TempExtent_end" => ["TempExtent_end", "temporal[]", ["MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition"]],
 
         # Name of a service type.
         "ServiceType" => ["ServiceType", "", ["MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType"]],
@@ -194,7 +194,7 @@ ALL_CMR_QUERYABLES =
         #
         "data_center" => ["", "data_center", [""]],
         #
-        "temporal" => ["", "temporal", [""]],
+        "temporal[]" => ["", "temporal[]", [""]],
         #
         "project" => ["", "project", [""]],
         #
