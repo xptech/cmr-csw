@@ -8,7 +8,7 @@ class OgcFilterEntryTitle
       entry_title_literal_node = title_node_set[0].next_element
       if (entry_title_literal_node != nil)
         literal_value = entry_title_literal_node.text
-        # the cmr entry title support multitple values
+        # the cmr entry title supports multitple values, only support one value for now
         cmr_query_hash["#{@@CMR_ENTRY_TITLE_PARAM}"] = literal_value
       end
       process_wildcard(entry_title_literal_node, cmr_query_hash)

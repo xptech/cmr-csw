@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe OgcFilter do
+RSpec.describe OgcFilterTemporal do
   describe 'OGC TempExtent_begin and TempExtent_end Filter Tests' do
     it 'is possible to generate a TempExtent_begin AFTER CMR query from a GetRecords POST XML request' do
       start_time_only_constraint_get_records_request_xml = <<-eos

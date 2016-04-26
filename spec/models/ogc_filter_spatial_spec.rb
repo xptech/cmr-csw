@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe OgcFilter do
+RSpec.describe OgcFilterBoundingBox do
   describe 'OGC boundingbox spatial Filter examples' do
     it 'is possible to generate a bounding box CMR query from a GetRecords POST XML request' do
       start_time_only_constraint_get_records_request_xml = <<-eos

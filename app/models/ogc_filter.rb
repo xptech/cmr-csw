@@ -3,7 +3,8 @@ class OgcFilter
   @@SUPPORTED_QUERYABLE_PROCESSORS = [ OgcFilterAnyText,
                                        OgcFilterBoundingBox,
                                        OgcFilterTemporal,
-                                       OgcFilterEntryTitle
+                                       OgcFilterEntryTitle,
+                                       OgcFilterPlatform
                                      ]
   @ogc_filter
   @cmr_query_hash
@@ -13,7 +14,7 @@ class OgcFilter
     @cmr_query_hash = cmr_query_hash
   end
 
-  def process_queryables
+  def process_all_queryables
     @@SUPPORTED_QUERYABLE_PROCESSORS.each do |queryable_processor|
       queryable_processor_instance = queryable_processor.new
       Rails.logger.info "#{queryable_processor.class.to_s} start queryable processing: #{@cmr_query_hash.to_s}"
