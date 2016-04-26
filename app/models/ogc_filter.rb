@@ -4,7 +4,8 @@ class OgcFilter
                                        OgcFilterBoundingBox,
                                        OgcFilterTemporal,
                                        OgcFilterEntryTitle,
-                                       OgcFilterPlatform
+                                       OgcFilterPlatform,
+                                       OgcFilterInstrument
                                      ]
   @ogc_filter
   @cmr_query_hash

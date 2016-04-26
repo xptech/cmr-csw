@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe "various GetRecords POST requests based on the Platform ISO queryable", :type => :request do
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a Platform ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/platform_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+RSpec.describe "various GetRecords POST requests based on the Instrument ISO queryable", :type => :request do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to an Instrument ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/instrument_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
       platform_constraint_get_records_request_xml = <<-eos
@@ -14,8 +14,8 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
         <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                     <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>Platform</ogc:PropertyName>
-                        <ogc:Literal>AQUA</ogc:Literal>
+                        <ogc:PropertyName>Instrument</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
                     </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
@@ -35,7 +35,7 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('696')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('941')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -43,11 +43,11 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
     end
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a Platform ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/platform_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a Instrument ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/instrument_records2_gmi_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
-      platform_only_constraint_get_records_request_xml = <<-eos
+      instrument_only_constraint_get_records_request_xml = <<-eos
 <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" resultType="results"
     xmlns:gmd="http://www.isotc211.org/2005/gmi" service="CSW" version="2.0.2">
     <csw:Query typeNames="csw:Record">
@@ -55,15 +55,15 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
         <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                     <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>Platform</ogc:PropertyName>
-                        <ogc:Literal>*AQUA*</ogc:Literal>
+                        <ogc:PropertyName>Instrument</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
                     </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', platform_only_constraint_get_records_request_xml
+      post '/', instrument_only_constraint_get_records_request_xml
       expect(response).to have_http_status(:success)
       expect(response).to render_template('get_records/index.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -76,7 +76,7 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('779')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('941')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -101,18 +101,18 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
     end
   end
 
-  it 'correctly renders FULL CSW RESULTS data in response to a Platform ONLY constraint POST request' do
+  it 'correctly renders FULL CSW RESULTS data in response to an Instrument ONLY constraint POST request' do
     skip("Address this example when implementing support for csw FULL results'")
-    VCR.use_cassette 'requests/get_records/gmi/platform_records3_csw_full', :decode_compressed_response => true, :record => :once do
+    VCR.use_cassette 'requests/get_records/gmi/instrument_records3_csw_full', :decode_compressed_response => true, :record => :once do
 
     end
   end
 
-  it 'correctly renders BRIEF CSW RESULTS data in response to a Platform ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/platform_records4_csw_brief', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF CSW RESULTS data in response to an Instrument ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/instrument_records4_csw_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
-      platform_only_constraint_get_records_request_xml = <<-eos
+      instrument_only_constraint_get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
@@ -124,15 +124,15 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
          <csw:Constraint version="1.1.0">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                     <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>Platform</ogc:PropertyName>
-                        <ogc:Literal>*AQUA*</ogc:Literal>
+                        <ogc:PropertyName>Instrument</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
                     </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', platform_only_constraint_get_records_request_xml
+      post '/', instrument_only_constraint_get_records_request_xml
       expect(response).to have_http_status(:success)
       expect(response).to render_template('get_records/index.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -145,7 +145,7 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('779')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('941')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -174,11 +174,11 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
     end
   end
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_AnyText_Title_Platform constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/platform_others_records1_gmi_full', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_AnyText_Title_Platform_Instrument constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/instrument_others_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
-      combined_only_constraint_get_records_request_xml = <<-eos
+      combined_constraint_get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
@@ -213,18 +213,22 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
                         <ogc:PropertyName>Platform</ogc:PropertyName>
                         <ogc:Literal>*AQUA*</ogc:Literal>
                     </ogc:PropertyIsLike>
+                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
+                        <ogc:PropertyName>Instrument</ogc:PropertyName>
+                        <ogc:Literal>*MODIS*</ogc:Literal>
+                    </ogc:PropertyIsLike>
                 </ogc:And>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', combined_only_constraint_get_records_request_xml
+      post '/', combined_constraint_get_records_request_xml
       # Generated CMR query is:
-      # https://cmr.earthdata.nasa.gov/search/collections?bounding_box=-180,-90,180,90&
-      # entry_title=*MODIS*&options[entry_title][pattern]=true&
-      # options[platform][pattern]=true&platform=*AQUA*
-      # &temporal[]=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
+      # https://cmr.earthdata.nasa.gov/search/collections?
+      # bounding_box=-180,-90,180,90&entry_title=*MODIS*&instrument=*MODIS*&options[entry_title][pattern]=true&
+      # options[instrument][pattern]=true&options[platform][pattern]=true&platform=*AQUA*&
+      # temporal[]=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
       expect(response).to have_http_status(:success)
       expect(response).to render_template('get_records/index.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -237,7 +241,7 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('389')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('378')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -245,23 +249,23 @@ RSpec.describe "various GetRecords POST requests based on the Platform ISO query
     end
   end
 
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a Platform ONLY constraint POST request and specified maxRecords' do
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to an Instrument ONLY constraint POST request and specified maxRecords' do
     skip("Address this example when implementing support for maxRecords mapping to cmr page_size'")
   end
 
-  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to a Platform ONLY constraint POST request and specified maxRecords and startPosition' do
+  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to an Instrument  ONLY constraint POST request and specified maxRecords and startPosition' do
     skip("Address this example when implementing support for startPosition and CMR implements index based navigation")
   end
 
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a Platform ONLY constraint POST request' do
+  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to an Instrument ONLY constraint POST request' do
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
-  it 'correctly renders HITS ISO MENDS data in response to a Platform ONLY constraint POST request' do
+  it 'correctly renders HITS ISO MENDS data in response to an Instrument ONLY constraint POST request' do
     skip("Address this example when implementing support for resultType='results' and resultType='hits'")
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a Platform ONLY constraint POST request' do
+  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to an Instrument ONLY constraint POST request' do
     skip("Address this example when implementing WILDCARD support in XML POST request body")
   end
 end
