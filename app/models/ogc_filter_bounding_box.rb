@@ -4,7 +4,8 @@ class OgcFilterBoundingBox
   # gml iso:boundingbox envelope is:
   # <gml:lowerCorner>LONG LAT</gml:lowerCorner>
   # <gml:upperCorner>LONG (-180 to + 180) LAT (-90 to +90)</gml:upperCorner>
-  def process(ogc_filter, cmr_query_hash)
+  def process(ogc_filter)
+    cmr_query_hash = {}
     cmr_bounding_box_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["BoundingBox"][1]
     bounding_box = ogc_filter.xpath('//ogc:PropertyName[contains(text(), "BoundingBox")]', 'ogc' => 'http://www.opengis.net/ogc')
     if (bounding_box != nil && bounding_box[0] != nil)
@@ -22,5 +23,6 @@ class OgcFilterBoundingBox
       end
     end
     Rails.logger.info("OgcFilterBoundingBox.process: #{cmr_query_hash}")
+    cmr_query_hash
   end
 end

@@ -30,9 +30,8 @@ RSpec.describe OgcFilterPlatform do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterPlatform.new
-      helper.process(filter, cmr_query_params)
+      cmr_query_params = helper.process(filter)
       expect(cmr_query_params['platform']).to eq('*AQUA*')
       expect(cmr_query_params['options[platform][pattern]']).to eq true
     end
@@ -65,9 +64,8 @@ RSpec.describe OgcFilterPlatform do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterPlatform.new
-      helper.process(filter, cmr_query_params)
+      cmr_query_params = helper.process(filter)
       # the CMR wildcard character is '*'
       expect(cmr_query_params['platform']).to eq('*AQUA*')
       expect(cmr_query_params['options[platform][pattern]']).to eq true
@@ -101,10 +99,8 @@ RSpec.describe OgcFilterPlatform do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterPlatform.new
-      helper.process(filter, cmr_query_params)
-      # the CMR wildcard character is '*'
+      cmr_query_params = helper.process(filter)
       expect(cmr_query_params['platform']).to eq('TERRA')
       expect(cmr_query_params['options[platform][pattern]']).to eq nil
     end

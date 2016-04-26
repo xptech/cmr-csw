@@ -30,9 +30,8 @@ RSpec.describe OgcFilterEntryTitle do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterEntryTitle.new
-      helper.process(filter, cmr_query_params)
+      cmr_query_params = helper.process(filter)
       expect(cmr_query_params['entry_title']).to eq('*MO*DIS*')
       expect(cmr_query_params['options[entry_title][pattern]']).to eq true
     end
@@ -65,9 +64,8 @@ RSpec.describe OgcFilterEntryTitle do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterEntryTitle.new
-      helper.process(filter, cmr_query_params)
+      cmr_query_params = helper.process(filter)
       # the CMR wildcard character is '*'
       expect(cmr_query_params['entry_title']).to eq('*MO*DIS*')
       expect(cmr_query_params['options[entry_title][pattern]']).to eq true
@@ -101,9 +99,8 @@ RSpec.describe OgcFilterEntryTitle do
                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                          'ogc' => 'http://www.opengis.net/ogc')
       expect(filter).not_to eq nil
-      cmr_query_params = Hash.new
       helper = OgcFilterEntryTitle.new
-      helper.process(filter, cmr_query_params)
+      cmr_query_params = helper.process(filter)
       # the CMR wildcard character is '*'
       expect(cmr_query_params['entry_title']).to eq('MODIS')
       expect(cmr_query_params['options[entry_title][pattern]']).to eq nil

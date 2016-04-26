@@ -7,7 +7,8 @@ class OgcFilterTemporal
   # For temporal range search, the default is inclusive on the range boundaries. This can be changed by specifying
   # exclude_boundary option with options[temporal][exclude_boundary]=true. This option has no impact on periodic
   # temporal searches, which CMR CSW will not support initially.
-  def process(ogc_filter, cmr_query_hash)
+  def process(ogc_filter)
+    cmr_query_hash = {}
     cmr_temporal_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["TempExtent_begin"][1] # same CMR mapping exists for TempExtent_end
     time_start_params = extract_operand_filter_data("TempExtent_begin", ogc_filter)
     time_end_params = extract_operand_filter_data("TempExtent_end", ogc_filter)
@@ -22,6 +23,7 @@ class OgcFilterTemporal
       cmr_query_hash["#{cmr_temporal_param}"] = temporal_query_string
     end
     Rails.logger.info("OgcFilterTemporal.process: #{cmr_query_hash}")
+    cmr_query_hash
   end
 
   private

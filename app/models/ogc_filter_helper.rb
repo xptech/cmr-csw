@@ -1,6 +1,7 @@
 class OgcFilterHelper
 
-  def self.process_queryable(ogc_filter, cmr_query_hash, iso_queryable_name, cmr_parameter_name, wildcard_flag)
+  def self.process_queryable(ogc_filter, iso_queryable_name, cmr_parameter_name, wildcard_flag)
+    cmr_query_hash = {}
     xpath_string = "//ogc:PropertyName[contains(text(), '#{iso_queryable_name}')]"
     property_name_node_set = ogc_filter.xpath(xpath_string, 'ogc' => 'http://www.opengis.net/ogc')
     if (property_name_node_set != nil && property_name_node_set[0] != nil)
@@ -13,6 +14,7 @@ class OgcFilterHelper
         process_wildcard(cmr_query_hash, literal_node, cmr_parameter_name)
       end
     end
+    cmr_query_hash
   end
 
   private
