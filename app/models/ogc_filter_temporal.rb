@@ -1,4 +1,5 @@
 class OgcFilterTemporal
+  # since temporal requires special processing, we cannot  use the OgcFilterHelper
   # CMR temporal query syntax
   # 2000-01-01T10:00:00Z, means AFTER, so does ISO 2000-01-01T10:00:00Z/
   # ,2010-03-10T12:00:00Z means BEFORE, so does ISO /2010-03-10T12:00:00Z

@@ -1,4 +1,5 @@
 class OgcFilterBoundingBox
+  # since bouding box requires special processing, we cannot  use the OgcFilterHelper
   # CMR query is: bounding_box =  lower left longitude, lower left latitude, upper right longitude, upper right latitude.
   # gml iso:boundingbox envelope is:
   # <gml:lowerCorner>LONG LAT</gml:lowerCorner>
