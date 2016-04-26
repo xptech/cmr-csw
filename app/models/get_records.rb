@@ -147,7 +147,7 @@ class GetRecords < BaseCswModel
     if @filter != nil
       Rails.logger.info("Processing filter in GetRecords POST request:  #{@request_body}")
       filter = OgcFilter.new(@filter, @cmr_query_hash)
-      filter.process_queryables
+      filter.process_all_queryables
     else
       Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
     end
