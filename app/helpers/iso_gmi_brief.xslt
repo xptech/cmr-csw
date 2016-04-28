@@ -7,7 +7,9 @@
     <xsl:element name="{$result_root_element}">
       <xsl:if test="$result_root_element = 'csw:GetRecordsResponse'">
         <csw:SearchStatus timestamp="{$server_timestamp}"/>
-        <csw:SearchResults numberOfRecordsMatched="{$number_of_records_matched}" numberOfRecordsReturned="{$number_of_records_returned}" nextRecord="{$next_record}" elementSet="{$element_set}" recordSchema="{$record_schema}">
+        <csw:SearchResults numberOfRecordsMatched="{$number_of_records_matched}"
+                           numberOfRecordsReturned="{$number_of_records_returned}" nextRecord="{$next_record}"
+                           elementSet="{$element_set}" recordSchema="{$record_schema}">
           <xsl:call-template name="entries"/>
         </csw:SearchResults>
       </xsl:if>
@@ -39,7 +41,9 @@
             <xsl:value-of select="@concept-id"/>
           </gco:CharacterString>
         </gmd:fileIdentifier>
-        <xsl:copy-of select="gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode"/>
+        <gmd:hierarchyLevel>
+          <xsl:copy-of select="gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode"/>
+        </gmd:hierarchyLevel>
         <xsl:copy-of select="gmi:MI_Metadata/gmd:identificationInfo"/>
       </gmi:MI_Metadata>
     </xsl:for-each>

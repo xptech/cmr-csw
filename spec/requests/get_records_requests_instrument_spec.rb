@@ -87,7 +87,7 @@ RSpec.describe "various GetRecords POST requests based on the Instrument ISO que
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
                                     'gmd' => 'http://www.isotc211.org/2005/gmd',
                                     'gco' => 'http://www.isotc211.org/2005/gco')[0].text).to eq("C1224520058-NOAA_NCEI")
-      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:MD_ScopeCode',
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'gmi' => 'http://www.isotc211.org/2005/gmi',
                                     'gmd' => 'http://www.isotc211.org/2005/gmd')[0].text).to eq('series')
