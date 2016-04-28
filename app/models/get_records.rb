@@ -1,12 +1,11 @@
 class GetRecords < BaseCswModel
-  # Supported ISO queryables
-  # TODO Add more queryables here,TempExtent_begin, TempExtent_end
-  RESULT_TYPES = %w(ScienceKeywords)
+
+  @@RESULT_TYPES = %w(results hits)
 
   @request_body_xml
   @filter
-  @start_position
   @result_type
+  @start_position
   @max_records
   # for now it only supports the AND between ALL CMR query parameters
   @cmr_query_hash
@@ -56,6 +55,7 @@ class GetRecords < BaseCswModel
     model.server_timestamp = Time.now.iso8601
     model.output_schema = @output_schema
     model.response_element = @response_element
+    model.result_type = @result_type
     model.number_of_records_matched = document.at_xpath('/results/hits').text.to_i
     # will include as a comment in the csw response XML
     model.cmr_search_duration_millis = document.at_xpath('/results/took').text.to_i
@@ -93,7 +93,8 @@ class GetRecords < BaseCswModel
       @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
       # defaults to 'hits' (per spec)
       result_type_value = @request_body_xml.root['resultType']
-      @result_type = result_type_value.blank? ? 'hits' : result_type_value
+      @result_type = (result_type_value.blank? || @@RESULT_TYPES.include?(result_type_value) == false) ? 'hits' : result_type_value
+      Rails.logger.info("GetRecords POST requested resultType: #{@result_type}")
 
       # defaults to 'brief' (per spec)
       element_set_name_value =  @request_body_xml.at_xpath("//csw:GetRecords//csw:Query//csw:ElementSetName",
