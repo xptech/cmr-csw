@@ -70,25 +70,8 @@ http_interactions:
         provided</gco:CharacterString></gmd:edition><gmd:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>GHRSST-GOES15-OSPO-L2P</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>\nGHRSST
         Level 2P Central Pacific Regional Skin Sea Surface Temperature from the Geostationary
         Operational Environmental Satellites (GOES) Imager on the GOES-15 satellite
-        (GDS versions 1 and 2)\n</gco:CharacterString></gmd:description></gmd:MD_Identifier></gmd:identifier></gmd:CI_Citation></gmd:citation><gmd:abstract><gco:CharacterString>\nThe
-        Geostationary Operational Environmental Satellites (GOES) operated by the
-        United States National Oceanographic and Atmospheric Administration (NOAA)
-        support weather forecasting, severe storm tracking, meteorology and oceanography
-        research. Generally there are several GOES satellites in geosynchronous orbit
-        at any one time viewing different earth locations including the GOES-15 launched
-        4 March 2010. The radiometer aboard the satellite, The GOES N-P Imager, is
-        a five channel (one visible, four infrared) imaging radiometer designed to
-        sense radiant and solar reflected energy from sampled areas of the earth.
-        The multi-element spectral channels simultaneously sweep east-west and west-east
-        along a north-to-south path by means of a two-axis mirror scan system retuning
-        telemetry in 10-bit precision. For this Group for High Resolution Sea Surface
-        Temperature (GHRSST) dataset, skin sea surface temperature (SST) measurements
-        are calculated from the far IR channels of GOES-15 at full resolution on a
-        half hourly basis. In native satellite projection, vertically adjacent pixels
-        are averaged and read out at every pixel. L2P datasets including Single Sensor
-        Error Statistics (SSES) are then derived following the GHRSST Data Processing
-        Specification (GDS) version 2.0. The full disk image is subsetted into granules
-        representing distinct northern and southern regions.\n</gco:CharacterString></gmd:abstract><gmd:purpose><gco:CharacterString>BASIC
+        (GDS versions 1 and 2)\n</gco:CharacterString></gmd:description></gmd:MD_Identifier></gmd:identifier></gmd:CI_Citation></gmd:citation><gmd:abstract><gco:CharacterString>foo</gco:CharacterString>
+        </gmd:abstract><gmd:purpose><gco:CharacterString>BASIC
         RESEARCH</gco:CharacterString></gmd:purpose><gmd:descriptiveKeywords><gmd:MD_Keywords><gmd:keyword><gco:CharacterString>EARTH
         SCIENCE&gt;OCEANS&gt;OCEAN TEMPERATURE&gt;WATER TEMPERATURE&gt;NONE&gt;NONE&gt;NONE</gco:CharacterString></gmd:keyword><gmd:keyword><gco:CharacterString>EARTH
         SCIENCE&gt;TERRESTRIAL HYDROSPHERE&gt;WATER QUALITY/WATER CHEMISTRY&gt;WATER

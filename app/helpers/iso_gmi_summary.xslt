@@ -41,6 +41,7 @@
         </gmd:fileIdentifier>
         <xsl:copy-of select="gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode"/>
         <xsl:copy-of select="gmi:MI_Metadata/gmd:identificationInfo"/>
+        <xsl:copy-of select="gmi:MI_Metadata/gmd:distributionInfo"/>
       </gmi:MI_Metadata>
     </xsl:for-each>
   </xsl:template>
