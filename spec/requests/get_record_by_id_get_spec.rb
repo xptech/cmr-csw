@@ -193,8 +193,6 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('EARTH SCIENCE>OCEANS>OCEAN TEMPERATURE>WATER TEMPERATURE>NONE>NONE>NONE')
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('2015-02-18T00:00:00.000Z')
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('foo')
-          # Spatial
-
         end
       end
     end

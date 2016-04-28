@@ -74,7 +74,6 @@
                     select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString"/>
           </dct:abstract>
         </xsl:if>
-        <dct:spatial/>
         <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal">
           <ows:WGS84BoundingBox>
             <ows:LowerCorner>
