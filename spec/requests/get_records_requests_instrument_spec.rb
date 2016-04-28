@@ -261,7 +261,7 @@ RSpec.describe "various GetRecords POST requests based on the Instrument ISO que
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
-  it 'correctly renders HITS data in response to an Instrument ONLY constraint POST request' do
+  it 'correctly renders HITS data in response to an Instrument constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/instrument_hits', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -335,7 +335,7 @@ RSpec.describe "various GetRecords POST requests based on the Instrument ISO que
     end
   end
 
-  it 'correctly renders default HITS data in response to a no resultType Instrument ONLY constraint POST request' do
+  it 'correctly renders default HITS data in response to a no resultType Instrument constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/instrument_hits', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd

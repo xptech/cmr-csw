@@ -191,7 +191,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
     end
   end
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_AnyText constraint POST request' do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI_TOI_BoundingBox constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/aoi_toi_anytext_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -261,7 +261,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
     skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
   end
 
-  it 'correctly renders HITS data in response to a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders HITS data in response to a BoundingBox constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/aoi_hits', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -318,7 +318,7 @@ RSpec.describe "various GetRecords POST requests based on spatial criteria", :ty
     end
   end
 
-  it 'correctly renders default HITS data in response to the resultType missing and a BoundingBox ONLY constraint POST request' do
+  it 'correctly renders default HITS data in response to the resultType missing and a BoundingBox constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/aoi_hits', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
