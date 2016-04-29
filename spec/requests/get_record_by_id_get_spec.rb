@@ -243,4 +243,36 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
       end
     end
   end
+
+  describe 'GET GetRecordById using CSW full' do
+    it 'correctly renders single CSW record as full' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/isro_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1214622565-ISRO', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
+        # The full record should have everything summary has
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:identifier', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('C1214622565-ISRO')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:title', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('INSAT-3D Imager Level-2B Sea Surface Temperature')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:type', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('dataset')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/ows:WGS84BoundingBox', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/ows:WGS84BoundingBox/ows:LowerCorner', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').text).to eq('0.843296 -81.04153')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/ows:WGS84BoundingBox/ows:UpperCorner', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').text).to eq('163.15671 81.04153')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(6)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('EARTH SCIENCE>OCEANS>OCEAN TEMPERATURE>SEA SURFACE TEMPERATURE>NONE>NONE>NONE')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('2014-07-22T00:00:00.000Z')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('INSAT-3D Imager Level-2B Sea Surface Temperature in HDF-5 Format')
+        # And also...
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:source', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('IMDPS')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('www.mosdac.gov.in')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('Urdu')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('otherRestrictions')
+        //gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode
+        puts records_xml.to_xml
+      end
+    end
+  end
 end
