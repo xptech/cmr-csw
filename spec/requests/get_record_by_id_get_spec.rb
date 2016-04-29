@@ -269,9 +269,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('www.mosdac.gov.in')
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('Urdu')
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('otherRestrictions')
-        //gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode
-        puts records_xml.to_xml
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('otherRestrictions')
       end
     end
   end
