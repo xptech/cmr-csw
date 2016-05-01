@@ -39,7 +39,9 @@
             <xsl:value-of select="@concept-id"/>
           </gco:CharacterString>
         </gmd:fileIdentifier>
-        <xsl:copy-of select="gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode"/>
+        <gmd:hierarchyLevel>
+          <xsl:copy-of select="gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode"/>
+        </gmd:hierarchyLevel>
         <xsl:copy-of select="gmi:MI_Metadata/gmd:identificationInfo"/>
         <xsl:copy-of select="gmi:MI_Metadata/gmd:distributionInfo"/>
       </gmi:MI_Metadata>
