@@ -121,13 +121,6 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
     end
   end
 
-  it 'correctly renders FULL CSW RESULTS data in response to a TempExtent_begin ONLY constraint POST request' do
-    skip("Address this example when implementing support for csw FULL results'")
-    VCR.use_cassette 'requests/get_records/gmi/tbegin_records3_csw_full', :decode_compressed_response => true, :record => :once do
-
-    end
-  end
-
   it 'correctly renders BRIEF CSW RESULTS data in response to a TempExtent_begin ONLY constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/tbegin_records4_csw_brief', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
@@ -304,18 +297,6 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
     end
   end
 
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request and specified maxRecords' do
-    skip("Address this example when implementing support for maxRecords mapping to cmr page_size'")
-  end
-
-  it 'correctly renders SUMMERY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request and specified maxRecords and startPosition' do
-    skip("Address this example when implementing support for startPosition and CMR implements index based navigation")
-  end
-
-  it 'correctly renders SUMMARY RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request' do
-    skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
-  end
-
   it 'correctly renders HITS data in response to a TOI ONLY constraint and resultType hits POST request' do
     VCR.use_cassette 'requests/get_records/gmi/tbegin_tend_hits', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
@@ -416,10 +397,6 @@ RSpec.describe "various GetRecords POST requests based on temporal criteria", :t
       children = search_results_node_set.children
       expect(children.size).to eq 0
     end
-  end
-
-  it 'correctly renders BRIEF RESULTS ISO MENDS data in response to a TempExtent_begin ONLY constraint POST request' do
-    skip("Address this example when implementing WILDCARD support in XML POST request body")
   end
 end
 
