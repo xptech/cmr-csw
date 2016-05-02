@@ -16,12 +16,12 @@ class OgcFilterScienceKeywords
 
   # The NASA Science Keywords hierarchy is:
   # CATEGORY / TOPIC / TERM / VARIABLE_LEVEL_1 / VARIABLE_LEVEL_2 / VARIABLE_LEVEL_3 / DETAILED_VARIABLE
-  # EARTH SCIENCE (category;TERRESTRIAL HYDROSPHERE (topic);WATER QUALITY/WATER CHEMISTRY (term);
+  # EARTH SCIENCE (category);TERRESTRIAL HYDROSPHERE (topic);WATER QUALITY/WATER CHEMISTRY (term);
   # WATER TEMPERATURE (variable_level_1);NONE (variable_level_2);NONE (variable_level_3);NONE (detailed_variable)
   # A Science Keyword will be translated to a CMR 'or' query across all the science_keyword classifications with
   # options[science_keywords][or]=true
   def process(ogc_filter)
-    # the science_keywords CMR param supports a wilcard as well as multiple values
+    # the science_keywords CMR param supports a wilcard
     cmr_query_hash = OgcFilterHelper.process_queryable(ogc_filter, @@QUERYABLE_NAME, @@CMR_SCIENCE_KEYWORDS_PARAM, true)
     # replicate the science_keyword across all types of science keywords and add the or option
     replicate_science_keyword_hierarchy(cmr_query_hash)

@@ -14,40 +14,10 @@ RSpec.describe OgcFilterScienceKeywords do
         <csw:ElementSetName>full</csw:ElementSetName>
         <csw:Constraint version="1.1.0" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <ogc:And>
                     <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>ScienceKeywords</ogc:PropertyName>
                         <ogc:Literal>*EARTH SCIENCE*</ogc:Literal>
                     </ogc:PropertyIsLike>
-                    <!--
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsTopic</ogc:PropertyName>
-                        <ogc:Literal>TERRESTRIAL HYDROSPHERE</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                   <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsTerm</ogc:PropertyName>
-                        <ogc:Literal>WATER QUALITY/WATER CHEMISTRY</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                   <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsVariableLevel1</ogc:PropertyName>
-                        <ogc:Literal>WATER TEMPERATURE</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                    -->
-                   <!--
-                   <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsVariableLevel2</ogc:PropertyName>
-                        <ogc:Literal>TBD</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                   <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsVariableLevel3</ogc:PropertyName>
-                        <ogc:Literal>TBD</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                    <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
-                        <ogc:PropertyName>ScienceKeywordsDetailedVariable</ogc:PropertyName>
-                        <ogc:Literal>NONE</ogc:Literal>
-                    </ogc:PropertyIsLike>
-                    -->
-                </ogc:And>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
