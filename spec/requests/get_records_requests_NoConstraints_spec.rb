@@ -30,16 +30,6 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
     end
   end
 
-  #TODO
-  it 'correctly renders default RESULTS SUMMARY ISO MENDS data in response to a basic / no-constrains POST request' do
-    skip("Address this example when implementing support for ElementSetName SUMMARY resultType='results'")
-  end
-
-  #TODO
-  it 'correctly renders default RESULTS BRIEF ISO MENDS data in response to a basic / no-constrains POST request' do
-    skip("Address this example when implementing support for ElementSetName BRIEF resultType='results'")
-  end
-
   it 'correctly renders HITS data in response to a basic / no-constrains POST request' do
     VCR.use_cassette 'requests/get_records/gmi/no_constraints_hits', :decode_compressed_response => true, :record => :once do
       no_constraints_get_records_request_xml = <<-eos
