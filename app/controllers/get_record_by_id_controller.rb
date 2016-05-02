@@ -6,18 +6,12 @@ class GetRecordByIdController < ApplicationController
         @model = grbi.find
         render 'get_record_by_id/index.xml.erb', :status => :ok and return
       else
-        # Need to refactor this to play nicer with rails validations
-        # What if we have multiple validation problems?
-        raise OwsException.new('MissingParameterValue', grbi.errors[:id].join(' '), 'id', '400') unless grbi.errors[:id].blank?
-        raise OwsException.new('InvalidParameterValue', grbi.errors[:version].join(' '), 'version', '400') unless grbi.errors[:version].blank?
-        raise OwsException.new('InvalidParameterValue', grbi.errors[:service].join(' '), 'service', '400') unless grbi.errors[:service].blank?
-        raise OwsException.new('InvalidParameterValue', grbi.errors[:output_schema].join(' '), 'outputSchema', '400') unless grbi.errors[:output_schema].blank?
-        raise OwsException.new('InvalidParameterValue', grbi.errors[:response_element].join(' '), 'ElementSetName', '400') unless grbi.errors[:response_element].blank?
-        raise OwsException.new('InvalidParameterValue', grbi.errors[:output_file_format].join(' '), 'outputFormat', '400') unless grbi.errors[:output_file_format].blank?
+        @exceptions = []
+        grbi.errors.each do |attribute, error|
+          @exceptions.append OwsException.new(attribute, error)
+        end
+        render 'shared/exception_report.xml.erb', :status => :bad_request and return
       end
-
-    rescue OwsException => e
-      render xml: e.to_xml, :status => e.http_code and return
     end
   end
 end

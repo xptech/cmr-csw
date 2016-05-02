@@ -139,10 +139,9 @@ RSpec.describe OgcFilterTemporal do
       begin
         cmr_query_params =helper.process(filter)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilterTemporal.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
-        expect(e.http_code).to eq('400')
-        expect(e.exception_code).to eq('InvalidParameterValue')
-        expect(e.locator).to eq('INVALID_DATE_HERE')
+        expect(e.text).to eq("'INVALID_DATE_HERE' is NOT in the supported ISO8601 format yyyy-MM-ddTHH:mm:ssZ")
+        expect(e.code).to eq('InvalidParameterValue')
+        expect(e.locator).to eq('TempExtent_begin')
       end
     end
 
@@ -180,10 +179,9 @@ RSpec.describe OgcFilterTemporal do
       begin
         cmr_query_params = helper.process(filter)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilterTemporal.validate_iso_date INVALID_DATE_HERE is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ')
-        expect(e.http_code).to eq('400')
-        expect(e.exception_code).to eq('InvalidParameterValue')
-        expect(e.locator).to eq('INVALID_DATE_HERE')
+        expect(e.text).to eq("'INVALID_DATE_HERE' is NOT in the supported ISO8601 format yyyy-MM-ddTHH:mm:ssZ")
+        expect(e.code).to eq('InvalidParameterValue')
+        expect(e.locator).to eq('TempExtent_end')
       end
     end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe "various GetRecords POST requests based on the Instrument ISO queryable", :type => :request do
+RSpec.describe 'various GetRecords POST requests based on the Instrument ISO queryable', :type => :request do
   it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to an Instrument ONLY constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/instrument_records1_gmi_full', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd

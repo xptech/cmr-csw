@@ -70,10 +70,9 @@ RSpec.describe OgcFilterBoundingBox do
       begin
         cmr_query_params = helper.process(filter)
       rescue OwsException => e
-        expect(e.exception_text).to eq('OgcFilterBoundingBox.process errors: ["Lower corner longitude lowerCorner longitude must be between -180 and 180 degrees", "Lower corner latitude lowerCorner latitude must be between -90 and 90 degrees", "Upper corner longitude upperCorner longitude must be between -180 and 180 degrees", "Upper corner latitude upperCorner latitude must be between -90 and 90 degrees"]')
-        expect(e.http_code).to eq('400')
-        expect(e.exception_code).to eq('InvalidParameterValue')
-        expect(e.locator).to eq('iso:BoundingBox')
+        expect(e.text).to eq("not in the supported ISO format. [\"Lower corner longitude lowerCorner longitude must be between -180 and 180 degrees\", \"Lower corner latitude lowerCorner latitude must be between -90 and 90 degrees\", \"Upper corner longitude upperCorner longitude must be between -180 and 180 degrees\", \"Upper corner latitude upperCorner latitude must be between -90 and 90 degrees\"]")
+        expect(e.code).to eq('InvalidParameterValue')
+        expect(e.locator).to eq('BoundingBox')
       end
     end
   end

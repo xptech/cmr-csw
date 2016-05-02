@@ -1,28 +1,28 @@
-# encapsulates a CSW OwsException.  CSW uses the OWS exception specification.
 class OwsException < StandardError
-  attr_reader :exception_text
-  attr_reader :exception_code
+  attr_reader :text
+  attr_reader :code
   attr_reader :locator
-  attr_reader :http_code
 
-  def initialize(exception_code, exception_message, locator, http_code)
-    @exception_text = exception_message
-    @exception_code = exception_code
-    @locator = locator
-    @http_code = http_code
-    Rails.logger.error("Encountered error: http_code: #{@http_code} | exception_text: #{@exception_text} | locator: #{@locator} | exception_code: #{@exception_code}")
-  end
-
-  # XML representation of this exception using the CSW / OWS specification
-  def to_xml
-    builder = Nokogiri::XML::Builder.new do |xml|
-      xml.ExceptionReport('xmlns' => 'http://www.opengis.net/ows', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
-               'xsi:schemaLocation' => 'http://www.opengis.net/ows owsExceptionReport.xsd') {
-        xml.Exception('locator'=> @locator, 'exceptionCode' => @exception_code) {
-          xml.ExceptionText @exception_text
-        }
-      }
+  def initialize(attribute, error)
+    @text = error
+    # To add: OperationNotSupported, ResourceNotFound
+    if error.include?('supported')
+      @code = 'InvalidParameterValue'
+    elsif error.include?('blank')
+      @code = 'MissingParameterValue'
+    else
+      @code = 'NoApplicableCode'
     end
-    return builder.to_xml
+
+    # Map our query attribute to CSW attribute
+    attribute = attribute.to_s
+    if attribute == 'output_schema'
+      attribute = 'outputSchema'
+    elsif attribute == 'response_element'
+      attribute = 'ElementSetName'
+    elsif attribute == 'output_file_format'
+      attribute = 'outputFormat'
+    end
+    @locator = attribute
   end
 end
