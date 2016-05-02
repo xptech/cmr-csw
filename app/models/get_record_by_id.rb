@@ -3,6 +3,11 @@ class GetRecordById < BaseCswModel
   attr_accessor :id
   validates :id, presence: {message: 'id can\'t be blank'}
 
+  attr_accessor :response_element
+  validates :response_element, inclusion: {in: RESPONSE_ELEMENTS, message: "Element set name '%{value}' is not supported. Supported element set names are brief, summary, full"}
+
+  attr_accessor :output_schema
+  validates :output_schema, inclusion: {in: OUTPUT_SCHEMAS, message: "Output schema '%{value}' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi"}
 
   def initialize (params, request)
     super(params, request)

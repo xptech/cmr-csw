@@ -50,7 +50,7 @@ class OgcFilterTemporal
   def process_start_temporal(time_start_hash)
     query_string = nil
     begin_value = time_start_hash[:literal_value]
-    validate_iso_date(begin_value)
+    validate_iso_date('TempExtent_begin', begin_value)
     #TODO add ISO format parsing for begin_value
     operator = time_start_hash[:operator]
     case operator
@@ -70,34 +70,34 @@ class OgcFilterTemporal
         error_message = "OgcFilterTemporal.process_start_temporal: invalid operator value #{operator} for TempExtent_begin"
         Rails.logger.error(error_message)
         # use 'None' instead of ommiting the locator
-        raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+        raise OwsException.new('None', error_message)
     end
     query_string
   end
 
   def process_end_temporal(time_end_hash, query_string)
     end_value = time_end_hash[:literal_value]
-    validate_iso_date(end_value)
+    validate_iso_date('TempExtent_end', end_value)
     operator = time_end_hash[:operator]
     if (query_string == nil)
       # we have no TempExtent_begin queryable
       case operator
-        when "PropertyIsGreaterThanOrEqualTo"
+        when 'PropertyIsGreaterThanOrEqualTo'
           query_string = "#{end_value}/"
-        when "PropertyIsGreaterThan"
+        when 'PropertyIsGreaterThan'
           # TODO modify when CMR supports boundary exclusion for individual temporal query component, currently the
           # boundary exlcusion applies to ALL temporal query components
           query_string = "#{end_value}/"
-        when "PropertyIsLessThanOrEqualTo"
+        when 'PropertyIsLessThanOrEqualTo'
           query_string = "/#{end_value}"
-        when "PropertyIsLessThan"
+        when 'PropertyIsLessThan'
           # TODO modify when CMR supports boundary exclusion for individual temporal query component, currently the
           # boundary exlcusion applies to ALL temporal query components
           query_string = "/#{end_value}"
         else
           Rails.logger.error("OgcFilterTemporal.process_end_temporal: invalid operator value #{operator}")
           # use 'None' instead of ommiting the locator
-          raise OwsException.new('NoApplicableCode', "Operator #{operator} not supported for TempExtent_end", 'None', '400')
+          raise OwsException.new('TempExtent_end', "Invalid operator '#{operator}' for TempExtent_end")
       end
     else
       # we already have a TempExtent_begin queryable
@@ -112,7 +112,7 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           else
             # begin is BEFORE, end is AFTER
             error_message = "OgcFilterTemporal.process_end_temporal (B BEFORE/AFTER): PropertyIsGreaterThanOrEqualTo OR PropertyIsGreaterThan for " +
@@ -120,7 +120,7 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           end
         when "PropertyIsGreaterThan"
           if begin_temporal_after_operator
@@ -130,7 +130,7 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           else
             # begin is BEFORE, end is AFTER
             error_message = "OgcFilterTemporal.process_end_temporal (C BEFORE/AFTER): PropertyIsGreaterThanOrEqualTo OR PropertyIsGreaterThan for " +
@@ -138,7 +138,7 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           end
         when "PropertyIsLessThanOrEqualTo"
           if begin_temporal_after_operator
@@ -152,7 +152,7 @@ class OgcFilterTemporal
                   "TempExtent_end date #{end_date}"
               Rails.logger.error(error_message)
               # use 'None' instead of ommiting the locator
-              raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+              raise OwsException.new('None', error_message)
             end
           else
             # begin is BEFORE, end is BEFORE
@@ -161,7 +161,7 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           end
         when "PropertyIsLessThan"
           if begin_temporal_after_operator
@@ -175,7 +175,7 @@ class OgcFilterTemporal
                   "TempExtent_end date #{end_date}"
               Rails.logger.error(error_message)
               # use 'None' instead of ommiting the locator
-              raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+              raise OwsException.new('None', error_message)
             end
           else
             # begin is BEFORE, end is BEFORE
@@ -184,26 +184,24 @@ class OgcFilterTemporal
                 "PropertyIsGreaterThan for TempExtent_end"
             Rails.logger.error(error_message)
             # use 'None' instead of ommiting the locator
-            raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+            raise OwsException.new('None', error_message)
           end
         else
           error_message = "OgcFilterTemporal.process_end_temporal: invalid operator value #{operator} for TempExtent_end"
           Rails.logger.error(error_message)
           # use 'None' instead of ommiting the locator
-          raise OwsException.new('NoApplicableCode', "#{error_message}", 'None', '400')
+          raise OwsException.new('None', error_message)
       end
     end
     query_string
   end
 
-  def validate_iso_date(date_string)
+  def validate_iso_date(id, date_string)
     begin
       # DateTime.parse(date).iso8601 is too lax, we must enforce CMR ISO 8601 format 2016-09-06T23:59:59Z
       d = DateTime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
     rescue ArgumentError => e
-      error_message = "OgcFilterTemporal.validate_iso_date #{date_string} is NOT in the required ISO8601 format yyyy-MM-ddTHH:mm:ssZ"
-      Rails.logger.error(error_message)
-      raise OwsException.new('InvalidParameterValue', "#{error_message}", "#{date_string}", '400')
+      raise OwsException.new(id, "'#{date_string}' is NOT in the supported ISO8601 format yyyy-MM-ddTHH:mm:ssZ")
     end
   end
 end

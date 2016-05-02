@@ -16,9 +16,9 @@ class OgcFilterBoundingBox
           # the cmr bounding_box only supports a single value and not an array
           cmr_query_hash["#{cmr_bounding_box_param}"] = iso_bounding_box.to_cmr
         else
-          error_message = "OgcFilterBoundingBox.process errors: #{iso_bounding_box.errors.full_messages.to_s}"
+          error_message = "not in the supported ISO format. #{iso_bounding_box.errors.full_messages.to_s}"
           Rails.logger.error(error_message)
-          raise OwsException.new('InvalidParameterValue', "#{error_message}", "iso:BoundingBox", '400')
+          raise OwsException.new('BoundingBox', error_message)
         end
       end
     end

@@ -45,7 +45,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:GetRecords maxRecords="18" outputFormat="application/xml"
-    outputSchema="http://www.isotc211.org/2005/gmd" resultType="hits" service="CSW"
+    outputSchema="http://www.isotc211.org/2005/gmi" resultType="hits" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
     xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
@@ -80,7 +80,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:GetRecords maxRecords="18" outputFormat="application/xml"
-    outputSchema="http://www.isotc211.org/2005/gmd" service="CSW"
+    outputSchema="http://www.isotc211.org/2005/gmi" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
     xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"

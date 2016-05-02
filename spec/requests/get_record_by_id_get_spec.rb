@@ -46,91 +46,70 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
   end
 
   it 'correctly reports an error when no id parameter is present' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="id" exceptionCode="MissingParameterValue">
-    <ExceptionText>id can't be blank</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'full'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('id')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('MissingParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("id can't be blank")
   end
 
   it 'correctly reports an error when an incorrect version is requested' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="version" exceptionCode="InvalidParameterValue">
-    <ExceptionText>version '2.0.x' is not supported. Supported version is '2.0.2'</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.x', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'full'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('version')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("version '2.0.x' is not supported. Supported version is '2.0.2'")
   end
   it 'correctly reports an error when an incorrect service is requested' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="service" exceptionCode="InvalidParameterValue">
-    <ExceptionText>service 'foo' is not supported. Supported service is 'CSW'</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'foo', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'full'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('service')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("service 'foo' is not supported. Supported service is 'CSW'")
   end
 
   it 'correctly reports an error when an incorrect output schema is requested' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="outputSchema" exceptionCode="InvalidParameterValue">
-    <ExceptionText>Output schema 'foo' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'foo', :ElementSetName => 'full'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('outputSchema')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("Output schema 'foo' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi")
+
   end
 
   it 'correctly reports an error when an incorrect element set name is requested' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="ElementSetName" exceptionCode="InvalidParameterValue">
-    <ExceptionText>Element set name 'foo' is not supported. Supported element set names are brief, summary, full</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :ElementSetName => 'foo'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('ElementSetName')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("Element set name 'foo' is not supported. Supported element set names are brief, summary, full")
+
   end
   it 'correctly reports an error when an incorrect output file format' do
-    expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="outputFormat" exceptionCode="InvalidParameterValue">
-    <ExceptionText>Output file format 'foo' is not supported. Supported output file format is application/xml</ExceptionText>
-  </Exception>
-</ExceptionReport>
-    eos
-
     get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmi', :outputFormat => 'foo'
     expect(response).to have_http_status(:bad_request)
-    expect(response.body).to eq expected_response_body
+    exception_xml = Nokogiri::XML(response.body)
+    expect(exception_xml.root.name).to eq 'ExceptionReport'
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('outputFormat')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
+    expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("Output file format 'foo' is not supported. Supported output file format is application/xml")
+
   end
 
   describe 'GET GetRecordById using CSW brief' do
