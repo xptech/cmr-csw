@@ -20,7 +20,7 @@ class OgcFilterScienceKeywords
   # EARTH SCIENCE (category);TERRESTRIAL HYDROSPHERE (topic);WATER QUALITY/WATER CHEMISTRY (term);
   # WATER TEMPERATURE (variable_level_1);NONE (variable_level_2);NONE (variable_level_3);NONE (detailed_variable)
   # A Science Keyword will be translated to a CMR science_keywords[0][any] OR query across all the science_keyword
-  # classifications with
+  # classifications
   def process(ogc_filter)
     # the science_keywords CMR param supports a wilcard
     cmr_query_hash = OgcFilterHelper.process_queryable(ogc_filter, @@QUERYABLE_NAME, @@CMR_SCIENCE_KEYWORDS_PARAM, true)
