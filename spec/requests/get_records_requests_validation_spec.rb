@@ -121,22 +121,14 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
     </csw:Query>
 </csw:GetRecords>
       eos
-      expected_response_body =<<-eos
-<?xml version="1.0"?>
-<ExceptionReport xmlns="http://www.opengis.net/ows" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/ows owsExceptionReport.xsd">
-  <Exception locator="CMR CSW:GetRecords.validate_post_request" exceptionCode="5001">
-    <ExceptionText>The CSW GetRecords POST request must contain the 'service=CSW' attribute for the 'GetRecords' root element.</ExceptionText>
-  </Exception>
-</ExceptionReport>
-      eos
       post '/', bad_get_records_request_xml
       expect(response).to have_http_status(:bad_request)
       exception_xml = Nokogiri::XML(response.body)
       expect(exception_xml.root.name).to eq 'ExceptionReport'
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('service')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq('service \'\' is not supported. Supported service is \'CSW\'')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('MissingParameterValue')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("service can't be blank")
     end
 
     # missing both version and service
@@ -174,19 +166,19 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
       expect(exception_xml.root.name).to eq 'ExceptionReport'
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(2)
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq('version')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq('InvalidParameterValue')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq('version \'\' is not supported. Supported version is \'2.0.2\'')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq('MissingParameterValue')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq("version can't be blank")
 
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq('service')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq('InvalidParameterValue')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq('service \'\' is not supported. Supported service is \'CSW\'')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq('MissingParameterValue')
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq("service can't be blank")
 
     end
   end
 
-  describe "various error cases" do
+  describe 'various error cases' do
     it 'correctly handles a CMR failure' do
-      skip("Address this example when implementing more robust error handling.")
+      skip('Address this example when implementing more robust error handling.')
     end
   end
 end

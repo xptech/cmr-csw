@@ -21,15 +21,35 @@ class BaseCswModel
   validates :output_file_format, inclusion: {in: OUTPUT_FILE_FORMATS, message: "Output file format '%{value}' is not supported. Supported output file format is application/xml"}
 
   attr_accessor :version
-  validates :version, inclusion: {in: %w(2.0.2), message: "version '%{value}' is not supported. Supported version is '2.0.2'"}
+  validate :validate_version
 
   attr_accessor :service
-  validates :service, inclusion: {in: %w(CSW), message: "service '%{value}' is not supported. Supported service is 'CSW'"}
+  validate :validate_service
 
-  def initialize params, request
+  def initialize(params, request)
     @request_params = params
     @request = request
     @request_body = request.body.read
+  end
+
+  private
+
+  # We have a combination of required and controlled values for both version and service
+  def validate_version
+    if @version.blank?
+      errors.add(:version, "version can't be blank")
+    elsif @version != '2.0.2'
+      errors.add(:version, "version '#{@version}' is not supported. Supported version is '2.0.2'")
+    end
+  end
+
+  # We have a combination of required and controlled values for both version and service
+  def validate_service
+    if @service.blank?
+      errors.add(:service, "service can't be blank")
+    elsif @service != 'CSW'
+      errors.add(:service, "service '#{@service}' is not supported. Supported service is 'CSW'")
+    end
   end
 
 end
