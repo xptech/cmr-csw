@@ -210,7 +210,7 @@ ALL_CMR_QUERYABLES =
         #
         "spatial_keyword" => ["", "spatial_keyword", [""]],
         #
-        "science_keywords" => ["", "science_keywords", [""]],
+        "science_keywords" => ["ScienceKeywords", "science_keywords", [""]],
         #
         "two_d_coordinate_system_name" => ["", "two_d_coordinate_system_name", [""]],
         #
