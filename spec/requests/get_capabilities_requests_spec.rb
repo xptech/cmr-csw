@@ -35,10 +35,13 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(response).to render_template('get_capabilities/index.xml.erb')
       capabilities_xml = Nokogiri::XML(response.body)
       expect(capabilities_xml.root.name).to eq 'Capabilities'
-      #xsd = Nokogiri::XML::Schema(open('http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd'))
-      #xsd.validate(capabilities_xml).each do |error|
-      #  puts error.message
-      #end
+      xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd'))
+      error_message = ''
+      # This takes 8 seconds to complete???!!
+      xsd.validate(capabilities_xml).each do |error|
+        error_message.concat ("#{error.message} \n")
+      end
+      fail error_message unless error_message.blank?
     end
 
     # CSW requests with NO parameters are routed to root
