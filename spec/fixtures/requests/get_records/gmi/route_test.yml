@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?options%5Bscience_keywords%5D%5Bor%5D=true&science_keywords%5B%5D%5Bcategory%5D=CWIC&science_keywords%5B%5D%5Btopic%5D=CWIC&science_keywords%5B%5D%5Bterm%5D=CWIC&science_keywords%5B%5D%5Bvariable_level_1%5D=CWIC&science_keywords%5B%5D%5Bvariable_level_2%5D=CWIC&science_keywords%5B%5D%5Bvariable_level_3%5D=CWIC
+    uri: https://cmr.earthdata.nasa.gov/search/collections?science_keywords%5B%5D%5Bany%5D=CWIC
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 01 May 2016 21:29:42 GMT
+      - Mon, 02 May 2016 22:28:56 GMT
       Content-Type:
       - application/iso19115+xml; charset=utf-8
       Access-Control-Expose-Headers:
@@ -31,16 +31,16 @@ http_interactions:
       Cmr-Hits:
       - '0'
       Cmr-Took:
-      - '42'
+      - '11'
       Cmr-Request-Id:
-      - 5a666ef2-9f60-4711-a9a7-bcbb9e946662
+      - 1c183d49-8dd2-4582-b5a0-e20ba27948a0
       Content-Length:
       - '86'
       Server:
       - Jetty(9.2.z-SNAPSHOT)
     body:
       encoding: UTF-8
-      string: <?xml version="1.0" encoding="UTF-8"?><results><hits>0</hits><took>41</took></results>
+      string: <?xml version="1.0" encoding="UTF-8"?><results><hits>0</hits><took>10</took></results>
     http_version: 
-  recorded_at: Sun, 01 May 2016 21:29:42 GMT
+  recorded_at: Mon, 02 May 2016 22:28:56 GMT
 recorded_with: VCR 3.0.1

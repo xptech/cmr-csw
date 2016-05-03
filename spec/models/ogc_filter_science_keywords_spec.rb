@@ -30,13 +30,7 @@ RSpec.describe OgcFilterScienceKeywords do
     expect(filter).not_to eq nil
     helper = OgcFilterScienceKeywords.new
     cmr_query_params = helper.process(filter)
-    expect(cmr_query_params['science_keywords[0][category]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[1][topic]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[2][term]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[3][variable_level_1]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[4][variable_level_2]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[5][variable_level_3]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['options[science_keywords][or]']).to eq(true)
+    expect(cmr_query_params['science_keywords[0][any]']).to eq('*EARTH SCIENCE*')
     expect(cmr_query_params['options[science_keywords][pattern]']).to eq(true)
   end
 
@@ -71,13 +65,7 @@ RSpec.describe OgcFilterScienceKeywords do
     helper = OgcFilterScienceKeywords.new
     cmr_query_params = helper.process(filter)
     # the CMR wildcard character is '*'
-    expect(cmr_query_params['science_keywords[0][category]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[1][topic]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[2][term]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[3][variable_level_1]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[4][variable_level_2]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['science_keywords[5][variable_level_3]']).to eq('*EARTH SCIENCE*')
-    expect(cmr_query_params['options[science_keywords][or]']).to eq(true)
+    expect(cmr_query_params['science_keywords[0][any]']).to eq('*EARTH SCIENCE*')
     expect(cmr_query_params['options[science_keywords][pattern]']).to eq(true)
   end
 
@@ -111,13 +99,7 @@ RSpec.describe OgcFilterScienceKeywords do
     expect(filter).not_to eq nil
     helper = OgcFilterScienceKeywords.new
     cmr_query_params = helper.process(filter)
-    expect(cmr_query_params['science_keywords[0][category]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['science_keywords[1][topic]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['science_keywords[2][term]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['science_keywords[3][variable_level_1]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['science_keywords[4][variable_level_2]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['science_keywords[5][variable_level_3]']).to eq('EARTH SCIENCE')
-    expect(cmr_query_params['options[science_keywords][or]']).to eq(true)
+    expect(cmr_query_params['science_keywords[0][any]']).to eq('EARTH SCIENCE')
     # no pattern was used in the filter
     expect(cmr_query_params['options[science_keywords][pattern]']).to eq(nil)
   end
