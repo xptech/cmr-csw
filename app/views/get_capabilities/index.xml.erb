@@ -122,20 +122,9 @@
 				<ows:Value>FILTER</ows:Value>
 			</ows:Parameter>
 			<ows:Constraint name="SupportedISOQueryables">
-				<ows:Value>AnyText</ows:Value>
-				<ows:Value>ScienceKeyword</ows:Value>
-				<ows:Value>ResourceIdentifier</ows:Value>
-				<ows:Value>Identifier</ows:Value>
-				<ows:Value>Title</ows:Value>
-				<ows:Value>OrganisationName</ows:Value>
-				<ows:Value>Modified</ows:Value>
-				<ows:Value>RevisionDate</ows:Value>
-				<ows:Value>TempExtent_begin</ows:Value>
-				<ows:Value>TempExtent_end</ows:Value>
-				<ows:Value>Project</ows:Value>
-				<ows:Value>Platform</ows:Value>
-				<ows:Value>Instrument</ows:Value>
-				<ows:Value>Location</ows:Value>
+			<% ISO_QUERYABLES_TO_CMR_QUERYABLES.each_pair do |key, value| %>
+			  <ows:Value><%= key %></ows:Value>
+			<% end %>
 			</ows:Constraint>
 		</ows:Operation>
 

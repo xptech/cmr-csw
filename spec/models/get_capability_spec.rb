@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe GetCapability do
+  # I don't understand why these tests are here. They aren't testing functionality rather describing the differences between GCMD and us.
+=begin
   context 'queryables mappings' do
     # The queryables below will be in the initial CMR CSW implementation
     it 'is possible to identify the supported CMR search parameters which map to GCMD CSW GetCapabilities queryables' do
@@ -96,4 +98,5 @@ RSpec.describe GetCapability do
       expect(expected_cmr_queryables_not_supported_by_gcmd_csw_set).to eq Set.new(cmr_queryables_not_supported_by_gcmd_csw)
     end
   end
+=end
 end
