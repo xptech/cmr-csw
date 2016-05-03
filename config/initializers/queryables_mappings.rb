@@ -105,6 +105,11 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         # Temporal extent information: end
         'TempExtent_end' => ['TempExtent_end', 'temporal[]', ['MD_Metadata.identificationInfo.MD_DataIdentification.extent.EX_Extent.temporalElement.EX_TemporalExtent.extent.TimePeriod.endPosition']],
 
+        'Instrument' => ['Instrument', 'instrument', ['']],
+
+        'Platform' => ['Platform', 'platform', ['']],
+
+        'ScienceKeywords' => ['ScienceKeywords', 'science_keywords', ['']],
         # Name of a service type.
         #'ServiceType' => ['ServiceType', '', ['MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType']],
 
