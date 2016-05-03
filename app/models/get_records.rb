@@ -1,12 +1,16 @@
 class GetRecords < BaseCswModel
+  RESULT_TYPES = %w(results hits)
+  HTTP_METHODS = %w(Post)
+  RESPONSE_ELEMENTS = %w(brief summary full)
+  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
+  TYPE_NAMES = %w(csw:Record gmi:MI_Metadata)
 
-  @@RESULT_TYPES = %w(results hits)
-
+  attr_accessor :result_types
 
   validate :validate_method
 
   attr_accessor :result_type
-  validates :result_type, inclusion: {in: @@RESULT_TYPES, message: "Result type '%{value}' is not supported. Supported result types are results, hits"}
+  validates :result_type, inclusion: {in: RESULT_TYPES, message: "Result type '%{value}' is not supported. Supported result types are results, hits"}
 
   attr_accessor :start_position
   validates :start_position, numericality: {only_integer: true, greater_than_or_equal_to: 1, message: 'maxRecords is not a positive integer greater than zero'}
@@ -40,7 +44,7 @@ class GetRecords < BaseCswModel
       @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
       # defaults to 'hits' (per spec)
       result_type_value = @request_body_xml.root['resultType']
-      @result_type = (result_type_value.blank? || @@RESULT_TYPES.include?(result_type_value) == false) ? 'hits' : result_type_value
+      @result_type = (result_type_value.blank? || RESULT_TYPES.include?(result_type_value) == false) ? 'hits' : result_type_value
 
       # defaults to 'brief' (per spec)
       element_set_name_value = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:ElementSetName',

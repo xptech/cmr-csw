@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'open-uri'
 
 RSpec.describe 'various GetCapabilities GET and POST requests', :type => :request do
 
@@ -34,6 +35,10 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(response).to render_template('get_capabilities/index.xml.erb')
       capabilities_xml = Nokogiri::XML(response.body)
       expect(capabilities_xml.root.name).to eq 'Capabilities'
+      #xsd = Nokogiri::XML::Schema(open('http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd'))
+      #xsd.validate(capabilities_xml).each do |error|
+      #  puts error.message
+      #end
     end
 
     # CSW requests with NO parameters are routed to root
