@@ -14,6 +14,7 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
     end
 
     it 'correctly routes a valid GetCapabilities POST request' do
+      VCR.use_cassette 'requests/get_capabilities/schema_validation', :decode_compressed_response => true, :record => :once do
       valid_get_capabilities_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:GetCapabilities xmlns:ows="http://www.opengis.net/ows"
@@ -35,13 +36,17 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(response).to render_template('get_capabilities/index.xml.erb')
       capabilities_xml = Nokogiri::XML(response.body)
       expect(capabilities_xml.root.name).to eq 'Capabilities'
-      #xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd'))
-      #error_message = ''
-      # This takes 8 seconds to complete???!!
-      #xsd.validate(capabilities_xml).each do |error|
-      #  error_message.concat ("#{error.message} \n")
-      #end
-      #fail error_message unless error_message.blank?
+
+      xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd')) do |config|
+        config.nonet
+      end
+      error_message = ''
+       # This takes 8 seconds to complete???!!
+      xsd.validate(capabilities_xml).each do |error|
+        error_message.concat ("#{error.message} \n")
+      end
+      fail error_message unless error_message.blank?
+        end
     end
 
     # CSW requests with NO parameters are routed to root
