@@ -1,6 +1,6 @@
 VCR.configure do |c|
   # By default VCR will intercept all http calls.
-  c.ignore_hosts '127.0.0.1', 'localhost'
+  c.ignore_hosts '127.0.0.1', 'localhost', 'schemas.opengis.net'
   # The directory where your cassettes will be saved
   c.cassette_library_dir = 'spec/fixtures'
   #c.preserve_exact_body_bytes do |http_message|

@@ -4,14 +4,10 @@ class BaseCswModel
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  # Supported outputSchema values
-  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
-  # Supported ElementSetName values TODO add support for 'browse' later
-  RESPONSE_ELEMENTS = %w(brief summary full)
-  # Supported resultType values
-  RESULT_TYPES = %w(hits, results)
   # Supported output file formats
   OUTPUT_FILE_FORMATS = %w(application/xml)
+  HTTP_METHODS = %w{Get Post}
+  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
 
   @request_params
   @request

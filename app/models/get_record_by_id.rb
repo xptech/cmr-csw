@@ -1,5 +1,8 @@
 class GetRecordById < BaseCswModel
 
+  RESPONSE_ELEMENTS = %w(brief summary full)
+  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
+
   attr_accessor :id
   validates :id, presence: {message: 'id can\'t be blank'}
 
