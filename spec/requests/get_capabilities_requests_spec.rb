@@ -35,19 +35,13 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(response).to render_template('get_capabilities/index.xml.erb')
       capabilities_xml = Nokogiri::XML(response.body)
       expect(capabilities_xml.root.name).to eq 'Capabilities'
-# uncomment test below when making significant changes to GetCapabilities
-=begin
-        # Parsing all schemas takes about 4 seconds
-        xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd')) do |config|
-        # forbid network access during XML/XSD parsing
-        config.nonet
-      end
+      # All schemas are local under the directory below
+      xsd = Nokogiri::XML::Schema(File.open('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd'))
       error_message = ''
       xsd.validate(capabilities_xml).each do |error|
         error_message.concat ("#{error.message} \n")
       end
       fail error_message unless error_message.blank?
-=end
     end
 
     # CSW requests with NO parameters are routed to root

@@ -13,11 +13,11 @@
     To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ .
       </xsd:documentation>
    </xsd:annotation>
-   <xsd:include schemaLocation="spec/fixtures/requests/get_capabilities/record.xsd"/>
+   <xsd:include schemaLocation="record.xsd"/>
 
-   <xsd:import namespace="http://www.opengis.net/ows" schemaLocation="http://schemas.opengis.net/ows/1.0.0/owsAll.xsd"/>
+   <xsd:import namespace="http://www.opengis.net/ows" schemaLocation="owsAll.xsd"/>
 
-   <xsd:import namespace="http://www.opengis.net/ogc" schemaLocation="http://schemas.opengis.net/filter/1.1.0/filter.xsd"/>
+   <xsd:import namespace="http://www.opengis.net/ogc" schemaLocation="filter.xsd"/>
 
    <xsd:complexType name="RequestBaseType" id="RequestBaseType" abstract="true">
       <xsd:annotation>
