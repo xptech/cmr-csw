@@ -37,12 +37,12 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(capabilities_xml.root.name).to eq 'Capabilities'
 # uncomment test below when making significant changes to GetCapabilities
 =begin
-      xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd')) do |config|
+        # Parsing all schemas takes about 4 seconds
+        xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd')) do |config|
         # forbid network access during XML/XSD parsing
         config.nonet
       end
       error_message = ''
-       # This takes 8 seconds to complete???!!
       xsd.validate(capabilities_xml).each do |error|
         error_message.concat ("#{error.message} \n")
       end
