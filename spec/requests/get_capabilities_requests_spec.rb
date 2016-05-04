@@ -38,6 +38,7 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
       expect(capabilities_xml.root.name).to eq 'Capabilities'
 
       xsd = Nokogiri::XML::Schema(File.read('spec/fixtures/requests/get_capabilities/CSW-discovery.xsd')) do |config|
+        # forbid network access during XML/XSD parsing
         config.nonet
       end
       error_message = ''
