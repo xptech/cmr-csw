@@ -146,6 +146,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata/gmd:fileIdentifier/gco:CharacterString', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').text).to eq('C1224520098-NOAA_NCEI')
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').text).to eq('series')
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmi:MI_Metadata/gmd:identificationInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+
       end
     end
   end
@@ -249,6 +250,120 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('www.mosdac.gov.in')
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('Urdu')
         expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('otherRestrictions')
+      end
+    end
+  end
+
+  describe 'GET GetRecordById using ISO GMD' do
+    it 'correctly renders single ISO GMD record as full' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
+        expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+      end
+    end
+    it 'correctly renders two ISO GMD records as full' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/two_records', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI,C1224520058-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(2)
+        expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+      end
+    end
+  end
+  it 'correctly renders zero ISO GMD records when unknown concept id is supplied' do
+    VCR.use_cassette 'requests/get_record_by_id/gmi/no_record', :decode_compressed_response => true, :record => :once do
+      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'foo', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_record_by_id/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+      # There should be no children
+      expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(0)
+      expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+    end
+  end
+  it 'correctly renders single ISO GMD record as full with output file format application/xml' do
+    VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+      get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full', :outputFormat => 'application/xml'
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_record_by_id/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+      expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
+      expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+    end
+  end
+
+  describe 'GET GetRecordById using ISO GMD brief' do
+    it 'correctly renders single CSW record as brief' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The brief record should have an id, scope and identification info
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').text).to eq('C1224520098-NOAA_NCEI')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').text).to eq('series')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:identificationInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById using ISO GMD summary' do
+    it 'correctly renders single CSW record as summary' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'summary'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The summary record should have an id, scope and identification info
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').text).to eq('C1224520098-NOAA_NCEI')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').text).to eq('series')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:identificationInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # And also...
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:distributionInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById using ISO GMD full' do
+    it 'correctly renders single CSW record as full' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The full record should have everything summary has
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').text).to eq('C1224520098-NOAA_NCEI')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').text).to eq('series')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:identificationInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:distributionInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # And also...
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:characterSet', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:hierarchyLevel', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:contact', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:dateStamp', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:metadataStandardName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:referenceSystemInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata/gmd:dataQualityInfo', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        expect(records_xml.root.xpath("/gmd:MD_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(0)
       end
     end
   end

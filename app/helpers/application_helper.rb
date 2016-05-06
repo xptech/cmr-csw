@@ -3,7 +3,16 @@ module ApplicationHelper
     output_schema_label = 'iso_gmi'
     if output_schema == 'http://www.opengis.net/cat/csw/2.0.2'
       output_schema_label = 'csw'
+    elsif output_schema == 'http://www.isotc211.org/2005/gmd'
+      output_schema_label = 'iso_gmd'
+      # Some elements become 'empty' once the gmi stuff is removed.
+      raw_collections_doc.root.xpath('//gmd:lineage', 'gmd' => 'http://www.isotc211.org/2005/gmd').remove
+      # Remove elements that contain a gmi element
+      raw_collections_doc.root.xpath("/results/result/gmi:MI_Metadata//*[namespace-uri()='http://www.isotc211.org/2005/gmi']", 'gmi' => 'http://www.isotc211.org/2005/gmi').each do |node|
+        node.remove
+      end
     end
+
     translate(raw_collections_doc, "app/helpers/#{output_schema_label}_#{response_element}.xslt", parameters_array)
   end
 

@@ -2,8 +2,6 @@ class GetRecords < BaseCswModel
   RESULT_TYPES = %w(results hits)
   HTTP_METHODS = %w(Post)
   RESPONSE_ELEMENTS = %w(brief summary full)
-  OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi)
-  TYPE_NAMES = %w(csw:Record gmi:MI_Metadata)
 
   attr_accessor :result_types
 

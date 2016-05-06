@@ -64,8 +64,9 @@ describe 'view documentation' do
       expect(page).to have_css("h3:contains('Supported output schemas')")
       expect(page).to have_css("h3:contains('Supported output formats')")
       within('ul.output-schemas') do
-        expect(page).to have_link('ISO', href: 'http://www.isotc211.org/2005/gmi')
+        expect(page).to have_link('ISO GMI', href: 'http://www.isotc211.org/2005/gmi')
         expect(page).to have_link('CSW', href: 'http://www.opengis.net/cat/csw/2.0.2')
+        expect(page).to have_link('ISO GMD', href: 'http://www.isotc211.org/2005/gmd')
       end
       expect(page).to have_css("h3:contains('Supported output formats')")
       within('ul.output-formats') do
@@ -92,8 +93,9 @@ describe 'view documentation' do
 
       expect(page).to have_css("h3:contains('Supported output schemas')")
       within('ul.output-schemas') do
-        expect(page).to have_link('ISO', href: 'http://www.isotc211.org/2005/gmi')
+        expect(page).to have_link('ISO GMI', href: 'http://www.isotc211.org/2005/gmi')
         expect(page).to have_link('CSW', href: 'http://www.opengis.net/cat/csw/2.0.2')
+        expect(page).to have_link('ISO GMD', href: 'http://www.isotc211.org/2005/gmd')
       end
       expect(page).to have_css("h3:contains('Supported output formats')")
       within('ul.output-formats') do
