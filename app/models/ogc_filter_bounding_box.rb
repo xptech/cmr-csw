@@ -11,6 +11,7 @@ class OgcFilterBoundingBox
   # TODO support multiple coordinate systems
   # AXIS Order is a MAJOR MAJOR PROBLEM in OpenGis:
   # http://www.ogcnetwork.net/axisorder
+  # FOR NOW we require (and document in GetCapas and error messages) the same order as CMR
   def process(ogc_filter)
     cmr_query_hash = {}
     cmr_bounding_box_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["BoundingBox"][1]

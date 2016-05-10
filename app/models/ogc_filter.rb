@@ -6,7 +6,8 @@ class OgcFilter
                                        OgcFilterEntryTitle,
                                        OgcFilterPlatform,
                                        OgcFilterInstrument,
-                                       OgcFilterScienceKeywords
+                                       OgcFilterScienceKeywords,
+                                       OgcFilterPolygon
                                      ]
   @ogc_filter
   @cmr_query_hash

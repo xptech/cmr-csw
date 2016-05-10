@@ -1,19 +1,14 @@
 class OgcFilterPolygon
   @@CMR_QUERY_PARAM = "polygon"
-=begin
-<xsd:enumeration value="gml:Point"/>
-<xsd:enumeration value="gml:LineString"/>
-<xsd:enumeration value="gml:Polygon"/>
-=end
-#  http://www.georss.org/gml.html#gmlboundary
 
-# CMR query is: lon1, lat1, lon2, lat2, lon3, lat3, lon1, lat1 (to close the polygon)
-# CMR needs more docs for the 2D coordinate system name so that the coordianate order can be properly inferred from the CRS
-# ?polygon=10,10,30,10,30,20,10,20,10,10
-# Coordinate system / Axis Order is an absolute MESS in GIS.  The proper / unambiguous way to deal with it is to clearly
-# document the behavior / expectations in the code:
-# http://www.ogcnetwork.net/axisorder
-# http://docs.geotools.org/latest/userguide/library/referencing/order.html
+  # CMR query is: lon1, lat1, lon2, lat2, lon3, lat3, lon1, lat1 (to close the polygon)
+  # CMR needs more docs for the 2D coordinate system name so that the coordianate order can be properly inferred from the CRS
+  # ?polygon=10,10,30,10,30,20,10,20,10,10
+  # Coordinate system / Axis Order is an absolute MESS in GIS.  The proper / unambiguous way to deal with it is to clearly
+  # document the behavior / expectations in the code:
+  # http://www.ogcnetwork.net/axisorder
+  # http://docs.geotools.org/latest/userguide/library/referencing/order.html
+  # FOR NOW we require (and document in GetCapas and error messages) the same order as CMR
   def process(ogc_filter)
     cmr_query_hash = {}
     gml_polygon_node_set = ogc_filter.xpath('//gml:Polygon', 'gml' => 'http://www.opengis.net/gml')
@@ -31,5 +26,4 @@ class OgcFilterPolygon
     Rails.logger.info("OgcFilterPolygon.process: #{cmr_query_hash}")
     cmr_query_hash
   end
-
 end

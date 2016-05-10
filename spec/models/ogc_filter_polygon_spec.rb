@@ -186,4 +186,4 @@ RSpec.describe OgcFilterPolygon do
       end
     end
   end
-  end
+end

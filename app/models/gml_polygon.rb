@@ -4,8 +4,7 @@ class GmlPolygon
   include ActiveModel::Validations
 
   attr_accessor :gml_point_array
-    #validates :gml_point_array,
-    #  :presence => {:message => 'must be a list of gml:posList LON LAN points coordinates with identical first and last point'}
+    # custom validators for the point array, individual points are validated by the GmlPoint validation
     validate :validate_array_length
     validate :validate_closed_polygon
     validate :validate_lon_lat_points
@@ -53,5 +52,4 @@ class GmlPolygon
       end
     end
   end
-
 end
