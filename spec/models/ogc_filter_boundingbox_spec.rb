@@ -76,16 +76,4 @@ RSpec.describe OgcFilterBoundingBox do
       end
     end
   end
-
-  describe 'OGC polygon spatial Filter examples' do
-
-  end
-
-  describe 'OGC point spatial Filter examples' do
-
-  end
-
-  describe 'OGC line spatial Filter examples' do
-
-  end
 end

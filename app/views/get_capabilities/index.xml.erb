@@ -181,9 +181,13 @@
 				<ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
 				<ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
 				<ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
+				<!-- Coordinates are specified in CMR order as:
+				 gml:posList>LON1 LAT1 LON2 LAT2 ... LONn LATn LON1 LAT1</gml:posList> -->
 				<ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
 			</ogc:GeometryOperands>
 			<ogc:SpatialOperators>
+			  <!-- Coordinates specified in CMR order as:
+			   <gml:lowerCorner>LON LAT</gml:lowerCorner> and <gml:upperCorner>LON LAT</gml:upperCorner> -->
 				<ogc:SpatialOperator name="BBOX"/>
 				<ogc:SpatialOperator name="Overlaps"/>
 				<ogc:SpatialOperator name="Intersects"/>

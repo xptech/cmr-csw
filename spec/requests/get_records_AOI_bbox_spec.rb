@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe "various GetRecords POST requests based on spatial criteria", :type => :request do
+RSpec.describe "various GetRecords POST requests based on spatial BoundingBox criteria", :type => :request do
 
   it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a BoundingBox ONLY constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_records1_gmi_full', :decode_compressed_response => true, :record => :once do

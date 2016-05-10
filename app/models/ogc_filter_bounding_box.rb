@@ -1,9 +1,17 @@
 class OgcFilterBoundingBox
-  # since bouding box requires special processing, we cannot  use the OgcFilterHelper
+  # since bounding box requires special processing, we cannot  use the OgcFilterHelper
   # CMR query is: bounding_box =  lower left longitude, lower left latitude, upper right longitude, upper right latitude.
-  # gml iso:boundingbox envelope is:
-  # <gml:lowerCorner>LONG LAT</gml:lowerCorner>
-  # <gml:upperCorner>LONG (-180 to + 180) LAT (-90 to +90)</gml:upperCorner>
+  # gml iso:boundingbox envelope default for WGS84 is:
+  # <gml:lowerCorner>LON LAT</gml:lowerCorner>
+  # <gml:upperCorner>LON (-180 to + 180) LAT (-90 to +90)</gml:upperCorner>
+  # See:
+  # http://gis.stackexchange.com/questions/124050/how-do-i-specify-the-lon-lat-ordering-in-csw-bounding-box-request
+  # WGS84 / EPSG4326: http://spatialreference.org/ref/epsg/wgs-84/
+  # Coordinate Order: http://docs.geotools.org/latest/userguide/library/referencing/order.html
+  # TODO support multiple coordinate systems
+  # AXIS Order is a MAJOR MAJOR PROBLEM in OpenGis:
+  # http://www.ogcnetwork.net/axisorder
+  # FOR NOW we require (and document in GetCapas and error messages) the same order as CMR
   def process(ogc_filter)
     cmr_query_hash = {}
     cmr_bounding_box_param = ISO_QUERYABLES_TO_CMR_QUERYABLES["BoundingBox"][1]
