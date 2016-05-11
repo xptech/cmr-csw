@@ -1,7 +1,7 @@
 class GetRecordsController < ApplicationController
   def index
-    gr = GetRecords.new(params, request)
     begin
+      gr = GetRecords.new(params, request)
       if gr.valid?
         @model = gr.find
         render 'get_records/index.xml.erb', :status => :ok and return
@@ -12,6 +12,11 @@ class GetRecordsController < ApplicationController
         end
         render 'shared/exception_report.xml.erb', :status => :bad_request and return
       end
+    rescue OwsException => e
+      # exception not captured via the ActiveModel:Validation framework
+      @exceptions = []
+      @exceptions.append e
+      render 'shared/exception_report.xml.erb', :status => :bad_request and return
     end
   end
 end
