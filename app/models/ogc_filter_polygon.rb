@@ -9,6 +9,7 @@ class OgcFilterPolygon
   # http://www.ogcnetwork.net/axisorder
   # http://docs.geotools.org/latest/userguide/library/referencing/order.html
   # FOR NOW we require (and document in GetCapas and error messages) the same order as CMR
+  # See: http://www.georss.org/gml.html#gmlboundary
   def process(ogc_filter)
     cmr_query_hash = {}
     gml_polygon_node_set = ogc_filter.xpath('//gml:Polygon', 'gml' => 'http://www.opengis.net/gml')

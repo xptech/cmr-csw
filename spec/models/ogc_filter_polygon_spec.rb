@@ -39,7 +39,7 @@ RSpec.describe OgcFilterPolygon do
       filter_xml = Nokogiri::XML(filter_xml_string)
       polygon = GmlPolygon.new(filter_xml)
       expect(polygon.valid?).to eq false
-      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml point array gml:posList - first (-165.938 47.517) and last (-165.938 0.000) point of the polygon must be indentical\"]")
+      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml polygon gml:posList - first (-165.938 47.517) and last (-165.938 0.000) point of the polygon must be indentical\"]")
     end
 
     it "corectly detects an invalid gml:Polygon which does not have an even number of coordinates" do
@@ -59,7 +59,7 @@ RSpec.describe OgcFilterPolygon do
       filter_xml = Nokogiri::XML(filter_xml_string)
       polygon = GmlPolygon.new(filter_xml)
       expect(polygon.valid?).to eq false
-      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml point array gml:posList - must be a space separated string of LON LAT point coordinates\", \"Gml point array gml:posList - first (-165.938 47.517) and last (66.231 -165.938) point of the polygon must be indentical\"]")
+      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml polygon gml:posList - must be a space separated string of LON LAT point coordinates\", \"Gml polygon gml:posList - first (-165.938 47.517) and last (66.231 -165.938) point of the polygon must be indentical\"]")
     end
 
     it "corectly detects an invalid gml:Polygon which does not have any coordinates" do
@@ -79,7 +79,7 @@ RSpec.describe OgcFilterPolygon do
       filter_xml = Nokogiri::XML(filter_xml_string)
       polygon = GmlPolygon.new(filter_xml)
       expect(polygon.valid?).to eq false
-      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml point array gml:posList - must be a space separated string of LON LAT point coordinates\"]")
+      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml polygon gml:posList - must be a space separated string of LON LAT point coordinates\"]")
     end
 
     it "corectly detects an well formed gml:Polygon shape with invalid lon lat coordinates" do
@@ -180,7 +180,7 @@ RSpec.describe OgcFilterPolygon do
       begin
         cmr_query_params = helper.process(filter)
       rescue OwsException => e
-        expect(e.text).to eq("not in the supported GML format. [\"Gml point array gml:posList - first (-165.938 47.517) and last (-165.938 0.000) point of the polygon must be indentical\"]")
+        expect(e.text).to eq("not in the supported GML format. [\"Gml polygon gml:posList - first (-165.938 47.517) and last (-165.938 0.000) point of the polygon must be indentical\"]")
         expect(e.code).to eq('InvalidParameterValue')
         expect(e.locator).to eq('Polygon')
       end
