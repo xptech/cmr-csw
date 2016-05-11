@@ -18,4 +18,20 @@ class GmlPoint
     @longitude = point_longitude
     @latitude = point_latitude
   end
+
+  def ==(other)
+    self.class === other and
+        other.longitude == @longitude and
+        other.latitude == @latitude
+  end
+
+  alias eql? ==
+
+  def hash
+    @longitude.hash ^ @latitude.hash # XOR
+  end
+
+  def to_s
+    return "(lon #{@latitude} lat #{@longitude}"
+  end
 end

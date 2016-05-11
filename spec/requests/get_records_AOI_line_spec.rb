@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon criteria", :type => :request do
+RSpec.describe "various GetRecords POST requests based on spatial gml:LineString criteria", :type => :request do
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a Polygon ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_only', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a LineString ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_only', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <?xml version="1.0"?>
 <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" resultType="results"
@@ -11,16 +11,10 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>full</csw:ElementSetName>
         <csw:Constraint version="1.1.0">
-           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <!-- Operator defaults to overlaps / intersects -->
-                <ogc:PropertyName>Geometry</ogc:PropertyName>
-                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                  <gml:outerBoundaryIs>
-                    <gml:LinearRing>
-                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                    </gml:LinearRing>
-                  </gml:outerBoundaryIs>
-                </gml:Polygon>
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+              </gml:LineString>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -39,7 +33,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('13249')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('9619')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -47,8 +41,8 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     end
   end
 
-  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a Polygon ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_only', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF RESULTS ISO MENDS (GMI) data in response to a LineString ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_only', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <?xml version="1.0"?>
 <csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" resultType="results"
@@ -56,16 +50,10 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>brief</csw:ElementSetName>
         <csw:Constraint version="1.1.0">
-           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <!-- Operator defaults to overlaps / intersects -->
-                <ogc:PropertyName>Geometry</ogc:PropertyName>
-                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                  <gml:outerBoundaryIs>
-                    <gml:LinearRing>
-                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                    </gml:LinearRing>
-                  </gml:outerBoundaryIs>
-                </gml:Polygon>
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+              </gml:LineString>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -84,7 +72,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('13249')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('9619')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -109,8 +97,8 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     end
   end
 
-  it 'correctly renders BRIEF CSW RESULTS data in response to a Polygon ONLY constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_only', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders BRIEF CSW RESULTS data in response to a LineString ONLY constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_only', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
@@ -121,16 +109,10 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>brief</csw:ElementSetName>
          <csw:Constraint version="1.1.0">
-           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <!-- Operator defaults to overlaps / intersects -->
-                <ogc:PropertyName>Geometry</ogc:PropertyName>
-                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                  <gml:outerBoundaryIs>
-                    <gml:LinearRing>
-                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                    </gml:LinearRing>
-                  </gml:outerBoundaryIs>
-                </gml:Polygon>
+            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+              </gml:LineString>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -149,7 +131,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('13249')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('9619')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
@@ -179,8 +161,8 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     end
   end
 
-  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI(Polygon)_TOI constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_mixed', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders FULL RESULTS ISO MENDS (GMI) data in response to a AOI(LineString)_TOI constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_mixed', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
@@ -201,13 +183,9 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
                         <ogc:PropertyName>TempExtent_end</ogc:PropertyName>
                         <ogc:Literal>2008-09-06T23:59:59Z</ogc:Literal>
                     </ogc:PropertyIsLessThanOrEqualTo>
-                    <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                      <gml:outerBoundaryIs>
-                        <gml:LinearRing>
-                          <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                        </gml:LinearRing>
-                      </gml:outerBoundaryIs>
-                    </gml:Polygon>
+                    <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+                    </gml:LineString>
                     </ogc:And>
             </ogc:Filter>
         </csw:Constraint>
@@ -227,7 +205,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('8540')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('6357')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -235,8 +213,8 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     end
   end
 
-  it 'correctly renders HITS data in response to a Polygon constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_only', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders HITS data in response to a LineString constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_only', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="hits" service="CSW"
@@ -247,16 +225,10 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>full</csw:ElementSetName>
          <csw:Constraint version="1.1.0">
-            <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <!-- Operator defaults to overlaps / intersects -->
-                <ogc:PropertyName>Geometry</ogc:PropertyName>
-                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                  <gml:outerBoundaryIs>
-                    <gml:LinearRing>
-                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                    </gml:LinearRing>
-                  </gml:outerBoundaryIs>
-                </gml:Polygon>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+              </gml:LineString>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -272,7 +244,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('13249')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('9619')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
@@ -282,8 +254,8 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     end
   end
 
-  it 'correctly renders default HITS data in response to the resultType missing and a Polygon constraint POST request' do
-    VCR.use_cassette 'requests/get_records/gmi/polygon_records_only', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders default HITS data in response to the resultType missing and a LineString constraint POST request' do
+    VCR.use_cassette 'requests/get_records/gmi/line_records_only', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" service="CSW"
@@ -294,16 +266,10 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
     <csw:Query typeNames="csw:Record">
         <csw:ElementSetName>full</csw:ElementSetName>
          <csw:Constraint version="1.1.0">
-           <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
-                <!-- Operator defaults to overlaps / intersects -->
-                <ogc:PropertyName>Geometry</ogc:PropertyName>
-                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" xmlns:gml="http://www.opengis.net/gml">
-                  <gml:outerBoundaryIs>
-                    <gml:LinearRing>
-                      <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517</gml:posList>
-                    </gml:LinearRing>
-                  </gml:outerBoundaryIs>
-                </gml:Polygon>
+          <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+              <gml:LineString xmlns:gml="http://www.opengis.net/gml">
+                <gml:posList>-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231</gml:posList>
+              </gml:LineString>
             </ogc:Filter>
         </csw:Constraint>
     </csw:Query>
@@ -319,7 +285,7 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Polygon cr
       expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
       search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       expect(search_results_node_set.size).to eq(1)
-      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('13249')
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('9619')
       expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
       expect(search_results_node_set[0]['nextRecord']).to eq('11')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
