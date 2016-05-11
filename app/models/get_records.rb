@@ -36,6 +36,12 @@ class GetRecords < BaseCswModel
     @cmr_query_hash = Hash.new
 
     if (!@request_body.empty? && @request.post?)
+      begin
+        @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
+      rescue Nokogiri::XML::SyntaxError => e
+        Rails.logger.error("Could not parse the request body XML: #{@request_body} ERROR: #{e.message}")
+        raise OwsException.new('NoApplicableCode', "Could not parse the request body XML: #{e.message}")
+      end
       @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
 
       output_schema_value = @request_body_xml.root['outputSchema']
@@ -102,9 +108,10 @@ class GetRecords < BaseCswModel
       end
       Rails.logger.info "CMR dataset search took : #{time.to_f.round(2)} seconds"
     rescue RestClient::Exception => e
-      Rails.logger.error("CMR call failure httpStatus: #{e.http_code} message: #{e.message} response: #{e.response}")
+      error_message = "CMR call failure httpStatus: #{e.http_code} message: #{e.message} response: #{e.response}"
+      Rails.logger.error(error_message)
       # TODO add error handling
-      throw OwsException.new(INVALID_REQUEST_TYPE_GET_RECORDS, 'GetRecords only supports POST requests', 'CMR CSW:GetRecords.is_valid', 400)
+      raise OwsException.new('NoApplicableCode', error_message)
     end
 
     document = Nokogiri::XML(response)

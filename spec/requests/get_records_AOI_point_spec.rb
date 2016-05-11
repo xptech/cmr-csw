@@ -294,7 +294,4 @@ RSpec.describe "various GetRecords POST requests based on spatial gml:Point crit
       expect(children.size).to eq 0
     end
   end
-
-  #TODO ERROR CASES
-
 end
