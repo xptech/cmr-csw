@@ -17,8 +17,8 @@ RSpec.describe OgcFilterBoundingBox do
               <ogc:BBOX>
                 <ogc:PropertyName>iso:BoundingBox</ogc:PropertyName>
                 <gml:Envelope xmlns:gml="http://www.opengis.net/gml">
-                  <gml:lowerCorner>-181 -91</gml:lowerCorner>
-                  <gml:upperCorner>182 92</gml:upperCorner>
+                  <gml:lowerCorner>13 14</gml:lowerCorner>
+                  <gml:upperCorner>15 16</gml:upperCorner>
                 </gml:Envelope>
               </ogc:BBOX>
             </ogc:Filter>
