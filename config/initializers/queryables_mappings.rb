@@ -26,7 +26,7 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         #'Identifier' => ['Identifier', 'concept_id', ['MD_Metadata.fileIdentifier']],
 
         # Date on which the record was created or updated within the catalogue
-        #'Modified' => ['Modified', 'updated_since', ['MD_Metadata.dateStamp.Date']],
+        'Modified' => ['Modified', 'updated_since', ['MD_Metadata.dateStamp.Date']],
 
         # The nature or genre of the content of the resource. Type can include general categories, genres or aggregation
         # levels of content. If MD_Metadata.hierarchyLevel.MD_ScopeCode@codeListValue is missing, default is 'Dataset'.
