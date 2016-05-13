@@ -68,7 +68,6 @@ class GetRecords < BaseCswModel
       @version = @request_body_xml.root['version']
 
       # Process the filter
-      #TODO add support of various queryables and filter criteria in csw:Query element
       @filter = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:Constraint//ogc:Filter',
                                            'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                            'ogc' => 'http://www.opengis.net/ogc')

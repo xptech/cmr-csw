@@ -32,7 +32,9 @@ RSpec.describe OgcFilterModified do
       cmr_query_params = helper.process(filter)
       expect(cmr_query_params['updated_since']).to eq('2016-04-01')
     end
+  end
 
+  describe 'ERROR cases for OGC Modified (CMR updated_since) Filter Tests' do
     it 'is NOT possible to generate an updated_since CMR query from a GetRecords POST XML request with an invalid Modified date' do
       start_time_only_constraint_get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
@@ -117,7 +119,7 @@ RSpec.describe OgcFilterModified do
              <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                     <ogc:PropertyIsGreaterThanOrEqualTo>
                         <!-- PropertyName missing -->
-                        <ogc:Literal>INVALID_DATE_HERE</ogc:Literal>
+                        <ogc:Literal>2016-04-01</ogc:Literal>
                     </ogc:PropertyIsGreaterThanOrEqualTo>
             </ogc:Filter>
         </csw:Constraint>
