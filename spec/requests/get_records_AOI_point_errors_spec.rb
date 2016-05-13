@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe "GetRecords gml:Point error cases" do
-  #TODO ERROR CASES
   it 'correctly renders default HITS data in response to the resultType missing and an incomplete Point constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/point_error1', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
