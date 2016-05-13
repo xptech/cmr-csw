@@ -35,18 +35,14 @@
       <a target="_blank" href="<%= root_url.chomp '/' %>?request=GetCapabilities&service=CSW&version=2.0.2">GET <%= root_url.chomp '/' %>
         ?request=GetCapabilities&service=CSW&version=2.0.2</a></li>
     <li>POST <%= root_url.chomp '/' %> with body:
-          <pre>
-            <code>
-              &lt;csw:GetCapabilities
-                xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
-                xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
-                xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-                xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;
-                service=&quot;CSW&quot;
-                version=&quot;2.0.2&quot;&gt;
-              &lt;/csw:GetCapabilities&gt;
-            </code>
-          </pre>
+<pre><code>&lt;csw:GetCapabilities
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;
+    service=&quot;CSW&quot;
+    version=&quot;2.0.2&quot;&gt;
+&lt;/csw:GetCapabilities&gt;</code></pre>
     </li>
   </ul>
 </section>
@@ -102,17 +98,304 @@
   </ul>
   <h3>Examples</h3>
   <ul>
-    <li>POST <%= root_url.chomp '/' %> with body:
-        <pre>
-          <code>
-            &lt;csw:GetRecords maxRecords=&quot;18&quot; outputFormat=&quot;application/xml&quot;
-                outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
-                startPosition=&quot;1&quot; version=&quot;2.0.2&quot;
-                xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
-                xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
-            &lt;/csw:GetRecords&gt;
-          </code>
-        </pre>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections (datasets) search with <strong>NO constraints</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an area of interest (AOI) <strong>iso:BoundingBox constraint</strong> and result entries <strong>resultType="results"</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+              &lt;ogc:BBOX&gt;
+                &lt;ogc:PropertyName&gt;iso:BoundingBox&lt;/ogc:PropertyName&gt;
+                &lt;gml:Envelope xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                  &lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;
+                  &lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;
+                &lt;/gml:Envelope&gt;
+              &lt;/ogc:BBOX&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:BoundingBox constraint</strong> and result hits <strong>resultType="hits"</strong> only:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;hits&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+              &lt;ogc:BBOX&gt;
+                &lt;ogc:PropertyName&gt;iso:BoundingBox&lt;/ogc:PropertyName&gt;
+                &lt;gml:Envelope xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                  &lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;
+                  &lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;
+                &lt;/gml:Envelope&gt;
+              &lt;/ogc:BBOX&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:Polygon constraint</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;brief&lt;/csw:ElementSetName&gt;
+         &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+           &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                &lt;!-- Operator defaults to overlaps / intersects --&gt;
+                &lt;ogc:PropertyName&gt;Geometry&lt;/ogc:PropertyName&gt;
+                &lt;gml:Polygon srsName=&quot;http://www.opengis.net/gml/srs/epsg.xml#4326&quot; xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                  &lt;gml:outerBoundaryIs&gt;
+                    &lt;gml:LinearRing&gt;
+                      &lt;gml:posList&gt;-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231 -165.938 47.517&lt;/gml:posList&gt;
+                    &lt;/gml:LinearRing&gt;
+                  &lt;/gml:outerBoundaryIs&gt;
+                &lt;/gml:Polygon&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:LineString constraint</strong>:
+    <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
+    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+              &lt;gml:LineString xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                &lt;gml:posList&gt;-165.938 47.517 -138.516 27.684 -78.047 28.922 -85.781 64.168 -160.313 66.231&lt;/gml:posList&gt;
+              &lt;/gml:LineString&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+  </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:Point constraint</strong>:
+    <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
+    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+              &lt;gml:Point xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                &lt;gml:pos&gt;-165.938 47.517&lt;/gml:pos&gt;
+              &lt;/gml:Point&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+  <li>POST <%= root_url.chomp '/' %> for CMR collections search with a time of interest (TOI) collection temporal extent <strong>TempExtent_begin and TempExtent_end constraints</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+              &lt;ogc:And&gt;
+                    &lt;ogc:PropertyIsGreaterThanOrEqualTo&gt;
+                        &lt;ogc:PropertyName&gt;TempExtent_begin&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;1990-09-03T00:00:01Z&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsGreaterThanOrEqualTo&gt;
+                    &lt;ogc:PropertyIsLessThanOrEqualTo&gt;
+                        &lt;ogc:PropertyName&gt;TempExtent_end&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;2008-09-06T23:59:59Z&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLessThanOrEqualTo&gt;
+              &lt;/ogc:And&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+  </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a TOI collection modification temporal extent <strong>Modified constraint</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                    &lt;ogc:PropertyIsGreaterThanOrEqualTo&gt;
+                        &lt;ogc:PropertyName&gt;Modified&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;2016-04-01&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsGreaterThanOrEqualTo&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with <strong>ScienceKeywords constraint</strong>:
+<pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
+    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                    &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
+                        &lt;ogc:PropertyName&gt;ScienceKeywords&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;EARTH SCIENCE&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLike&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a <strong>Title constraint and wildcard</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
+                    &lt;ogc:PropertyName&gt;Title&lt;/ogc:PropertyName&gt;
+                    &lt;ogc:Literal&gt;*MO*DIS*&lt;/ogc:Literal&gt;
+                &lt;/ogc:PropertyIsLike&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an <strong>Instrument constraint</strong>:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
+                    &lt;ogc:PropertyName&gt;Instrument&lt;/ogc:PropertyName&gt;
+                    &lt;ogc:Literal&gt;MISR&lt;/ogc:Literal&gt;
+                &lt;/ogc:PropertyIsLike&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a <strong>Platform constraint</strong>:
+<pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
+    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                &lt;ogc:PropertyIsLike&gt;
+                    &lt;ogc:PropertyName&gt;Platform&lt;/ogc:PropertyName&gt;
+                    &lt;ogc:Literal&gt;AQUA&lt;/ogc:Literal&gt;
+                &lt;/ogc:PropertyIsLike&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a combined constraint (AOI/TOI/Title/Platform/ScienceKeywords) and defaulted resultType (hits):
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                &lt;ogc:And&gt;
+                    &lt;ogc:PropertyIsGreaterThanOrEqualTo&gt;
+                        &lt;ogc:PropertyName&gt;TempExtent_begin&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;1990-09-03T00:00:01Z&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsGreaterThanOrEqualTo&gt;
+                    &lt;ogc:PropertyIsLessThanOrEqualTo&gt;
+                        &lt;ogc:PropertyName&gt;TempExtent_end&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;2008-09-06T23:59:59Z&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLessThanOrEqualTo&gt;
+                    &lt;ogc:BBOX&gt;
+                        &lt;ogc:PropertyName&gt;iso:BoundingBox&lt;/ogc:PropertyName&gt;
+                        &lt;gml:Envelope xmlns:gml=&quot;http://www.opengis.net/gml&quot;&gt;
+                            &lt;gml:lowerCorner&gt;-180 -90&lt;/gml:lowerCorner&gt;
+                            &lt;gml:upperCorner&gt;180 90&lt;/gml:upperCorner&gt;
+                        &lt;/gml:Envelope&gt;
+                    &lt;/ogc:BBOX&gt;
+                    &lt;ogc:PropertyIsLike escapeChar=&quot;\\&quot; singleChar=&quot;?&quot; wildCard=&quot;*&quot;&gt;
+                        &lt;ogc:PropertyName&gt;Title&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;*MODIS*&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLike&gt;
+                    &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
+                        &lt;ogc:PropertyName&gt;Platform&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;*AQUA*&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLike&gt;
+                   &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
+                        &lt;ogc:PropertyName&gt;ScienceKeywords&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;EARTH SCIENCE&lt;/ogc:Literal&gt;
+                   &lt;/ogc:PropertyIsLike&gt;
+                &lt;/ogc:And&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
     </li>
   </ul>
 </section>
@@ -159,19 +442,15 @@
         ?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C1224520098-NOAA_NCEI</a>
     </li>
     <li>POST <%= root_url.chomp '/' %> with body:
-        <pre>
-          <code>
-            &lt;csw:GetRecordById
-                service=&quot;CSW&quot;
-                version=&quot;2.0.2&quot;
-                outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot;
-                xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
-                xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
-                &lt;csw:Id&gt;C1224520098-NOAA_NCEI&lt;/csw:Id&gt;
-                &lt;ElementSetName typeNames=&quot;csw:Record&quot;&gt;full&lt;/ElementSetName&gt;
-            &lt;/csw:GetRecordById&gt;
-          </code>
-        </pre>
+<pre><code>&lt;csw:GetRecordById
+service=&quot;CSW&quot;
+version=&quot;2.0.2&quot;
+outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot;
+xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+    &lt;csw:Id&gt;C1224520098-NOAA_NCEI&lt;/csw:Id&gt;
+    &lt;ElementSetName typeNames=&quot;csw:Record&quot;&gt;full&lt;/ElementSetName&gt;
+&lt;/csw:GetRecordById&gt;</code></pre>
     </li>
   </ul>
 </section>

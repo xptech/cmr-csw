@@ -9,7 +9,8 @@ class OgcFilter
                                        OgcFilterScienceKeywords,
                                        OgcFilterPolygon,
                                        OgcFilterLine,
-                                       OgcFilterPoint
+                                       OgcFilterPoint,
+                                       OgcFilterModified
                                      ]
   @ogc_filter
   @cmr_query_hash

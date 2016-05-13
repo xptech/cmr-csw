@@ -59,7 +59,7 @@ RSpec.describe OgcFilterPolygon do
       filter_xml = Nokogiri::XML(filter_xml_string)
       polygon = GmlPolygon.new(filter_xml)
       expect(polygon.valid?).to eq false
-      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml polygon gml:posList - must be a space separated string of LON LAT point coordinates\", \"Gml polygon gml:posList - first (-165.938 47.517) and last (66.231 -165.938) point of the polygon must be indentical\"]")
+      expect(polygon.errors.full_messages.to_s).to eq ("[\"Gml polygon gml:posList - must be a space separated string of LON LAT point coordinates\"]")
     end
 
     it "corectly detects an invalid gml:Polygon which does not have any coordinates" do
