@@ -8,7 +8,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
       # TODO - revisit this once CMR supports ISO 19115 gmd
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
-<csw:GetRecords maxRecords="18" outputFormat="application/xml"
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -34,7 +34,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
     VCR.use_cassette 'requests/get_records/gmi/no_constraints_hits', :decode_compressed_response => true, :record => :once do
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
-<csw:GetRecords maxRecords="18" outputFormat="application/xml"
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="hits" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -69,7 +69,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
     VCR.use_cassette 'requests/get_records/gmi/no_constraints_hits', :decode_compressed_response => true, :record => :once do
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
-<csw:GetRecords maxRecords="18" outputFormat="application/xml"
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
