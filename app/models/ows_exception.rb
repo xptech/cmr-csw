@@ -22,6 +22,12 @@ class OwsException < StandardError
       attribute = 'ElementSetName'
     elsif attribute == 'output_file_format'
       attribute = 'outputFormat'
+    elsif attribute == 'type_names'
+      attribute = 'TypeName'
+    elsif attribute == 'schema_language'
+      attribute = 'schemaLanguage'
+    elsif attribute == 'namespaces'
+      attribute = 'NAMESPACE'
     end
     @locator = attribute
   end
