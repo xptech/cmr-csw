@@ -11,7 +11,7 @@ class GetRecords < BaseCswModel
   validates :result_type, inclusion: {in: RESULT_TYPES, message: "Result type '%{value}' is not supported. Supported result types are results, hits"}
 
   attr_accessor :start_position
-  validates :start_position, numericality: {only_integer: true, greater_than_or_equal_to: 1, message: 'maxRecords is not a positive integer greater than zero'}
+  validates :start_position, numericality: {only_integer: true, greater_than_or_equal_to: 1, message: 'startPosition is not a positive integer greater than zero'}
 
   attr_accessor :max_records
   validates :max_records, numericality: {only_integer: true, greater_than_or_equal_to: 0, message: 'maxRecords is not a positive integer'}
@@ -96,6 +96,8 @@ class GetRecords < BaseCswModel
     #cmr_params = to_cmr_collection_params
     Rails.logger.info "CMR Params: #{@cmr_query_hash}"
     response = nil
+    @cmr_query_hash[:offset] = @start_position unless @start_position == '1'
+    @cmr_query_hash[:page_size] = @max_records unless @max_records == '10'
     begin
       time = Benchmark.realtime do
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"
