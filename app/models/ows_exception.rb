@@ -23,7 +23,7 @@ class OwsException < StandardError
     elsif attribute == 'output_file_format'
       attribute = 'outputFormat'
     elsif attribute == 'type_names'
-      attribute = 'TypeName'
+      attribute = 'typeName'
     elsif attribute == 'schema_language'
       attribute = 'schemaLanguage'
     elsif attribute == 'namespaces'
