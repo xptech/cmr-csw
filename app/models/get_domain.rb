@@ -1,14 +1,121 @@
-# Retrieves valid values for the queryable
-# CGMD ONLY supports PropertyName in GetDomain (GET or POST) and not ParameterName
-class GetDomain
-  def initialize params
+class GetDomain < BaseCswModel
 
+  @@VALID_PROPERTY_NAMES = {'Modified' => 'DomainModified',
+                            'TempExtent_begin' => 'DomainTempExtentBegin',
+                            'TempExtent_end' => 'DomainTempExtentEnd',
+                            'Platform' => 'DomainPlatform',
+                            'Instrument' => 'DomainInstrument',
+                            'ScienceKeywords' => 'DomainScieceKeywords'
+  }
+  # TODO Platform, Instrument, ScienceKeywords once we have a way to get the list of values
+
+  @@VALID_PARAMETER_NAMES = {'GetRecords.resultType' => 'DomainGetRecordsResultType',
+                             'GetRecords.outputFormat' => 'DomainGetRecordsOutputFormat',
+                             'GetRecords.outputRecType' => 'DomainGetRecordsOutputRecType',
+                             'GetRecords.typeName' => 'DomainGetRecordsTypeName',
+                             'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
+                             'GetRecords.ElementName' => 'DomainGetRecordsElementName',
+                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraingLanguage',
+                             'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
+                             'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
+                             'DescribeRecord.schemaLanguage' => 'DomainDescribeRecordSchemaLanguage'
+  }
+
+  @request_body_xml
+
+  # NO need for custom validator errors, the spec mentions that the type reference should be returned
+  attr_accessor :property_names
+  #validate :validate_property_names
+  attr_accessor :property_names_domain_values
+
+  # NO need for custom validator errors, the spec mentions that the type reference should be returned
+  attr_accessor :parameter_names
+  #validate :validate_parameter_names
+  attr_accessor :parameter_names_domain_values
+
+  def initialize (params, request)
+    super(params, request)
+    # default the output file format
+    @output_file_format = 'application/xml'
+    @property_names = nil
+    @parameter_names = nil
+    @property_names_domain_values = Array.new
+    @parameter_names_domain_value = Array.new
+    if (@request.get?)
+      # for GET requests, the spec allows for one or more PropertyName or ParameterName as a comma separated string
+      if (!params[:PropertyName].nil?)
+        @property_names = params[:PropertyName].gsub(/\s+/, "").split(',')
+      elsif (!params[:ParameterName].nil?)
+        @parameter_names = params[:ParameterName].split(',')
+      end
+      @version = params[:version]
+      @service = params[:service]
+    elsif @request.post? && !@request_body.empty?
+      # for POST requests XML request body, the spec allows for only ONE PropertyName or ParameterName
+      begin
+        @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
+      rescue Nokogiri::XML::SyntaxError => e
+        Rails.logger.error("Could not parse the GetDomain request body XML: #{@request_body} ERROR: #{e.message}")
+        raise OwsException.new('NoApplicableCode', "Could not parse the GetDomain request body XML: #{e.message}")
+      end
+      parameter_name_node = @request_body_xml.root.at_xpath('/csw:GetDomain/csw:ParameterName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      if (parameter_name_node != nil)
+        @parameter_name = parameter_name_node.text
+      end
+      property_name_node = @request_body_xml.root.at_xpath('/csw:GetDomain/csw:PropertyName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      if (property_name_node != nil)
+        @property_names = property_name_node.text
+      end
+      @service = @request_body_xml.root['service']
+      @version = @request_body_xml.root['version']
+    end
+    if (@property_names == nil && @parameter_names == nil)
+      error_message = "The GetDomain GET request requires either a ParameterName or a PropertyName. ParameterName supported values are: #{@@VALID_PARAMETER_NAMES.keys}. PropertyName supported values are: #{@@VALID_PROPERTY_NAMES.keys}"
+      Rails.logger.error("Could not process the GetDomain request: #{@request_body} ERROR: #{error_message}")
+      raise OwsException.new('NoApplicableCode', "Invalid GetDomain request body XML: #{error_message}")
+    end
   end
 
-  def get_model
-    model = OpenStruct.new
-    # Add additional items below
+  def process_domain()
+    if !@property_names.nil?
+      process_property_names()
+    elsif !(@parameter_names.nil!)
+      process_parameter_names()
+    end
+  end
 
-    return model
+  private
+  def process_property_names()
+    @property_names.each do |property_name|
+      property = Hash.new
+      property[:name] = property_name
+      if @@VALID_PROPERTY_NAMES.include?(property_name)
+        property_class = @@VALID_PROPERTY_NAMES[property_name].constantize
+        property[:supported] = true
+        property[:domain_xml] = property_class.domain_xml
+      end
+      @property_names_domain_values << property
+    end
+  end
+
+  def process_parameter_names()
+  end
+
+
+  def validate_property_names()
+    @property_names.each do |property_name|
+      if !@@VALID_PROPERTY_NAMES.include?(property_name)
+        Rails.logger.info("Unsupported GetDomain PropertyName value: #{property_name}")
+        #errors.add :property_names, "Value %{value} not supported.  Supported GetDomain PropertyName values are: #{@@VALID_PROPERTY_NAMES}"
+      end
+    end
+  end
+
+  def validate_parameter_names()
+    @parameter_names.each do |parameter_name|
+      if !@@VALID_PARAMETER_NAMES.include?(property_name)
+        #errors.add :parameter_names, "Value %{value} not supported.  Supported GetDomain ParameterName values are: #{@@VALID_PARAMETER_NAMES}"
+      end
+    end
   end
 end

@@ -27,6 +27,10 @@ class OgcFilterTemporal
     cmr_query_hash
   end
 
+  def self.domain_values
+
+  end
+
   private
   SUPPORTED_TEMPORAL_OPERATORS = %w(PropertyIsGreaterThanOrEqualTo PropertyIsGreaterThan PropertyIsLessThanOrEqualTo PropertyIsLess)
   # the property_name is the string that we are interested in (AnyText, TempExtent_begin, TempExtent_end etc.)

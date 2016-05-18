@@ -1,11 +1,23 @@
 class GetDomainController < ApplicationController
 
-  # TODO: implement this
   def index
-    # create GetDomain model
-    # set model variable to be used in the view below
-
-    # render view
-    render 'get_domain/index.xml.erb', :status => :ok and return
+    begin
+      @model = GetDomain.new(params, request)
+      if @model.valid?
+        @model.process_domain
+        render 'get_domain/index.xml.erb', :status => :ok and return
+      else
+        @exceptions = []
+        gd.errors.each do |attribute, error|
+          @exceptions.append OwsException.new(attribute, error)
+        end
+        render 'shared/exception_report.xml.erb', :status => :bad_request and return
+      end
+    rescue OwsException => e
+      # exception not captured via the ActiveModel:Validation framework
+      @exceptions = []
+      @exceptions.append e
+      render 'shared/exception_report.xml.erb', :status => :bad_request and return
+    end
   end
 end
