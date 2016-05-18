@@ -113,25 +113,39 @@ RSpec.describe 'GetDomain http GET TOI (TimeExtent_begin and TimeExtent_end succ
 end
 
 RSpec.describe 'GetDomain http GET error scenarios', :type => :request do
-  it 'correctly renders the exception response for a GetDomain without a PropertyName or ParameterNameknown property with ranges' do
-    # :propertyName should be :PropertyName
+  # :propertyName should be :PropertyName
+  it 'correctly renders the exception response for a GetDomain without a PropertyName query parameter' do
     get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :propertyName => 'TimeExtent_begin'
     expect(response).to have_http_status(:bad_request)
     expect(response).to render_template('shared/exception_report.xml.erb')
     records_xml = Nokogiri::XML(response.body)
     expect(records_xml.root.name).to eq 'ExceptionReport'
-    # There should be a SearchStatus with a timestamp
     exception_node_set = records_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows')
     expect(exception_node_set.size).to eq(1)
-    expect(exception_node_set[0]['exceptionCode']).to eq('InvalidParameterValue')
-    expect(exception_node_set[0]['locator']).to eq('NoApplicableCode')
+    expect(exception_node_set[0]['exceptionCode']).to eq('MissingParameterValue')
+    expect(exception_node_set[0]['locator']).to eq('PropertyName|ParameterName')
     exception_text = exception_node_set[0].at_xpath('//ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')
-    expect(exception_text.text).to include("The GetDomain GET request requires either a ParameterName or a PropertyName.")
+    expect(exception_text.text).to include("ParameterName or PropertyName cannot both be blank")
   end
 
-  ## Same Property twice
-  ## TempExtentBegin test
+  it 'correctly renders the exception response for a GetDomain without a service and version' do
+    get '/', :request => 'GetDomain', :PropertyName => 'TimeExtent_begin'
+    expect(response).to have_http_status(:bad_request)
+    expect(response).to render_template('shared/exception_report.xml.erb')
+    records_xml = Nokogiri::XML(response.body)
+    expect(records_xml.root.name).to eq 'ExceptionReport'
+    exception_node_set = records_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows')
+    expect(exception_node_set.size).to eq(2)
 
-  ## TODO basic service and version errors
+    expect(exception_node_set[0]['exceptionCode']).to eq('MissingParameterValue')
+    expect(exception_node_set[0]['locator']).to eq('version')
+    exception_text = exception_node_set[0].at_xpath('ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')
+    expect(exception_text.text).to include("version can't be blank")
+
+    expect(exception_node_set[1]['exceptionCode']).to eq('MissingParameterValue')
+    expect(exception_node_set[1]['locator']).to eq('service')
+    exception_text = exception_node_set[1].at_xpath('ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')
+    expect(exception_text.text).to include("service can't be blank")
+  end
 
 end
