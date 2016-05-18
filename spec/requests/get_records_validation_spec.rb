@@ -207,7 +207,6 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
     post '/', bad_get_records_request_xml
     expect(response).to have_http_status(:bad_request)
     exception_xml = Nokogiri::XML(response.body)
-    puts exception_xml
     expect(exception_xml.root.name).to eq 'ExceptionReport'
     expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
     expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows')[0].text).to eq('start_position')

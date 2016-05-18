@@ -39,10 +39,9 @@ class GetRecords < BaseCswModel
       begin
         @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
       rescue Nokogiri::XML::SyntaxError => e
-        Rails.logger.error("Could not parse the request body XML: #{@request_body} ERROR: #{e.message}")
-        raise OwsException.new('NoApplicableCode', "Could not parse the request body XML: #{e.message}")
+        Rails.logger.error("Could not parse the GetRecords request body XML: #{@request_body} ERROR: #{e.message}")
+        raise OwsException.new('NoApplicableCode', "Could not parse the GetRecords request body XML: #{e.message}")
       end
-      @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
 
       output_schema_value = @request_body_xml.root['outputSchema']
       @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
