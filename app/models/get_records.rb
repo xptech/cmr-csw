@@ -11,7 +11,7 @@ class GetRecords < BaseCswModel
   validates :result_type, inclusion: {in: RESULT_TYPES, message: "Result type '%{value}' is not supported. Supported result types are results, hits"}
 
   attr_accessor :start_position
-  validates :start_position, numericality: {only_integer: true, greater_than_or_equal_to: 1, message: 'maxRecords is not a positive integer greater than zero'}
+  validates :start_position, numericality: {only_integer: true, greater_than_or_equal_to: 1, message: 'startPosition is not a positive integer greater than zero'}
 
   attr_accessor :max_records
   validates :max_records, numericality: {only_integer: true, greater_than_or_equal_to: 0, message: 'maxRecords is not a positive integer'}
@@ -39,10 +39,9 @@ class GetRecords < BaseCswModel
       begin
         @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
       rescue Nokogiri::XML::SyntaxError => e
-        Rails.logger.error("Could not parse the request body XML: #{@request_body} ERROR: #{e.message}")
-        raise OwsException.new('NoApplicableCode', "Could not parse the request body XML: #{e.message}")
+        Rails.logger.error("Could not parse the GetRecords request body XML: #{@request_body} ERROR: #{e.message}")
+        raise OwsException.new('NoApplicableCode', "Could not parse the GetRecords request body XML: #{e.message}")
       end
-      @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
 
       output_schema_value = @request_body_xml.root['outputSchema']
       @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
@@ -96,6 +95,8 @@ class GetRecords < BaseCswModel
     #cmr_params = to_cmr_collection_params
     Rails.logger.info "CMR Params: #{@cmr_query_hash}"
     response = nil
+    @cmr_query_hash[:offset] = @start_position unless @start_position == '1'
+    @cmr_query_hash[:page_size] = @max_records unless @max_records == '10'
     begin
       time = Benchmark.realtime do
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"

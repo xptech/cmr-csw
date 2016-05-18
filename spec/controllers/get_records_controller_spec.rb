@@ -29,7 +29,7 @@ RSpec.describe GetRecordsController, type: :controller do
       VCR.use_cassette 'requests/get_records/gmi/controller_success', :decode_compressed_response => true, :record => :once do
         valid_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
-<csw:GetRecords maxRecords="18" outputFormat="application/xml"
+<csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.isotc211.org/2005/gmi" resultType="results" service="CSW"
     startPosition="1" version="2.0.2" xmlns="http://www.opengis.net/cat/csw/2.0.2"
     xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd"
