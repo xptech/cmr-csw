@@ -63,16 +63,6 @@ class DescribeRecord < BaseCswModel
 
   private
 
-  #def validate_type_names
-  #  if @type_names.blank?
-  #    errors.add(:type_names, "typeName can't be blank")
-  #  else
-  #    @type_names.each do |type_name|
-  #      errors.add(:type_names, "#{type_name} is not one of #{TYPE_NAMES.join(', ')}") unless TYPE_NAMES.include? type_name
-  #    end
-  #  end
-  #end
-
   def validate_namespaces
     @namespaces.each_pair do |key, value|
       errors.add(:namespaces, "Namespace '#{value}' is not supported. Supported namespaces are #{OUTPUT_SCHEMAS.join(', ')}") unless OUTPUT_SCHEMAS.include? value
