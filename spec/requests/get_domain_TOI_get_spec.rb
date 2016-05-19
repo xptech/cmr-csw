@@ -30,7 +30,7 @@ RSpec.describe 'GetDomain http GET TOI (TempExtent_begin and TempExtent_end quer
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for an unkown property' do
+  it 'correctly renders the response for an unknown property' do
     get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'UNKNOWN_PROPERTY'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
@@ -112,10 +112,10 @@ RSpec.describe 'GetDomain http GET TOI (TempExtent_begin and TempExtent_end quer
   end
 end
 
-RSpec.describe 'GetDomain http GET (TimeExtent_begin and TimeExtent_end queryables) error scenarios', :type => :request do
+RSpec.describe 'GetDomain http GET (TempExtent_begin and TempExtent_end queryables) error scenarios', :type => :request do
   # :propertyName should be :PropertyName
   it 'correctly renders the exception response for a GetDomain without a PropertyName query parameter' do
-    get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :propertyName => 'TimeExtent_begin'
+    get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :propertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:bad_request)
     expect(response).to render_template('shared/exception_report.xml.erb')
     records_xml = Nokogiri::XML(response.body)
@@ -129,7 +129,7 @@ RSpec.describe 'GetDomain http GET (TimeExtent_begin and TimeExtent_end queryabl
   end
 
   it 'correctly renders the exception response for a GetDomain without a service and version' do
-    get '/', :request => 'GetDomain', :PropertyName => 'TimeExtent_begin'
+    get '/', :request => 'GetDomain', :PropertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:bad_request)
     expect(response).to render_template('shared/exception_report.xml.erb')
     records_xml = Nokogiri::XML(response.body)

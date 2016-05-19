@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe 'GetDomain http POST TOI (TimeExtent_begin and TimeExtent_end queryables) success scenarios', :type => :request do
+RSpec.describe 'GetDomain http POST TOI (TempExtent_begin and TempExtent_end queryables) success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the TimeExtent_begin PropertyName' do
+  it 'correctly renders the response for a the TempExtent_begin PropertyName' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain
@@ -28,7 +28,7 @@ RSpec.describe 'GetDomain http POST TOI (TimeExtent_begin and TimeExtent_end que
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for a the TimeExtent_end PropertyName' do
+  it 'correctly renders the response for a the TempExtent_end PropertyName' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain
@@ -54,7 +54,7 @@ RSpec.describe 'GetDomain http POST TOI (TimeExtent_begin and TimeExtent_end que
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for an unkown property' do
+  it 'correctly renders the response for an unknown property' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain
@@ -111,7 +111,7 @@ RSpec.describe 'GetDomain http POST TOI (TimeExtent_begin and TimeExtent_end que
   end
 end
 
-RSpec.describe 'GetDomain http POST (TimeExtent_begin and TimeExtent_end queryables) error scenarios', :type => :request do
+RSpec.describe 'GetDomain http POST (TempExtent_begin and TempExtent_end queryables) error scenarios', :type => :request do
   # The error specs are not property specific
   # See the get_domain_modified_post_spec error scenarios.  They cover ALL PropertyName with a static value domain
   # capture in the respective model class (ex. DomainModified, TempExtent_begin, TempExtent_end etc.)
