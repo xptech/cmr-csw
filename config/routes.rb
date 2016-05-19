@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/', to: 'get_capabilities#index', constraints: lambda { |request| RequestRouter.is_get_capabilities_post(request) }
   # GetDomain must be supported for both GET and POST
   get '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_get(request) }
-  #post '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_post(request) }
+  post '/', to: 'get_domain#index', constraints: lambda { |request| RequestRouter.is_get_domain_post(request) }
   # TBD if GetRecordById will also be supported via GET
   get '/', to: 'get_record_by_id#index', constraints: lambda { |request| RequestRouter.is_get_record_by_id_get(request) }
   post '/', to: 'get_record_by_id#index', constraints: lambda { |request| RequestRouter.is_get_record_by_id_post(request) }
