@@ -95,7 +95,7 @@ RSpec.describe 'Describe record', :type => :request do
       expect(response).to render_template('describe_record/index.xml.erb')
       response_xml = Nokogiri::XML(response.body)
       expect(response_xml.root.name).to eq 'DescribeRecordResponse'
-      expect(response_xml.root.xpath('/csw:DescribeRecordResponse/csw:SchemaComponent', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(2), :typeName => 'csw:Record', :typeName => 'gmd:MD_Metadata'
+      expect(response_xml.root.xpath('/csw:DescribeRecordResponse/csw:SchemaComponent', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(2)
       expect(response_xml.root.xpath("/csw:DescribeRecordResponse/csw:SchemaComponent[@targetNamespace='http://www.isotc211.org/2005/gmi']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
       expect(response_xml.root.xpath("/csw:DescribeRecordResponse/csw:SchemaComponent[@targetNamespace='http://www.isotc211.org/2005/gmi']/xsd:schema[@targetNamespace='http://www.isotc211.org/2005/gmi']", 'xsd' => 'http://www.w3.org/2001/XMLSchema', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)
       expect(response_xml.root.xpath("/csw:DescribeRecordResponse/csw:SchemaComponent[@targetNamespace='http://www.opengis.net/cat/csw/2.0.2']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(1)

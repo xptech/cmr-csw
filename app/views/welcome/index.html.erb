@@ -1,17 +1,32 @@
-<p>
-  <a target="_blank" href="http://www.opengeospatial.org/standards/cat">Catalog Service for the Web (CSW)</a> is an OGC
-  standard for exposing a catalogue of geospatial records in XML on the Internet (over HTTP).
-</p>
-<p>
-  This implementation provides a CSW API over NASA EOSDIS'
-  <a target="_blank" href="https:cmr.earthdata.nasa.gov">Common Metadata Repository (CMR)</a> earth data discovery API.
-</p>
-<h1>Supported requests</h1>
-<p>CMR CSW supports HTTP protocol binding as per section 10.2 of the
-  <a target="_blank" href="http://www.opengeospatial.org/standards/cat">OpenGIS® Catalogue Services Specification
-    version 2.0.2</a></p>
+<hr/>
+<h3>Table of contents</h3>
+<ul>
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#get-capabilities">The GetCapabilities request</a></li>
+  <li><a href="#get-records">The GetRecords request</a></li>
+  <li><a href="#get-record-by-id">The GetRecordById request</a></li>
+  <li><a href="#get-domain">The GetDomain request</a></li>
+  <li><a href="#describe-record">The DescribeRecord request</a></li>
+</ul>
+<section>
+  <h2><a name="overview"></a>Overview</h2>
+  <p>
+    <a target="_blank" href="http://www.opengeospatial.org/standards/cat">Catalog Service for the Web (CSW)</a> is an
+    OGC
+    standard for exposing a catalogue of geospatial records in XML on the Internet (over HTTP).
+  </p>
+  <p>
+    This implementation provides a CSW API over NASA EOSDIS'
+    <a target="_blank" href="https:cmr.earthdata.nasa.gov">Common Metadata Repository (CMR)</a> earth data discovery
+    API.
+  </p>
+  <h1>Supported requests</h1>
+  <p>CMR CSW supports HTTP protocol binding as per section 10.2 of the
+    <a target="_blank" href="http://www.opengeospatial.org/standards/cat">OpenGIS® Catalogue Services Specification
+      version 2.0.2</a></p>
+</section>
 <section class="get-capabilities">
-  <h2>GetCapabilities</h2>
+  <h2><a name="get-capabilities"></a>GetCapabilities</h2>
 
   <p>
     Allows CSW clients to retrieve service metadata. The response to a GetCapabilities request is
@@ -34,7 +49,7 @@
     <li>
       <a target="_blank" href="<%= root_url.chomp '/' %>?request=GetCapabilities&service=CSW&version=2.0.2">GET <%= root_url.chomp '/' %>
         ?request=GetCapabilities&service=CSW&version=2.0.2</a></li>
-    <li>POST <%= root_url.chomp '/' %> with body:
+    <li>POST <%= root_url.chomp '/' %> with XML request body:
 <pre><code>&lt;csw:GetCapabilities
     xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
     xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;
@@ -47,7 +62,7 @@
   </ul>
 </section>
 <section class="get-records">
-  <h2>GetRecords</h2>
+  <h2><a name="get-records"/>GetRecords</h2>
 
   <p>
     The primary means of resource discovery in the general model are the two operations search and present. In the
@@ -112,7 +127,8 @@
     </li>
   </ul>
   <ul>
-    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an area of interest (AOI) <strong>iso:BoundingBox constraint</strong> and result entries <strong>resultType="results"</strong>:
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an area of interest (AOI)
+      <strong>iso:BoundingBox constraint</strong> and result entries <strong>resultType="results"</strong>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -137,7 +153,8 @@
     </li>
   </ul>
   <ul>
-    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:BoundingBox constraint</strong> and result hits <strong>resultType="hits"</strong> only:
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI
+      <strong>iso:BoundingBox constraint</strong> and result hits <strong>resultType="hits"</strong> only:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;hits&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -203,7 +220,7 @@
         &lt;/csw:Constraint&gt;
     &lt;/csw:Query&gt;
 &lt;/csw:GetRecords&gt;</code></pre>
-  </li>
+    </li>
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %> for CMR collections search with an AOI <strong>iso:Point constraint</strong>:
@@ -223,7 +240,8 @@
     </li>
   </ul>
   <ul>
-  <li>POST <%= root_url.chomp '/' %> for CMR collections search with a time of interest (TOI) collection temporal extent <strong>TempExtent_begin and TempExtent_end constraints</strong>:
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a time of interest (TOI) collection temporal
+      extent <strong>TempExtent_begin and TempExtent_end constraints</strong>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -248,10 +266,11 @@
         &lt;/csw:Constraint&gt;
     &lt;/csw:Query&gt;
 &lt;/csw:GetRecords&gt;</code></pre>
-  </li>
+    </li>
   </ul>
   <ul>
-    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a TOI collection modification temporal extent <strong>Modified constraint</strong>:
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a TOI collection modification temporal extent
+      <strong>Modified constraint</strong>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -352,7 +371,8 @@
     </li>
   </ul>
   <ul>
-    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a combined constraint (AOI/TOI/Title/Platform/ScienceKeywords) and defaulted resultType (hits):
+    <li>POST <%= root_url.chomp '/' %> for CMR collections search with a combined constraint
+      (AOI/TOI/Title/Platform/ScienceKeywords) and defaulted resultType (hits):
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -400,7 +420,7 @@
   </ul>
 </section>
 <section class="get-record-by-id">
-  <h2>GetRecordById</h2>
+  <h2><a name="get-record-by-id"/>GetRecordById</h2>
 
   <p>
     This request retrieves the default representation of catalogue records using their
@@ -441,7 +461,7 @@
       <a target="_blank" href="<%= root_url.chomp '/' %>?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C1224520098-NOAA_NCEI">GET <%= root_url.chomp '/' %>
         ?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C1224520098-NOAA_NCEI</a>
     </li>
-    <li>POST <%= root_url.chomp '/' %> with body:
+    <li>POST <%= root_url.chomp '/' %> with XML request body:
 <pre><code>&lt;csw:GetRecordById
 service=&quot;CSW&quot;
 version=&quot;2.0.2&quot;
@@ -451,6 +471,58 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
     &lt;csw:Id&gt;C1224520098-NOAA_NCEI&lt;/csw:Id&gt;
     &lt;ElementSetName typeNames=&quot;csw:Record&quot;&gt;full&lt;/ElementSetName&gt;
 &lt;/csw:GetRecordById&gt;</code></pre>
+    </li>
+  </ul>
+</section>
+<!-- ************** GetDomain ************** -->
+<section class="get-domain">
+  <h2><a name="get-domain"/>GetDomain</h2>
+
+  <p>
+    Allows clients to retrieve the domain (allowed values) of some request parameters at the time the request is
+    invoked.
+    The returned information may be static domain information, but may also be dynamic in that the allowed values are
+    determined at runtime. The operation does a best attempt at returning information about a request parameter.
+  </p>
+  <h3>Supported methods</h3>
+  <ul class="methods">
+    <% GetDomain::HTTP_METHODS.each do |method| %>
+        <li><%= method.upcase %></li>
+    <% end %>
+  </ul>
+  <h3>Supported ParameterName values</h3>
+  <ul class="parameter-names">
+    <% GetDomain::VALID_PARAMETER_NAMES.keys.each do |param_name| %>
+        <li><%= param_name %></li>
+    <% end %>
+  </ul>
+  <h3>Supported PropertyName values</h3>
+  <ul class="parameter-names">
+    <% GetDomain::VALID_PROPERTY_NAMES.keys.each do |prop_name| %>
+        <li><%= prop_name %></li>
+    <% end %>
+  </ul>
+
+  <h3>Examples</h3>
+  <ul>
+    <li>Get domain values for the TempExtent_begin PropertyName:
+      <a target="_blank" href="<%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin">GET <%= root_url.chomp '/' %>
+        ?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin</a>
+    </li>
+    <li>POST <%= root_url.chomp '/' %> for the TempExtent_begin with XML request body:
+<pre><code>&lt;GetDomain
+   service=&quot;CSW&quot;
+   version=&quot;2.0.2&quot;
+   xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;&gt;
+    &lt;PropertyName&gt;TempExtent_begin&lt;/PropertyName&gt;
+&lt;/GetDomain&gt;</code></pre>
+    </li>
+    <li>Get domain values for the TempExtent_begin, Temp_Extent_end and Modified PropertyNames:
+      <a target="_blank" href="<%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin,TempExtent_end,Modified">GET <%= root_url.chomp '/' %>
+        ?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin,TempExtent_end,Modified</a>
     </li>
   </ul>
 </section>

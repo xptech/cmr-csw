@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe 'GetDomain http GET TOI (TimeExtent_begin and TimeExtent_end success scenarios', :type => :request do
+RSpec.describe 'GetDomain http GET TOI (TempExtent_begin and TempExtent_end queryables) success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the TimeExtent_begin PropertyName' do
+  it 'correctly renders the response for a the TempExtent_begin PropertyName' do
     get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
@@ -16,7 +16,7 @@ RSpec.describe 'GetDomain http GET TOI (TimeExtent_begin and TimeExtent_end succ
                                  'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for a the TimeExtent_end PropertyName' do
+  it 'correctly renders the response for a the TempExtent_end PropertyName' do
     get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'TempExtent_end'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
@@ -30,7 +30,7 @@ RSpec.describe 'GetDomain http GET TOI (TimeExtent_begin and TimeExtent_end succ
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for an unnkown property' do
+  it 'correctly renders the response for an unknown property' do
     get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'UNKNOWN_PROPERTY'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
@@ -112,10 +112,10 @@ RSpec.describe 'GetDomain http GET TOI (TimeExtent_begin and TimeExtent_end succ
   end
 end
 
-RSpec.describe 'GetDomain http GET error scenarios', :type => :request do
+RSpec.describe 'GetDomain http GET (TempExtent_begin and TempExtent_end queryables) error scenarios', :type => :request do
   # :propertyName should be :PropertyName
   it 'correctly renders the exception response for a GetDomain without a PropertyName query parameter' do
-    get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :propertyName => 'TimeExtent_begin'
+    get '/', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :propertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:bad_request)
     expect(response).to render_template('shared/exception_report.xml.erb')
     records_xml = Nokogiri::XML(response.body)
@@ -129,7 +129,7 @@ RSpec.describe 'GetDomain http GET error scenarios', :type => :request do
   end
 
   it 'correctly renders the exception response for a GetDomain without a service and version' do
-    get '/', :request => 'GetDomain', :PropertyName => 'TimeExtent_begin'
+    get '/', :request => 'GetDomain', :PropertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:bad_request)
     expect(response).to render_template('shared/exception_report.xml.erb')
     records_xml = Nokogiri::XML(response.body)
@@ -147,5 +147,4 @@ RSpec.describe 'GetDomain http GET error scenarios', :type => :request do
     exception_text = exception_node_set[1].at_xpath('ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')
     expect(exception_text.text).to include("service can't be blank")
   end
-
 end
