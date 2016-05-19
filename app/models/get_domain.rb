@@ -79,7 +79,7 @@ class GetDomain < BaseCswModel
       @version = @request_body_xml.root['version']
     end
     if (@property_names == nil && @parameter_names == nil)
-      error_message = "ParameterName or PropertyName cannot both be blank. ParameterName allowed values are: #{@@VALID_PARAMETER_NAMES.keys}. PropertyName allowed values are: #{@@VALID_PROPERTY_NAMES.keys}"
+      error_message = "ParameterName or PropertyName cannot both be blank. ParameterName allowed values are: #{VALID_PARAMETER_NAMES.keys}. PropertyName allowed values are: #{VALID_PROPERTY_NAMES.keys}"
       Rails.logger.error("Could not process the GetDomain request: #{@request_body} ERROR: #{error_message}")
       raise OwsException.new('PropertyName|ParameterName', "Invalid GetDomain request: #{error_message}")
     end
