@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'GetDomain http POST TOI (Platform queryables) success scenarios', :type => :request do
+RSpec.describe 'GetDomain http POST TOI (Platform queryable) success scenarios', :type => :request do
 
   it 'correctly renders the response for a the Platform PropertyName' do
     post_xml = <<-eos
