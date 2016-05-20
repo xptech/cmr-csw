@@ -1,5 +1,7 @@
 class DescribeRecord < BaseCswModel
 
+  HTTP_METHODS = %w{Get}
+
   attr_accessor :output_schema
   validates :output_schema, inclusion: {in: OUTPUT_SCHEMAS, message: "Output schema '%{value}' is not supported. Supported output schemas are http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmi, http://www.isotc211.org/2005/gmd"}
 

@@ -15,10 +15,12 @@ footer {
 }
 
 .masthead-logo {
+  span.hide-text {
+    visibility: hidden;
+  }
 
   a:link {
     background-image: url(earthdata-logo.png);
-
   }
 
   a:hover {
