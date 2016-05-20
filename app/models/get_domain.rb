@@ -5,7 +5,7 @@ class GetDomain < BaseCswModel
                             'TempExtent_end' => 'DomainTempExtentEnd',
                             'Platform' => 'DomainPlatform',
                             'Instrument' => 'DomainInstrument',
-                            'ScienceKeywords' => 'DomainScieceKeywords'
+                            'ScienceKeywords' => 'DomainScienceKeywords'
   }
   # TODO Platform, Instrument, ScienceKeywords once we have a way to get the list of values
 

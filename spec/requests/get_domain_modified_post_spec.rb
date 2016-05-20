@@ -1,6 +1,6 @@
 RSpec.describe 'GetDomain http POST "Modified" queryable success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the Modified PropertyName' do
+  it 'correctly renders the response for the Modified PropertyName' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain

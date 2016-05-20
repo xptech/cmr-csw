@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'GetDomain http GET TOI (TempExtent_begin and TempExtent_end queryables) success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the TempExtent_begin PropertyName' do
+  it 'correctly renders the response for the TempExtent_begin PropertyName' do
     get '/collections', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'TempExtent_begin'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
@@ -16,7 +16,7 @@ RSpec.describe 'GetDomain http GET TOI (TempExtent_begin and TempExtent_end quer
                                  'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for a the TempExtent_end PropertyName' do
+  it 'correctly renders the response for the TempExtent_end PropertyName' do
     get '/collections', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'TempExtent_end'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')

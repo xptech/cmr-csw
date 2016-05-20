@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'GetDomain http POST TOI (TempExtent_begin and TempExtent_end queryables) success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the TempExtent_begin PropertyName' do
+  it 'correctly renders the response for the TempExtent_begin PropertyName' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain
@@ -28,7 +28,7 @@ RSpec.describe 'GetDomain http POST TOI (TempExtent_begin and TempExtent_end que
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('9999-12-31T23:59:59Z')
   end
 
-  it 'correctly renders the response for a the TempExtent_end PropertyName' do
+  it 'correctly renders the response for the TempExtent_end PropertyName' do
     post_xml = <<-eos
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GetDomain
