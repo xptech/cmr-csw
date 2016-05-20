@@ -28,7 +28,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to have_http_status(:success)
       expect(response).to render_template('get_records/index.xml.erb')
     end
@@ -59,7 +59,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to have_http_status(:bad_request)
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -99,7 +99,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to have_http_status(:bad_request)
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
@@ -139,7 +139,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'ExceptionReport'
@@ -178,7 +178,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'ExceptionReport'
@@ -217,7 +217,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'ExceptionReport'
@@ -256,7 +256,7 @@ describe "GetRecords BBOX error cases" do
     </csw:Query>
 </csw:GetRecords>
       eos
-      post '/', get_records_request_xml
+      post '/collections', get_records_request_xml
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'ExceptionReport'
