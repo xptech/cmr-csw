@@ -101,7 +101,8 @@ class GetDomain < BaseCswModel
       if VALID_PROPERTY_NAMES.include?(property_name)
         property_class = VALID_PROPERTY_NAMES[property_name].constantize
         property[:supported] = true
-        property[:domain_xml] = property_class.domain_xml
+        property[:object] = property_class.new
+        property[:class] = property_class
       end
       @property_names_domain_values << property
     end
