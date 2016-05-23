@@ -105,26 +105,40 @@ describe 'view documentation' do
   end
 
   it 'contains the correct description of Describe Record' do
-      visit '/collections'
-      within('section.describe-record') do
-        expect(page).to have_css("h2:contains('DescribeRecord')")
-        expect(page).to have_css("h3:contains('Supported methods')")
-        within('ul.methods') do
-          expect(page).to have_content('GET')
-          expect(page).to have_no_content('POST')
-        end
-        expect(page).to have_css("h3:contains('Supported namespaces')")
-        within('ul.namespaces') do
-          expect(page).to have_link('http://www.isotc211.org/2005/gmi', href: 'http://www.isotc211.org/2005/gmi')
-          expect(page).to have_link('http://www.opengis.net/cat/csw/2.0.2', href: 'http://www.opengis.net/cat/csw/2.0.2')
-          expect(page).to have_link('http://www.isotc211.org/2005/gmd', href: 'http://www.isotc211.org/2005/gmd')
-        end
-        expect(page).to have_css("h3:contains('Supported type names')")
-        within('ul.type-names') do
-          expect(page).to have_content('csw:Record')
-          expect(page).to have_content('gmi:MI_Metadata')
-          expect(page).to have_content('gmd:MD_Metadata')
-        end
+    visit '/collections'
+    within('section.describe-record') do
+      expect(page).to have_css("h2:contains('DescribeRecord')")
+      expect(page).to have_css("h3:contains('Supported methods')")
+      within('ul.methods') do
+        expect(page).to have_content('GET')
+        expect(page).to have_no_content('POST')
+      end
+      expect(page).to have_css("h3:contains('Supported namespaces')")
+      within('ul.namespaces') do
+        expect(page).to have_link('http://www.isotc211.org/2005/gmi', href: 'http://www.isotc211.org/2005/gmi')
+        expect(page).to have_link('http://www.opengis.net/cat/csw/2.0.2', href: 'http://www.opengis.net/cat/csw/2.0.2')
+        expect(page).to have_link('http://www.isotc211.org/2005/gmd', href: 'http://www.isotc211.org/2005/gmd')
+      end
+      expect(page).to have_css("h3:contains('Supported type names')")
+      within('ul.type-names') do
+        expect(page).to have_content('csw:Record')
+        expect(page).to have_content('gmi:MI_Metadata')
+        expect(page).to have_content('gmd:MD_Metadata')
       end
     end
+  end
+
+  it 'contains the correct description of Get Domain' do
+    visit '/collections'
+    within('section.get-domain') do
+      expect(page).to have_css("h2:contains('GetDomain')")
+      expect(page).to have_css("h3:contains('Supported methods')")
+      within('ul.methods') do
+        expect(page).to have_content('GET')
+        expect(page).to have_content('POST')
+      end
+      expect(page).to have_css("h3:contains('Supported PropertyName values')")
+      expect(page).to have_css("h3:contains('Supported ParameterName values')")
+    end
+  end
 end

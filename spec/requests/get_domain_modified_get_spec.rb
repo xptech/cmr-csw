@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'GetDomain http GET "Modified" queryable success scenarios', :type => :request do
 
-  it 'correctly renders the response for a the Modified PropertyName' do
+  it 'correctly renders the response for the Modified PropertyName' do
     get '/collections', :request => 'GetDomain', :service => 'CSW', :version => '2.0.2', :PropertyName => 'Modified'
     expect(response).to have_http_status(:success)
     expect(response).to render_template('get_domain/index.xml.erb')
