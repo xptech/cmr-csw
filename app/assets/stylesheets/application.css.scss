@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require_tree
  */
 footer {
   background-color: rgb(44, 62, 80);
@@ -43,8 +44,4 @@ section.hero {
   h1 {
     font-size: 64px;
   }
-}
-
-span.emphasis {
-  font-weight: bold;
 }

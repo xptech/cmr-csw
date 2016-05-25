@@ -111,8 +111,8 @@
   </ul>
   <h3>Examples</h3>
   <ul>
-    <li>POST <%= root_url.chomp '/' %>/collections for CMR collections (datasets) search with
-      <span class='emphasis'>NO constraints</span>:
+
+    <li>POST <%= root_url.chomp '/' %>/collections for CMR collections (datasets) search with NO constraints:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -127,7 +127,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an area of interest (AOI)
-      <span class='emphasis'>iso:BoundingBox constraint</span> and result entries <span class='emphasis'>resultType="results"</span>:
+      <span class="queryable">iso:BoundingBox</span> constraint and result entries <span class="queryable">resultType="results"</span>.
+      The <span class="queryable">gml:lowerCorner</span> and <span class="queryable">gml:upperCorner</span> points must
+      formatted as <span class="queryable-format">LONGITUDE LATITUDE</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -153,7 +155,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <span class='emphasis'>iso:BoundingBox constraint</span> and result hits <span class='emphasis'>resultType="hits"</span> only:
+      <span class="queryable">iso:BoundingBox</span> constraint and result hits <span class="queryable">resultType="hits"</span>.
+      The <span class="queryable">gml:lowerCorner</span> and <span class="queryable">gml:upperCorner</span> points must
+      formatted as <span class="queryable-format">LONGITUDE LATITUDE</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;hits&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -179,7 +183,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <span class='emphasis'>iso:Polygon constraint</span>:
+      <span class="queryable">iso:Polygon constraint</span>.  The <span class="queryable">gml:posList</span> must contain
+      a sequence of <span class="queryable-format">LONGITUDE LATITUDE</span> points with the first and last point being
+      identical in order to close the <span class="queryable">iso:Polygon</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -207,7 +213,8 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <span class='emphasis'>iso:LineString constraint</span>:
+      <span class="queryable">iso:LineString</span>.  The <span class="queryable">gml:posList</span> must contain
+      a sequence of <span class="queryable-format">LONGITUDE LATITUDE</span> distinct points.
     <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -225,7 +232,8 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <span class='emphasis'>iso:Point constraint</span>:
+      <span class="queryable">iso:Point constraint</span>. The <span class="queryable">gml:pos</span> must contain
+      a <span class="queryable-format">LONGITUDE LATITUDE</span> point.
     <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -244,7 +252,10 @@
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a time of interest (TOI) collection
       temporal
-      extent <span class='emphasis'>TempExtent_begin and TempExtent_end constraints</span>:
+      extent <span class="queryable">TempExtent_begin</span> and <span class="queryable">TempExtent_end</span> constraints.
+      The <span>ogc:Literal</span> value for the <span class="queryable">TempExtent_begin</span> and
+      <span class="queryable">TempExtent_end</span> queryables must be in the ISO 8601 datetime format UTC
+      <span class="queryable-format">YYYY-MM-ddThh:mm:ssZ</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -273,8 +284,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a TOI collection modification
-      temporal extent
-      <span class='emphasis'>Modified constraint</span>:
+      temporal extent <span class="queryable">Modified</span> constraint.  The <span>ogc:Literal</span> value for the
+      <span class="queryable">Modified</span> queryable must be in the ISO 8601 date format
+      <span class="queryable-format">YYYY-MM-dd</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -297,7 +309,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with
-      <span class='emphasis'>ScienceKeywords constraint</span>:
+      <span class="queryable">ScienceKeywords</span> constraint. The valid ScienceKeywords values are specified in
+      <a target="_blank" href="http://gcmd.nasa.gov/learn/keyword_list.html">NASA's GCMD Science Keywords and Associated Directory Keywords</a>.
+      They can also be retrieved via the <a href="#get-domain">GetDomain</a> call with the <span class="queryable">ScienceKeywords</span> PropertyName.
 <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -316,7 +330,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a
-      <span class='emphasis'>Title constraint and wildcard</span>:
+      <span class="queryable">Title</span> constraint and wildcard.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -339,7 +353,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an
-      <span class='emphasis'>Instrument constraint</span>:
+      <span class="queryable">Instrument</span> constraint.  The valid Instrument values are specified in
+      <a target="_blank" href="http://gcmd.nasa.gov/learn/keyword_list.html">NASA's GCMD Science Keywords and Associated Directory Keywords</a>.
+      They can also be retrieved via the <a href="#get-domain">GetDomain</a> call with the <span class="queryable">Instrument</span> PropertyName.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -362,7 +378,9 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a
-      <span class='emphasis'>Platform constraint</span>:
+      <span class="queryable">Platform</span> constraint.  The valid Platform values are specified in
+      <a target="_blank" href="http://gcmd.nasa.gov/learn/keyword_list.html">NASA's GCMD Science Keywords and Associated Directory Keywords</a>.
+      They can also be retrieved via the <a href="#get-domain">GetDomain</a> call with the <span class="queryable">Platform</span> PropertyName.
 <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
