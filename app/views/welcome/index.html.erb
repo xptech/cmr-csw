@@ -112,7 +112,7 @@
   <h3>Examples</h3>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections (datasets) search with
-      <strong>NO constraints</strong>:
+      <span class='emphasis'>NO constraints</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -127,7 +127,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an area of interest (AOI)
-      <strong>iso:BoundingBox constraint</strong> and result entries <strong>resultType="results"</strong>:
+      <span class='emphasis'>iso:BoundingBox constraint</span> and result entries <span class='emphasis'>resultType="results"</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -153,7 +153,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <strong>iso:BoundingBox constraint</strong> and result hits <strong>resultType="hits"</strong> only:
+      <span class='emphasis'>iso:BoundingBox constraint</span> and result hits <span class='emphasis'>resultType="hits"</span> only:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;hits&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -179,7 +179,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <strong>iso:Polygon constraint</strong>:
+      <span class='emphasis'>iso:Polygon constraint</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -207,7 +207,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <strong>iso:LineString constraint</strong>:
+      <span class='emphasis'>iso:LineString constraint</span>:
     <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -225,7 +225,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an AOI
-      <strong>iso:Point constraint</strong>:
+      <span class='emphasis'>iso:Point constraint</span>:
     <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -244,7 +244,7 @@
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a time of interest (TOI) collection
       temporal
-      extent <strong>TempExtent_begin and TempExtent_end constraints</strong>:
+      extent <span class='emphasis'>TempExtent_begin and TempExtent_end constraints</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -274,7 +274,7 @@
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a TOI collection modification
       temporal extent
-      <strong>Modified constraint</strong>:
+      <span class='emphasis'>Modified constraint</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -297,7 +297,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with
-      <strong>ScienceKeywords constraint</strong>:
+      <span class='emphasis'>ScienceKeywords constraint</span>:
 <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
@@ -316,7 +316,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a
-      <strong>Title constraint and wildcard</strong>:
+      <span class='emphasis'>Title constraint and wildcard</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -339,7 +339,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with an
-      <strong>Instrument constraint</strong>:
+      <span class='emphasis'>Instrument constraint</span>:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -362,7 +362,7 @@
   </ul>
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a
-      <strong>Platform constraint</strong>:
+      <span class='emphasis'>Platform constraint</span>:
 <pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
     xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;

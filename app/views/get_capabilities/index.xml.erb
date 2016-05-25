@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <csw:Capabilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gml="http://www.opengis.net/gml" xmlns:ows="http://www.opengis.net/ows" xmlns:ogc="http://www.opengis.net/ogc" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd" version="2.0.2">
 	<ows:ServiceIdentification>
-		<ows:Title>NASA's Common Metadata Repository (CMR) CSW Service</ows:Title>
-		<ows:Abstract>NASA's CMR contributes to GEOSS by offering a web service that utilizes
+		<ows:Title>NASA Earthdata's Common Metadata Repository (CMR) CSW Service</ows:Title>
+		<ows:Abstract>NASA Earthdata's CMR contributes to GEOSS by offering a web service that utilizes
             the Catalogue Service for the Web (CSW) protocol. This service provides GEOSS with
             the capability to perform dynamic queries of NASA’s Earth Science metadata collection.
             The CSW service is registered within the GEOSS registry system, which allows NASA’s
@@ -15,43 +15,35 @@
 			<ows:Keyword>geossNoMonetaryCharge</ows:Keyword>
 			<ows:Keyword>geossDataCore</ows:Keyword>
 			<ows:Keyword>USA/NOAA</ows:Keyword>
-			<ows:Keyword>SHIPS</ows:Keyword>
 			<ows:Keyword>GEOGRAPHIC REGION &gt; POLAR</ows:Keyword>
 			<ows:Keyword>USA/NASA</ows:Keyword>
 			<ows:Keyword>AMD</ows:Keyword>
-			<ows:Keyword>MSBS &gt; Multibeam Swath Bathymetry System</ows:Keyword>
-			<ows:Keyword>SONAR &gt; Sound Navigation and Ranging</ows:Keyword>
 			<ows:Type>theme</ows:Type>
 		</ows:Keywords>
 		<ows:ServiceType>CSW</ows:ServiceType>
 		<ows:ServiceTypeVersion>2.0.2</ows:ServiceTypeVersion>
-		<ows:Fees/>
-		<ows:AccessConstraints/>
 	</ows:ServiceIdentification>
 
 	<ows:ServiceProvider>
-		<ows:ProviderName>NASA</ows:ProviderName>
-		<ows:ProviderSite xlink:href="http://www.nasa.gov"/>
+		<ows:ProviderName>NASA Earthdata</ows:ProviderName>
+		<ows:ProviderSite xlink:href="http://www.earthdata.nasa.gov"/>
 		<ows:ServiceContact>
-			<ows:IndividualName>Andy Mitchell</ows:IndividualName>
+			<ows:IndividualName>Andrew E. Mitchell</ows:IndividualName>
 			<ows:PositionName>Responsible NASA Official</ows:PositionName>
 			<ows:ContactInfo>
 				<ows:Phone>
-					<ows:Voice/>
-					<ows:Facsimile/>
+					<ows:Voice>301-614-5189</ows:Voice>
 				</ows:Phone>
 				<ows:Address>
-					<ows:DeliveryPoint/>
-					<ows:City/>
-					<ows:AdministrativeArea/>
-					<ows:PostalCode/>
-					<ows:Country/>
-					<ows:ElectronicMailAddress/>
+					<ows:DeliveryPoint>Mailstop: Code 423.0, NASA/Goddard Space Flight Center</ows:DeliveryPoint>
+					<ows:City>Greenbelt</ows:City>
+					<ows:AdministrativeArea>Maryland</ows:AdministrativeArea>
+					<ows:PostalCode>20771</ows:PostalCode>
+					<ows:Country>USA</ows:Country>
+					<ows:ElectronicMailAddress>Andrew.E.Mitchell@NASA.gov</ows:ElectronicMailAddress>
 				</ows:Address>
-				<ows:HoursOfService/>
-				<ows:ContactInstructions/>
 			</ows:ContactInfo>
-			<ows:Role/>
+			<ows:Role>Responsible NASA Official</ows:Role>
 		</ows:ServiceContact>
 	</ows:ServiceProvider>
 
@@ -179,7 +171,7 @@
 		<ogc:Spatial_Capabilities>
 			<ogc:GeometryOperands>
 				<ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
-				<!-- Coordinates are specified in CMR order as: <gml:pos>LON LAT</gml:pos> -->
+			  <!-- Coordinates are specified in CMR order as: <gml:pos>LON LAT</gml:pos> -->
 				<ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
 				<!-- Coordinates are specified in CMR order as: <gml:posList>LON1 LAT1 LON2 LAT2 ... LONn LATn</gml:posList> -->
 				<ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
@@ -188,13 +180,8 @@
 				<ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
 			</ogc:GeometryOperands>
 			<ogc:SpatialOperators>
-			  <!-- Coordinates specified in CMR order as:
-			   <gml:lowerCorner>LON LAT</gml:lowerCorner> and <gml:upperCorner>LON LAT</gml:upperCorner> -->
 				<ogc:SpatialOperator name="BBOX"/>
-				<ogc:SpatialOperator name="Overlaps"/>
 				<ogc:SpatialOperator name="Intersects"/>
-				<ogc:SpatialOperator name="Touches"/>
-				<ogc:SpatialOperator name="Crosses"/>
 			</ogc:SpatialOperators>
 		</ogc:Spatial_Capabilities>
 		<ogc:Scalar_Capabilities>

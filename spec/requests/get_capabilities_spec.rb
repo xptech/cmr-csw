@@ -247,4 +247,25 @@ RSpec.describe 'various GetCapabilities GET and POST requests', :type => :reques
     expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows')[1].text).to eq("service can't be blank")
 
   end
+
+  it 'correctly describes the contact information' do
+    get '/collections', :request => 'GetCapabilities', :service => 'CSW', :version => '2.0.2'
+    expect(response).to have_http_status(:success)
+    expect(response).to render_template('get_capabilities/index.xml.erb')
+    capabilities_xml = Nokogiri::XML(response.body)
+    expect(capabilities_xml.root.name).to eq 'Capabilities'
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ProviderName', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('NASA Earthdata')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ProviderSite/@xlink:href', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'xlink' => 'http://www.w3.org/1999/xlink').text).to eq('http://www.earthdata.nasa.gov')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:IndividualName', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Andrew E. Mitchell')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:PositionName', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Responsible NASA Official')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:Role', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Responsible NASA Official')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Phone/ows:Voice', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('301-614-5189')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:DeliveryPoint', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Mailstop: Code 423.0, NASA/Goddard Space Flight Center')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:City', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Greenbelt')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:AdministrativeArea', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Maryland')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:PostalCode', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('20771')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:Country', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('USA')
+    expect(capabilities_xml.root.xpath('/csw:Capabilities/ows:ServiceProvider/ows:ServiceContact/ows:ContactInfo/ows:Address/ows:ElectronicMailAddress', 'ows' => 'http://www.opengis.net/ows', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').text).to eq('Andrew.E.Mitchell@NASA.gov')
+  end
+
 end
