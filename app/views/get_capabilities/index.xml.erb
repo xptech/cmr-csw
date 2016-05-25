@@ -11,14 +11,10 @@
             Earth Observation Satellites (CEOS) members’ metadata collections available to GEOSS
             from the CSW service.</ows:Abstract>
 		<ows:Keywords>
+		  <ows:Keyword>NASA</ows:Keyword>
+		  <ows:Keyword>NOAA</ows:Keyword>
 			<ows:Keyword>CEOS</ows:Keyword>
-			<ows:Keyword>geossNoMonetaryCharge</ows:Keyword>
-			<ows:Keyword>geossDataCore</ows:Keyword>
-			<ows:Keyword>USA/NOAA</ows:Keyword>
-			<ows:Keyword>GEOGRAPHIC REGION &gt; POLAR</ows:Keyword>
-			<ows:Keyword>USA/NASA</ows:Keyword>
-			<ows:Keyword>AMD</ows:Keyword>
-			<ows:Type>theme</ows:Type>
+			<ows:Keyword>GEOSS</ows:Keyword>
 		</ows:Keywords>
 		<ows:ServiceType>CSW</ows:ServiceType>
 		<ows:ServiceTypeVersion>2.0.2</ows:ServiceTypeVersion>
@@ -180,8 +176,11 @@
 				<ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
 			</ogc:GeometryOperands>
 			<ogc:SpatialOperators>
-				<ogc:SpatialOperator name="BBOX"/>
-				<ogc:SpatialOperator name="Intersects"/>
+				<ogc:SpatialOperator name="BBOX" />
+				<ogc:SpatialOperator name="Overlaps" />
+				<ogc:SpatialOperator name="Intersects" />
+				<ogc:SpatialOperator name="Touches" />
+				<ogc:SpatialOperator name="Crosses" />
 			</ogc:SpatialOperators>
 		</ogc:Spatial_Capabilities>
 		<ogc:Scalar_Capabilities>
