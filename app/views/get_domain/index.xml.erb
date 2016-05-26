@@ -13,7 +13,7 @@
         </csw:RangeOfValues>
             <% when 'ListOfValues' %>
         <csw:ListOfValues>
-          <% property[:object].get_values.each do |value| %>
+          <% parameter[:class]::LIST_OF_VALUES.each do |value| %>
           <csw:Value><%= value %></csw:Value>
           <% end %>
         </csw:ListOfValues>
@@ -31,26 +31,26 @@
   <% if !@model.parameter_names_domain_values.nil? %>
     <% @model.parameter_names_domain_values.each do |parameter| %>
       <csw:DomainValues type="csw:record">
-        <csw:ParameterName><%= property[:name] %></csw:ParameterName>
+        <csw:ParameterName><%= parameter[:name] %></csw:ParameterName>
         <% if parameter[:supported] %>
-          <% case property[:class]::TYPE %>
+          <% case parameter[:class]::TYPE %>
             <% when 'RangeOfValues' %>
-              <csw:RangeOfValues>
-                <csw:MinValue><%= parameter[:class]::MIN_VALUE %></csw:MinValue>
-                <csw:MaxValue><%= parameter[:class]::MAX_VALUE %></csw:MaxValue>
-              </csw:RangeOfValues>
+        <csw:RangeOfValues>
+          <csw:MinValue><%= parameter[:class]::MIN_VALUE %></csw:MinValue>
+          <csw:MaxValue><%= parameter[:class]::MAX_VALUE %></csw:MaxValue>
+        </csw:RangeOfValues>
             <% when 'ListOfValues' %>
-              <csw:ListOfValues>
-                <% parameter[:object].get_values.each do |value| %>
-                  <csw:Value><%= value %></csw:Value>
+        <csw:ListOfValues>
+                <% parameter[:class]::LIST_OF_VALUES.each do |value| %>
+          <csw:Value><%= value %></csw:Value>
                 <% end %>
-              </csw:ListOfValues>
+        </csw:ListOfValues>
             <% when 'ConceptualScheme' %>
-              <csw:ConceptualScheme>
-                <csw:Name><%= parameter[:class]::NAME %></csw:Name>
-                <csw:Document><%= parameter[:class]::DOCUMENT %></csw:Document>
-                <csw:Authority><%= parameter[:class]::AUTHORITY %></csw:Authority>
-              </csw:ConceptualScheme>
+        <csw:ConceptualScheme>
+          <csw:Name><%= parameter[:class]::NAME %></csw:Name>
+          <csw:Document><%= parameter[:class]::DOCUMENT %></csw:Document>
+          <csw:Authority><%= parameter[:class]::AUTHORITY %></csw:Authority>
+        </csw:ConceptualScheme>
           <% end %>
         <% end %>
       </csw:DomainValues>
