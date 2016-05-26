@@ -38,7 +38,7 @@ RSpec.describe 'GetDomain http POST "Modified" queryable success scenarios', :ty
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd">
     <PropertyName>Modified</PropertyName>
-    <PropertyName>NOT_ALLOWED BUT NOT ERROR REQUIRED BY CSW SPEC</PropertyName>
+    <PropertyName>NOT_ALLOWED BUT NO ERROR REQUIRED BY CSW SPEC</PropertyName>
 </GetDomain>
     eos
     post '/collections', post_xml
