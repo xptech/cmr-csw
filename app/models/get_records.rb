@@ -92,11 +92,11 @@ class GetRecords < BaseCswModel
   end
 
   def find
-    #cmr_params = to_cmr_collection_params
     Rails.logger.info "CMR Params: #{@cmr_query_hash}"
     response = nil
     @cmr_query_hash[:offset] = @start_position unless @start_position == '1'
     @cmr_query_hash[:page_size] = @max_records unless @max_records == '10'
+    @cmr_query_hash = add_cwic_parameter @cmr_query_hash
     begin
       time = Benchmark.realtime do
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"
@@ -115,6 +115,7 @@ class GetRecords < BaseCswModel
     end
 
     document = Nokogiri::XML(response)
+    #document = add_cwic_keywords document
     # This model is an array of collections in the iso19115 format. It's up to the view to figure out how to render it
     # Each gmi:MI_Metadata element is a collection
     model = OpenStruct.new
@@ -137,12 +138,6 @@ class GetRecords < BaseCswModel
     end
     model.raw_collections_doc = document
     return model
-  end
-
-  def to_cmr_collection_params
-    cmr_params = {}
-
-    cmr_params
   end
 
   private
