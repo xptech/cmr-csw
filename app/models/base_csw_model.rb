@@ -30,7 +30,7 @@ class BaseCswModel
   end
 
   def add_cwic_parameter(params)
-    #params[:include_tags] = 'org.ceos.wgiss.cwic.granules.prod'
+    params[:include_tags] = 'org.ceos.wgiss.cwic.granules.prod'
     params
   end
 

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?concept_id%5B%5D=C1224520058-NOAA_NCEI&concept_id%5B%5D=C1224520098-NOAA_NCEI
+    uri: https://cmr.earthdata.nasa.gov/search/collections?concept_id%5B%5D=C1224520058-NOAA_NCEI&concept_id%5B%5D=C1224520098-NOAA_NCEI&include_tags=org.ceos.wgiss.cwic.granules.prod
     body:
       encoding: US-ASCII
       string: ''

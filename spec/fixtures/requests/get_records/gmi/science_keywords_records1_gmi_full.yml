@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?science_keywords%5B%5D%5Bany%5D=EARTH%20SCIENCE
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod&science_keywords%5B%5D%5Bany%5D=EARTH%20SCIENCE
     body:
       encoding: US-ASCII
       string: ''
