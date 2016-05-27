@@ -15,7 +15,7 @@ class GetDomain < BaseCswModel
                              'GetRecords.typeName' => 'DomainGetRecordsTypeName',
                              'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
                              'GetRecords.ElementName' => 'DomainGetRecordsElementName',
-                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraingLanguage',
+                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraintLanguage',
                              'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
                              'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
                              'DescribeRecord.schemaLanguage' => 'DomainDescribeRecordSchemaLanguage'
@@ -23,12 +23,12 @@ class GetDomain < BaseCswModel
 
   @request_body_xml
 
-  # NO need for custom validator errors, the spec mentions that the type reference should be returned
+  # NO need for custom validator errors, the spec mentions that the type reference should be returned on error
   attr_accessor :property_names
   #validate :validate_property_names
   attr_accessor :property_names_domain_values
 
-  # NO need for custom validator errors, the spec mentions that the type reference should be returned
+  # NO need for custom validator errors, the spec mentions that the type reference should be returned on error
   attr_accessor :parameter_names
   #validate :validate_parameter_names
   attr_accessor :parameter_names_domain_values
@@ -40,7 +40,7 @@ class GetDomain < BaseCswModel
     @property_names = nil
     @parameter_names = nil
     @property_names_domain_values = Array.new
-    @parameter_names_domain_value = Array.new
+    @parameter_names_domain_values = Array.new
     if (@request.get?)
       # for GET requests, the spec allows for one or more PropertyName or ParameterName as a comma separated string
       if (!params[:PropertyName].nil?)
@@ -49,7 +49,7 @@ class GetDomain < BaseCswModel
           @property_names = nil
         end
       elsif (!params[:ParameterName].nil?)
-        @parameter_names = params[:ParameterName].split(',')
+        @parameter_names = params[:ParameterName].gsub(/\s+/, "").split(',')
         if @parameter_names.empty?
           @parameter_names = nil
         end
@@ -57,7 +57,8 @@ class GetDomain < BaseCswModel
       @version = params[:version]
       @service = params[:service]
     elsif @request.post? && !@request_body.empty?
-      # for POST requests XML request body, the spec allows for only ONE PropertyName or ParameterName
+      # for POST requests XML request body, the spec allows for only ONE PropertyName or ParameterName element
+      # TODO might want to support comma separated string for the PropertyName and ParameterName value
       begin
         @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
       rescue Nokogiri::XML::SyntaxError => e
@@ -66,10 +67,7 @@ class GetDomain < BaseCswModel
       end
       parameter_name_node = @request_body_xml.root.at_xpath('/csw:GetDomain/csw:ParameterName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       if (parameter_name_node != nil && !parameter_name_node.text.empty?)
-        @parameter_name = [parameter_name_node.text]
-        if @parameter_names.empty?
-          @parameter_names = nil
-        end
+        @parameter_names = [parameter_name_node.text]
       end
       property_name_node = @request_body_xml.root.at_xpath('/csw:GetDomain/csw:PropertyName', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
       if (property_name_node != nil && !property_name_node.text.empty?)
@@ -88,7 +86,7 @@ class GetDomain < BaseCswModel
   def process_domain()
     if !@property_names.nil?
       process_property_names()
-    elsif !(@parameter_names.nil!)
+    elsif !(@parameter_names.nil?)
       process_parameter_names()
     end
   end
@@ -109,9 +107,20 @@ class GetDomain < BaseCswModel
   end
 
   def process_parameter_names()
+    @parameter_names.each do |parameter_name|
+      parameter = Hash.new
+      parameter[:name] = parameter_name
+      if VALID_PARAMETER_NAMES.include?(parameter_name)
+        parameter_class = VALID_PARAMETER_NAMES[parameter_name].constantize
+        parameter[:supported] = true
+        parameter[:object] = parameter_class.new
+        parameter[:class] = parameter_class
+      end
+      @parameter_names_domain_values << parameter
+    end
   end
 
-
+  # NOT USED for now, unsupported property names result in the unsupported property being returned
   def validate_property_names()
     @property_names.each do |property_name|
       if !VALID_PROPERTY_NAMES.include?(property_name)
@@ -121,6 +130,7 @@ class GetDomain < BaseCswModel
     end
   end
 
+  # NOT USED for now, unsupported parameter names result in the unsupported parameter being returned
   def validate_parameter_names()
     @parameter_names.each do |parameter_name|
       if !VALID_PARAMETER_NAMES.include?(property_name)
