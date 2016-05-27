@@ -13,9 +13,9 @@ RSpec.describe 'GetDomain http GET "resultType" request parameter success scenar
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ListOfValues/csw:Value',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(2)
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ListOfValues/csw:Value',
-                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[0].text).to eq('hits')
+                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[0].text).to eq('results')
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ListOfValues/csw:Value',
-                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[1].text).to eq('results')
+                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[1].text).to eq('hits')
   end
 
   it 'correctly renders the response for resultType and an unknown parameter' do
@@ -28,9 +28,9 @@ RSpec.describe 'GetDomain http GET "resultType" request parameter success scenar
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ParameterName',
                                  'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[0].text).to eq('GetRecords.resultType')
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ListOfValues/csw:Value',
-                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.text).to eq('hits')
+                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.text).to eq('results')
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ListOfValues/csw:Value',
-                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').last.text).to eq('results')
+                                 'csw' => 'http://www.opengis.net/cat/csw/2.0.2').last.text).to eq('hits')
 
     expect(domain_xml.root.xpath('/csw:GetDomainResponse/csw:DomainValues/csw:ParameterName',
                                  'csw' => 'http://www.opengis.net/cat/csw/2.0.2')[1].text).to eq('UNKNOWN_PARAMETER')
