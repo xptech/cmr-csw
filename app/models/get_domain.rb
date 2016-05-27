@@ -15,7 +15,7 @@ class GetDomain < BaseCswModel
                              'GetRecords.typeName' => 'DomainGetRecordsTypeName',
                              'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
                              'GetRecords.ElementName' => 'DomainGetRecordsElementName',
-                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraingLanguage',
+                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraintLanguage',
                              'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
                              'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
                              'DescribeRecord.schemaLanguage' => 'DomainDescribeRecordSchemaLanguage'
