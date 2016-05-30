@@ -529,10 +529,10 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
 
   <h3>Examples</h3>
   <ul>
-    <li>Get domain values for the TempExtent_begin PropertyName:
+    <li>Allowed values via a GetDomain GET request for the TempExtent_begin <span class="queryable">PropertyName</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin</a>
     </li>
-    <li>POST <%= root_url.chomp '/' %> for the TempExtent_begin with XML request body:
+    <li>Allowed values via a GetDomain POST <%= root_url.chomp '/' %> for the TempExtent_begin <span class="queryable">PropertyName</span> with XML POST request body:
 <pre><code>&lt;GetDomain
    service=&quot;CSW&quot;
    version=&quot;2.0.2&quot;
@@ -543,8 +543,26 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
     &lt;PropertyName&gt;TempExtent_begin&lt;/PropertyName&gt;
 &lt;/GetDomain&gt;</code></pre>
     </li>
-    <li>Get domain values for the TempExtent_begin, Temp_Extent_end and Modified PropertyNames:
+    <li>Allowed values via a GetDomain GET request for the TempExtent_begin, Temp_Extent_end and Modified <span class="queryable">PropertyNames</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin,TempExtent_end,Modified">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin,TempExtent_end,Modified</a>
+    </li>
+    </br>
+    <li>Allowed values via a GetDomain GET request for the GetRecords.ElementSetName <span class="queryable">ParameterName</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&ParameterName=GetRecords.ElementSetName">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&ParameterName=GetRecords.ElementSetName</a>
+    </li>
+    <li>Allowed values via a GetDomain POST <%= root_url.chomp '/' %> for the GetRecords.ElementSetName <span class="queryable">ParameterName</span> with XML POST request body:
+<pre><code>&lt;GetDomain
+   service=&quot;CSW&quot;
+   version=&quot;2.0.2&quot;
+   xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;&gt;
+    &lt;ParameterName&gt;GetRecords.ElementSetName&lt;/ParameterName&gt;
+&lt;/GetDomain&gt;</code></pre>
+    </li>
+    <li>Allowed values via a GetDomain GET request for the GetRecords.ElementSetName,GetRecords.resultType and GetRecords.outputRecType <span class="queryable">ParameterNames</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&ParameterName=GetRecords.ElementSetName,GetRecords.resultType,GetRecords.outputRecType">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&ParameterName=GetRecords.ElementSetName,GetRecords.resultType,GetRecords.outputRecType</a>
     </li>
   </ul>
 </section>
