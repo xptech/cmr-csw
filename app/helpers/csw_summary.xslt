@@ -31,8 +31,7 @@
               xmlns:ows="http://www.opengis.net/ows"
               xmlns:gco="http://www.isotc211.org/2005/gco"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2
-                        ../../../csw/2.0.2/record.xsd">
+              xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 record.xsd">
 
         <dc:identifier>
           <xsl:value-of select="@concept-id"/>
