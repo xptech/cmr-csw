@@ -14,7 +14,6 @@ class GetDomain < BaseCswModel
                              'GetRecords.outputRecType' => 'DomainGetRecordsOutputRecType',
                              'GetRecords.typeName' => 'DomainGetRecordsTypeName',
                              'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
-                             'GetRecords.ElementName' => 'DomainGetRecordsElementName',
                              'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraintLanguage',
                              'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
                              'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
