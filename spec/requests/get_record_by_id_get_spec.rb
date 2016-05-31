@@ -171,8 +171,8 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         # And also...  subjects, modified, abstract, spatial
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(5)
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('EARTH SCIENCE>OCEANS>OCEAN TEMPERATURE>WATER TEMPERATURE>NONE>NONE>NONE')
-        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('2015-02-18T00:00:00.000Z')
-        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('foo')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('2015-02-18T00:00:00.000Z')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('foo')
       end
     end
   end
@@ -242,14 +242,14 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/ows:WGS84BoundingBox/ows:UpperCorner', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'ows' => 'http://www.opengis.net/ows').text).to eq('163.15671 81.04153')
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(6)
         expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:subject', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('EARTH SCIENCE>OCEANS>OCEAN TEMPERATURE>SEA SURFACE TEMPERATURE>NONE>NONE>NONE')
-        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('2014-07-22T00:00:00.000Z')
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('INSAT-3D Imager Level-2B Sea Surface Temperature in HDF-5 Format')
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('2014-07-22T00:00:00.000Z')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('INSAT-3D Imager Level-2B Sea Surface Temperature in HDF-5 Format')
         # And also...
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:source', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('IMDPS')
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:uri', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('www.mosdac.gov.in')
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('Urdu')
-        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('otherRestrictions')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:source', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('IMDPS')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:references', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').size).to eq(1)
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:references', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('www.mosdac.gov.in')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dc:language', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').text).to eq('Urdu')
+        expect(records_xml.xpath('/csw:GetRecordByIdResponse/csw:Record/dct:rights', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('otherRestrictions')
       end
     end
   end

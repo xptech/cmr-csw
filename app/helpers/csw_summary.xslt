@@ -25,13 +25,13 @@
               xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
               xmlns:gmd="http://www.isotc211.org/2005/gmd"
               xmlns:gmi="http://www.isotc211.org/2005/gmi"
+              xmlns:gml="http://www.opengis.net/gml/3.2"
               xmlns:dc="http://purl.org/dc/elements/1.1/"
-              xmlns:dct="http://purl.org/dc/terms"
+              xmlns:dct="http://purl.org/dc/terms/"
               xmlns:ows="http://www.opengis.net/ows"
               xmlns:gco="http://www.isotc211.org/2005/gco"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2
-                        ../../../csw/2.0.2/record.xsd">
+              xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 record.xsd">
 
         <dc:identifier>
           <xsl:value-of select="@concept-id"/>
@@ -64,9 +64,9 @@
         </xsl:for-each>
         <xsl:for-each
                 select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date">
-          <dc:modified>
+          <dct:modified>
             <xsl:value-of select="gco:DateTime"/>
-          </dc:modified>
+          </dct:modified>
         </xsl:for-each>
         <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString">
           <dct:abstract>
@@ -74,6 +74,13 @@
                     select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString"/>
           </dct:abstract>
         </xsl:if>
+        <!-- TODO: investigate whether or not there can be multiple polygons for a CMR result -->
+        <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList">
+          <dct:spatial>gml:Polygon gml:posList
+            <xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList"/>
+          </dct:spatial>
+        </xsl:if>
+        <!-- TODO: investigate whether or not there can be multiple bounding boxes for a CMR result entry -->
         <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal">
           <ows:WGS84BoundingBox>
             <ows:LowerCorner>

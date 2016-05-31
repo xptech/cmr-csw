@@ -163,25 +163,25 @@ RSpec.describe "various GetRecords POST requests based on the ScienceKeywords qu
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'dc' => 'http://purl.org/dc/elements/1.1/'
       )[0].text).to eq('EARTH SCIENCE>OCEANS>OCEAN TEMPERATURE>WATER TEMPERATURE>NONE>NONE>NONE')
-      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dc:modified',
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dct:modified',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                    'dc' => 'http://purl.org/dc/elements/1.1/'
+                                    'dct' => 'http://purl.org/dc/terms/'
       )[0].text).to eq('2015-02-18T00:00:00.000Z')
       expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dc:title',
                                'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                'dc' => 'http://purl.org/dc/elements/1.1/'
       )[0].text).to include('GHRSST Level 2P Central Pacific Regional')
-      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dct:source',
-                               'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                               'dct' => 'http://purl.org/dc/terms'
-      )[0].text).to eq('GHRSST')
-      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dc:uri',
+      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dc:source',
                                'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                'dc' => 'http://purl.org/dc/elements/1.1/'
-      )[0].text).to include('http://data.nodc.noaa.gov/thredds/catalog/ghrsst/L2P/GOES15/OSPO/')
-      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dct:language',
+      )[0].text).to eq('GHRSST')
+      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dct:references',
                                'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                               'dct' => 'http://purl.org/dc/terms'
+                               'dct' => 'http://purl.org/dc/terms/'
+      )[0].text).to include('http://data.nodc.noaa.gov/thredds/catalog/ghrsst/L2P/GOES15/OSPO/')
+      expect(records_xml.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dc:language',
+                               'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
+                               'dc' => 'http://purl.org/dc/elements/1.1/'
       )[0].text).to eq('')
     end
   end

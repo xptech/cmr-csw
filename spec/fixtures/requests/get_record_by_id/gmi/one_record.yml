@@ -131,6 +131,6 @@ http_interactions:
         id=\"de1b4a775-a30c-4f19-a82f-8c0a4364870b\"><gmi:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>GOES-15</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>\nGeostationary
         Operational Environmental Satellite 15\n</gco:CharacterString></gmd:description></gmd:MD_Identifier></gmi:identifier><gmi:description><gco:CharacterString>Not
         Specified</gco:CharacterString></gmi:description><gmi:instrument xlink:href=\"#d991c8222-2030-48f0-b781-c37d1ef1cb3a\"></gmi:instrument></eos:EOS_Platform></gmi:platform></gmi:MI_AcquisitionInformation></gmi:acquisitionInformation></gmi:MI_Metadata></result></results>"
-    http_version: 
+    http_version:
   recorded_at: Tue, 12 Apr 2016 15:37:15 GMT
 recorded_with: VCR 3.0.1
