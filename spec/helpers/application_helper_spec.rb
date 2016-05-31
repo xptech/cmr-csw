@@ -26,9 +26,9 @@ RSpec.describe ApplicationHelper do
       expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:relation', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(3)
       expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:relation', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('COLLOTHER-237')
 
-      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(2)
-      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dc:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').first.text).to eq('1999-12-31T19:00:00-05:00')
-      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms').text).to eq('An abstract')
+      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').size).to eq(2)
+      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:modified', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').first.text).to eq('1999-12-31T19:00:00-05:00')
+      expect(output_document.root.xpath('/csw:GetRecordByIdResponse/csw:SummaryRecord/dct:abstract', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dct' => 'http://purl.org/dc/terms/').text).to eq('An abstract')
     end
 
     it 'is possible to translate a CMR ISO_MENDS record into a CSW summary record without optional items' do
