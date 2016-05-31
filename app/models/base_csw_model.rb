@@ -30,14 +30,16 @@ class BaseCswModel
   end
 
   def add_cwic_parameter(params)
-    params[:include_tags] = 'org.ceos.wgiss.cwic.granules.prod'
+    params[:include_tags] = Rails.configuration.cwic_tag
     params
   end
 
   def self.add_cwic_keywords(document)
     # For each result with a CWIC tag. If it exists insert a gmd:keyword as follows,
+    puts "looking for #{Rails.configuration.cwic_tag} tag"
     document.xpath('/results/result/tags/tag/tagKey').each do |tag|
-      if tag.xpath("text()='org.ceos.wgiss.cwic.granules.prod'") == true
+      puts "Found tag key #{tag.content}"
+      if tag.xpath("text()='#{Rails.configuration.cwic_tag}'") == true
         result = tag.xpath('../../..')
         keywords = result.xpath('gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
         keyword = Nokogiri::XML::Node.new 'gmd:keyword', document

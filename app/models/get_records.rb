@@ -115,7 +115,7 @@ class GetRecords < BaseCswModel
     end
 
     document = Nokogiri::XML(response)
-    #document = add_cwic_keywords document
+    document = BaseCswModel.add_cwic_keywords document
     # This model is an array of collections in the iso19115 format. It's up to the view to figure out how to render it
     # Each gmi:MI_Metadata element is a collection
     model = OpenStruct.new
