@@ -1,9 +1,9 @@
 require "spec_helper"
 
-RSpec.describe "various GetRecords requests to verify spatial coverages in the CSW results output", :type => :request do
+RSpec.describe "various GetRecords requests to verify POINT spatial coverages in the CSW results output", :type => :request do
 
-  it 'correctly renders CSW FULL RESULTS for a collection with Polygon Coverage in response to a POST request' do
-    VCR.use_cassette 'requests/get_records/csw/polygon_coverage', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders CSW FULL RESULTS for a collection with Point Coverage in response to a POST request' do
+    VCR.use_cassette 'requests/get_records/csw/point_coverage', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
@@ -17,7 +17,7 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                 <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>AIRSAR_TOP_DEM</ogc:Literal>
+                        <ogc:Literal>SPURS1_MOORING_WHOI</ogc:Literal>
                 </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
@@ -42,7 +42,10 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
       expect(search_results_node_set[0]['nextRecord']).to eq('0')
       expect(search_results_node_set[0]['elementSet']).to eq('full')
       expect(search_results_node_set[0]['recordSchema']).to eq('http://www.opengis.net/cat/csw/2.0.2')
-      # The csw results should validate agains the csw.xsd schema
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:Record/dct:spatial',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
+                                    'dct' => 'http://purl.org/dc/terms/').first.text).to eq("gml:Point gml:pos\n        24.58111572265625 -38.0")
+      # The csw results should validate against the csw.xsd schema
       # All schemas are local under the directory below
       xsd = Nokogiri::XML::Schema(File.open('spec/fixtures/requests/get_capabilities/csw.xsd'))
       error_message = ''
@@ -53,8 +56,8 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
     end
   end
 
-  it 'correctly renders CSW SUMMARY RESULTS for a collection with Polygon Coverage in response to a POST request' do
-    VCR.use_cassette 'requests/get_records/csw/polygon_coverage', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders CSW SUMMARY RESULTS for a collection with Point Coverage in response to a POST request' do
+    VCR.use_cassette 'requests/get_records/csw/point_coverage', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
@@ -68,7 +71,7 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                 <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>AIRSAR_TOP_DEM</ogc:Literal>
+                        <ogc:Literal>SPURS1_MOORING_WHOI</ogc:Literal>
                 </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
@@ -93,7 +96,10 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
       expect(search_results_node_set[0]['nextRecord']).to eq('0')
       expect(search_results_node_set[0]['elementSet']).to eq('summary')
       expect(search_results_node_set[0]['recordSchema']).to eq('http://www.opengis.net/cat/csw/2.0.2')
-      # The csw results should validate agains the csw.xsd schema
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:SummaryRecord/dct:spatial',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
+                                    'dct' => 'http://purl.org/dc/terms/').first.text).to eq("gml:Point gml:pos\n        24.58111572265625 -38.0")
+      # The csw results should validate against the csw.xsd schema
       # All schemas are local under the directory below
       xsd = Nokogiri::XML::Schema(File.open('spec/fixtures/requests/get_capabilities/csw.xsd'))
       error_message = ''
@@ -104,8 +110,8 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
     end
   end
 
-  it 'correctly renders CSW BRIEF RESULTS for a collection with Polygon Coverage in response to a POST request' do
-    VCR.use_cassette 'requests/get_records/csw/polygon_coverage', :decode_compressed_response => true, :record => :once do
+  it 'correctly renders CSW BRIEF RESULTS for a collection with Point Coverage in response to a POST request' do
+    VCR.use_cassette 'requests/get_records/csw/point_coverage', :decode_compressed_response => true, :record => :once do
       get_records_request_xml = <<-eos
 <csw:GetRecords maxRecords="10" outputFormat="application/xml"
     outputSchema="http://www.opengis.net/cat/csw/2.0.2" resultType="results" service="CSW"
@@ -119,7 +125,7 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
             <ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
                 <ogc:PropertyIsLike escapeChar="\\" singleChar="?" wildCard="*">
                         <ogc:PropertyName>AnyText</ogc:PropertyName>
-                        <ogc:Literal>AIRSAR_TOP_DEM</ogc:Literal>
+                        <ogc:Literal>SPURS1_MOORING_WHOI</ogc:Literal>
                 </ogc:PropertyIsLike>
             </ogc:Filter>
         </csw:Constraint>
@@ -144,6 +150,10 @@ RSpec.describe "various GetRecords requests to verify spatial coverages in the C
       expect(search_results_node_set[0]['nextRecord']).to eq('0')
       expect(search_results_node_set[0]['elementSet']).to eq('brief')
       expect(search_results_node_set[0]['recordSchema']).to eq('http://www.opengis.net/cat/csw/2.0.2')
+      # NO SPATIAL COVERAGE IN BRIEF CSW
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dct:spatial',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
+                                    'dct' => 'http://purl.org/dc/terms/').first).to eq(nil)
       # The csw results should validate agains the csw.xsd schema
       # All schemas are local under the directory below
       xsd = Nokogiri::XML::Schema(File.open('spec/fixtures/requests/get_capabilities/csw.xsd'))
