@@ -17,10 +17,9 @@ module ApplicationHelper
   end
 
   def translate(document, stylesheet, parameters_array=nil)
-    template = Nokogiri::XSLT(File.read(stylesheet))
-
+    # must use File.open instead of File.read so that xlst:include and xslt:import can be resolved
+    template = Nokogiri::XSLT(File.open(stylesheet,'rt'))
     transformed_document = template.transform(document,  Nokogiri::XSLT.quote_params(parameters_array))
-
     transformed_document.to_xml
   end
 end

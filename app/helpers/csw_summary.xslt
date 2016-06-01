@@ -2,7 +2,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
-
+  <xsl:include href="csw_common.xslt" />
   <xsl:template match="/">
     <xsl:element name="{$result_root_element}">
       <xsl:if test="$result_root_element = 'csw:GetRecordsResponse'">
@@ -74,31 +74,21 @@
                     select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString"/>
           </dct:abstract>
         </xsl:if>
-        <!-- TODO: investigate whether or not there can be multiple polygons for a CMR result -->
-        <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList">
-          <dct:spatial>gml:Polygon gml:posList
-            <xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:Polygon/gml:exterior/gml:LinearRing/gml:posList"/>
-          </dct:spatial>
-        </xsl:if>
-        <!-- TODO: investigate whether or not there can be multiple bounding boxes for a CMR result entry -->
-        <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal">
-          <ows:WGS84BoundingBox>
-            <ows:LowerCorner>
-              <xsl:value-of
-                      select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal"/>
-              <xsl:text> </xsl:text>
-              <xsl:value-of
-                      select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal"/>
-            </ows:LowerCorner>
-            <ows:UpperCorner>
-              <xsl:value-of
-                      select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal"/>
-              <xsl:text> </xsl:text>
-              <xsl:value-of
-                      select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal"/>
-            </ows:UpperCorner>
-          </ows:WGS84BoundingBox>
-        </xsl:if>
+        <xsl:call-template name="process_polygon">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="process_point">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="process_bbox">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
       </csw:SummaryRecord>
     </xsl:for-each>
   </xsl:template>

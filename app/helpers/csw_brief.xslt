@@ -2,7 +2,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
-
+  <xsl:include href="csw_common.xslt" />
   <xsl:template match="/">
     <xsl:element name="{$result_root_element}">
       <xsl:if test="$result_root_element = 'csw:GetRecordsResponse'">
