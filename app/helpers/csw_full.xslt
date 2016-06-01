@@ -115,6 +115,17 @@
             <xsl:value-of select="."/>
           </xsl:with-param>
         </xsl:call-template>
+        <xsl:call-template name="process_temporal_point">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
+        <xsl:call-template name="process_temporal_range">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
+        <!-- BBOX must be after the dct namespace -->
         <xsl:call-template name="process_bbox">
           <xsl:with-param name="current_result">
             <xsl:value-of select="."/>

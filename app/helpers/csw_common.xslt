@@ -23,6 +23,11 @@
     </xsl:if>
   </xsl:template>
 
+  <!-- TODO: investigate how a line is handled in CMR ISO responses -->
+  <xsl:template name="process_line">
+    <xsl:param name="current_result"/>
+  </xsl:template>
+
   <!-- TODO: investigate whether or not there can be multiple points for a CMR result -->
   <xsl:template name="process_point">
     <xsl:param name="current_result"/>
@@ -53,6 +58,44 @@
                   select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal"/>
         </ows:UpperCorner>
       </ows:WGS84BoundingBox>
+    </xsl:if>
+  </xsl:template>
+
+  <!-- ISO 8601 dates and date ranges are used to represent the temporal coverage inside a CSW dct:temporal element -->
+  <!-- Only CSW FULL / csw:Record responses contain temporal coverage -->
+  <xsl:template name="process_temporal_range">
+    <xsl:param name="current_result"/>
+    <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod">
+      <xsl:variable name="begin" select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition"/>
+      <xsl:variable name="begin_indeterminate" select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition/@indeterminatePosition"/>
+      <xsl:variable name="end" select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition"/>
+      <xsl:variable name="end_indeterminate" select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition/@indeterminatePosition"/>
+      <dct:temporal>
+        <xsl:choose>
+          <!-- We have a complete range specified -->
+          <xsl:when test="$begin and $begin != '' and $end and $end != ''">
+            <xsl:value-of select="concat($begin, '/', $end)"/>
+          </xsl:when>
+          <xsl:when test="$begin and $begin != '' and $end_indeterminate = 'now'">
+            <xsl:value-of select="concat($begin, '/')"/>
+          </xsl:when>
+          <xsl:when test="$end and $end != '' and $begin_indeterminate = 'before'">
+            <xsl:value-of select="concat('/', $end)"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>Functionality to process the current entry temporal coverage from the CMR ISO 19115 response by CMR CSW does not exist.</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </dct:temporal>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="process_temporal_point">
+    <xsl:param name="current_result"/>
+    <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimeInstant/gml:timePosition">
+      <dct:temporal>
+        <xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimeInstant/gml:timePosition"/>
+      </dct:temporal>
     </xsl:if>
   </xsl:template>
 
