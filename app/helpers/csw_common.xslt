@@ -10,8 +10,8 @@
                 xmlns:gco="http://www.isotc211.org/2005/gco"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <xsl:output method="xml" indent="yes"/>
-  <!-- Nokogiri only supports xslt 1.0 where functions are not a native construct -->
-  <!-- functionality in this stylesheet is used across the csw_brief.xslt, csw_summary.xslt and csw_full.xslt -->
+  <!-- Nokogiri only supports xslt 1.0 where functions are not a native construct, must use templates -->
+  <!-- functionality in this stylesheet can be used across the csw_brief.xslt, csw_summary.xslt and csw_full.xslt -->
 
   <!-- TODO: investigate whether or not there can be multiple polygons for a CMR result -->
   <xsl:template name="process_polygon">

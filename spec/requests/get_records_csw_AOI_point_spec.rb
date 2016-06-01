@@ -154,7 +154,7 @@ RSpec.describe "various GetRecords requests to verify POINT spatial coverages in
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/csw:BriefRecord/dct:spatial',
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                     'dct' => 'http://purl.org/dc/terms/').first).to eq(nil)
-      # The csw results should validate agains the csw.xsd schema
+      # The csw results should validate against the csw.xsd schema
       # All schemas are local under the directory below
       xsd = Nokogiri::XML::Schema(File.open('spec/fixtures/requests/get_capabilities/csw.xsd'))
       error_message = ''
