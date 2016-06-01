@@ -36,7 +36,6 @@ class BaseCswModel
 
   def self.add_cwic_keywords(document)
     # For each result with a CWIC tag. If it exists insert a gmd:keyword as follows,
-    puts "looking for #{Rails.configuration.cwic_tag} tag"
     document.xpath('/results/result/tags/tag/tagKey').each do |tag|
       puts "Found tag key #{tag.content}"
       if tag.xpath("text()='#{Rails.configuration.cwic_tag}'") == true
