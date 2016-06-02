@@ -367,4 +367,168 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
       end
     end
   end
+
+  describe 'GET GetRecordById ISO full with CWIC' do
+    it 'correctly renders single ISO record as full with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The full record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById ISO full without CWIC' do
+    it 'correctly renders single ISO record as full without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The full record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="CWIC > CEOS WGISS Integrated Catalog"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+      end
+    end
+  end
+  describe 'GET GetRecordById ISO summary with CWIC' do
+    it 'correctly renders single ISO record as summary with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'summary'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The summary record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById ISO summary without CWIC' do
+    it 'correctly renders single ISO record as summary without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'summary'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The summary record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="CWIC > CEOS WGISS Integrated Catalog"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+      end
+    end
+  end
+  describe 'GET GetRecordById ISO brief with CWIC' do
+    it 'correctly renders single ISO record as brief with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The summary record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById ISO brief without CWIC' do
+    it 'correctly renders single ISO record as brief without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.isotc211.org/2005/gmd', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
+        # The summary record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="CWIC > CEOS WGISS Integrated Catalog"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+      end
+    end
+  end
+  describe 'GET GetRecordById CSW full with CWIC' do
+    it 'correctly renders single CSW record as full with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        # The full record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById CSW full without CWIC' do
+    it 'correctly renders single CSW record as full without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'full'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        # The full record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+      end
+    end
+  end
+  describe 'GET GetRecordById CSW summary with CWIC' do
+    it 'correctly renders single CSW record as summary with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'summary'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById CSW summary without CWIC' do
+    it 'correctly renders single CSW record as summary without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'summary'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+      end
+    end
+  end
+  describe 'GET GetRecordById CSW brief with CWIC' do
+    it 'correctly renders single CSW record as brief with CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/cwic_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1000000247-DEMO_PROV', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        # The summary record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+      end
+    end
+  end
+
+  describe 'GET GetRecordById CSW brief without CWIC' do
+    it 'correctly renders single CSW record as brief without CWIC' do
+      VCR.use_cassette 'requests/get_record_by_id/gmi/one_record', :decode_compressed_response => true, :record => :once do
+        get '/collections', :service => 'CSW', :request => 'GetRecordById', :version => '2.0.2', :id => 'C1224520098-NOAA_NCEI', :outputSchema => 'http://www.opengis.net/cat/csw/2.0.2', :ElementSetName => 'brief'
+        expect(response).to have_http_status(:success)
+        expect(response).to render_template('get_record_by_id/index.xml.erb')
+        records_xml = Nokogiri::XML(response.body)
+        expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
+        # The summary record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
+        expect(records_xml.root.xpath("//dc:subject[text()='CWIC > CEOS WGISS Integrated Catalog']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+      end
+    end
+  end
 end
