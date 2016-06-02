@@ -40,12 +40,12 @@
           <xsl:value-of select="gmi:MI_Metadata/gmd:fileIdentifier/gco:CharacterString"/>
         </dc:title>
         <dc:type>dataset</dc:type>
-        <xsl:for-each select="//gmd:keyword">
+        <xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword">
           <dc:subject>
             <xsl:value-of select="gco:CharacterString"/>
           </dc:subject>
         </xsl:for-each>
-        <xsl:for-each select="//gmd:topicCategory">
+        <xsl:for-each select="*/gmd:topicCategory">
           <dc:subject>
             <xsl:value-of select="gmd:MD_TopicCategoryCode"/>
           </dc:subject>
@@ -57,7 +57,7 @@
           </dc:format>
         </xsl:if>
         <xsl:for-each
-                select="//gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:title">
+                select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:title">
           <dc:relation>
             <xsl:value-of select="gco:CharacterString"/>
           </dc:relation>
