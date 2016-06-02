@@ -33,6 +33,7 @@ module Csw
     # config.active_record.raise_in_transactional_callbacks = true
 
     config.relative_url_root = '/csw'
+    config.assets.prefix = 'assets'
 
     def self.load_version
       version_file = "#{config.root}/version.txt"
