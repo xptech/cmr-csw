@@ -37,14 +37,24 @@ class BaseCswModel
   def self.add_cwic_keywords(document)
     # For each result with a CWIC tag. If it exists insert a gmd:keyword as follows,
     document.xpath('/results/result/tags/tag/tagKey').each do |tag|
-      if tag.xpath("text()='#{Rails.configuration.cwic_tag}'") == true
+      if tag.content.strip == Rails.configuration.cwic_tag
         result = tag.xpath('../../..')
         keywords = result.xpath('gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
         keyword = Nokogiri::XML::Node.new 'gmd:keyword', document
         text = Nokogiri::XML::Node.new 'gco:CharacterString', document
         text.content = 'CWIC > CEOS WGISS Integrated Catalog'
         keyword.add_child text
-        keywords.first.prepend_child keyword
+        if keywords.empty?
+          # Add a descriptive keywords node at gmd:MD_DataIdentification
+          di = result.xpath('gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+          dks = Nokogiri::XML::Node.new 'gmd:descriptiveKeywords', document
+          keywords = Nokogiri::XML::Node.new 'gmd:MD_Keywords', document
+          di.first.prepend_child dks
+          dks.add_child keywords
+          keywords.add_child keyword
+        else
+          keywords.first.prepend_child keyword
+        end
       end
     end
     document

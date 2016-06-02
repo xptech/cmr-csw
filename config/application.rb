@@ -48,7 +48,9 @@ module Csw
     config.version = load_version
     # additional config parameters for ALL environments here
     config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
+    #config.cmr_search_endpoint = 'https://cmr.sit.earthdata.nasa.gov/search'
     config.client_id = 'cmr_csw'
     config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
+    #config.cwic_tag = 'cmr.demo.importance'
   end
 end
