@@ -50,6 +50,6 @@ module Csw
     # additional config parameters for ALL environments here
     config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
     config.client_id = 'cmr_csw'
-
+    config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
   end
 end

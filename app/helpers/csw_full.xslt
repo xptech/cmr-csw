@@ -45,7 +45,7 @@
           </dc:creator>
         </xsl:if>
         <dc:type>dataset</dc:type>
-        <xsl:for-each select="//gmd:keyword">
+        <xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword">
           <dc:subject>
             <xsl:value-of select="gco:CharacterString"/>
           </dc:subject>
@@ -62,7 +62,7 @@
                     select="gmi:MI_Metadata/gmd:language/gco:CharacterString"/>
           </dc:language>
         </xsl:if>
-        <xsl:for-each select="//gmd:topicCategory">
+        <xsl:for-each select="*/gmd:topicCategory">
           <dc:subject>
             <xsl:value-of select="gmd:MD_TopicCategoryCode"/>
           </dc:subject>
@@ -74,7 +74,7 @@
           </dc:format>
         </xsl:if>
         <xsl:for-each
-                select="//gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:title">
+                select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:aggregationInfo/gmd:MD_AggregateInformation/gmd:aggregateDataSetName/gmd:CI_Citation/gmd:title">
           <dc:relation>
             <xsl:value-of select="gco:CharacterString"/>
           </dc:relation>
@@ -92,14 +92,14 @@
           </dct:abstract>
         </xsl:if>
         <xsl:for-each
-                select="//gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
+                select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints">
           <dct:rights>
             <xsl:value-of
                     select="gmd:MD_RestrictionCode"/>
           </dct:rights>
         </xsl:for-each>
         <xsl:for-each
-                select="//gmd:CI_OnlineResource/gmd:linkage">
+                select="gmi:MI_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributor/gmd:MD_Distributor/gmd:distributorTransferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage">
           <dct:references>
             <xsl:value-of
                     select="gmd:URL"/>

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?instrument=*MODIS*&options%5Binstrument%5D%5Bpattern%5D=true
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod&instrument=*MODIS*&options%5Binstrument%5D%5Bpattern%5D=true
     body:
       encoding: US-ASCII
       string: ''
