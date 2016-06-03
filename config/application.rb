@@ -51,5 +51,7 @@ module Csw
     config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
     config.client_id = 'cmr_csw'
     config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
+
+    config.concept_id = 'C14758250-LPDAAC_ECS'
   end
 end

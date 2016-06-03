@@ -484,7 +484,7 @@
   <h3>Examples</h3>
   <ul>
     <li>
-      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C1224520098-NOAA_NCEI">GET <%= root_url.chomp '/' %>?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C1224520098-NOAA_NCEI</a>
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=<%= Rails.configuration.concept_id %>">GET <%= root_url.chomp '/' %>/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=<%= Rails.configuration.concept_id %></a>
     </li>
     <li>POST <%= root_url.chomp '/' %>/collections with XML request body:
 <pre><code>&lt;csw:GetRecordById
@@ -493,7 +493,7 @@ version=&quot;2.0.2&quot;
 outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot;
 xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
 xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
-    &lt;csw:Id&gt;C1224520098-NOAA_NCEI&lt;/csw:Id&gt;
+    &lt;csw:Id&gt;<%= Rails.configuration.concept_id %>&lt;/csw:Id&gt;
     &lt;ElementSetName typeNames=&quot;csw:Record&quot;&gt;full&lt;/ElementSetName&gt;
 &lt;/csw:GetRecordById&gt;</code></pre>
     </li>
