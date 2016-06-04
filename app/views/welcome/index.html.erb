@@ -285,7 +285,7 @@
   <ul>
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a TOI collection modification
       temporal extent <span class="emphasis">Modified</span> constraint.  The <span>ogc:Literal</span> value for the
-      <span class="emphasis">Modified</span> emphasis must be in the ISO 8601 date format
+      <span class="emphasis">Modified</span> must be in the ISO 8601 date format
       <span class="emphasis-format">YYYY-MM-dd</span>.
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
@@ -381,16 +381,21 @@
       <span class="emphasis">Platform</span> constraint.  The valid Platform values are specified in
       <a target="_blank" href="http://gcmd.nasa.gov/learn/keyword_list.html">NASA's GCMD Science Keywords and Associated Directory Keywords</a>.
       They can also be retrieved via the <a href="#get-domain">GetDomain</a> call with the <span class="emphasis">Platform</span> PropertyName.
-<pre><code>&lt;csw:GetRecords xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; resultType=&quot;results&quot;
-    xmlns:gmd=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot; version=&quot;2.0.2&quot;&gt;
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
     &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
         &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
-        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot; xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;&gt;
             &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
-                &lt;ogc:PropertyIsLike&gt;
+                &lt;ogc:PropertyIsLike wildCard=&quot;*&quot;&gt;
                     &lt;ogc:PropertyName&gt;Platform&lt;/ogc:PropertyName&gt;
                     &lt;ogc:Literal&gt;AQUA&lt;/ogc:Literal&gt;
                 &lt;/ogc:PropertyIsLike&gt;
+            &lt;/ogc:Filter&gt;
         &lt;/csw:Constraint&gt;
     &lt;/csw:Query&gt;
 &lt;/csw:GetRecords&gt;</code></pre>
@@ -400,7 +405,7 @@
     <li>POST <%= root_url.chomp '/' %>/collections for CMR collections search with a combined constraint
       (AOI/TOI/Title/Platform/ScienceKeywords) and defaulted resultType (hits):
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
-    outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmi&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
     xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
     xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;

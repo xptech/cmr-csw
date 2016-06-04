@@ -154,5 +154,6 @@ _Calin Duma_
 * [OWS Schemas (used by CSW schemas)](http://schemas.opengis.net/ows/)
 * [OGC Filter constraint language schemas] (http://schemas.opengis.net/filter/)
 * [Good high level CSW explanation and examples] (http://wiki.osgeo.org/wiki/CSW)
-* [A Common Query Language (CQL) introduction] (http://zing.z3950.org/cql/intro.html)
+* [A Common (aka Contextual) Query Language (CQL) introduction] (http://zing.z3950.org/cql/intro.html)
+* [The Contextual (aka Common) Query Language specification] (http://docs.oasis-open.org/search-ws/searchRetrieve/v1.0/os/part5-cql/searchRetrieve-v1.0-os-part5-cql.html)
 
