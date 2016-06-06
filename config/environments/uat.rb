@@ -80,4 +80,7 @@ Rails.application.configure do
   # config.active_record.dump_schema_after_migration = false
 
   config.cmr_search_endpoint = 'https://cmr.uat.earthdata.nasa.gov/search'
+
+
+  config.concept_id = 'C1052-LPDAAC_TS1'
 end
