@@ -23,9 +23,14 @@
     </xsl:if>
   </xsl:template>
 
-  <!-- TODO: investigate how a line is handled in CMR ISO responses -->
+  <!-- TODO: investigate whether or not there can be multiple lines for a CMR result  -->
   <xsl:template name="process_line">
     <xsl:param name="current_result"/>
+    <xsl:if test="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:LineString/gml:posList">
+      <dct:spatial>gml:LineString gml:posList
+        <xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_BoundingPolygon/gmd:polygon/gml:LineString/gml:posList"/>
+      </dct:spatial>
+    </xsl:if>
   </xsl:template>
 
   <!-- TODO: investigate whether or not there can be multiple points for a CMR result -->

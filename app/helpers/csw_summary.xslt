@@ -79,6 +79,11 @@
             <xsl:value-of select="."/>
           </xsl:with-param>
         </xsl:call-template>
+        <xsl:call-template name="process_line">
+          <xsl:with-param name="current_result">
+            <xsl:value-of select="."/>
+          </xsl:with-param>
+        </xsl:call-template>
         <xsl:call-template name="process_point">
           <xsl:with-param name="current_result">
             <xsl:value-of select="."/>
