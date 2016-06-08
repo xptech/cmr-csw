@@ -2,7 +2,7 @@ require 'routes_helper'
 
 Rails.application.routes.draw do
 
-  # user Rails 4 Advanced Constraints specification with lambda to set up the CSW routes
+  # use Rails 4 Advanced Constraints specification with lambda to set up the CSW routes
   # see lib/routes_helper.rb for the RequestRouter
   get '/collections', to: 'describe_record#index', constraints: lambda { |request| RequestRouter.is_describe_record_get(request) }
   post '/collections', to: 'describe_record#index', constraints: lambda { |request| RequestRouter.is_describe_record_post(request) }
