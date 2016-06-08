@@ -577,7 +577,7 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
   <p>
     Allows clients to examine the anatomy of output schemas supported by this CSW by responding with the corresponding
     XML Schema document.  The CMR CSW implementation supports the root element of the supported output schemas and does
-    not allow separate retrieval of individual schema element.  As a consequence, one or more requested schemas will be
+    not allow separate retrieval of individual schema elements.  As a consequence, one or more requested schemas will be
     returned in their entirety.
   </p>
   <h3>Supported methods</h3>
@@ -617,10 +617,10 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
     </li>
     </br>
     <li>GET Retrieve ALL supported output schemas <span class="emphasis">http://www.opengis.net/cat/csw/2.0.2</span> through
-      their respective namespaces element:
+      their respective namespaces elements:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=DescribeRecord&service=CSW&version=2.0.2&NAMESPACE=xmlns(csw=http://www.opengis.net/cat/csw/2.0.2),xmlns(gmi=http://www.isotc211.org/2005/gmi,xmlns(gmd=http://www.isotc211.org/2005/gmd)">GET <%= root_url.chomp '/' %>?request=DescribeRecord&service=CSW&version=2.0.2&NAMESPACE=xmlns(csw=http://www.opengis.net/cat/csw/2.0.2),xmlns(gmi=http://www.isotc211.org/2005/gmi,xmlns(gmd=http://www.isotc211.org/2005/gmd)</a>
     </li>
-    <li>Retrieve the same schemas via their respective TypeName <span class="emphasis">csw:Record gmi:MI_Metadata gmd:MD_Metadata</span> a POST to <%= root_url.chomp '/' %>/collections with the request body:
+    <li>Retrieve the same schemas via their respective TypeName <span class="emphasis">csw:Record gmi:MI_Metadata gmd:MD_Metadata</span> through a POST to <%= root_url.chomp '/' %>/collections with the request body:
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
 &lt;DescribeRecord xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
  xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 csw.xsd&quot;
