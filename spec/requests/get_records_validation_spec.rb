@@ -42,18 +42,7 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
     end
   end
 
-  describe 'INVALID GET and POST requests scenarios' do
-    it 'correctly handles an unsupported GetRecords GET request' do
-      get '/collections', :request => 'GetRecords', :version => '2.0.2'
-      expect(response).to have_http_status(:bad_request)
-      exception_xml = Nokogiri::XML(response.body)
-      expect(exception_xml.root.name).to eq 'ExceptionReport'
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('method')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('InvalidParameterValue')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq('Only the POST method is supported for GetRecords')
-    end
-
+  describe 'INVALID POST requests scenarios' do
     it "correctly handles an invalid (bad 'version' attribute) GetRecords POST request" do
       bad_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>

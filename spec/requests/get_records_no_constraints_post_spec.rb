@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => :request do
 
-  it 'correctly renders default RESULTS FULL ISO MENDS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic / no-constrains POST request' do
     VCR.use_cassette 'requests/get_records/gmi/ten_records', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd
       # TODO - revisit this once CMR supports ISO 19115 gmd
@@ -30,7 +30,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
     end
   end
 
-  it 'correctly renders HITS data in response to a basic / no-constrains POST request' do
+  it 'correctly renders ISO MENDS (gmi) HITS data in response to a basic / no-constrains POST request' do
     VCR.use_cassette 'requests/get_records/gmi/no_constraints_hits', :decode_compressed_response => true, :record => :once do
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>
@@ -65,7 +65,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
     end
   end
 
-  it 'correctly renders default HITS data in response to a basic / no-constrains POST request with NO resultType' do
+  it 'correctly renders default ISO MENDS (gmi) HITS data in response to a basic / no-constrains POST request with NO resultType' do
     VCR.use_cassette 'requests/get_records/gmi/no_constraints_hits', :decode_compressed_response => true, :record => :once do
       no_constraints_get_records_request_xml = <<-eos
 <?xml version="1.0" encoding="UTF-8"?>

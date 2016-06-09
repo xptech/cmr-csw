@@ -3,11 +3,6 @@ require 'spec_helper'
 RSpec.describe GetRecordsController, type: :controller do
 
   describe 'GetRecords GET requests' do
-    it 'returns bad request for the unsupported GetRecords GET request' do
-      get :index, :request => 'GetRecords', :service => 'CSW', :version => '2.0.2'
-      expect(response).to have_http_status(:bad_request)
-    end
-
     it "returns bad request for a GET request with an invalid 'service' parameter" do
       get :index, :request => 'GetRecords', :service => 'BAD', :version => '2.0.2'
       expect(response).to have_http_status(:bad_request)
@@ -15,11 +10,6 @@ RSpec.describe GetRecordsController, type: :controller do
 
     it "returns bad request for a GET request with an invalid 'version' parameter" do
       get :index, :request => 'GetRecords', :service => 'CSW', :version => 'BAD_VERSION'
-      expect(response).to have_http_status(:bad_request)
-    end
-
-    it "returns bad request for a GET request with an invalid 'request' parameter" do
-      get :index, :request => 'GetRecordsBAD', :service => 'CSW', :version => '2.0.2'
       expect(response).to have_http_status(:bad_request)
     end
   end

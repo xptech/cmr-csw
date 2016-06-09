@@ -28,6 +28,8 @@ class OwsException < StandardError
       attribute = 'schemaLanguage'
     elsif attribute == 'namespaces'
       attribute = 'NAMESPACE'
+    elsif attribute == 'query_language'
+      attribute = 'CONSTRAINTLANGUAGE'
     end
     @locator = attribute
   end
