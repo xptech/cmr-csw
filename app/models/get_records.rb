@@ -1,6 +1,5 @@
 class GetRecords < BaseCswModel
   RESULT_TYPES = %w(results hits)
-  HTTP_METHODS = %w(Post)
   RESPONSE_ELEMENTS = %w(brief summary full)
 
   attr_accessor :result_types
@@ -35,59 +34,65 @@ class GetRecords < BaseCswModel
 
     @cmr_query_hash = Hash.new
 
-    if (!@request_body.empty? && @request.post?)
-      begin
-        @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
-      rescue Nokogiri::XML::SyntaxError => e
-        Rails.logger.error("Could not parse the GetRecords request body XML: #{@request_body} ERROR: #{e.message}")
-        raise OwsException.new('NoApplicableCode', "Could not parse the GetRecords request body XML: #{e.message}")
-      end
+    if (@request.get?)
+      @output_schema = params[:outputSchema].blank? ? 'http://www.isotc211.org/2005/gmi' : params[:outputSchema]
+      @output_file_format = params[:outputFormat].blank? ? 'application/xml' : params[:outputFormat]
+      @result_type  = params[:resultType].blank? ? 'hits' : params[:resultType]
+      @response_element =  params[:ElementSetName].blank? ? 'brief' : params[:ElementSetName]
+      @start_position =  params[:startPosition].blank? ? '1' : params[:startPosition]
+      @max_records = params[:maxRecords].blank? ? '10' : params[:maxRecords]
+      @version = params[:version]
+      @service = params[:service]
 
-      output_schema_value = @request_body_xml.root['outputSchema']
-      @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
-      # defaults to 'hits' (per spec)
-      result_type_value = @request_body_xml.root['resultType']
-      @result_type = (result_type_value.blank? || RESULT_TYPES.include?(result_type_value) == false) ? 'hits' : result_type_value
+      constraint = params[:constraint].blank? ? '' : params[:constraint]
+      constraint_language = params[:CONSTRAINTLANGUAGE].blank? ? '' : params[:CONSTRAINTLANGUAGE]
 
-      # defaults to 'brief' (per spec)
-      element_set_name_value = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:ElementSetName',
-                                                          'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
-      @response_element = element_set_name_value.blank? ? 'brief' : element_set_name_value.text
-
-      start_position_value = @request_body_xml.root['startPosition']
-      # defaults to 1 (per spec)
-      @start_position = start_position_value.blank? ? '1' : start_position_value
-
-      max_records_value = @request_body_xml.root['maxRecords']
-      # defaults to 10 (per spec)
-      @max_records = max_records_value.blank? ? '10' : max_records_value
-
-      @output_file_format = @request_body_xml.root['outputFormat'].blank? ? 'application/xml' : @request_body_xml.root['outputFormat']
-      @service = @request_body_xml.root['service']
-      @version = @request_body_xml.root['version']
-
-      # Process the filter
-      @filter = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:Constraint//ogc:Filter',
-                                           'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
-                                           'ogc' => 'http://www.opengis.net/ogc')
-      if @filter != nil
-        Rails.logger.info("Processing filter in GetRecords POST request:  #{@request_body}")
-        filter = OgcFilter.new(@filter, @cmr_query_hash)
-        filter.process_all_queryables
-      else
-        Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
-      end
-
+      filter = CqlFilter.new(constraint,constraint_language,@cmr_query_hash)
+      filter.process_constraint()
     else
-      # The salient point we want to communicate is the GET error so let's initialize the rest
-      @output_schema = 'http://www.isotc211.org/2005/gmi'
-      @response_element = 'brief'
-      @start_position = '1'
-      @max_records = '10'
-      @result_type = 'hits'
-      @output_file_format = 'application/xml'
-      @service = 'CSW'
-      @version = '2.0.2'
+      if (!@request_body.empty? && @request.post?)
+        begin
+          @request_body_xml = Nokogiri::XML(@request_body) { |config| config.strict }
+        rescue Nokogiri::XML::SyntaxError => e
+          Rails.logger.error("Could not parse the GetRecords request body XML: #{@request_body} ERROR: #{e.message}")
+          raise OwsException.new('NoApplicableCode', "Could not parse the GetRecords request body XML: #{e.message}")
+        end
+
+        output_schema_value = @request_body_xml.root['outputSchema']
+        @output_schema = output_schema_value.blank? ? 'http://www.isotc211.org/2005/gmi' : output_schema_value
+        # defaults to 'hits' (per spec)
+        result_type_value = @request_body_xml.root['resultType']
+        @result_type = (result_type_value.blank? || RESULT_TYPES.include?(result_type_value) == false) ? 'hits' : result_type_value
+
+        # defaults to 'brief' (per spec)
+        element_set_name_value = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:ElementSetName',
+                                                            'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+        @response_element = element_set_name_value.blank? ? 'brief' : element_set_name_value.text
+
+        start_position_value = @request_body_xml.root['startPosition']
+        # defaults to 1 (per spec)
+        @start_position = start_position_value.blank? ? '1' : start_position_value
+
+        max_records_value = @request_body_xml.root['maxRecords']
+        # defaults to 10 (per spec)
+        @max_records = max_records_value.blank? ? '10' : max_records_value
+
+        @output_file_format = @request_body_xml.root['outputFormat'].blank? ? 'application/xml' : @request_body_xml.root['outputFormat']
+        @service = @request_body_xml.root['service']
+        @version = @request_body_xml.root['version']
+
+        # Process the filter
+        @filter = @request_body_xml.at_xpath('//csw:GetRecords//csw:Query//csw:Constraint//ogc:Filter',
+                                             'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
+                                             'ogc' => 'http://www.opengis.net/ogc')
+        if @filter != nil
+          Rails.logger.info("Processing filter in GetRecords POST request:  #{@request_body}")
+          filter = OgcFilter.new(@filter, @cmr_query_hash)
+          filter.process_all_queryables
+        else
+          Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
+        end
+      end
     end
   end
 
@@ -143,8 +148,8 @@ class GetRecords < BaseCswModel
   private
 
   def validate_method
-    if (@request_body.empty? || !@request.post?)
-      errors.add(:method, 'Only the POST method is supported for GetRecords')
+    if (!@request.post? && !@request.get?)
+      errors.add(:method, 'Only the HTTP POST and GET methods are supported for GetRecords')
     end
   end
 

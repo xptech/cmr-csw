@@ -111,7 +111,11 @@
   </ul>
   <h3>Examples</h3>
   <ul>
-
+    <li><a href="#get-records-post">POST requests using the OGC Filter query language</a></li>
+    <li><a href="#get-records-get">GET requests using the Constraint (a.k.a Common) Query Language (CQL)</a></li>
+  </ul>
+  <h4><a name="get-records-post"/>POST Requests using the OGC Filter query language</h4>
+  <ul>
     <li>POST to <%= root_url.chomp '/' %>/collections for CMR collections (datasets) search with NO constraints:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
@@ -447,6 +451,18 @@
         &lt;/csw:Constraint&gt;
     &lt;/csw:Query&gt;
 &lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <h4><a name="get-records-get"/>GET Records using the CQL query language</h4>
+  <ul>
+    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and no constraints:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results</a>
+    </li>
+    <li>Search results with the <span class="emphasis">ISO 19115 GMD</span> output (http://www.isotc211.org/2005/gmd), full result set and no constraints:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd</a>
+    </li>
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and no constraints:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2</a>
     </li>
   </ul>
 </section>

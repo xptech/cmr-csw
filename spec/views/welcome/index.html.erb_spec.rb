@@ -47,7 +47,7 @@ describe 'view documentation' do
       expect(page).to have_css("h2:contains('GetRecords')")
       expect(page).to have_css("h3:contains('Supported methods')")
       within('ul.methods') do
-        expect(page).to have_no_content('GET')
+        expect(page).to have_content('GET')
         expect(page).to have_content('POST')
       end
       expect(page).to have_css("h3:contains('Supported element set names')")
