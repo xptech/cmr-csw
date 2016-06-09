@@ -82,7 +82,7 @@ RSpec.describe "various GetRecords GET requests with NO CONSTRAINTS", :type => :
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows').size).to eq(1)
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@locator', 'ows' => 'http://www.opengis.net/ows').text).to eq('CONSTRAINTLANGUAGE')
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/@exceptionCode', 'ows' => 'http://www.opengis.net/ows').text).to eq('MissingParameterValue')
-      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("GetRecords GET request error: the CONSTRAINTLANGUAGE query parameter cannot be blank and must equal 'CQL' when the [constraint=SAMPLE CONSTRAINT HERE] is specified.")
+      expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("GetRecords GET request error: the CONSTRAINTLANGUAGE query parameter cannot be blank and must equal 'CQL_TEXT' when the [constraint=SAMPLE CONSTRAINT HERE] is specified.")
     end
   end
 

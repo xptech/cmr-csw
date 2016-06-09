@@ -2,7 +2,7 @@
 # constraint query parameter.  The XML encoding results in more complex queries and can run into URL length limitations.
 #
 class CqlFilter
-  CONSTRAINT_LAGUAGES = %w(CQL)
+  CONSTRAINT_LAGUAGES = %w(CQL_TEXT)
 
   @constraint
   @constraint_language
@@ -16,7 +16,7 @@ class CqlFilter
     if (!@constraint.empty? && !CONSTRAINT_LAGUAGES.include?(@constraint_language))
       error_message = "GetRecords GET request error: "
       if @constraint_language.empty?
-        error_message = error_message + "the CONSTRAINTLANGUAGE query parameter cannot be blank and must equal 'CQL' when the [constraint=#{@constraint}] is specified."
+        error_message = error_message + "the CONSTRAINTLANGUAGE query parameter cannot be blank and must equal 'CQL_TEXT' when the [constraint=#{@constraint}] is specified."
       else
         error_message = error_message + "the CONSTRAINTLANGUAGE query parameter value '#{@constraint_language}' is not supported. The only supported value is CQL."
       end
