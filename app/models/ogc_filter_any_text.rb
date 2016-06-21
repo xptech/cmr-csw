@@ -6,7 +6,6 @@ class OgcFilterAnyText
   def process(ogc_filter)
     # the keyword CMR param supports a wilcard
     cmr_query_hash = OgcFilterHelper.process_queryable(ogc_filter, @@ISO_QUERYABLE_NAME, @@CMR_ANYTEXT_PARAM, true)
-    Rails.logger.info("OgcFilterAnyText.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 

@@ -48,7 +48,7 @@ class GetRecordById < BaseCswModel
         # RestClient does not support array parameters in a query so we have to inline them in the url parameter. Which sucks...
         response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{cmr_params.to_query}", :verify_ssl => OpenSSL::SSL::VERIFY_NONE, :headers => {:client_id => Rails.configuration.client_id, :accept => 'application/iso19115+xml'}
       end
-      Rails.logger.info "CMR dataset search took : #{time.to_f.round(2)} seconds"
+      Rails.logger.info "CMR collection search took #{(time.to_f * 1000).round(0)} ms"
     rescue RestClient::BadRequest => e
       # An unknown concept id will give a bad request error
       response = e.response if e.response.include?('Concept-id') && e.response.include?('is not valid')
@@ -61,6 +61,11 @@ class GetRecordById < BaseCswModel
     model.output_schema = @output_schema
     model.response_element = @response_element
     model.raw_collections_doc = document
+    if document.at_xpath('/results/hits').nil?
+      model.number_of_records_matched = 0
+    else
+      model.number_of_records_matched = document.at_xpath('/results/hits').text.to_i
+    end
     model
   end
 

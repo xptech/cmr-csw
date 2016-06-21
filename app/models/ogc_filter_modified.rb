@@ -16,7 +16,6 @@ class OgcFilterModified
         cmr_query_hash["#{@@CMR_QUERY_PARAM}"] = modified_query_string
       end
     end
-    Rails.logger.info("OgcFilterModified.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 
