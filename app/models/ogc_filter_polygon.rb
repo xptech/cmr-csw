@@ -24,7 +24,6 @@ class OgcFilterPolygon
         raise OwsException.new('Polygon', error_message)
       end
     end
-    Rails.logger.info("OgcFilterPolygon.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 end

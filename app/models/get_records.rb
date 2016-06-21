@@ -86,11 +86,10 @@ class GetRecords < BaseCswModel
                                              'csw' => 'http://www.opengis.net/cat/csw/2.0.2',
                                              'ogc' => 'http://www.opengis.net/ogc')
         if @filter != nil
-          Rails.logger.info("Processing filter in GetRecords POST request:  #{@request_body}")
           filter = OgcFilter.new(@filter, @cmr_query_hash)
           filter.process_all_queryables
         else
-          Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
+          #Rails.logger.info("No results filtering criteria specified in GetRecords POST request:  #{@request_body}")
         end
       end
     end
@@ -111,7 +110,7 @@ class GetRecords < BaseCswModel
                                                :headers => {:client_id => Rails.configuration.client_id,
                                                             :accept => 'application/iso19115+xml'}
       end
-      Rails.logger.info "CMR dataset search took : #{time.to_f.round(2)} seconds"
+      Rails.logger.info "CMR collection search took #{(time.to_f * 1000).round(0)} ms"
     rescue RestClient::Exception => e
       error_message = "CMR call failure httpStatus: #{e.http_code} message: #{e.message} response: #{e.response}"
       Rails.logger.error(error_message)

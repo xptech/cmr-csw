@@ -24,7 +24,6 @@ class OgcFilterPoint
         raise OwsException.new('Point', error_message)
       end
     end
-    Rails.logger.info("OgcFilterPoint.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 end

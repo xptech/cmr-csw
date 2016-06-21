@@ -23,7 +23,6 @@ class OgcFilterLine
           raise OwsException.new('LineString', error_message)
         end
       end
-      Rails.logger.info("OgcFilterLine.process: #{cmr_query_hash}")
       cmr_query_hash
     end
 end

@@ -30,7 +30,6 @@ class OgcFilterBoundingBox
         end
       end
     end
-    Rails.logger.info("OgcFilterBoundingBox.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 end

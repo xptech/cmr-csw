@@ -27,7 +27,6 @@ class OgcFilterScienceKeywords
     # the science_keywords applied across the entire hierarchy is a special case and the default
     # behavior must be corrected
     correct_science_keywords_query_param(cmr_query_hash)
-    Rails.logger.info("OgcFilterScienceKeywords.process: #{cmr_query_hash}")
     cmr_query_hash
   end
 
