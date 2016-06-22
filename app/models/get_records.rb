@@ -46,9 +46,10 @@ class GetRecords < BaseCswModel
 
       constraint = params[:constraint].blank? ? '' : params[:constraint]
       constraint_language = params[:CONSTRAINTLANGUAGE].blank? ? '' : params[:CONSTRAINTLANGUAGE]
-
-      filter = CqlFilter.new(constraint,constraint_language,@cmr_query_hash)
-      filter.process_constraint()
+      if !constraint.blank?
+        filter = CqlFilter.new(constraint,constraint_language,@cmr_query_hash)
+        filter.process_constraint()
+      end
     else
       if (!@request_body.empty? && @request.post?)
         begin

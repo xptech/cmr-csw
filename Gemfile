@@ -34,6 +34,9 @@ gem 'rgeo'
 
 gem 'georuby'
 
+# CQL parsing and interpreting
+gem 'parslet'
+
 group :development do
   gem 'pry-rails'
 end
