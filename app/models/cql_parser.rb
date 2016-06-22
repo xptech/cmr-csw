@@ -1,5 +1,5 @@
 class CqlParser < Parslet::Parser
-  # example: bbox=-180.00,-90.00, 180.000, 90 and AnyText=MODIS and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008­09­06T23:59:59Z
+  # example string to parse: BoundingBox=-180.00,-90.00, 180.000, 90 and AnyText=MODIS and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008­09­06T23:59:59Z
 
   # one or more spaces
   rule(:space)                  { match('\s').repeat(1) }
@@ -17,7 +17,6 @@ class CqlParser < Parslet::Parser
   rule(:operator?)      { operator.maybe }
 
   rule(:cqlquery)       { ((cqlconstraint_bbox |  cqlconstraint_anytext | cqlconstraint_tbegin | cqlconstraint_tend) >> equals >> value >> operator?).repeat }
-  #rule(:cqlquery)       { cqlconstraint_bbox }
 
   root(:cqlquery)
 

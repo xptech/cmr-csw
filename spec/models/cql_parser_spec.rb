@@ -164,7 +164,8 @@ RSpec.describe CqlParser do
     end
 
     it 'is possible to parse the AnyText,BoundingBox, TempExtent_begin, TempExtent_end queryables and values' do
-      begin # ALL queryables and values
+      begin
+        # ALL queryables and values
         parser = CqlParser.new.cqlquery.parse('AnyText=1234 and BoundingBox=-180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z')
         expect(parser[0][:key].str).to eq 'AnyText'
         expect(parser[0][:value].str).to eq '1234'

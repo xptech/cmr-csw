@@ -1,5 +1,5 @@
 class CqlFilterTemporal < OgcFilterTemporal
-
+  # the temporal begin before end is left to CMR
   def self.process(begin_date, end_date)
     cmr_query_hash = {}
     temporal_query_string = ''

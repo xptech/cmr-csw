@@ -34,7 +34,7 @@ gem 'rgeo'
 
 gem 'georuby'
 
-# CQL parsing and interpreting
+# DSL grammar parsing and interpreting (used for CQL)
 gem 'parslet'
 
 group :development do
