@@ -57,7 +57,6 @@ describe "GetRecords Instrument error cases" do
       expect(response).to render_template('shared/exception_report.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'ExceptionReport'
-      # There should be a SearchStatus with a timestamp
       exception_node_set = records_xml.root.xpath('/ows:ExceptionReport/ows:Exception', 'ows' => 'http://www.opengis.net/ows')
       expect(exception_node_set.size).to eq(1)
       expect(exception_node_set[0]['exceptionCode']).to eq('NoApplicableCode')

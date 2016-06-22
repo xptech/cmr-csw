@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe "various successful GetRecords GET requests with BBOX CONSTRAINTS", :type => :request do
+RSpec.describe "various successful GetRecords GET requests with BoundingBox, TimeExtent_begin, TimeExtent_end and AnyText CONSTRAINTS", :type => :request do
 
   it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic BBOX constraint GET request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_1', :decode_compressed_response => true, :record => :once do
