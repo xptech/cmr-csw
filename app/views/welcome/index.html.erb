@@ -453,16 +453,59 @@
 &lt;/csw:GetRecords&gt;</code></pre>
     </li>
   </ul>
-  <h4><a name="get-records-get"/>GET Records using the CQL query language</h4>
+  <h4><a name="get-records-get"/>GetRecords GET requests using the CQL query language</h4>
+  <p>
+    The CMR CSW implementation of CQL <span class="emphasis">only supports the 'and' logical operator</span> and the following
+    CSW queryables inside the CQL 'constraint' GET request query parameter:
+    <ul>
+      <li><span class="emphasis">AnyText</span> with wildcard * and ? support</li>
+      <li><span class="emphasis">BoundingBox</span> specified as a comma (no spaces) separated string (ex. BoundingBox=lower_left_longitude,lower_left_latitude,upper_right_longitude,upper_right_latitude)</li>
+      <li><span class="emphasis">TempExtent_begin</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_begin=2008-09-06T23:59:59Z)</li>
+      <li><span class="emphasis">TempExtent_end</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_end=2010-09-06T23:59:59Z).  TempExtent_end must be after TempExtent_begin</li>
+    </ul>
+    Additional query parameters to be used with the GetRecords GET request are:
+    <ul>
+      <li><span class="emphasis">resultType</span> with supported values:
+        <% GetRecords::RESULT_TYPES.each do |rtype| %>
+            <%= rtype %>
+        <% end %>
+      </li>
+      <li><span class="emphasis">outputSchema</span> with supported values:
+        <% GetRecords::OUTPUT_SCHEMAS.each do |schema| %>
+            <%= schema %>
+        <% end %>
+      </li>
+      <li><span class="emphasis">ElementSetName</span> with supported values:
+        <% GetRecords::RESPONSE_ELEMENTS.each do |elem| %>
+            <%= elem %>
+        <% end %>
+      </li>
+    </ul>
+    More details about CQL are below:
+    <ul>
+      <li><a target="_blank" href="http://zing.z3950.org/cql/intro.html">A gentle introduction to CQL</a></li>
+      <li><a target="_blank" href="http://docs.oasis-open.org/search-ws/searchRetrieve/v1.0/os/part5-cql/searchRetrieve-v1.0-os-part5-cql.html">The OASIS CQL specification</a></li>
+    </ul>
+  </p>
+  <p>Sample GetRecords GET requests:</p>
   <ul>
-    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and no constraints:
+    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and <span class="emphasis">no constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results</a>
     </li>
-    <li>Search results with the <span class="emphasis">ISO 19115 GMD</span> output (http://www.isotc211.org/2005/gmd), full result set and no constraints:
+    <li>Search results with the <span class="emphasis">ISO 19115 GMD</span> output (http://www.isotc211.org/2005/gmd), full result set and <span class="emphasis">no constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.isotc211.org/2005/gmd</a>
     </li>
-    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and no constraints:
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">no constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2</a>
+    </li>
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">an AnyText constraint</span> and wildcard support:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS*">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS*</a>
+    </li>
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">a BoundingBox constraint</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=BoundingBox=-180.00,-90.00,180.00,90.00">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=BoundingBox=-180.00,-90.00,180.00,90.00</a>
+    </li>
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">AnyText, BoundingBox, TempExtent_begin and TempExtent_end constraints</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS* and BoundingBox=-180.00,-90.00,180.00,90.00 TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS* and BoundingBox=-180.00,-90.00,180.00,90.00 TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z</a>
     </li>
   </ul>
 </section>

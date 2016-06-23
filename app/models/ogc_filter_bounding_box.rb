@@ -1,4 +1,8 @@
 class OgcFilterBoundingBox
+  @@ISO_QUERYABLE_NAME = "BoundingBox"
+  # AnyText is an ISO queryable
+  @@CMR_BOUNDINGBOX_PARAM = ISO_QUERYABLES_TO_CMR_QUERYABLES[@@ISO_QUERYABLE_NAME][1]
+
   # since bounding box requires special processing, we cannot  use the OgcFilterHelper
   # CMR query is: bounding_box =  lower left longitude, lower left latitude, upper right longitude, upper right latitude.
   # gml iso:boundingbox envelope default for WGS84 is:
@@ -22,7 +26,7 @@ class OgcFilterBoundingBox
         iso_bounding_box = IsoBoundingBox.new(bounding_box_envelope_node)
         if(iso_bounding_box.valid?)
           # the cmr bounding_box only supports a single value and not an array
-          cmr_query_hash["#{cmr_bounding_box_param}"] = iso_bounding_box.to_cmr
+          cmr_query_hash["#{@@CMR_BOUNDINGBOX_PARAM}"] = iso_bounding_box.to_cmr
         else
           error_message = "not in the supported ISO format. #{iso_bounding_box.errors.full_messages.to_s}"
           Rails.logger.error(error_message)

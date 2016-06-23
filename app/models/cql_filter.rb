@@ -3,11 +3,11 @@
 #
 class CqlFilter
   CONSTRAINT_LAGUAGES = %w(CQL_TEXT)
+  SUPPORTED_CQL_QUERYABLES = %w(AnyText BoundingBox TempExtent_begin TempExtent_end)
 
   @constraint
   @constraint_language
   @cmr_query_hash
-
 
   def initialize (constraint, constraint_language, cmr_query_hash)
     @constraint = constraint
@@ -27,7 +27,42 @@ class CqlFilter
   end
 
   def process_constraint
-
+    cql_parser = CqlParser.new
+    begin
+      parser_results = cql_parser.parse(@constraint)
+      process_parser_results(parser_results)
+    rescue Parslet::ParseFailed => error
+      parser_error = error.cause.ascii_tree
+      error_message = "The value for 'constraint' query parameter is not supported and cannot be parsed: #{parser_error}"
+      Rails.logger.error(error_message)
+      raise OwsException.new('constraint', error_message)
+    end
   end
 
+  private
+  def process_parser_results(parser_results)
+    begin_date = nil
+    end_date = nil
+    parser_results.each  do |parser_result_hash|
+        queryable = parser_result_hash[:key].str
+        queryable_value = parser_result_hash[:value].str
+      case queryable
+        when 'AnyText'
+          @cmr_query_hash.reverse_merge!(CqlFilterAnyText.process(queryable_value))
+        when 'BoundingBox'
+          @cmr_query_hash.reverse_merge!(CqlFilterBoundingBox.process(queryable_value))
+        when 'TempExtent_begin'
+          begin_date = queryable_value
+        when 'TempExtent_end'
+          end_date = queryable_value
+        else
+          error_message = "The queryable #{queryable} is not supported by the CMR CSW implementation"
+          Rails.logger.error(error_message)
+          raise OwxException.new('constraint', error_message)
+      end
+    end
+    if !begin_date.nil? || !end_date.nil?
+      @cmr_query_hash.reverse_merge!(CqlFilterTemporal.process(begin_date, end_date))
+    end
+  end
 end

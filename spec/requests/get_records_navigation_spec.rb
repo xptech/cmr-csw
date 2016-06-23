@@ -60,7 +60,7 @@ RSpec.describe 'result set navigation for GetRecords', :type => :request do
         expect(search_results_node_set.size).to eq(1)
         expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('36528')
         expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('13')
-        expect(search_results_node_set[0]['nextRecord']).to eq('14')
+        expect(search_results_node_set[0]['nextRecord']).to eq('16')
         expect(search_results_node_set[0]['elementSet']).to eq('brief')
         expect(search_results_node_set[0]['recordSchema']).to eq('http://www.isotc211.org/2005/gmi')
       end

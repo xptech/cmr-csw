@@ -46,9 +46,10 @@ class GetRecords < BaseCswModel
 
       constraint = params[:constraint].blank? ? '' : params[:constraint]
       constraint_language = params[:CONSTRAINTLANGUAGE].blank? ? '' : params[:CONSTRAINTLANGUAGE]
-
-      filter = CqlFilter.new(constraint,constraint_language,@cmr_query_hash)
-      filter.process_constraint()
+      if !constraint.blank?
+        filter = CqlFilter.new(constraint,constraint_language,@cmr_query_hash)
+        filter.process_constraint()
+      end
     else
       if (!@request_body.empty? && @request.post?)
         begin
@@ -133,9 +134,8 @@ class GetRecords < BaseCswModel
     model.cmr_search_duration_millis = document.at_xpath('/results/took').text.to_i
     result_nodes = document.root.xpath('/results/result')
     model.number_of_records_returned = result_nodes.blank? ? 0 : result_nodes.size
-    #TODO handle edge conditions better, wait for CMR navigation by index functionality
     if (model.number_of_records_matched > model.number_of_records_returned)
-      model.next_record = 1 + model.number_of_records_returned
+      model.next_record = 1 + @cmr_query_hash[:offset].to_i + model.number_of_records_returned
     else
       # indicates that ALL records have been returned
       model.next_record = 0

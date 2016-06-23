@@ -50,7 +50,7 @@ class OgcFilterTemporal
   def process_start_temporal(time_start_hash)
     query_string = nil
     begin_value = time_start_hash[:literal_value]
-    validate_iso_date_time('TempExtent_begin', begin_value)
+    OgcFilterTemporal.validate_iso_date_time('TempExtent_begin', begin_value)
     operator = time_start_hash[:operator]
     case operator
       when "PropertyIsGreaterThanOrEqualTo"
@@ -76,7 +76,7 @@ class OgcFilterTemporal
 
   def process_end_temporal(time_end_hash, query_string)
     end_value = time_end_hash[:literal_value]
-    validate_iso_date_time('TempExtent_end', end_value)
+    OgcFilterTemporal.validate_iso_date_time('TempExtent_end', end_value)
     operator = time_end_hash[:operator]
     if (query_string == nil)
       # we have no TempExtent_begin queryable
@@ -195,7 +195,7 @@ class OgcFilterTemporal
     query_string
   end
 
-  def validate_iso_date_time(id, date_string)
+  def self.validate_iso_date_time(id, date_string)
     begin
       # DateTime.parse(date).iso8601 is too lax, we must enforce CMR ISO 8601 format 2016-09-06T23:59:59Z
       d = DateTime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')

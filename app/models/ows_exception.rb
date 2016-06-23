@@ -30,6 +30,8 @@ class OwsException < StandardError
       attribute = 'NAMESPACE'
     elsif attribute == 'query_language'
       attribute = 'CONSTRAINTLANGUAGE'
+    elsif attribute == 'constraint'
+      attribute = 'constraint'
     end
     @locator = attribute
   end
