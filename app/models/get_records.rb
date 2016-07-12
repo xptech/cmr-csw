@@ -28,11 +28,14 @@ class GetRecords < BaseCswModel
   @max_records
   # for now it only supports the AND between ALL CMR query parameters
   @cmr_query_hash
+  # indicates whether or not CWICSmart is the requestor
+  @invoked_from_cwicsmart
 
   def initialize(params, request)
     super(params, request)
 
     @cmr_query_hash = Hash.new
+    @invoked_from_cwicsmart = false
 
     if (@request.get?)
       @output_schema = params[:outputSchema].blank? ? 'http://www.isotc211.org/2005/gmi' : params[:outputSchema]
@@ -101,7 +104,14 @@ class GetRecords < BaseCswModel
     response = nil
     @cmr_query_hash[:offset] = @start_position unless @start_position == '1'
     @cmr_query_hash[:page_size] = @max_records unless @max_records == '10'
-    @cmr_query_hash = add_cwic_parameter @cmr_query_hash
+    # special behavior for CWICSmart
+    if(@request.headers['HTTP_HEADERS'] != nil)
+      from_cwic =  @request.headers['HTTP_HEADERS']['From-Cwic-Smart']
+      if(from_cwic != nil && from_cwic.upcase == 'Y')
+        @invoked_from_cwicsmart = true
+      end
+    end
+    @cmr_query_hash = add_cwic_parameter(@cmr_query_hash, @invoked_from_cwicsmart)
     begin
       time = Benchmark.realtime do
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"

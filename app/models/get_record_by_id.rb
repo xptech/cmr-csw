@@ -85,7 +85,10 @@ class GetRecordById < BaseCswModel
       end
     end
     cmr_params[:concept_id] = id_array
-    cmr_params = add_cwic_parameter cmr_params
+    # for GetRecordById the false flag indicated that we don't want special filtering for CWICSmart invocation since the
+    # GerRecordById invocation from CWIC already has a concept-id to identify the record of interest and it will already
+    # be a CWIC record since its parent dataset retrieved via GetRecords is already a CWIC dataset
+    cmr_params = add_cwic_parameter(cmr_params,false)
     cmr_params
   end
 end

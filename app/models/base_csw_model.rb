@@ -28,8 +28,11 @@ class BaseCswModel
     @request_body = request.body.read
   end
 
-  def add_cwic_parameter(params)
+  def add_cwic_parameter(params, invoked_from_cwicsmart)
     params[:include_tags] = Rails.configuration.cwic_tag
+    if(invoked_from_cwicsmart)
+      params[:tag_key] = Rails.configuration.cwic_tag
+    end
     params
   end
 
