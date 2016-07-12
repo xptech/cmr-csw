@@ -281,7 +281,7 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
     end
 
   describe 'various error cases' do
-    
+
   end
 end
 

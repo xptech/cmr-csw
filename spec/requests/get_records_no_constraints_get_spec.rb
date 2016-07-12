@@ -99,4 +99,36 @@ RSpec.describe "various GetRecords GET requests with NO CONSTRAINTS", :type => :
       expect(exception_xml.root.xpath('/ows:ExceptionReport/ows:Exception/ows:ExceptionText', 'ows' => 'http://www.opengis.net/ows').text).to eq("GetRecords GET request error: the CONSTRAINTLANGUAGE query parameter value 'FILTER (not supported)' is not supported. The only supported value is CQL.")
     end
   end
+
+  it 'returns ONLY the CWIC datasets if the originator is CWICSmart' do
+    VCR.use_cassette 'requests/get_records/gmi/originator_cwic_get', :decode_compressed_response => true, :record => :once do
+      get '/collections', :service => 'CSW', :request => 'GetRecords', :version => '2.0.2', :ElementSetName => 'summary', :resultType => 'results', headers: { "From-Cwic-Smart" => "Y" }
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      # There should be 10 records
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
+      # we have a total of 32166 datasets (from which a subset of 1798 are CWIC datasets)
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/@numberOfRecordsMatched', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.value).to eq("1798")
+    end
+  end
+
+  it 'returns both CWIC and non-CWIC datasets for a regular (non-CWICSmart) invocation' do
+    VCR.use_cassette 'requests/get_records/gmi/originator_non_cwic_get', :decode_compressed_response => true, :record => :once do
+      get '/collections', :service => 'CSW', :request => 'GetRecords', :version => '2.0.2', :ElementSetName => 'summary', :resultType => 'results'
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      # There should be 10 records
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
+      # we have a total of 32166 datasets (from which a subset are CWIC datasets)
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/@numberOfRecordsMatched', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.value).to eq("32166")
+    end
+  end
 end
