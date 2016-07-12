@@ -184,14 +184,6 @@ RSpec.describe "various GetRecords POST requests containing the AnyText ISO quer
     end
   end
 
-  it 'correctly renders default RESULTS SUMMARY ISO MENDS data in response to a keyword ONLY constraint POST request and specified maxRecords' do
-    skip("Address this example when implementing support for maxRecords mapping to cmr page_size'")
-  end
-
-  it 'correctly renders default RESULTS SUMMARY ISO MENDS data in response to a keyword ONLY constraint POST request and specified maxRecords and startPosition' do
-    skip("Address this example when implementing support for startPosition and CMR implements index based navigation")
-  end
-
   it 'correctly renders HITS data in response to NO resultType (defaulted to hits) and keyword ONLY constraint POST request' do
     VCR.use_cassette 'requests/get_records/gmi/keyword_hits_result_type', :decode_compressed_response => true, :record => :once do
       # notice the outputSchema below http://www.isotc211.org/2005/gmi, which is not the GCMD one http://www.isotc211.org/2005/gmd

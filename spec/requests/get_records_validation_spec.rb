@@ -281,9 +281,7 @@ RSpec.describe 'various GetRecords GET and POST requests for request validation 
     end
 
   describe 'various error cases' do
-    it 'correctly handles a CMR failure' do
-      skip('Address this example when implementing more robust error handling.')
-    end
+
   end
 end
 
