@@ -104,13 +104,22 @@ class GetRecords < BaseCswModel
     response = nil
     @cmr_query_hash[:offset] = @start_position unless @start_position == '1'
     @cmr_query_hash[:page_size] = @max_records unless @max_records == '10'
-    # special behavior for CWICSmart
+    # special behavior for CWICSmart, for some reason the headers for POST from rspec and regular POST appear in
+    # different places in the rails request headers hash
+    from_cwic = nil
+    # regular rails request
+    if(@request.headers['From-Cwic-Smart'] != nil)
+        from_cwic =  @request.headers['From-Cwic-Smart']
+    end
+    # rspec request
     if(@request.headers['HTTP_HEADERS'] != nil)
       from_cwic =  @request.headers['HTTP_HEADERS']['From-Cwic-Smart']
-      if(from_cwic != nil && from_cwic.upcase == 'Y')
-        @invoked_from_cwicsmart = true
-      end
     end
+
+    if(from_cwic != nil && from_cwic.upcase == 'Y')
+        @invoked_from_cwicsmart = true
+    end
+
     @cmr_query_hash = add_cwic_parameter(@cmr_query_hash, @invoked_from_cwicsmart)
     begin
       time = Benchmark.realtime do

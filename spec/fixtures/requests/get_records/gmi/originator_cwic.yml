@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 12 Jul 2016 13:42:59 GMT
+      - Wed, 03 Aug 2016 15:36:48 GMT
       Content-Type:
       - application/iso19115+xml; charset=utf-8
       Access-Control-Expose-Headers:
@@ -29,11 +29,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Cmr-Hits:
-      - '1798'
+      - '1797'
       Cmr-Took:
-      - '92'
+      - '135'
       Cmr-Request-Id:
-      - 16eb096c-1eb8-4d53-9f95-15906e8723fe
+      - bf5068d9-3617-4ee9-8a10-cb35c45e1d92
       Vary:
       - Accept-Encoding, User-Agent
       Transfer-Encoding:
@@ -42,8 +42,8 @@ http_interactions:
       - Jetty(9.2.z-SNAPSHOT)
     body:
       encoding: ASCII-8BIT
-      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><results><hits>1798</hits><took>77</took><result
-        concept-id=\"C1020-GHRC\" revision-id=\"37\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><results><hits>1797</hits><took>131</took><result
+        concept-id=\"C1020-GHRC\" revision-id=\"38\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
         \                xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"\n                 xmlns:gmx=\"http://www.isotc211.org/2005/gmx\"\n
         \                xmlns:gsr=\"http://www.isotc211.org/2005/gsr\"\n                 xmlns:gss=\"http://www.isotc211.org/2005/gss\"\n
@@ -52,21 +52,22 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ACES CONTINUOUS
-        DATA V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n   <gmd:language>\n
-        \     <gco:CharacterString>eng</gco:CharacterString>\n   </gmd:language>\n
-        \  <gmd:characterSet>\n      <gmd:MD_CharacterSetCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ACES CONTINUOUS DATA V1</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
         \  </gmd:characterSet>\n   <gmd:hierarchyLevel>\n      <gmd:MD_ScopeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode\"\n
         \                       codeListValue=\"series\">series</gmd:MD_ScopeCode>\n
         \  </gmd:hierarchyLevel>\n   <gmd:contact>\n      <gmd:CI_ResponsibleParty>\n
-        \        <gmd:organisationName>\n            <gco:CharacterString>GHRC</gco:CharacterString>\n
+        \        <gmd:organisationName>\n            <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
         \        </gmd:organisationName>\n         <gmd:role>\n            <gmd:CI_RoleCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.163-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.448-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -111,9 +112,9 @@ http_interactions:
         corner of Florida. For the first time in NASA research, an uninhabited aerial
         vehicle (UAV) named ALTUS was used to collect cloud electrification data.
         Carrying field mills, optical sensors, electric field sensors and other instruments,
-        ALTUS allowed scientists to collect cloud electrification data for the first
+        ALTUS allowed scientists to collect cloudelectrification data for the first
         time from above the storm, from its birth through dissipation. This experiment
-        allowed scientists to achieve the dual goals of gathering weather data safely,
+        allowed scientists to achieve the dual goals of gathering weather data safely
         and testing new aircraft technology. This dataset consists of data collected
         from seven instruments: the Slow/Fast antenna, Electric Field Mill, Dual Optical
         Pulse Sensor, Searchcoil Magnetometer, Accelerometers, Gerdien Conductivity
@@ -121,8 +122,9 @@ http_interactions:
         throughout the flight from all 64 channels.</gco:CharacterString>\n         </gmd:abstract>\n
         \        <gmd:purpose gco:nilReason=\"missing\"/>\n         <gmd:pointOfContact>\n
         \           <gmd:CI_ResponsibleParty>\n               <gmd:organisationName>\n
-        \                 <gco:CharacterString>GHRC</gco:CharacterString>\n               </gmd:organisationName>\n
-        \              <gmd:role>\n                  <gmd:CI_RoleCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
+        \                 <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
+        \              </gmd:organisationName>\n               <gmd:role>\n                  <gmd:CI_RoleCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                                  codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \              </gmd:role>\n            </gmd:CI_ResponsibleParty>\n         </gmd:pointOfContact>\n
         \        <gmd:resourceFormat>\n            <gmd:MD_Format>\n               <gmd:name>\n
@@ -200,9 +202,8 @@ http_interactions:
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
         \        <gmd:descriptiveKeywords>\n            <gmd:MD_Keywords>\n               <gmd:keyword>\n
-        \                 <gco:CharacterString>POINT LOCATIONS</gco:CharacterString>\n
-        \              </gmd:keyword>\n               <gmd:type>\n                  <gmd:MD_KeywordTypeCode
-        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
+        \                 <gco:CharacterString>CARIBBEAN</gco:CharacterString>\n               </gmd:keyword>\n
+        \              <gmd:type>\n                  <gmd:MD_KeywordTypeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
         \                                         codeListValue=\"place\">place</gmd:MD_KeywordTypeCode>\n
         \              </gmd:type>\n               <gmd:thesaurusName>\n                  <gmd:CI_Citation>\n
         \                    <gmd:title>\n                        <gco:CharacterString>NASA/Global
@@ -302,7 +303,7 @@ http_interactions:
         \                                         codeListValue=\"temporal\">temporal</gmd:MD_KeywordTypeCode>\n
         \              </gmd:type>\n               <gmd:thesaurusName gco:nilReason=\"unknown\"/>\n
         \           </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n         <gmd:descriptiveKeywords>\n
-        \           <gmd:MD_Keywords>\n               <gmd:keyword>\n                  <gco:CharacterString>GHRC</gco:CharacterString>\n
+        \           <gmd:MD_Keywords>\n               <gmd:keyword>\n                  <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
         \              </gmd:keyword>\n               <gmd:type>\n                  <gmd:MD_KeywordTypeCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
         \                                         codeListValue=\"dataCenter\">dataCenter</gmd:MD_KeywordTypeCode>\n
@@ -482,12 +483,17 @@ http_interactions:
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
         \        <gmd:descriptiveKeywords>\n            <gmd:MD_Keywords>\n               <gmd:keyword>\n
         \                 <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
-        \              </gmd:keyword>\n               <gmd:keyword>\n                  <gco:CharacterString>ELECTRIC
+        \              </gmd:keyword>\n               <gmd:keyword>\n                  <gco:CharacterString>Dual
+        Optical Pulse Sensor</gco:CharacterString>\n               </gmd:keyword>\n
+        \              <gmd:keyword>\n                  <gco:CharacterString>ELECTRIC
         FIELD MILL</gco:CharacterString>\n               </gmd:keyword>\n               <gmd:keyword>\n
-        \                 <gco:CharacterString>GERDIEN CONDUCTIVITY PROBE</gco:CharacterString>\n
-        \              </gmd:keyword>\n               <gmd:keyword>\n                  <gco:CharacterString>RF
-        ANTENNA</gco:CharacterString>\n               </gmd:keyword>\n               <gmd:type>\n
-        \                 <gmd:MD_KeywordTypeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
+        \                 <gco:CharacterString>FLUXGATE MAGNETOMETERS</gco:CharacterString>\n
+        \              </gmd:keyword>\n               <gmd:keyword>\n                  <gco:CharacterString>GERDIEN
+        CONDUCTIVITY PROBE</gco:CharacterString>\n               </gmd:keyword>\n
+        \              <gmd:keyword>\n                  <gco:CharacterString>RF ANTENNA</gco:CharacterString>\n
+        \              </gmd:keyword>\n               <gmd:keyword>\n                  <gco:CharacterString>SEARCH
+        COIL MAGNETOMETERS</gco:CharacterString>\n               </gmd:keyword>\n
+        \              <gmd:type>\n                  <gmd:MD_KeywordTypeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
         \                                         codeListValue=\"instrument\">instrument</gmd:MD_KeywordTypeCode>\n
         \              </gmd:type>\n               <gmd:thesaurusName>\n                  <gmd:CI_Citation>\n
         \                    <gmd:title>\n                        <gco:CharacterString>NASA/GCMD
@@ -542,12 +548,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -564,7 +565,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d364e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
+        gml:id=\"d44e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2002-08-30T23:59:00.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -591,7 +592,7 @@ http_interactions:
         \                                <gmd:administrativeArea gco:nilReason=\"missing\"/>\n
         \                                <gmd:postalCode gco:nilReason=\"missing\"/>\n
         \                                <gmd:country gco:nilReason=\"missing\"/>\n
-        \                                <gmd:electronicMailAddress>\n                                    <gco:CharacterString>ghrc-dmg@itsc.uah.edu</gco:CharacterString>\n
+        \                                <gmd:electronicMailAddress>\n                                    <gco:CharacterString>support-ghrc@earthdata.nasa.gov</gco:CharacterString>\n
         \                                </gmd:electronicMailAddress>\n                              </gmd:CI_Address>\n
         \                          </gmd:address>\n                           <gmd:hoursOfService
         gco:nilReason=\"missing\"/>\n                           <gmd:contactInstructions
@@ -629,7 +630,7 @@ http_interactions:
         \                                                        codeListValue=\"information\">information</gmd:CI_OnLineFunctionCode>\n
         \                          </gmd:function>\n                        </gmd:CI_OnlineResource>\n
         \                    </gmd:onLine>\n                     <gmd:onLine>\n                        <gmd:CI_OnlineResource>\n
-        \                          <gmd:linkage>\n                              <gmd:URL>http://aces.nsstc.nasa.gov/</gmd:URL>\n
+        \                          <gmd:linkage>\n                              <gmd:URL>https://ghrc.nsstc.nasa.gov/home/field-campaigns/ACES</gmd:URL>\n
         \                          </gmd:linkage>\n                           <gmd:applicationProfile
         gco:nilReason=\"missing\"/>\n                           <gmd:name>\n                              <gco:CharacterString>Homepage</gco:CharacterString>\n
         \                          </gmd:name>\n                           <gmd:description>\n
@@ -684,13 +685,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d364e132\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d44e132\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
@@ -698,19 +697,42 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d364e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
-        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d364e138\">\n
+        xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d44e138\">\n
         \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
-        \                       <gco:CharacterString>ELECTRIC FIELD MILL</gco:CharacterString>\n
+        \                       <gco:CharacterString>Dual Optical Pulse Sensor</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
-        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ELECTRIC
-        FIELD MILL</gco:CharacterString>\n                     </gmd:code>\n                     <gmd:description
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>Dual
+        Optical Pulse Sensor</gco:CharacterString>\n                     </gmd:code>\n
+        \                    <gmd:description gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n
+        \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
+        \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
+        \              <gmi:mountedOn xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n
+        \        </gmi:instrument>\n         <gmi:instrument>\n            <gmi:MI_Instrument
+        id=\"d44e144\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
+        \                    <gmd:title>\n                        <gco:CharacterString>ELECTRIC
+        FIELD MILL</gco:CharacterString>\n                     </gmd:title>\n                     <gmd:date
+        gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n               </gmi:citation>\n
+        \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
+        \                       <gco:CharacterString>ELECTRIC FIELD MILL</gco:CharacterString>\n
+        \                    </gmd:code>\n                     <gmd:description gco:nilReason=\"missing\"/>\n
+        \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
+        \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
+        \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
+        xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d44e150\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>FLUXGATE MAGNETOMETERS</gco:CharacterString>\n
+        \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
+        \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>FLUXGATE
+        MAGNETOMETERS</gco:CharacterString>\n                     </gmd:code>\n                     <gmd:description
         gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d364e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
-        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d364e144\">\n
+        xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d44e156\">\n
         \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
         \                       <gco:CharacterString>GERDIEN CONDUCTIVITY PROBE</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
@@ -720,9 +742,9 @@ http_interactions:
         \                    <gmd:description gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d364e123\"/>\n            </gmi:MI_Instrument>\n
+        \              <gmi:mountedOn xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n
         \        </gmi:instrument>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d364e150\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
+        id=\"d44e162\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
         \                    <gmd:title>\n                        <gco:CharacterString>RF
         ANTENNA</gco:CharacterString>\n                     </gmd:title>\n                     <gmd:date
         gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n               </gmi:citation>\n
@@ -732,23 +754,36 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d364e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
-        \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
-        \                 <gco:CharacterString>ACES</gco:CharacterString>\n               </gmi:description>\n
-        \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
-        \                       <gco:CharacterString>ACES</gco:CharacterString>\n
+        xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d44e168\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>SEARCH COIL MAGNETOMETERS</gco:CharacterString>\n
+        \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
+        \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>SEARCH
+        COIL MAGNETOMETERS</gco:CharacterString>\n                     </gmd:code>\n
+        \                    <gmd:description gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n
+        \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
+        \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
+        \              <gmi:mountedOn xlink:href=\"#d44e123\"/>\n            </gmi:MI_Instrument>\n
+        \        </gmi:instrument>\n         <gmi:operation>\n            <gmi:MI_Operation>\n
+        \              <gmi:description>\n                  <gco:CharacterString>ACES</gco:CharacterString>\n
+        \              </gmi:description>\n               <gmi:identifier>\n                  <gmd:MD_Identifier>\n
+        \                    <gmd:code>\n                        <gco:CharacterString>ACES</gco:CharacterString>\n
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d364e123\">\n               <gmi:identifier>\n
+        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d44e123\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
-        \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>AIRCRAFT</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d364e132\"/>\n
-        \              <gmi:instrument xlink:href=\"#d364e138\"/>\n               <gmi:instrument
-        xlink:href=\"#d364e144\"/>\n               <gmi:instrument xlink:href=\"#d364e150\"/>\n
+        \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>Aircraft</gco:CharacterString>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d44e132\"/>\n
+        \              <gmi:instrument xlink:href=\"#d44e138\"/>\n               <gmi:instrument
+        xlink:href=\"#d44e144\"/>\n               <gmi:instrument xlink:href=\"#d44e150\"/>\n
+        \              <gmi:instrument xlink:href=\"#d44e156\"/>\n               <gmi:instrument
+        xlink:href=\"#d44e162\"/>\n               <gmi:instrument xlink:href=\"#d44e168\"/>\n
         \           </gmi:MI_Platform>\n         </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n
         \  </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C194462-GHRC\" revision-id=\"34\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
@@ -760,11 +795,12 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ACES ELECTRIC
-        FIELD MILL V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n   <gmd:language>\n
-        \     <gco:CharacterString>eng</gco:CharacterString>\n   </gmd:language>\n
-        \  <gmd:characterSet>\n      <gmd:MD_CharacterSetCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ACES ELECTRIC FIELD MILL V1</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
         \  </gmd:characterSet>\n   <gmd:hierarchyLevel>\n      <gmd:MD_ScopeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode\"\n
         \                       codeListValue=\"series\">series</gmd:MD_ScopeCode>\n
@@ -774,7 +810,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.165-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.435-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -1232,12 +1268,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -1254,7 +1285,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d363e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
+        gml:id=\"d28e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2002-08-30T23:59:00.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -1374,22 +1405,19 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d363e72\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>ELECTRIC
-        FIELD MILL</gco:CharacterString>\n                     </gmd:title>\n                     <gmd:date
-        gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n               </gmi:citation>\n
-        \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d28e72\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
         \                       <gco:CharacterString>ELECTRIC FIELD MILL</gco:CharacterString>\n
-        \                    </gmd:code>\n                     <gmd:description gco:nilReason=\"missing\"/>\n
-        \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
+        \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
+        \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ELECTRIC
+        FIELD MILL</gco:CharacterString>\n                     </gmd:code>\n                     <gmd:description
+        gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d363e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d28e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>ACES</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -1397,16 +1425,16 @@ http_interactions:
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d363e63\">\n               <gmi:identifier>\n
+        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d28e63\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>AIRCRAFT</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d363e72\"/>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d28e72\"/>\n
         \           </gmi:MI_Platform>\n         </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n
         \  </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
-        concept-id=\"C1022-GHRC\" revision-id=\"36\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
+        concept-id=\"C1022-GHRC\" revision-id=\"37\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
         \                xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"\n                 xmlns:gmx=\"http://www.isotc211.org/2005/gmx\"\n
         \                xmlns:gsr=\"http://www.isotc211.org/2005/gsr\"\n                 xmlns:gss=\"http://www.isotc211.org/2005/gss\"\n
@@ -1415,21 +1443,22 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ACES LOG
-        DATA V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n   <gmd:language>\n
-        \     <gco:CharacterString>eng</gco:CharacterString>\n   </gmd:language>\n
-        \  <gmd:characterSet>\n      <gmd:MD_CharacterSetCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ACES LOG DATA V1</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
         \  </gmd:characterSet>\n   <gmd:hierarchyLevel>\n      <gmd:MD_ScopeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode\"\n
         \                       codeListValue=\"series\">series</gmd:MD_ScopeCode>\n
         \  </gmd:hierarchyLevel>\n   <gmd:contact>\n      <gmd:CI_ResponsibleParty>\n
-        \        <gmd:organisationName>\n            <gco:CharacterString>GHRC</gco:CharacterString>\n
+        \        <gmd:organisationName>\n            <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
         \        </gmd:organisationName>\n         <gmd:role>\n            <gmd:CI_RoleCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.156-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.441-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -1480,8 +1509,9 @@ http_interactions:
         each flight, and yields instrument and aircraft status throughout the flight.</gco:CharacterString>\n
         \        </gmd:abstract>\n         <gmd:purpose gco:nilReason=\"missing\"/>\n
         \        <gmd:pointOfContact>\n            <gmd:CI_ResponsibleParty>\n               <gmd:organisationName>\n
-        \                 <gco:CharacterString>GHRC</gco:CharacterString>\n               </gmd:organisationName>\n
-        \              <gmd:role>\n                  <gmd:CI_RoleCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
+        \                 <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
+        \              </gmd:organisationName>\n               <gmd:role>\n                  <gmd:CI_RoleCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                                  codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \              </gmd:role>\n            </gmd:CI_ResponsibleParty>\n         </gmd:pointOfContact>\n
         \        <gmd:resourceFormat>\n            <gmd:MD_Format>\n               <gmd:name>\n
@@ -1547,9 +1577,8 @@ http_interactions:
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
         \        <gmd:descriptiveKeywords>\n            <gmd:MD_Keywords>\n               <gmd:keyword>\n
-        \                 <gco:CharacterString>POINT LOCATION</gco:CharacterString>\n
-        \              </gmd:keyword>\n               <gmd:type>\n                  <gmd:MD_KeywordTypeCode
-        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
+        \                 <gco:CharacterString>CARIBBEAN</gco:CharacterString>\n               </gmd:keyword>\n
+        \              <gmd:type>\n                  <gmd:MD_KeywordTypeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
         \                                         codeListValue=\"place\">place</gmd:MD_KeywordTypeCode>\n
         \              </gmd:type>\n               <gmd:thesaurusName>\n                  <gmd:CI_Citation>\n
         \                    <gmd:title>\n                        <gco:CharacterString>NASA/Global
@@ -1649,7 +1678,7 @@ http_interactions:
         \                                         codeListValue=\"temporal\">temporal</gmd:MD_KeywordTypeCode>\n
         \              </gmd:type>\n               <gmd:thesaurusName gco:nilReason=\"unknown\"/>\n
         \           </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n         <gmd:descriptiveKeywords>\n
-        \           <gmd:MD_Keywords>\n               <gmd:keyword>\n                  <gco:CharacterString>GHRC</gco:CharacterString>\n
+        \           <gmd:MD_Keywords>\n               <gmd:keyword>\n                  <gco:CharacterString>NASA/MSFC/GHRC</gco:CharacterString>\n
         \              </gmd:keyword>\n               <gmd:type>\n                  <gmd:MD_KeywordTypeCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode\"\n
         \                                         codeListValue=\"dataCenter\">dataCenter</gmd:MD_KeywordTypeCode>\n
@@ -1885,12 +1914,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -1907,7 +1931,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d366e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
+        gml:id=\"d29e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2002-08-30T23:59:00.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -1934,7 +1958,7 @@ http_interactions:
         \                                <gmd:administrativeArea gco:nilReason=\"missing\"/>\n
         \                                <gmd:postalCode gco:nilReason=\"missing\"/>\n
         \                                <gmd:country gco:nilReason=\"missing\"/>\n
-        \                                <gmd:electronicMailAddress>\n                                    <gco:CharacterString>ghrc-dmg@itsc.uah.edu</gco:CharacterString>\n
+        \                                <gmd:electronicMailAddress>\n                                    <gco:CharacterString>support-ghrc@earthdata.nasa.gov</gco:CharacterString>\n
         \                                </gmd:electronicMailAddress>\n                              </gmd:CI_Address>\n
         \                          </gmd:address>\n                           <gmd:hoursOfService
         gco:nilReason=\"missing\"/>\n                           <gmd:contactInstructions
@@ -1972,7 +1996,7 @@ http_interactions:
         \                                                        codeListValue=\"information\">information</gmd:CI_OnLineFunctionCode>\n
         \                          </gmd:function>\n                        </gmd:CI_OnlineResource>\n
         \                    </gmd:onLine>\n                     <gmd:onLine>\n                        <gmd:CI_OnlineResource>\n
-        \                          <gmd:linkage>\n                              <gmd:URL>http://aces.nsstc.nasa.gov/</gmd:URL>\n
+        \                          <gmd:linkage>\n                              <gmd:URL>https://ghrc.nsstc.nasa.gov/home/field-campaigns/ACES</gmd:URL>\n
         \                          </gmd:linkage>\n                           <gmd:applicationProfile
         gco:nilReason=\"missing\"/>\n                           <gmd:name>\n                              <gco:CharacterString>Homepage</gco:CharacterString>\n
         \                          </gmd:name>\n                           <gmd:description>\n
@@ -1992,7 +2016,7 @@ http_interactions:
         \                                                        codeListValue=\"information\">information</gmd:CI_OnLineFunctionCode>\n
         \                          </gmd:function>\n                        </gmd:CI_OnlineResource>\n
         \                    </gmd:onLine>\n                     <gmd:onLine>\n                        <gmd:CI_OnlineResource>\n
-        \                          <gmd:linkage>\n                              <gmd:URL>http://dx.doi.org/10.5067/ACES/ALTUS/DATA10</gmd:URL>\n
+        \                          <gmd:linkage>\n                              <gmd:URL>http://dx.doi.org/10.5067/ACES/ALTUS/DATA101</gmd:URL>\n
         \                          </gmd:linkage>\n                           <gmd:applicationProfile
         gco:nilReason=\"missing\"/>\n                           <gmd:name>\n                              <gco:CharacterString>DOI</gco:CharacterString>\n
         \                          </gmd:name>\n                           <gmd:description>\n
@@ -2002,7 +2026,7 @@ http_interactions:
         \                                                        codeListValue=\"\"/>\n
         \                          </gmd:function>\n                        </gmd:CI_OnlineResource>\n
         \                    </gmd:onLine>\n                     <gmd:onLine>\n                        <gmd:CI_OnlineResource>\n
-        \                          <gmd:linkage>\n                              <gmd:URL>http://ghrc.nsstc.nasa.gov/uso/citation.html</gmd:URL>\n
+        \                          <gmd:linkage>\n                              <gmd:URL>https://ghrc.nsstc.nasa.gov/home/about-ghrc/citing-ghrc-daac-data</gmd:URL>\n
         \                          </gmd:linkage>\n                           <gmd:applicationProfile
         gco:nilReason=\"missing\"/>\n                           <gmd:name>\n                              <gco:CharacterString>Citing
         GHRC Data</gco:CharacterString>\n                           </gmd:name>\n
@@ -2027,22 +2051,19 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d366e72\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>ALTUS
-        DATA COLLECTION SYSTEM</gco:CharacterString>\n                     </gmd:title>\n
-        \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
-        \              </gmi:citation>\n               <gmi:identifier>\n                  <gmd:MD_Identifier>\n
-        \                    <gmd:code>\n                        <gco:CharacterString>ALTUS
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d29e72\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>ALTUS DATA COLLECTION SYSTEM</gco:CharacterString>\n
+        \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
+        \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS
         DATA COLLECTION SYSTEM</gco:CharacterString>\n                     </gmd:code>\n
         \                    <gmd:description gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d366e63\"/>\n            </gmi:MI_Instrument>\n
+        \              <gmi:mountedOn xlink:href=\"#d29e63\"/>\n            </gmi:MI_Instrument>\n
         \        </gmi:instrument>\n         <gmi:operation>\n            <gmi:MI_Operation>\n
         \              <gmi:description>\n                  <gco:CharacterString>ACES</gco:CharacterString>\n
         \              </gmi:description>\n               <gmi:identifier>\n                  <gmd:MD_Identifier>\n
@@ -2050,13 +2071,13 @@ http_interactions:
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d366e63\">\n               <gmi:identifier>\n
+        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d29e63\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
-        \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>AIRCRAFT</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d366e72\"/>\n
+        \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>Aircraft</gco:CharacterString>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d29e72\"/>\n
         \           </gmi:MI_Platform>\n         </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n
         \  </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C1023-GHRC\" revision-id=\"35\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
@@ -2068,11 +2089,12 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ACES TIMING
-        DATA V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n   <gmd:language>\n
-        \     <gco:CharacterString>eng</gco:CharacterString>\n   </gmd:language>\n
-        \  <gmd:characterSet>\n      <gmd:MD_CharacterSetCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ACES TIMING DATA V1</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
         \  </gmd:characterSet>\n   <gmd:hierarchyLevel>\n      <gmd:MD_ScopeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode\"\n
         \                       codeListValue=\"series\">series</gmd:MD_ScopeCode>\n
@@ -2082,7 +2104,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.163-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.449-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -2545,12 +2567,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -2567,7 +2584,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d361e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
+        gml:id=\"d38e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2002-08-30T23:59:00.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -2687,13 +2704,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d361e72\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>CLOCKS</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d38e72\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>CLOCKS</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>CLOCKS</gco:CharacterString>\n
@@ -2701,7 +2716,7 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d361e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d38e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>ACES</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -2709,13 +2724,13 @@ http_interactions:
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d361e63\">\n               <gmi:identifier>\n
+        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d38e63\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>AIRCRAFT</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d361e72\"/>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d38e72\"/>\n
         \           </gmi:MI_Platform>\n         </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n
         \  </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C1024-GHRC\" revision-id=\"34\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
@@ -2727,11 +2742,12 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ACES TRIGGERED
-        DATA V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n   <gmd:language>\n
-        \     <gco:CharacterString>eng</gco:CharacterString>\n   </gmd:language>\n
-        \  <gmd:characterSet>\n      <gmd:MD_CharacterSetCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ACES TRIGGERED DATA V1</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
+        codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
         \  </gmd:characterSet>\n   <gmd:hierarchyLevel>\n      <gmd:MD_ScopeCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_ScopeCode\"\n
         \                       codeListValue=\"series\">series</gmd:MD_ScopeCode>\n
@@ -2741,7 +2757,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.154-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.44-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -3215,12 +3231,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -3237,7 +3248,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d362e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
+        gml:id=\"d39e36\">\n                           <gml:beginPosition>2002-07-10T00:00:00.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2002-08-30T23:59:00.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -3357,13 +3368,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d362e122\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d39e122\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ACCELEROMETERS</gco:CharacterString>\n
@@ -3371,8 +3380,8 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d362e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
-        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d362e128\">\n
+        xlink:href=\"#d39e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d39e128\">\n
         \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
         \                       <gco:CharacterString>ELECTRIC FIELD MILL</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
@@ -3382,8 +3391,8 @@ http_interactions:
         gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d362e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
-        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d362e134\">\n
+        xlink:href=\"#d39e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d39e134\">\n
         \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
         \                       <gco:CharacterString>RF ANTENNA</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
@@ -3393,7 +3402,7 @@ http_interactions:
         gco:nilReason=\"missing\"/>\n                  </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d362e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d39e113\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>ACES</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -3401,15 +3410,15 @@ http_interactions:
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d362e113\">\n               <gmi:identifier>\n
+        \        <gmi:platform>\n            <gmi:MI_Platform id=\"d39e113\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>ALTUS</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>AIRCRAFT</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d362e122\"/>\n
-        \              <gmi:instrument xlink:href=\"#d362e128\"/>\n               <gmi:instrument
-        xlink:href=\"#d362e134\"/>\n            </gmi:MI_Platform>\n         </gmi:platform>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d39e122\"/>\n
+        \              <gmi:instrument xlink:href=\"#d39e128\"/>\n               <gmi:instrument
+        xlink:href=\"#d39e134\"/>\n            </gmi:MI_Platform>\n         </gmi:platform>\n
         \     </gmi:MI_AcquisitionInformation>\n   </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C1223726607-GES_DISC\" revision-id=\"27\" format=\"application/iso19115+xml\"><gmi:MI_Metadata
         xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:gmx=\"http://www.isotc211.org/2005/gmx\"
@@ -3428,9 +3437,9 @@ http_interactions:
         gco:nilReason=\"missing\"></gmd:contact><gmd:dateStamp><gco:DateTime>2016-05-11T00:00:00.000Z</gco:DateTime></gmd:dateStamp><gmd:metadataStandardName><gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString></gmd:metadataStandardName><gmd:metadataStandardVersion><gco:CharacterString>ISO
-        19115-2:2009(E)</gco:CharacterString></gmd:metadataStandardVersion><gmd:referenceSystemInfo><gmd:MD_ReferenceSystem><gmd:referenceSystemIdentifier><gmd:RS_Identifier><gmd:code><gco:CharacterString>GEODETIC</gco:CharacterString></gmd:code></gmd:RS_Identifier></gmd:referenceSystemIdentifier></gmd:MD_ReferenceSystem></gmd:referenceSystemInfo><gmd:identificationInfo><gmd:MD_DataIdentification><gmd:citation><gmd:CI_Citation><gmd:title><gco:CharacterString>ACOS_L2S
-        &gt; ACOS GOSAT/TANSO-FTS Level 2 Full Physics Standard Product V3.5 (ACOS_L2S)
-        at GES DISC</gco:CharacterString></gmd:title><gmd:date><gmd:CI_Date><gmd:date><gco:DateTime>2013-03-28T00:00:00.000Z</gco:DateTime></gmd:date><gmd:dateType><gmd:CI_DateTypeCode
+        19115-2:2009(E)</gco:CharacterString></gmd:metadataStandardVersion><gmd:referenceSystemInfo><gmd:MD_ReferenceSystem><gmd:referenceSystemIdentifier><gmd:RS_Identifier><gmd:code><gco:CharacterString>GEODETIC</gco:CharacterString></gmd:code></gmd:RS_Identifier></gmd:referenceSystemIdentifier></gmd:MD_ReferenceSystem></gmd:referenceSystemInfo><gmd:identificationInfo><gmd:MD_DataIdentification><gmd:citation><gmd:CI_Citation><gmd:title><gco:CharacterString>ACOS
+        GOSAT/TANSO-FTS Level 2 Full Physics Standard Product V3.5 (ACOS_L2S) at GES
+        DISC</gco:CharacterString></gmd:title><gmd:date><gmd:CI_Date><gmd:date><gco:DateTime>2013-03-28T00:00:00.000Z</gco:DateTime></gmd:date><gmd:dateType><gmd:CI_DateTypeCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode\"
         codeListValue=\"creation\">creation</gmd:CI_DateTypeCode></gmd:dateType></gmd:CI_Date></gmd:date><gmd:edition><gco:CharacterString>3.5</gco:CharacterString></gmd:edition><gmd:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>ACOS_L2S</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>ACOS
         GOSAT/TANSO-FTS Level 2 Full Physics Standard Product V3.5 (ACOS_L2S) at GES
@@ -3494,10 +3503,10 @@ http_interactions:
         codeListValue=\"instrument\">instrument</gmd:MD_KeywordTypeCode></gmd:type></gmd:MD_Keywords></gmd:descriptiveKeywords><gmd:resourceConstraints><gmd:MD_LegalConstraints><gmd:useLimitation><gco:CharacterString>Global
         Carbon Cycle</gco:CharacterString></gmd:useLimitation><gmd:otherConstraints><gco:CharacterString>Restriction
         Flag:</gco:CharacterString></gmd:otherConstraints></gmd:MD_LegalConstraints></gmd:resourceConstraints><gmd:language><gco:CharacterString>eng</gco:CharacterString></gmd:language><gmd:extent><gmd:EX_Extent
-        id=\"boundingExtent\"><gmd:geographicElement><gmd:EX_GeographicBoundingBox
-        id=\"geo-6e6408af-87bf-4f69-94b9-a30a23561439\"><gmd:extentTypeCode><gco:Boolean>1</gco:Boolean></gmd:extentTypeCode><gmd:westBoundLongitude><gco:Decimal>-180.0</gco:Decimal></gmd:westBoundLongitude><gmd:eastBoundLongitude><gco:Decimal>180.0</gco:Decimal></gmd:eastBoundLongitude><gmd:southBoundLatitude><gco:Decimal>-90.0</gco:Decimal></gmd:southBoundLatitude><gmd:northBoundLatitude><gco:Decimal>90.0</gco:Decimal></gmd:northBoundLatitude></gmd:EX_GeographicBoundingBox></gmd:geographicElement><gmd:geographicElement><gmd:EX_GeographicBoundingBox
-        id=\"geo-37fe679c-ac92-405c-bed8-d4bae4a854d3\"><gmd:extentTypeCode><gco:Boolean>1</gco:Boolean></gmd:extentTypeCode><gmd:westBoundLongitude><gco:Decimal>-180.0</gco:Decimal></gmd:westBoundLongitude><gmd:eastBoundLongitude><gco:Decimal>180.0</gco:Decimal></gmd:eastBoundLongitude><gmd:southBoundLatitude><gco:Decimal>-90.0</gco:Decimal></gmd:southBoundLatitude><gmd:northBoundLatitude><gco:Decimal>90.0</gco:Decimal></gmd:northBoundLatitude></gmd:EX_GeographicBoundingBox></gmd:geographicElement><gmd:temporalElement><gmd:EX_TemporalExtent><gmd:extent><gml:TimePeriod
-        gml:id=\"d9aaa12cf-919a-4026-adf9-0ff2ad1f6c44\"><gml:beginPosition>2009-03-31T00:00:00.000Z</gml:beginPosition><gml:endPosition></gml:endPosition></gml:TimePeriod></gmd:extent></gmd:EX_TemporalExtent></gmd:temporalElement></gmd:EX_Extent></gmd:extent><gmd:processingLevel><gmd:MD_Identifier><gmd:code><gco:CharacterString></gco:CharacterString></gmd:code></gmd:MD_Identifier></gmd:processingLevel></gmd:MD_DataIdentification></gmd:identificationInfo><gmd:distributionInfo><gmd:MD_Distribution><gmd:distributor><gmd:MD_Distributor><gmd:distributorContact><gmd:CI_ResponsibleParty><gmd:organisationName><gco:CharacterString>NASA/GSFC/SED/ESD/GCDC/GESDISC</gco:CharacterString></gmd:organisationName><gmd:contactInfo><gmd:CI_Contact><gmd:address><gmd:CI_Address><gmd:electronicMailAddress><gco:CharacterString>Andrey.Savtchenko@nasa.gov</gco:CharacterString></gmd:electronicMailAddress></gmd:CI_Address></gmd:address></gmd:CI_Contact></gmd:contactInfo><gmd:role><gmd:CI_RoleCode
+        id=\"boundingExtent\"><gmd:description><gco:CharacterString>SpatialGranuleSpatialRepresentation=GEODETIC</gco:CharacterString></gmd:description><gmd:geographicElement><gmd:EX_GeographicBoundingBox
+        id=\"geo-816a0a0f-71a7-440d-aacf-3055a78f44cc\"><gmd:extentTypeCode><gco:Boolean>1</gco:Boolean></gmd:extentTypeCode><gmd:westBoundLongitude><gco:Decimal>-180.0</gco:Decimal></gmd:westBoundLongitude><gmd:eastBoundLongitude><gco:Decimal>180.0</gco:Decimal></gmd:eastBoundLongitude><gmd:southBoundLatitude><gco:Decimal>-90.0</gco:Decimal></gmd:southBoundLatitude><gmd:northBoundLatitude><gco:Decimal>90.0</gco:Decimal></gmd:northBoundLatitude></gmd:EX_GeographicBoundingBox></gmd:geographicElement><gmd:geographicElement><gmd:EX_GeographicBoundingBox
+        id=\"geo-bd2e91c6-1ada-4688-a6f8-c3ce8bf44a30\"><gmd:extentTypeCode><gco:Boolean>1</gco:Boolean></gmd:extentTypeCode><gmd:westBoundLongitude><gco:Decimal>-180.0</gco:Decimal></gmd:westBoundLongitude><gmd:eastBoundLongitude><gco:Decimal>180.0</gco:Decimal></gmd:eastBoundLongitude><gmd:southBoundLatitude><gco:Decimal>-90.0</gco:Decimal></gmd:southBoundLatitude><gmd:northBoundLatitude><gco:Decimal>90.0</gco:Decimal></gmd:northBoundLatitude></gmd:EX_GeographicBoundingBox></gmd:geographicElement><gmd:temporalElement><gmd:EX_TemporalExtent><gmd:extent><gml:TimePeriod
+        gml:id=\"d2526a431-b6e2-45e8-96e0-3ae3b96ba77c\"><gml:beginPosition>2009-03-31T00:00:00.000Z</gml:beginPosition><gml:endPosition></gml:endPosition></gml:TimePeriod></gmd:extent></gmd:EX_TemporalExtent></gmd:temporalElement></gmd:EX_Extent></gmd:extent><gmd:processingLevel><gmd:MD_Identifier><gmd:code><gco:CharacterString></gco:CharacterString></gmd:code></gmd:MD_Identifier></gmd:processingLevel></gmd:MD_DataIdentification></gmd:identificationInfo><gmd:distributionInfo><gmd:MD_Distribution><gmd:distributor><gmd:MD_Distributor><gmd:distributorContact><gmd:CI_ResponsibleParty><gmd:organisationName><gco:CharacterString>NASA/GSFC/SED/ESD/GCDC/GESDISC</gco:CharacterString></gmd:organisationName><gmd:contactInfo><gmd:CI_Contact><gmd:address><gmd:CI_Address><gmd:electronicMailAddress><gco:CharacterString>Andrey.Savtchenko@nasa.gov</gco:CharacterString></gmd:electronicMailAddress></gmd:CI_Address></gmd:address></gmd:CI_Contact></gmd:contactInfo><gmd:role><gmd:CI_RoleCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"
         codeListValue=\"distributor\">distributor</gmd:CI_RoleCode></gmd:role></gmd:CI_ResponsibleParty></gmd:distributorContact><gmd:distributorTransferOptions><gmd:MD_DigitalTransferOptions><gmd:onLine><gmd:CI_OnlineResource><gmd:linkage><gmd:URL>http://disc.sci.gsfc.nasa.gov/OCO-2/images/ACOS.xCO2.2013.v3.5.png</gmd:URL></gmd:linkage><gmd:name><gco:CharacterString>Browse</gco:CharacterString></gmd:name><gmd:description><gco:CharacterString>Global
         amounts of column CO2 in 2013, from the ACOS v3.5 algorithm (warn levels below
@@ -3536,18 +3545,63 @@ http_interactions:
         codeListValue=\"series\">series</gmd:MD_ScopeCode></gmd:level></gmd:DQ_Scope></gmd:scope><gmd:lineage><gmd:LI_Lineage><gmd:processStep><gmi:LE_ProcessStep><gmd:description
         gco:nilReason=\"unknown\"></gmd:description><gmd:processor><gmd:CI_ResponsibleParty><gmd:organisationName><gco:CharacterString></gco:CharacterString></gmd:organisationName><gmd:role><gmd:CI_RoleCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"
-        codeListValue=\"processor\">processor</gmd:CI_RoleCode></gmd:role></gmd:CI_ResponsibleParty></gmd:processor></gmi:LE_ProcessStep></gmd:processStep></gmd:LI_Lineage></gmd:lineage></gmd:DQ_DataQuality></gmd:dataQualityInfo><gmi:acquisitionInformation><gmi:MI_AcquisitionInformation><gmi:instrument><gmi:MI_Instrument
-        id=\"dcebf9b86-b64f-4922-a27d-c3c30cfc4e3d\"><gmi:citation><gmd:CI_Citation><gmd:title><gco:CharacterString>TANSO-FTS
+        codeListValue=\"processor\">processor</gmd:CI_RoleCode></gmd:role></gmd:CI_ResponsibleParty></gmd:processor><gmi:processingInformation><eos:EOS_Processing><gmi:identifier></gmi:identifier><eos:otherProperty><gco:Record><eos:AdditionalAttributes><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>Granularity</gco:CharacterString></eos:name><eos:description><gco:CharacterString>The
+        time coverage of individual data granules.</gco:CharacterString></eos:description><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>sun-lit
+        orbit (45 minutes)</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>metadata.uuid</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>ee5f8c12-509c-4d80-8d82-c7fb48f046fb</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>metadata.extraction_date</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>2016-01-19
+        09:26:46</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>metadata.keyword_version</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"FLOAT\">FLOAT</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>8.1</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>DIF9.0-to-DIF10-Converter</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"DATETIME\">DATETIME</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>2016-01-20T13:00:10Z</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>IDN_Node.Short_Name</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>USA/NASA</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>IDN_Node.UUID</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>9ae20472-ba4c-4b01-8d97-857b73fa3c95</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>Original.Metadata_Version</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>VERSION
+        9.9.3</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>Original.Dataset_Language</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>English</gco:CharacterString></eos:value></eos:AdditionalAttribute><eos:AdditionalAttribute><eos:reference><eos:EOS_AdditionalAttributeDescription><eos:type><eos:EOS_AdditionalAttributeTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeTypeCode\"
+        codeListValue=\"processingInformation\">processingInformation</eos:EOS_AdditionalAttributeTypeCode></eos:type><eos:name><gco:CharacterString>Original.xsi:schemaLocation</gco:CharacterString></eos:name><eos:dataType><eos:EOS_AdditionalAttributeDataTypeCode
+        codeList=\"http://earthdata.nasa.gov/metadata/resources/Codelists.xml#EOS_AdditionalAttributeDataTypeCode\"
+        codeListValue=\"STRING\">STRING</eos:EOS_AdditionalAttributeDataTypeCode></eos:dataType></eos:EOS_AdditionalAttributeDescription></eos:reference><eos:value><gco:CharacterString>http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/
+        http://gcmd.gsfc.nasa.gov/Aboutus/xml/dif/dif_v9.9.3.xsd</gco:CharacterString></eos:value></eos:AdditionalAttribute></eos:AdditionalAttributes></gco:Record></eos:otherProperty></eos:EOS_Processing></gmi:processingInformation></gmi:LE_ProcessStep></gmd:processStep></gmd:LI_Lineage></gmd:lineage></gmd:DQ_DataQuality></gmd:dataQualityInfo><gmi:acquisitionInformation><gmi:MI_AcquisitionInformation><gmi:instrument><gmi:MI_Instrument
+        id=\"df62c91cf-4f99-46b6-a25a-16a797bba0d1\"><gmi:citation><gmd:CI_Citation><gmd:title><gco:CharacterString>TANSO-FTS
         &gt; Thermal And Near Infrared Sensor For Carbon Observation</gco:CharacterString></gmd:title><gmd:date
         gco:nilReason=\"unknown\"></gmd:date></gmd:CI_Citation></gmi:citation><gmi:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>TANSO-FTS</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>Thermal
         And Near Infrared Sensor For Carbon Observation</gco:CharacterString></gmd:description></gmd:MD_Identifier></gmi:identifier><gmi:type><gco:CharacterString></gco:CharacterString></gmi:type><gmi:description
-        gco:nilReason=\"missing\"></gmi:description><gmi:mountedOn xlink:href=\"#d86fd4665-d88f-433d-b22c-7cd3fad07ea9\"></gmi:mountedOn></gmi:MI_Instrument></gmi:instrument><gmi:operation><gmi:MI_Operation><gmi:description><gco:CharacterString>OCO
+        gco:nilReason=\"missing\"></gmi:description><gmi:mountedOn xlink:href=\"#d479ccd20-b931-4056-b7ee-9f68c70d5943\"></gmi:mountedOn></gmi:MI_Instrument></gmi:instrument><gmi:operation><gmi:MI_Operation><gmi:description><gco:CharacterString>OCO
         &gt; Orbiting Carbon Observatory</gco:CharacterString></gmi:description><gmi:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>OCO</gco:CharacterString></gmd:code></gmd:MD_Identifier></gmi:identifier><gmi:status></gmi:status><gmi:parentOperation
         gco:nilReason=\"inapplicable\"></gmi:parentOperation></gmi:MI_Operation></gmi:operation><gmi:platform><eos:EOS_Platform
-        id=\"d86fd4665-d88f-433d-b22c-7cd3fad07ea9\"><gmi:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>GOSAT</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>Greenhouse
+        id=\"d479ccd20-b931-4056-b7ee-9f68c70d5943\"><gmi:identifier><gmd:MD_Identifier><gmd:code><gco:CharacterString>GOSAT</gco:CharacterString></gmd:code><gmd:description><gco:CharacterString>Greenhouse
         Gases Observing Satellite</gco:CharacterString></gmd:description></gmd:MD_Identifier></gmi:identifier><gmi:description><gco:CharacterString>Earth
         Observation Satellites</gco:CharacterString></gmi:description><gmi:instrument
-        xlink:href=\"#dcebf9b86-b64f-4922-a27d-c3c30cfc4e3d\"></gmi:instrument></eos:EOS_Platform></gmi:platform></gmi:MI_AcquisitionInformation></gmi:acquisitionInformation></gmi:MI_Metadata><tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
+        xlink:href=\"#df62c91cf-4f99-46b6-a25a-16a797bba0d1\"></gmi:instrument></eos:EOS_Platform></gmi:platform></gmi:MI_AcquisitionInformation></gmi:acquisitionInformation></gmi:MI_Metadata><tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C345242-GHRC\" revision-id=\"46\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
         \                xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"\n                 xmlns:gmx=\"http://www.isotc211.org/2005/gmx\"\n
@@ -3557,10 +3611,11 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ADVANCED
-        MICROWAVE SOUNDING UNIT-A (AMSU-A) SWATH FROM NOAA-15 V1</gco:CharacterString>\n
-        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ADVANCED MICROWAVE SOUNDING UNIT-A
+        (AMSU-A) SWATH FROM NOAA-15 V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n
+        \  <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
         \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -3572,7 +3627,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.159-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.429-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -4027,12 +4082,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -4049,7 +4099,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d365e36\">\n                           <gml:beginPosition>1998-08-03T01:51:10.000Z</gml:beginPosition>\n
+        gml:id=\"d34e36\">\n                           <gml:beginPosition>1998-08-03T01:51:10.000Z</gml:beginPosition>\n
         \                          <gml:endPosition/>\n                        </gml:TimePeriod>\n
         \                    </gmd:extent>\n                  </gmd:EX_TemporalExtent>\n
         \              </gmd:temporalElement>\n            </gmd:EX_Extent>\n         </gmd:extent>\n
@@ -4179,13 +4229,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d365e70\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d34e70\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>AMSU-A</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
@@ -4193,7 +4241,7 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d365e61\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d34e61\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>N/A</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -4201,14 +4249,14 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:status/>\n               <gmi:parentOperation gco:nilReason=\"inapplicable\"/>\n
         \           </gmi:MI_Operation>\n         </gmi:operation>\n         <gmi:platform>\n
-        \           <gmi:MI_Platform id=\"d365e61\">\n               <gmi:identifier>\n
+        \           <gmi:MI_Platform id=\"d34e61\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>NOAA-15</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>NOAA-15</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>EARTH
         OBSERVATION SATELLITES</gco:CharacterString>\n               </gmi:description>\n
-        \              <gmi:instrument xlink:href=\"#d365e70\"/>\n            </gmi:MI_Platform>\n
+        \              <gmi:instrument xlink:href=\"#d34e70\"/>\n            </gmi:MI_Platform>\n
         \        </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n   </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C294362-GHRC\" revision-id=\"45\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
@@ -4219,10 +4267,11 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ADVANCED
-        MICROWAVE SOUNDING UNIT-A (AMSU-A) SWATH FROM NOAA-16 V1</gco:CharacterString>\n
-        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ADVANCED MICROWAVE SOUNDING UNIT-A
+        (AMSU-A) SWATH FROM NOAA-16 V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n
+        \  <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
         \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -4234,7 +4283,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.167-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.444-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -4689,12 +4738,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -4711,7 +4755,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d369e36\">\n                           <gml:beginPosition>2001-05-27T00:41:30.000Z</gml:beginPosition>\n
+        gml:id=\"d42e36\">\n                           <gml:beginPosition>2001-05-27T00:41:30.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2009-07-30T17:30:57.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -4831,13 +4875,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d369e72\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d42e72\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>AMSU-A</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
@@ -4845,7 +4887,7 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d369e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d42e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>N/A</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -4853,14 +4895,14 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:status/>\n               <gmi:parentOperation gco:nilReason=\"inapplicable\"/>\n
         \           </gmi:MI_Operation>\n         </gmi:operation>\n         <gmi:platform>\n
-        \           <gmi:MI_Platform id=\"d369e63\">\n               <gmi:identifier>\n
+        \           <gmi:MI_Platform id=\"d42e63\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>NOAA-16</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>NOAA-16</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>EARTH
         OBSERVATION SATELLITES</gco:CharacterString>\n               </gmi:description>\n
-        \              <gmi:instrument xlink:href=\"#d369e72\"/>\n            </gmi:MI_Platform>\n
+        \              <gmi:instrument xlink:href=\"#d42e72\"/>\n            </gmi:MI_Platform>\n
         \        </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n   </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C239364-GHRC\" revision-id=\"45\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
@@ -4871,10 +4913,11 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:ADVANCED
-        MICROWAVE SOUNDING UNIT-A (AMSU-A) SWATH FROM NOAA-17 V1</gco:CharacterString>\n
-        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:ADVANCED MICROWAVE SOUNDING UNIT-A
+        (AMSU-A) SWATH FROM NOAA-17 V1</gco:CharacterString>\n   </gmd:fileIdentifier>\n
+        \  <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
         \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -4886,7 +4929,7 @@ http_interactions:
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#CI_RoleCode\"\n
         \                            codeListValue=\"pointOfContact\">pointOfContact</gmd:CI_RoleCode>\n
         \        </gmd:role>\n      </gmd:CI_ResponsibleParty>\n   </gmd:contact>\n
-        \  <gmd:dateStamp>\n      <gco:DateTime>2016-07-12T09:42:59.154-04:00</gco:DateTime>\n
+        \  <gmd:dateStamp>\n      <gco:DateTime>2016-08-03T11:36:48.427-04:00</gco:DateTime>\n
         \  </gmd:dateStamp>\n   <gmd:metadataStandardName>\n      <gco:CharacterString>ISO
         19115-2 Geographic Information - Metadata Part 2 Extensions for imagery and
         gridded data</gco:CharacterString>\n   </gmd:metadataStandardName>\n   <gmd:metadataStandardVersion>\n
@@ -5340,12 +5383,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -5362,7 +5400,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d367e36\">\n                           <gml:beginPosition>2002-07-21T00:53:50.000Z</gml:beginPosition>\n
+        gml:id=\"d30e36\">\n                           <gml:beginPosition>2002-07-21T00:53:50.000Z</gml:beginPosition>\n
         \                          <gml:endPosition>2003-12-13T01:24:45.000Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -5482,13 +5520,11 @@ http_interactions:
         \        <gmd:maintenanceAndUpdateFrequency>\n            <gmd:MD_MaintenanceFrequencyCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <gmi:MI_Instrument
-        id=\"d367e72\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <gmi:MI_Instrument id=\"d30e72\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>AMSU-A</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
         \                 </gmd:CI_Citation>\n               </gmi:citation>\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>AMSU-A</gco:CharacterString>\n
@@ -5496,7 +5532,7 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d367e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
+        xlink:href=\"#d30e63\"/>\n            </gmi:MI_Instrument>\n         </gmi:instrument>\n
         \        <gmi:operation>\n            <gmi:MI_Operation>\n               <gmi:description>\n
         \                 <gco:CharacterString>N/A</gco:CharacterString>\n               </gmi:description>\n
         \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
@@ -5504,14 +5540,14 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:status/>\n               <gmi:parentOperation gco:nilReason=\"inapplicable\"/>\n
         \           </gmi:MI_Operation>\n         </gmi:operation>\n         <gmi:platform>\n
-        \           <gmi:MI_Platform id=\"d367e63\">\n               <gmi:identifier>\n
+        \           <gmi:MI_Platform id=\"d30e63\">\n               <gmi:identifier>\n
         \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>NOAA-17</gco:CharacterString>\n
         \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>NOAA-17</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>EARTH
         OBSERVATION SATELLITES</gco:CharacterString>\n               </gmi:description>\n
-        \              <gmi:instrument xlink:href=\"#d367e72\"/>\n            </gmi:MI_Platform>\n
+        \              <gmi:instrument xlink:href=\"#d30e72\"/>\n            </gmi:MI_Platform>\n
         \        </gmi:platform>\n      </gmi:MI_AcquisitionInformation>\n   </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result><result
         concept-id=\"C179003112-ORNL_DAAC\" revision-id=\"17\" format=\"application/iso19115+xml\">\n<gmi:MI_Metadata
         xmlns:gmi=\"http://www.isotc211.org/2005/gmi\"\n                 xmlns:gco=\"http://www.isotc211.org/2005/gco\"\n
@@ -5522,10 +5558,10 @@ http_interactions:
         \                xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n
         \                xmlns:swe=\"http://schemas.opengis.net/sweCommon/2.0/\"\n
         \                xmlns:eos=\"http://earthdata.nasa.gov/schema/eos\"\n                 xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><!--Other
-        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0-->\n
-        \  <gmd:fileIdentifier>\n      <gco:CharacterString>gov.nasa.echo:Aircraft
-        Flux-Detrended: NRCC (FIFE)</gco:CharacterString>\n   </gmd:fileIdentifier>\n
-        \  <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
+        Properties, all:0, coi:0,ii:0,si:0,pli:0,pri:0,qi:0,gi:0,ci:0,dk:0,pcc:0,icc:0,scc:0--><!--Translated
+        from ECHO using ECHOToISO.xsl Version: 1.33-->\n   <gmd:fileIdentifier>\n
+        \     <gco:CharacterString>gov.nasa.echo:Aircraft Flux-Detrended: NRCC (FIFE)</gco:CharacterString>\n
+        \  </gmd:fileIdentifier>\n   <gmd:language>\n      <gco:CharacterString>eng</gco:CharacterString>\n
         \  </gmd:language>\n   <gmd:characterSet>\n      <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                              codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -5938,12 +5974,7 @@ http_interactions:
         \                          </gmd:role>\n                        </gmd:CI_ResponsibleParty>\n
         \                    </gmd:citedResponsibleParty>\n                  </gmd:CI_Citation>\n
         \              </gmd:thesaurusName>\n            </gmd:MD_Keywords>\n         </gmd:descriptiveKeywords>\n
-        \        <gmd:resourceConstraints>\n            <gmd:MD_LegalConstraints>\n
-        \              <gmd:useLimitation>\n                  <gco:CharacterString>Restriction
-        Comment:</gco:CharacterString>\n               </gmd:useLimitation>\n               <gmd:otherConstraints>\n
-        \                 <gco:CharacterString>Restriction Flag:</gco:CharacterString>\n
-        \              </gmd:otherConstraints>\n            </gmd:MD_LegalConstraints>\n
-        \        </gmd:resourceConstraints>\n         <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
+        \        <gmd:language>\n            <gco:CharacterString>eng</gco:CharacterString>\n
         \        </gmd:language>\n         <gmd:characterSet>\n            <gmd:MD_CharacterSetCode
         codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode\"\n
         \                                    codeListValue=\"utf8\">utf8</gmd:MD_CharacterSetCode>\n
@@ -5960,7 +5991,7 @@ http_interactions:
         \                 </gmd:EX_GeographicBoundingBox>\n               </gmd:geographicElement>\n
         \              <gmd:temporalElement><!--RangeDateTime-->\n                  <gmd:EX_TemporalExtent
         id=\"boundingTemporalExtent\">\n                     <gmd:extent>\n                        <gml:TimePeriod
-        gml:id=\"d368e40\">\n                           <gml:beginPosition>1987-06-26T00:00:00Z</gml:beginPosition>\n
+        gml:id=\"d36e40\">\n                           <gml:beginPosition>1987-06-26T00:00:00Z</gml:beginPosition>\n
         \                          <gml:endPosition>1989-10-31T00:00:00Z</gml:endPosition>\n
         \                       </gml:TimePeriod>\n                     </gmd:extent>\n
         \                 </gmd:EX_TemporalExtent>\n               </gmd:temporalElement>\n
@@ -6061,24 +6092,22 @@ http_interactions:
         \     <gmd:MD_MaintenanceInformation>\n         <gmd:maintenanceAndUpdateFrequency>\n
         \           <gmd:MD_MaintenanceFrequencyCode codeList=\"http://www.ngdc.noaa.gov/metadata/published/xsd/schema/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode\"\n
         \                                            codeListValue=\"irregular\">irregular</gmd:MD_MaintenanceFrequencyCode>\n
-        \        </gmd:maintenanceAndUpdateFrequency>\n         <gmd:maintenanceNote>\n
-        \           <gco:CharacterString>Translated from ECHO using ECHOToISO.xsl
-        Version: 1.32 (Dec. 9, 2015)</gco:CharacterString>\n         </gmd:maintenanceNote>\n
-        \     </gmd:MD_MaintenanceInformation>\n   </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n
-        \     <gmi:MI_AcquisitionInformation>\n         <gmi:instrument>\n            <eos:EOS_Instrument
-        id=\"d368e222\">\n               <gmi:citation>\n                  <gmd:CI_Citation>\n
-        \                    <gmd:title>\n                        <gco:CharacterString>INFRARED
-        RADIOMETER &gt; INFRARED RADIOMETER</gco:CharacterString>\n                     </gmd:title>\n
-        \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
-        \              </gmi:citation>\n               <gmi:identifier>\n                  <gmd:MD_Identifier>\n
-        \                    <gmd:code>\n                        <gco:CharacterString>INFRARED
-        RADIOMETER</gco:CharacterString>\n                     </gmd:code>\n                     <gmd:description>\n
+        \        </gmd:maintenanceAndUpdateFrequency>\n      </gmd:MD_MaintenanceInformation>\n
+        \  </gmd:metadataMaintenance>\n   <gmi:acquisitionInformation>\n      <gmi:MI_AcquisitionInformation>\n
+        \        <gmi:instrument>\n            <eos:EOS_Instrument id=\"d36e222\">\n
+        \              <gmi:citation>\n                  <gmd:CI_Citation>\n                     <gmd:title>\n
+        \                       <gco:CharacterString>INFRARED RADIOMETER &gt; INFRARED
+        RADIOMETER</gco:CharacterString>\n                     </gmd:title>\n                     <gmd:date
+        gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n               </gmi:citation>\n
+        \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
+        \                       <gco:CharacterString>INFRARED RADIOMETER</gco:CharacterString>\n
+        \                    </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>INFRARED RADIOMETER</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e228\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e228\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>INFRARED RADIOMETER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6090,9 +6119,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e222\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e222\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e231\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e231\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>PRESSURE
         TRANSDUCER &gt; PRESSURE TRANSDUCER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6103,8 +6132,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e237\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e237\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>PRESSURE TRANSDUCER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6116,9 +6145,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e231\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e231\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e240\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e240\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>EDDY
         CORRELATION APPARATUS &gt; EDDY CORRELATION APPARATUS</gco:CharacterString>\n
         \                    </gmd:title>\n                     <gmd:date gco:nilReason=\"unknown\"/>\n
@@ -6130,8 +6159,8 @@ http_interactions:
         \                 </gmd:MD_Identifier>\n               </gmi:identifier>\n
         \              <gmi:type>\n                  <gco:CharacterString/>\n               </gmi:type>\n
         \              <gmi:description gco:nilReason=\"missing\"/>\n               <gmi:mountedOn
-        xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n                  <eos:EOS_Sensor
-        id=\"d368e246\">\n                     <eos:citation>\n                        <gmd:CI_Citation>\n
+        xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n                  <eos:EOS_Sensor
+        id=\"d36e246\">\n                     <eos:citation>\n                        <gmd:CI_Citation>\n
         \                          <gmd:title>\n                              <gco:CharacterString>EDDY
         CORRELATION APPARATUS&gt;</gco:CharacterString>\n                           </gmd:title>\n
         \                          <gmd:date gco:nilReason=\"unknown\"/>\n                        </gmd:CI_Citation>\n
@@ -6142,9 +6171,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e240\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e240\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e249\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e249\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>NDIR
         GAS ANALYZER &gt; NDIR GAS ANALYZER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6155,8 +6184,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e255\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e255\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>NDIR GAS ANALYZER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6168,9 +6197,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e249\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e249\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e258\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e258\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>RADIO
         ALTIMETER &gt; RADIO ALTIMETER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6181,8 +6210,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e264\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e264\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>RADIO ALTIMETER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6194,9 +6223,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e258\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e258\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e267\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e267\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>HYGROMETER
         &gt; HYGROMETER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6207,8 +6236,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e273\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e273\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>HYGROMETER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6220,9 +6249,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e267\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e267\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e276\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e276\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>PYRANOMETER
         &gt; PYRANOMETER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6233,8 +6262,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e282\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e282\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>PYRANOMETER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6246,9 +6275,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e276\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e276\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e285\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e285\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>WIND
         PROFILER &gt; WIND PROFILER</gco:CharacterString>\n                     </gmd:title>\n
         \                    <gmd:date gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n
@@ -6259,8 +6288,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e291\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e291\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>WIND PROFILER&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6272,9 +6301,9 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e285\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e285\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:instrument>\n
-        \           <eos:EOS_Instrument id=\"d368e294\">\n               <gmi:citation>\n
+        \           <eos:EOS_Instrument id=\"d36e294\">\n               <gmi:citation>\n
         \                 <gmd:CI_Citation>\n                     <gmd:title>\n                        <gco:CharacterString>ANALYSIS
         &gt; ANALYSIS</gco:CharacterString>\n                     </gmd:title>\n                     <gmd:date
         gco:nilReason=\"unknown\"/>\n                  </gmd:CI_Citation>\n               </gmi:citation>\n
@@ -6285,8 +6314,8 @@ http_interactions:
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:type>\n                  <gco:CharacterString/>\n
         \              </gmi:type>\n               <gmi:description gco:nilReason=\"missing\"/>\n
-        \              <gmi:mountedOn xlink:href=\"#d368e214\"/>\n               <eos:sensor>\n
-        \                 <eos:EOS_Sensor id=\"d368e300\">\n                     <eos:citation>\n
+        \              <gmi:mountedOn xlink:href=\"#d36e214\"/>\n               <eos:sensor>\n
+        \                 <eos:EOS_Sensor id=\"d36e300\">\n                     <eos:citation>\n
         \                       <gmd:CI_Citation>\n                           <gmd:title>\n
         \                             <gco:CharacterString>ANALYSIS&gt;</gco:CharacterString>\n
         \                          </gmd:title>\n                           <gmd:date
@@ -6298,7 +6327,7 @@ http_interactions:
         \                             <gco:CharacterString/>\n                           </gmd:description>\n
         \                       </gmd:MD_Identifier>\n                     </eos:identifier>\n
         \                    <eos:type gco:nilReason=\"missing\"/>\n                     <eos:mountedOn
-        xlink:href=\"#d368e294\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
+        xlink:href=\"#d36e294\"/>\n                  </eos:EOS_Sensor>\n               </eos:sensor>\n
         \           </eos:EOS_Instrument>\n         </gmi:instrument>\n         <gmi:operation>\n
         \           <gmi:MI_Operation>\n               <gmi:description>\n                  <gco:CharacterString>FIFE
         &gt; FIFE</gco:CharacterString>\n               </gmi:description>\n               <gmi:identifier>\n
@@ -6322,21 +6351,20 @@ http_interactions:
         \                    </gmd:code>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:status/>\n               <gmi:parentOperation
         gco:nilReason=\"inapplicable\"/>\n            </gmi:MI_Operation>\n         </gmi:operation>\n
-        \        <gmi:platform>\n            <eos:EOS_Platform id=\"d368e214\">\n
-        \              <gmi:identifier>\n                  <gmd:MD_Identifier>\n                     <gmd:code>\n
-        \                       <gco:CharacterString>TWIN OTTER</gco:CharacterString>\n
-        \                    </gmd:code>\n                     <gmd:description>\n
+        \        <gmi:platform>\n            <eos:EOS_Platform id=\"d36e214\">\n               <gmi:identifier>\n
+        \                 <gmd:MD_Identifier>\n                     <gmd:code>\n                        <gco:CharacterString>TWIN
+        OTTER</gco:CharacterString>\n                     </gmd:code>\n                     <gmd:description>\n
         \                       <gco:CharacterString>TWIN OTTER</gco:CharacterString>\n
         \                    </gmd:description>\n                  </gmd:MD_Identifier>\n
         \              </gmi:identifier>\n               <gmi:description>\n                  <gco:CharacterString>aircraft</gco:CharacterString>\n
-        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d368e222\"/>\n
-        \              <gmi:instrument xlink:href=\"#d368e231\"/>\n               <gmi:instrument
-        xlink:href=\"#d368e240\"/>\n               <gmi:instrument xlink:href=\"#d368e249\"/>\n
-        \              <gmi:instrument xlink:href=\"#d368e258\"/>\n               <gmi:instrument
-        xlink:href=\"#d368e267\"/>\n               <gmi:instrument xlink:href=\"#d368e276\"/>\n
-        \              <gmi:instrument xlink:href=\"#d368e285\"/>\n               <gmi:instrument
-        xlink:href=\"#d368e294\"/>\n            </eos:EOS_Platform>\n         </gmi:platform>\n
+        \              </gmi:description>\n               <gmi:instrument xlink:href=\"#d36e222\"/>\n
+        \              <gmi:instrument xlink:href=\"#d36e231\"/>\n               <gmi:instrument
+        xlink:href=\"#d36e240\"/>\n               <gmi:instrument xlink:href=\"#d36e249\"/>\n
+        \              <gmi:instrument xlink:href=\"#d36e258\"/>\n               <gmi:instrument
+        xlink:href=\"#d36e267\"/>\n               <gmi:instrument xlink:href=\"#d36e276\"/>\n
+        \              <gmi:instrument xlink:href=\"#d36e285\"/>\n               <gmi:instrument
+        xlink:href=\"#d36e294\"/>\n            </eos:EOS_Platform>\n         </gmi:platform>\n
         \     </gmi:MI_AcquisitionInformation>\n   </gmi:acquisitionInformation>\n</gmi:MI_Metadata>\n<tags><tag><tagKey>org.ceos.wgiss.cwic.granules.prod</tagKey></tag></tags></result></results>"
     http_version: 
-  recorded_at: Tue, 12 Jul 2016 13:42:59 GMT
+  recorded_at: Wed, 03 Aug 2016 15:36:48 GMT
 recorded_with: VCR 3.0.1

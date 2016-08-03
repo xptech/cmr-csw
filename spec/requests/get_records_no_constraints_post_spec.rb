@@ -125,7 +125,7 @@ RSpec.describe "various GetRecords POST requests with NO CONSTRAINTS", :type => 
                                     'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
       # we have a total of 32166 datasets (from which a subset of 1798 are CWIC datasets)
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/@numberOfRecordsMatched', 'gmi' => 'http://www.isotc211.org/2005/gmi',
-                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.value).to eq("1798")
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').first.value).to eq("1797")
     end
   end
 
