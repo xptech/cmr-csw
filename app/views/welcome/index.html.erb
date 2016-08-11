@@ -116,7 +116,29 @@
   </ul>
   <h4><a name="get-records-post"/>POST Requests using the OGC Filter query language</h4>
   <ul>
-    <li>POST to <%= root_url.chomp '/' %>/collections for CMR collections (datasets) search with NO constraints:
+    <li>POST to <%= root_url.chomp '/' %>/collections for <span class="emphasis">only searching for CMR CWIC collections (datasets)</span> search with NO additional constraints:
+<pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+    outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+    startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+    xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+    xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+    xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+    &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+        &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+        &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+            &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                    &lt;ogc:PropertyIsLike&gt;
+                        &lt;ogc:PropertyName&gt;IsCwic&lt;/ogc:PropertyName&gt;
+                        &lt;ogc:Literal&gt;true&lt;/ogc:Literal&gt;
+                    &lt;/ogc:PropertyIsLike&gt;
+            &lt;/ogc:Filter&gt;
+        &lt;/csw:Constraint&gt;
+    &lt;/csw:Query&gt;
+&lt;/csw:GetRecords&gt;</code></pre>
+    </li>
+  </ul>
+  <ul>
+    <li>POST to <%= root_url.chomp '/' %>/collections for <span class="emphasis">all CMR collections (datasets)</span> search with NO constraints:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
     startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
@@ -462,6 +484,7 @@
       <li><span class="emphasis">BoundingBox</span> specified as a comma (no spaces) separated string (ex. BoundingBox=lower_left_longitude,lower_left_latitude,upper_right_longitude,upper_right_latitude)</li>
       <li><span class="emphasis">TempExtent_begin</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_begin=2008-09-06T23:59:59Z)</li>
       <li><span class="emphasis">TempExtent_end</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_end=2010-09-06T23:59:59Z).  TempExtent_end must be after TempExtent_begin</li>
+      <li><span class="emphasis">IsCwic</span> with the only valid value 'true' (ex. IsCwic=true) in order to limit the scope of the search to CWIC collections (datasets) instead of the default all CMR collections</li>
     </ul>
     Additional query parameters to be used with the GetRecords GET request are:
     <ul>
@@ -489,7 +512,10 @@
   </p>
   <p>Sample GetRecords GET requests:</p>
   <ul>
-    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and <span class="emphasis">no constraints</span>:
+    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and only searching for <span class="emphasis">CMR CWIC collections (datasets)</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsCwic=true">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsCwic=true</a>
+    </li>
+    <li>Search results with the default all CMR collections, <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and <span class="emphasis">no constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results">GET <%= root_url.chomp '/' %>?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results</a>
     </li>
     <li>Search results with the <span class="emphasis">ISO 19115 GMD</span> output (http://www.isotc211.org/2005/gmd), full result set and <span class="emphasis">no constraints</span>:
@@ -593,10 +619,24 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
 
   <h3>Examples</h3>
   <ul>
+    <li>Allowed values via a GetDomain GET request for the IsCwic (used to search only CWIC datasets) <span class="emphasis">PropertyName</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic</a>
+    </li>
+    <li>Allowed values via a GetDomain POST to <%= root_url.chomp '/' %>/collections for the IsCwic (used to only search CWIC datasets) <span class="emphasis">PropertyName</span> with XML POST request body:
+<pre><code>&lt;GetDomain
+   service=&quot;CSW&quot;
+   version=&quot;2.0.2&quot;
+   xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;&gt;
+    &lt;PropertyName&gt;IsCwic&lt;/PropertyName&gt;
+&lt;/GetDomain&gt;</code></pre>
+    </li>
     <li>Allowed values via a GetDomain GET request for the TempExtent_begin <span class="emphasis">PropertyName</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin</a>
     </li>
-    <li>Allowed values via a GetDomain POST to<%= root_url.chomp '/' %>/collections for the TempExtent_begin <span class="emphasis">PropertyName</span> with XML POST request body:
+    <li>Allowed values via a GetDomain POST to <%= root_url.chomp '/' %>/collections for the TempExtent_begin <span class="emphasis">PropertyName</span> with XML POST request body:
 <pre><code>&lt;GetDomain
    service=&quot;CSW&quot;
    version=&quot;2.0.2&quot;

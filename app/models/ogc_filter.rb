@@ -10,7 +10,8 @@ class OgcFilter
                                        OgcFilterPolygon,
                                        OgcFilterLine,
                                        OgcFilterPoint,
-                                       OgcFilterModified
+                                       OgcFilterModified,
+                                       OgcFilterIsCwic
                                      ]
   @ogc_filter
   @cmr_query_hash

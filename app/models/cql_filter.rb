@@ -3,7 +3,7 @@
 #
 class CqlFilter
   CONSTRAINT_LAGUAGES = %w(CQL_TEXT)
-  SUPPORTED_CQL_QUERYABLES = %w(AnyText BoundingBox TempExtent_begin TempExtent_end)
+  SUPPORTED_CQL_QUERYABLES = %w(AnyText BoundingBox TempExtent_begin TempExtent_end IsCwic)
 
   @constraint
   @constraint_language
@@ -55,6 +55,8 @@ class CqlFilter
           begin_date = queryable_value
         when 'TempExtent_end'
           end_date = queryable_value
+        when 'IsCwic'
+          @cmr_query_hash.reverse_merge!(CqlFilterIsCwic.process(queryable_value))
         else
           error_message = "The queryable #{queryable} is not supported by the CMR CSW implementation"
           Rails.logger.error(error_message)

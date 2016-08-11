@@ -13,7 +13,7 @@
         </csw:RangeOfValues>
             <% when 'ListOfValues' %>
         <csw:ListOfValues>
-          <% parameter[:class]::LIST_OF_VALUES.each do |value| %>
+          <% property[:class]::LIST_OF_VALUES.each do |value| %>
           <csw:Value><%= value %></csw:Value>
           <% end %>
         </csw:ListOfValues>

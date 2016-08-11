@@ -20,5 +20,4 @@ class CqlFilterTemporal < OgcFilterTemporal
     end
     cmr_query_hash
   end
-
 end

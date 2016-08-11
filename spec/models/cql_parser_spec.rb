@@ -4,6 +4,21 @@ require 'parslet/rig/rspec'
 RSpec.describe CqlParser do
   describe 'Various CQL Parsing scenarios' do
 
+    it 'is possible to parse IsCwic' do
+      begin
+        # bbox
+        CqlParser.new.cqlconstraint_iscwic.parse('IsCwic')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse('IsCwic')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse('IsCwic ')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse('IsCwic   ')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse(' IsCwic')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse('  IsCwic ')
+        expect(CqlParser.new.cqlconstraint_iscwic).to parse('   IsCwic   ')
+      rescue Parslet::ParseFailed => error
+        fail(error.cause.ascii_tree)
+      end
+    end
+
     it 'is possible to parse a BoundingBox' do
       begin
         # bbox
@@ -123,6 +138,19 @@ RSpec.describe CqlParser do
       end
     end
 
+    it 'is possible to parse the IsCwic queryable and value' do
+      begin
+        # single queryable and value
+        expect(CqlParser.new.cqlquery).to parse('IsCwic=true')
+        expect(CqlParser.new.cqlquery).to parse(' IsCwic = true')
+        parser = CqlParser.new.cqlquery.parse(' IsCwic = true')
+        expect(parser[0][:key].str).to eq 'IsCwic'
+        expect(parser[0][:value].str).to eq 'true'
+      rescue Parslet::ParseFailed => error
+        fail(error.cause.ascii_tree)
+      end
+    end
+
     it 'is possible to parse the TempExtent_begin queryable and value' do
       begin
         # single queryable and value
@@ -178,6 +206,29 @@ RSpec.describe CqlParser do
 
         expect(CqlParser.new.cqlquery).to parse(' AnyText = 1234 and BoundingBox =  -180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z')
         expect(CqlParser.new.cqlquery).to parse(' AnyText=  1234 and BoundingBox  =   -180,-90,+180.000,+90.0 and TempExtent_begin = 1990-09-03T00:00:01Z  and TempExtent_end  = 2008-09-06T23:59:59Z')
+
+      rescue Parslet::ParseFailed => error
+        fail(error.cause.ascii_tree)
+      end
+    end
+
+    it 'is possible to parse the AnyText,BoundingBox, TempExtent_begin, TempExtent_end, IsCwic queryables and values' do
+      begin
+        # ALL queryables and values
+        parser = CqlParser.new.cqlquery.parse('AnyText=1234 and BoundingBox=-180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true')
+        expect(parser[0][:key].str).to eq 'AnyText'
+        expect(parser[0][:value].str).to eq '1234'
+        expect(parser[1][:key].str).to eq 'BoundingBox'
+        expect(parser[1][:value].str).to eq '-180,-90,+180.000,+90.0'
+        expect(parser[2][:key].str).to eq 'TempExtent_begin'
+        expect(parser[2][:value].str).to eq '1990-09-03T00:00:01Z'
+        expect(parser[3][:key].str).to eq 'TempExtent_end'
+        expect(parser[3][:value].str).to eq '2008-09-06T23:59:59Z'
+        expect(parser[4][:key].str).to eq 'IsCwic'
+        expect(parser[4][:value].str).to eq 'true'
+
+        expect(CqlParser.new.cqlquery).to parse(' AnyText = 1234 and BoundingBox =  -180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true')
+        expect(CqlParser.new.cqlquery).to parse(' AnyText=  1234 and BoundingBox  =   -180,-90,+180.000,+90.0 and TempExtent_begin = 1990-09-03T00:00:01Z  and TempExtent_end  = 2008-09-06T23:59:59Z  and  IsCwic = true')
 
       rescue Parslet::ParseFailed => error
         fail(error.cause.ascii_tree)

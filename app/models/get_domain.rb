@@ -1,11 +1,12 @@
 class GetDomain < BaseCswModel
 
   VALID_PROPERTY_NAMES = {'Modified' => 'DomainModified',
-                            'TempExtent_begin' => 'DomainTempExtentBegin',
-                            'TempExtent_end' => 'DomainTempExtentEnd',
-                            'Platform' => 'DomainPlatform',
-                            'Instrument' => 'DomainInstrument',
-                            'ScienceKeywords' => 'DomainScienceKeywords'
+                          'TempExtent_begin' => 'DomainTempExtentBegin',
+                          'TempExtent_end' => 'DomainTempExtentEnd',
+                          'Platform' => 'DomainPlatform',
+                          'Instrument' => 'DomainInstrument',
+                          'ScienceKeywords' => 'DomainScienceKeywords',
+                          'IsCwic' => 'DomainIsCwic'
   }
   # TODO Platform, Instrument, ScienceKeywords once we have a way to get the list of values
 

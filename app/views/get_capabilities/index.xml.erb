@@ -114,6 +114,11 @@
 			  <ows:Value><%= key %></ows:Value>
 			<% end %>
 			</ows:Constraint>
+			<ows:Constraint name="AdditionalQueryables">
+			<% ADDITIONAL_QUERYABLES_TO_CMR_QUERYABLES.each_pair do |key, value| %>
+			  <ows:Value><%= key %></ows:Value>
+			<% end %>
+			</ows:Constraint>
 		</ows:Operation>
 
 		<ows:Operation name="GetRecordById">
