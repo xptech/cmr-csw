@@ -110,6 +110,13 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         'Platform' => ['Platform', 'platform', ['']],
 
         'ScienceKeywords' => ['ScienceKeywords', 'science_keywords', ['']],
+
+        # CWIC datasets are tagged in CMR with:
+        # namespace = 'org.ceos.wgiss.cwic.granules' and value = 'prod' for CWIC PROD datasets
+        # namespace = 'org.ceos.wgiss.cwic.granules' and value = 'test' for CWIC TEST datasets
+        # Sample CMR query is:
+        # https://cmr.earthdata.nasa.gov/search/collections.json?tag_key=org.ceos.wgiss.cwic.granules.prod&include_tags=org.ceos.wgiss.cwic.*
+        'IsCwic' => ['IsCwic', 'IsCwic', ['']],
         # Name of a service type.
         #'ServiceType' => ['ServiceType', '', ['MD_Metadata.identificationInfo.SV_ServiceIdentification.serviceType']],
 

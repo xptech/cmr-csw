@@ -593,10 +593,24 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
 
   <h3>Examples</h3>
   <ul>
+    <li>Allowed values via a GetDomain GET request for the IsCwic (used to search only CWIC datasets) <span class="emphasis">PropertyName</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic</a>
+    </li>
+    <li>Allowed values via a GetDomain POST to <%= root_url.chomp '/' %>/collections for the IsCwic (used to only search CWIC datasets) <span class="emphasis">PropertyName</span> with XML POST request body:
+<pre><code>&lt;GetDomain
+   service=&quot;CSW&quot;
+   version=&quot;2.0.2&quot;
+   xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://www.opengis.net/cat/csw/2.0.2 CSW-discovery.xsd&quot;&gt;
+    &lt;PropertyName&gt;IsCwic&lt;/PropertyName&gt;
+&lt;/GetDomain&gt;</code></pre>
+    </li>
     <li>Allowed values via a GetDomain GET request for the TempExtent_begin <span class="emphasis">PropertyName</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin">GET <%= root_url.chomp '/' %>?request=GetDomain&service=CSW&version=2.0.2&PropertyName=TempExtent_begin</a>
     </li>
-    <li>Allowed values via a GetDomain POST to<%= root_url.chomp '/' %>/collections for the TempExtent_begin <span class="emphasis">PropertyName</span> with XML POST request body:
+    <li>Allowed values via a GetDomain POST to <%= root_url.chomp '/' %>/collections for the TempExtent_begin <span class="emphasis">PropertyName</span> with XML POST request body:
 <pre><code>&lt;GetDomain
    service=&quot;CSW&quot;
    version=&quot;2.0.2&quot;
