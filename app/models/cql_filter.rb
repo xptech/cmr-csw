@@ -3,7 +3,7 @@
 #
 class CqlFilter
   CONSTRAINT_LAGUAGES = %w(CQL_TEXT)
-  SUPPORTED_CQL_QUERYABLES = %w(AnyText BoundingBox TempExtent_begin TempExtent_end IcCwic)
+  SUPPORTED_CQL_QUERYABLES = %w(AnyText BoundingBox TempExtent_begin TempExtent_end IsCwic)
 
   @constraint
   @constraint_language
