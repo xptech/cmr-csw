@@ -1,6 +1,31 @@
 require "spec_helper"
 
-RSpec.describe "various successful GetRecords GET requests with BoundingBox, TimeExtent_begin, TimeExtent_end and AnyText CONSTRAINTS", :type => :request do
+RSpec.describe "various successful GetRecords GET requests with BoundingBox, TimeExtent_begin, TimeExtent_end, AnyText and IsCwic CONSTRAINTS", :type => :request do
+
+  it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic IsCwic constraint GET request' do
+    VCR.use_cassette 'requests/get_records/gmi/cwic_1', :decode_compressed_response => true, :record => :once do
+      get '/collections', :request => 'GetRecords', :service => 'CSW', :version => '2.0.2', :ElementSetName => 'full',
+          :resultType => 'results', :constraint => 'IsCwic=true', :CONSTRAINTLANGUAGE => 'CQL_TEXT'
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template('get_records/index.xml.erb')
+      records_xml = Nokogiri::XML(response.body)
+      expect(records_xml.root.name).to eq 'GetRecordsResponse'
+      # There should be 10 records
+      expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'gmi' => 'http://www.isotc211.org/2005/gmi',
+                                    'csw' => 'http://www.opengis.net/cat/csw/2.0.2').size).to eq(10)
+      # There should be a SearchStatus with a timestamp
+      search_status_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchStatus', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_status_node_set.size).to eq(1) # expect(search_status_node_set[0]['timestamp']).to_not eq(nil)
+      search_results_node_set = records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
+      expect(search_results_node_set.size).to eq(1)
+      # ALL CWIC DATASETS (as opposed to ALL 32205 CMR datasets)
+      expect(search_results_node_set[0]['numberOfRecordsMatched']).to eq('1800')
+      expect(search_results_node_set[0]['numberOfRecordsReturned']).to eq('10')
+      expect(search_results_node_set[0]['nextRecord']).to eq('11')
+      expect(search_results_node_set[0]['elementSet']).to eq('full')
+      expect(search_results_node_set[0]['recordSchema']).to eq('http://www.isotc211.org/2005/gmi')
+    end
+  end
 
   it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic BBOX constraint GET request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_1', :decode_compressed_response => true, :record => :once do
