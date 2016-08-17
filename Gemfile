@@ -4,13 +4,6 @@ gem 'rails', '4.2.7.1'
 
 gem 'unicorn'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-#gem 'sqlite3'
-
-#gem 'jruby-openssl', '~> 0.9.10'
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -46,21 +39,6 @@ group :test, :development do
   #gem 'rspec', :require => false
   gem 'rspec_junit_formatter'
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-#gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-#gem 'debugger'
 
 group :test do
   gem 'vcr'

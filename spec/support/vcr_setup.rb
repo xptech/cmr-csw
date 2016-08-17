@@ -1,4 +1,5 @@
 VCR.configure do |c|
+  # c.allow_http_connections_when_no_cassette = true
   # By default VCR will intercept all http calls.
   c.ignore_hosts '127.0.0.1', 'localhost', 'schemas.opengis.net'
   # The directory where your cassettes will be saved
