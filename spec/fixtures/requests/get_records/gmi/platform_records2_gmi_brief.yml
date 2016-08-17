@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod&options%5Bplatform%5D%5Bpattern%5D=true&platform=*AQUA*
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&options%5Bplatform%5D%5Bpattern%5D=true&platform=*AQUA*
     body:
       encoding: US-ASCII
       string: ''

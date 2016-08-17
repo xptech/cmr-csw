@@ -32,7 +32,7 @@ RSpec.describe "various successful GetRecords GET requests with BoundingBox, Tim
   end
 
   # resulting CMR Query is:
-  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod&keyword=MODIS&temporal=1990-09-03T00:00:01Z/
+  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&keyword=MODIS&temporal=1990-09-03T00:00:01Z/
   it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic BBOX AnyText, TempExtent_begin constraints GET request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_3', :decode_compressed_response => true, :record => :once do
       get '/collections', :request => 'GetRecords', :service => 'CSW', :version => '2.0.2', :ElementSetName => 'full',
@@ -50,7 +50,7 @@ RSpec.describe "various successful GetRecords GET requests with BoundingBox, Tim
   end
 
   # resulting query is:
-  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod&keyword=MODIS&temporal=/2008-09-06T23:59:59Z
+  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&keyword=MODIS&temporal=/2008-09-06T23:59:59Z
   it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic BBOX AnyText, TempExtent_end constraints GET request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_4', :decode_compressed_response => true, :record => :once do
       get '/collections', :request => 'GetRecords', :service => 'CSW', :version => '2.0.2', :ElementSetName => 'full',
@@ -68,7 +68,7 @@ RSpec.describe "various successful GetRecords GET requests with BoundingBox, Tim
   end
 
   # resulting query is
-  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod&keyword=MODIS&temporal=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
+  # search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&keyword=MODIS&temporal=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
   it 'correctly renders RESULTS FULL ISO MENDS (gmi) data in response to a basic BBOX AnyText, TempExtent_begin and TempExtent_end constraints GET request' do
     VCR.use_cassette 'requests/get_records/gmi/bbox_5', :decode_compressed_response => true, :record => :once do
       get '/collections', :request => 'GetRecords', :service => 'CSW', :version => '2.0.2', :ElementSetName => 'full',
