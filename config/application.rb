@@ -51,7 +51,9 @@ module Csw
     config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
     config.client_id = 'cmr_csw'
     config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
+    config.cwic_descriptive_keyword = 'CWIC > CEOS WGISS Integrated Catalog'
     config.geoss_data_core_tag = 'org.geo.geoss_data-core'
+    config.geoss_data_core_descriptive_keyword = 'This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution'
 
     config.concept_id = 'C14758250-LPDAAC_ECS'
   end

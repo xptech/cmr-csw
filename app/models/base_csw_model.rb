@@ -46,9 +46,9 @@ class BaseCswModel
         keyword = Nokogiri::XML::Node.new 'gmd:keyword', document
         text = Nokogiri::XML::Node.new 'gco:CharacterString', document
         if tag.content.strip == Rails.configuration.cwic_tag
-          text.content = 'CWIC > CEOS WGISS Integrated Catalog'
+          text.content = Rails.configuration.cwic_descriptive_keyword
         else
-          text.content = 'This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution'
+          text.content = Rails.configuration.geoss_data_core_descriptive_keyword
         end
 
         keyword.add_child text
