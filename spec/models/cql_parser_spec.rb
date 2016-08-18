@@ -6,7 +6,6 @@ RSpec.describe CqlParser do
 
     it 'is possible to parse IsCwic' do
       begin
-        # bbox
         CqlParser.new.cqlconstraint_iscwic.parse('IsCwic')
         expect(CqlParser.new.cqlconstraint_iscwic).to parse('IsCwic')
         expect(CqlParser.new.cqlconstraint_iscwic).to parse('IsCwic ')
@@ -21,7 +20,6 @@ RSpec.describe CqlParser do
 
     it 'is possible to parse IsGeoss' do
       begin
-        # bbox
         CqlParser.new.cqlconstraint_isgeoss.parse('IsGeoss')
         expect(CqlParser.new.cqlconstraint_isgeoss).to parse('IsGeoss')
         expect(CqlParser.new.cqlconstraint_isgeoss).to parse('IsGeoss ')
