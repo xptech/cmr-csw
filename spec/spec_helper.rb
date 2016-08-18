@@ -37,4 +37,9 @@ RSpec.configure do |config|
 
   config.color = true
   config.infer_spec_type_from_file_location!
+  # enforce new syntax
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
 end
