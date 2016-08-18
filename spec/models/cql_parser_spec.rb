@@ -19,6 +19,21 @@ RSpec.describe CqlParser do
       end
     end
 
+    it 'is possible to parse IsGeoss' do
+      begin
+        # bbox
+        CqlParser.new.cqlconstraint_isgeoss.parse('IsGeoss')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse('IsGeoss')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse('IsGeoss ')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse('IsGeoss   ')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse(' IsGeoss')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse('  IsGeoss ')
+        expect(CqlParser.new.cqlconstraint_isgeoss).to parse('   IsGeoss   ')
+      rescue Parslet::ParseFailed => error
+        fail(error.cause.ascii_tree)
+      end
+    end
+
     it 'is possible to parse a BoundingBox' do
       begin
         # bbox
@@ -151,6 +166,19 @@ RSpec.describe CqlParser do
       end
     end
 
+    it 'is possible to parse the IsGeoss queryable and value' do
+      begin
+        # single queryable and value
+        expect(CqlParser.new.cqlquery).to parse('IsGeoss=true')
+        expect(CqlParser.new.cqlquery).to parse(' IsGeoss = true')
+        parser = CqlParser.new.cqlquery.parse(' IsGeoss = true')
+        expect(parser[0][:key].str).to eq 'IsGeoss'
+        expect(parser[0][:value].str).to eq 'true'
+      rescue Parslet::ParseFailed => error
+        fail(error.cause.ascii_tree)
+      end
+    end
+
     it 'is possible to parse the TempExtent_begin queryable and value' do
       begin
         # single queryable and value
@@ -212,10 +240,10 @@ RSpec.describe CqlParser do
       end
     end
 
-    it 'is possible to parse the AnyText,BoundingBox, TempExtent_begin, TempExtent_end, IsCwic queryables and values' do
+    it 'is possible to parse the AnyText,BoundingBox, TempExtent_begin, TempExtent_end, IsCwic, IsGeos queryables and values' do
       begin
         # ALL queryables and values
-        parser = CqlParser.new.cqlquery.parse('AnyText=1234 and BoundingBox=-180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true')
+        parser = CqlParser.new.cqlquery.parse('AnyText=1234 and BoundingBox=-180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true and IsGeoss=true')
         expect(parser[0][:key].str).to eq 'AnyText'
         expect(parser[0][:value].str).to eq '1234'
         expect(parser[1][:key].str).to eq 'BoundingBox'
@@ -226,9 +254,11 @@ RSpec.describe CqlParser do
         expect(parser[3][:value].str).to eq '2008-09-06T23:59:59Z'
         expect(parser[4][:key].str).to eq 'IsCwic'
         expect(parser[4][:value].str).to eq 'true'
+        expect(parser[5][:key].str).to eq 'IsGeoss'
+        expect(parser[5][:value].str).to eq 'true'
 
-        expect(CqlParser.new.cqlquery).to parse(' AnyText = 1234 and BoundingBox =  -180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true')
-        expect(CqlParser.new.cqlquery).to parse(' AnyText=  1234 and BoundingBox  =   -180,-90,+180.000,+90.0 and TempExtent_begin = 1990-09-03T00:00:01Z  and TempExtent_end  = 2008-09-06T23:59:59Z  and  IsCwic = true')
+        expect(CqlParser.new.cqlquery).to parse(' AnyText = 1234 and BoundingBox =  -180,-90,+180.000,+90.0 and TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z and IsCwic=true and IsGeoss=true')
+        expect(CqlParser.new.cqlquery).to parse(' AnyText=  1234 and BoundingBox  =   -180,-90,+180.000,+90.0 and TempExtent_begin = 1990-09-03T00:00:01Z  and TempExtent_end  = 2008-09-06T23:59:59Z  and  IsCwic = true and IsGeoss = true')
 
       rescue Parslet::ParseFailed => error
         fail(error.cause.ascii_tree)

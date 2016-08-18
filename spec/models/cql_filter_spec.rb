@@ -26,6 +26,16 @@ RSpec.describe CqlFilter do
       expect(cmr_query_hash['tag_key']).to eq(Rails.configuration.cwic_tag)
     end
 
+    it 'is possible to process the IsGeoss queryable' do
+      constraint = 'IsGeoss=true'
+      constraint_language = 'CQL_TEXT'
+      cmr_query_hash = Hash.new
+      cql_filter = CqlFilter.new(constraint, constraint_language, cmr_query_hash)
+      cql_filter.process_constraint
+      expect(cmr_query_hash.size).to_not equal(0)
+      expect(cmr_query_hash['tag_key']).to eq(Rails.configuration.geoss_data_core_tag)
+    end
+
     it 'is possible to process the AnyText queryable with wildcard support' do
       constraint = 'AnyText=12?345*'
       constraint_language = 'CQL_TEXT'

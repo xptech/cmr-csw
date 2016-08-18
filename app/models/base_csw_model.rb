@@ -6,6 +6,7 @@ class BaseCswModel
 
   OUTPUT_FILE_FORMATS = %w(application/xml)
   IS_CWIC = %w(true)
+  IS_GEOSS = %w(true)
   HTTP_METHODS = %w{Get Post}
   OUTPUT_SCHEMAS = %w(http://www.opengis.net/cat/csw/2.0.2 http://www.isotc211.org/2005/gmi http://www.isotc211.org/2005/gmd)
   TYPE_NAMES = %w(csw:Record gmi:MI_Metadata gmd:MD_Metadata)

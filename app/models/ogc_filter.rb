@@ -11,7 +11,8 @@ class OgcFilter
                                        OgcFilterLine,
                                        OgcFilterPoint,
                                        OgcFilterModified,
-                                       OgcFilterIsCwic
+                                       OgcFilterIsCwic,
+                                       OgcFilterIsGeoss
                                      ]
   @ogc_filter
   @cmr_query_hash
