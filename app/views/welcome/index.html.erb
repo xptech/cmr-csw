@@ -138,6 +138,28 @@
     </li>
   </ul>
   <ul>
+      <li>POST to <%= root_url.chomp '/' %>/collections for <span class="emphasis">only searching for CMR GEOSS collections (datasets)</span> search with NO additional constraints:
+  <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
+      outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;
+      startPosition=&quot;1&quot; version=&quot;2.0.2&quot; xmlns=&quot;http://www.opengis.net/cat/csw/2.0.2&quot;
+      xmlns:csw=&quot;http://www.opengis.net/cat/csw/2.0.2&quot; xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot;
+      xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;
+      xmlns:rim=&quot;urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0&quot;&gt;
+      &lt;csw:Query typeNames=&quot;csw:Record&quot;&gt;
+          &lt;csw:ElementSetName&gt;full&lt;/csw:ElementSetName&gt;
+          &lt;csw:Constraint version=&quot;1.1.0&quot;&gt;
+              &lt;ogc:Filter xmlns:ogc=&quot;http://www.opengis.net/ogc&quot;&gt;
+                      &lt;ogc:PropertyIsLike&gt;
+                          &lt;ogc:PropertyName&gt;IsGeoss&lt;/ogc:PropertyName&gt;
+                          &lt;ogc:Literal&gt;true&lt;/ogc:Literal&gt;
+                      &lt;/ogc:PropertyIsLike&gt;
+              &lt;/ogc:Filter&gt;
+          &lt;/csw:Constraint&gt;
+      &lt;/csw:Query&gt;
+  &lt;/csw:GetRecords&gt;</code></pre>
+      </li>
+    </ul>
+  <ul>
     <li>POST to <%= root_url.chomp '/' %>/collections for <span class="emphasis">all CMR collections (datasets)</span> search with NO constraints:
 <pre><code>&lt;csw:GetRecords maxRecords=&quot;10&quot; outputFormat=&quot;application/xml&quot;
     outputSchema=&quot;http://www.isotc211.org/2005/gmd&quot; resultType=&quot;results&quot; service=&quot;CSW&quot;

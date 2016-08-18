@@ -17,13 +17,13 @@ class OgcFilterIsGeoss
             raise OwsException.new('IsGeoss', error_message)
           end
         else
-          # if IsCwic is present it must have a value
-          error_message = "cannot be blank, it must be set to 'true' in order to search only CWIC datasets"
+          # if IsGeoss is present it must have a value
+          error_message = "cannot be blank, it must be set to 'true' in order to search only GEOSS datasets"
           Rails.logger.error(error_message)
           raise OwsException.new('IsGeoss', error_message)
         end
       else
-        error_message = "cannot be blank, it must be set to 'true' in order to search only CWIC datasets"
+        error_message = "cannot be blank, it must be set to 'true' in order to search only GEOSS datasets"
         Rails.logger.error(error_message)
         raise OwsException.new('IsGeoss', error_message)
       end
