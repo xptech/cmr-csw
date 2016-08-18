@@ -34,6 +34,10 @@ group :development do
   gem 'pry-rails'
 end
 
+group :profile do
+  gem 'ruby-prof'
+end
+
 group :test, :development do
   gem 'rspec-rails'
   #gem 'rspec', :require => false
