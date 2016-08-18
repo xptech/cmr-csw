@@ -49,7 +49,6 @@ group :test do
   gem 'webmock'
   gem 'capybara'
   gem 'rack-test'
-  gem 'ruby-prof', :require => false
 end
 
 gem 'bundler-audit'

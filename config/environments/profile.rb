@@ -1,7 +1,6 @@
 # this profile is to be used for profiling the CSW application.  It is almost identical with the production profile so
 # that we can profile with production settings.
-#
-
+# See config.ru for current profile environment settings
 Rails.application.configure do
   # Code is not reloaded between requests.
   config.cache_classes = true
