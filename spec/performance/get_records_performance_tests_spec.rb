@@ -3,7 +3,7 @@ require 'benchmark'
 RSpec.describe "various GetRecords POST requests to evaluate and improve performance", :type => :request do
   # expectations for various result sizes
   let(:performace_runs) { [
-      {:max_records => 10, :max_allowed_memory_increase_mb => 20},
+      {:max_records => 10, :max_allowed_memory_increase_mb => 30},
       {:max_records => 100, :max_allowed_memory_increase_mb => 100},
       {:max_records => 1000, :max_allowed_memory_increase_mb => 410},
       {:max_records => 2000, :max_allowed_memory_increase_mb => 820}
