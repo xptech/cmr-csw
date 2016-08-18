@@ -3,7 +3,7 @@ require 'benchmark'
 RSpec.describe "various GetRecords POST requests to evaluate and improve performance", :type => :request do
   # expectations for various result sizes
   let(:performace_runs) { [
-      {:max_records => 10, :max_allowed_memory_increase_mb => 10},
+      {:max_records => 10, :max_allowed_memory_increase_mb => 30},
       {:max_records => 100, :max_allowed_memory_increase_mb => 100},
       {:max_records => 1000, :max_allowed_memory_increase_mb => 410},
       {:max_records => 2000, :max_allowed_memory_increase_mb => 820}
@@ -42,6 +42,7 @@ RSpec.describe "various GetRecords POST requests to evaluate and improve perform
       performace_runs.each do |performance_run|
         max_records = performance_run[:max_records]
         max_memory_increase_mb = performance_run[:max_allowed_memory_increase_mb]
+        Rails.logger.info("RUNNING performance test for maxRecords = #{max_records} max_memory_increase_mb=#{max_memory_increase_mb}")
         # collect memory before measurements
         GC.start(full_mark: true, immediate_sweep: true, immediate_mark: false)
         gc_stat_before = GC.stat
@@ -77,7 +78,7 @@ RSpec.describe "various GetRecords POST requests to evaluate and improve perform
         # less than max_memory_increase in ram
         expect(resident_set_size_MB_end_after_GC - resident_set_size_MB_start).to be < max_memory_increase_mb
         memory_stats_msg = "RSS_start: #{resident_set_size_MB_start} num_objects_start: #{num_objects_start} gc_stat_start: #{gc_stat_before} RSS_end_before_gc: #{resident_set_size_MB_end_before_GC} num_objects_end_before_gc: #{num_objects_end_before_GC} RSS_end_after_gc: #{resident_set_size_MB_end_after_GC} num_objects_end_after_gc: #{num_objects_end_after_GC} gc_stat_end_after_gc: #{gc_stat_after}"
-        Rails.logger.info("RAN performance run for maxRecords = #{max_records} max_memory_increase_mb=#{max_memory_increase_mb}")
+        Rails.logger.info("RAN performance test for maxRecords = #{max_records} max_memory_increase_mb=#{max_memory_increase_mb}")
         Rails.logger.info(memory_stats_msg)
       end
     end

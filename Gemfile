@@ -34,6 +34,10 @@ group :development do
   gem 'pry-rails'
 end
 
+group :profile do
+  gem 'ruby-prof'
+end
+
 group :test, :development do
   gem 'rspec-rails'
   #gem 'rspec', :require => false
@@ -45,6 +49,7 @@ group :test do
   gem 'webmock'
   gem 'capybara'
   gem 'rack-test'
+  gem 'ruby-prof', :require => false
 end
 
 gem 'bundler-audit'
