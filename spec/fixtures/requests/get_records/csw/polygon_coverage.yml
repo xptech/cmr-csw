@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod&keyword=AIRSAR_TOP_DEM
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&keyword=AIRSAR_TOP_DEM
     body:
       encoding: US-ASCII
       string: ''

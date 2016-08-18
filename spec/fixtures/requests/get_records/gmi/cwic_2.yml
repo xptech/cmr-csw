@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod&keyword=*MODIS*&options%5Bkeyword%5D%5Bpattern%5D=true&tag_key=org.ceos.wgiss.cwic.granules.prod&temporal=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
+    uri: https://cmr.earthdata.nasa.gov/search/collections?bounding_box=-180.00,-90.00,180.000,90&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&keyword=*MODIS*&options%5Bkeyword%5D%5Bpattern%5D=true&tag_key=org.ceos.wgiss.cwic.granules.prod&temporal=1990-09-03T00:00:01Z/2008-09-06T23:59:59Z
     body:
       encoding: US-ASCII
       string: ''
