@@ -527,7 +527,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
         records_xml = Nokogiri::XML(response.body)
         expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
         # The summary record should not have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
-        expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+        expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
       end
     end
   end
@@ -543,7 +543,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
         end
       end
     end
@@ -557,7 +557,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="geossDataCore"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
         end
       end
     end
@@ -570,7 +570,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
         end
       end
     end
@@ -584,7 +584,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="geossDataCore"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
         end
       end
     end
@@ -597,7 +597,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+          expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
         end
       end
     end
@@ -611,7 +611,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
           expect(records_xml.root.xpath('/csw:GetRecordByIdResponse/gmd:MD_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd').size).to eq(1)
-          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
+          expect(records_xml.root.xpath('//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString/text="geossDataCore"', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco')).to eq(false)
         end
       end
     end
@@ -622,7 +622,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to have_http_status(:success)
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
         end
       end
     end
@@ -635,7 +635,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
         end
       end
     end
@@ -646,7 +646,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to have_http_status(:success)
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(1)
         end
       end
     end
@@ -658,7 +658,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to have_http_status(:success)
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
         end
       end
     end
@@ -670,7 +670,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
         end
       end
     end
@@ -683,7 +683,7 @@ RSpec.describe 'Get Record By ID http GET specs', :type => :request do
           expect(response).to render_template('get_record_by_id/index.xml.erb')
           records_xml = Nokogiri::XML(response.body)
           expect(records_xml.root.name).to eq 'GetRecordByIdResponse'
-          expect(records_xml.root.xpath("//dc:subject[text()='This is a GEOSS Data-CORE collection with full and open unrestricted access at no more than the cost of reproduction and distribution']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
+          expect(records_xml.root.xpath("//dc:subject[text()='geossDataCore']", 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'dc' => 'http://purl.org/dc/elements/1.1/').size).to eq(0)
         end
       end
     end
