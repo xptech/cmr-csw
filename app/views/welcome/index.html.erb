@@ -506,9 +506,6 @@
       <li><span class="emphasis">BoundingBox</span> specified as a comma (no spaces) separated string (ex. BoundingBox=lower_left_longitude,lower_left_latitude,upper_right_longitude,upper_right_latitude)</li>
       <li><span class="emphasis">TempExtent_begin</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_begin=2008-09-06T23:59:59Z)</li>
       <li><span class="emphasis">TempExtent_end</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_end=2010-09-06T23:59:59Z).  TempExtent_end must be after TempExtent_begin</li>
-      <li><span class="emphasis">IsCwic</span> with the only valid value 'true' (ex. IsCwic=true) in order to limit the scope of the search to CWIC collections (datasets) instead of the default all CMR collections</li>
-      <li><span class="emphasis">IsGeoss</span> with the only valid value 'true' (ex. IsGeoss=true) in order to limit the scope of the search to GEOSS collections (datasets) instead of the default all CMR collections</li>
-
     </ul>
     Additional query parameters to be used with the GetRecords GET request are:
     <ul>
@@ -536,12 +533,6 @@
   </p>
   <p>Sample GetRecords GET requests:</p>
   <ul>
-    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and only searching for <span class="emphasis">CMR CWIC collections (datasets)</span>:
-      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsCwic=true">GET <%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsCwic=true</a>
-    </li>
-    <li>Search results with the default <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and only searching for <span class="emphasis">CMR CWIC collections (datasets)</span>:
-      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsGeoss=true">GET <%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=IsGeoss=true</a>
-    </li>
     <li>Search results with the default all CMR collections, <span class="emphasis">ISO MENDS / GMI</span> output (http://www.isotc211.org/2005/gmi), full result set and <span class="emphasis">no constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results">GET <%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results</a>
     </li>
