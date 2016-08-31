@@ -34,6 +34,9 @@ RSpec.describe 'GetRecords CWIC functionality', :type => :request do
       expect(records_xml.root.xpath('/csw:GetRecordsResponse/csw:SearchResults/gmi:MI_Metadata', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2', 'gmi' => 'http://www.isotc211.org/2005/gmi').size).to eq(1)
       # The full record should have a keyword of value 'CWIC > CEOS WGISS Integrated Catalog'
       expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='CWIC > CEOS WGISS Integrated Catalog']", 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(1)
+      expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='geossDataCore']", 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(0)
+      expect(records_xml.root.xpath("//gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString[text()='geossNoMonetaryCharge']", 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gco' => 'http://www.isotc211.org/2005/gco').size).to eq(0)
+
     end
   end
 

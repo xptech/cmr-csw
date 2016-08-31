@@ -44,15 +44,19 @@ class BaseCswModel
       if tag.content.strip == Rails.configuration.cwic_tag or tag.content.strip == Rails.configuration.geoss_data_core_tag
         result = tag.xpath('../../..')
         keywords = result.xpath('gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
-        keyword = Nokogiri::XML::Node.new 'gmd:keyword', document
-        text = Nokogiri::XML::Node.new 'gco:CharacterString', document
+        keyword_1 = Nokogiri::XML::Node.new 'gmd:keyword', document
+        keyword_2 = Nokogiri::XML::Node.new 'gmd:keyword', document
+        text_1 = Nokogiri::XML::Node.new 'gco:CharacterString', document
+        text_2 = Nokogiri::XML::Node.new 'gco:CharacterString', document
+        text_2.content = Rails.configuration.geoss_data_core_descriptive_keyword_2
         if tag.content.strip == Rails.configuration.cwic_tag
-          text.content = Rails.configuration.cwic_descriptive_keyword
+          text_1.content = Rails.configuration.cwic_descriptive_keyword
         else
-          text.content = Rails.configuration.geoss_data_core_descriptive_keyword
+          text_1.content = Rails.configuration.geoss_data_core_descriptive_keyword_1
         end
 
-        keyword.add_child text
+        keyword_1.add_child text_1
+        keyword_2.add_child text_2 if tag.content.strip == Rails.configuration.geoss_data_core_tag
         if keywords.empty?
           # Add a descriptive keywords node at gmd:MD_DataIdentification
           di = result.xpath('gmi:MI_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification', 'gmd' => 'http://www.isotc211.org/2005/gmd', 'gmi' => 'http://www.isotc211.org/2005/gmi', 'csw' => 'http://www.opengis.net/cat/csw/2.0.2')
@@ -60,9 +64,11 @@ class BaseCswModel
           keywords = Nokogiri::XML::Node.new 'gmd:MD_Keywords', document
           di.first.prepend_child dks
           dks.add_child keywords
-          keywords.add_child keyword
+          keywords.add_child keyword_1
+          keywords.add_child keyword_2 if tag.content.strip == Rails.configuration.geoss_data_core_tag
         else
-          keywords.first.prepend_child keyword
+          keywords.first.prepend_child keyword_1
+          keywords.first.prepend_child keyword_2 if tag.content.strip == Rails.configuration.geoss_data_core_tag
         end
       end
     end
