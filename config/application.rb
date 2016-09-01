@@ -52,7 +52,7 @@ module Csw
     config.client_id = 'cmr_csw'
     config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
     config.cwic_descriptive_keyword = 'CWIC > CEOS WGISS Integrated Catalog'
-    config.geoss_data_core_tag = 'org.geo.geoss_data-core'
+    config.geoss_data_core_tag = 'org.geoss.geoss_data-core'
     config.geoss_data_core_descriptive_keyword_1 = 'geossDataCore'
     config.geoss_data_core_descriptive_keyword_2 = 'geossNoMonetaryCharge'
     config.concept_id = 'C14758250-LPDAAC_ECS'

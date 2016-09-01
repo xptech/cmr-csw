@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?concept_id%5B%5D=C1000000247-DEMO_PROV&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core
+    uri: https://cmr.earthdata.nasa.gov/search/collections?concept_id%5B%5D=C1000000247-DEMO_PROV&include_tags=org.ceos.wgiss.cwic.granules.prod,org.geoss.geoss_data-core
     body:
       encoding: US-ASCII
       string: ''
@@ -354,7 +354,7 @@ http_interactions:
               <gmi:MI_AcquisitionInformation/>
            </gmi:acquisitionInformation>
         </gmi:MI_Metadata>
-        <tags><tag><tagKey>org.geo.geoss_data-core</tagKey></tag></tags></result></results>
+        <tags><tag><tagKey>org.geoss.geoss_data-core</tagKey></tag></tags></result></results>
     http_version: 
   recorded_at: Wed, 01 Jun 2016 20:47:15 GMT
 recorded_with: VCR 3.0.1

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core&tag_key=org.ceos.wgiss.cwic.granules.prod
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geoss.geoss_data-core&tag_key=org.ceos.wgiss.cwic.granules.prod
     body:
       encoding: US-ASCII
       string: ''
@@ -6370,7 +6370,7 @@ http_interactions:
   recorded_at: Thu, 11 Aug 2016 15:02:28 GMT
 - request:
     method: get
-    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geo.geoss_data-core
+    uri: https://cmr.earthdata.nasa.gov/search/collections?include_tags=org.ceos.wgiss.cwic.granules.prod,org.geoss.geoss_data-core
     body:
       encoding: US-ASCII
       string: ''
