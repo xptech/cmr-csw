@@ -5,6 +5,7 @@ describe 'view documentation' do
 
   it 'contains the relevant static markup from the layout' do
     visit '/collections'
+    expect(page).to have_link('Common Metadata Repository (CMR)', href: 'https://cmr.earthdata.nasa.gov')
     within('section.hero') do
       title = find('h1')
       expect(title.text).to eq('Catalog Service for the Web')
