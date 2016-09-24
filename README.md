@@ -3,8 +3,27 @@ This file contains the issues identified during the development of CMR CSW.  It
 is focused on differences between the IDN/GCMD CSW and CMR CSW mainly due to
 the initial CMR Search capabilities, which contains functionality which is
 exposed via a CSW standard.
+It also contains notes that can be useful with coming up to speed with 
+development of the CMR CSW application.
 
 This file uses the GitHub markdown language. [Learn Markdown here.](https://bitbucket.org/tutorials/markdowndemo)
+
+### Application Profiling using RubyProd and qcachegrind ###
+ Use the ruby-prof profiling gem (for MRI ruby) and the :profile group:
+~~~~    
+    group :profile do
+      gem 'ruby-prof'
+    end
+~~~~
+ 
+ Install the qcachegrind visualization package:
+~~~~    
+    brew install qcachegrind --with-graphviz
+    sudo brew linkapps qcachegrind
+~~~~
+
+ Configure the ruby-prof gem to generate qcachegrind output:
+   See the [Profiling Rails Section of the ruby-prof gem documentation.](https://github.com/ruby-prof/ruby-prof)   
 
 ### GetCapabilities findings ### 
 ##### Quick summary #####
