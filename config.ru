@@ -5,7 +5,7 @@ map '/csw' do
     # configure ruby-prof behavior when profiling the application and running with the profile environment
     # for visualizing csw-call-grind.out.app on a Mac install QCachegrind using brew or MacPorts
     # profiling data location and type
-    use Rack::RubyProf, :path => '/tmp/rubyprof',
+    use Rack::RubyProf, :path => Rails.root.join('log','rubyprof'),
     :printers => {::RubyProf::FlatPrinter => 'csw-flat.txt',
                   ::RubyProf::GraphPrinter => 'csw-graph.txt',
                   ::RubyProf::GraphHtmlPrinter => 'csw-graph.html',

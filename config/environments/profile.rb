@@ -1,9 +1,15 @@
+require "gc_disabler"
+
 # this profile is to be used for profiling the CSW application.  It is almost identical with the production profile so
 # that we can profile with production settings.
 # See config.ru for current profile environment settings
 Rails.application.configure do
+  # disable garbage collection BEFORE profiling
+  config.middleware.insert_before Rack::Runtime, GCDisabler
+
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.cache_template_loading = true
 
   config.eager_load = true
 
