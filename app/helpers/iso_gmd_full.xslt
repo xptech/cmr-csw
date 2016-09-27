@@ -3,17 +3,31 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
   <xsl:output method="xml" indent="yes"/>
+  <xsl:param name="result_root_element"/>
+  <xsl:param name="server_timestamp"/>
+  <xsl:param name="number_of_records_matched"/>
+  <xsl:param name="number_of_records_returned"/>
+  <xsl:param name="next_record"/>
+  <xsl:param name="element_set"/>
+  <xsl:param name="record_schema"/>
+  <xsl:variable name="v_result_root_element" select="$result_root_element"/>
+  <xsl:variable name="v_server_timestamp" select="$server_timestamp"/>
+  <xsl:variable name="v_number_of_records_matched" select="$number_of_records_matched"/>
+  <xsl:variable name="v_number_of_records_returned" select="$number_of_records_returned"/>
+  <xsl:variable name="v_next_record" select="$next_record"/>
+  <xsl:variable name="v_element_set" select="$element_set"/>
+  <xsl:variable name="v_record_schema" select="$record_schema"/>
   <xsl:template match="/">
-    <xsl:element name="{$result_root_element}">
-      <xsl:if test="$result_root_element = 'csw:GetRecordsResponse'">
-        <csw:SearchStatus timestamp="{$server_timestamp}"/>
-        <csw:SearchResults numberOfRecordsMatched="{$number_of_records_matched}"
-                           numberOfRecordsReturned="{$number_of_records_returned}" nextRecord="{$next_record}"
-                           elementSet="{$element_set}" recordSchema="{$record_schema}">
+    <xsl:element name="{$v_result_root_element}">
+      <xsl:if test="$v_result_root_element = 'csw:GetRecordsResponse'">
+        <csw:SearchStatus timestamp="{$v_server_timestamp}"/>
+        <csw:SearchResults numberOfRecordsMatched="{$v_number_of_records_matched}"
+                           numberOfRecordsReturned="{$v_number_of_records_returned}" nextRecord="{$v_next_record}"
+                           elementSet="{$v_element_set}" recordSchema="{$v_record_schema}">
           <xsl:call-template name="entries"/>
         </csw:SearchResults>
       </xsl:if>
-      <xsl:if test="$result_root_element = 'csw:GetRecordByIdResponse'">
+      <xsl:if test="$v_result_root_element = 'csw:GetRecordByIdResponse'">
         <xsl:call-template name="entries"/>
       </xsl:if>
     </xsl:element>
