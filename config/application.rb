@@ -34,6 +34,7 @@ module Csw
 
     config.relative_url_root = '/csw'
     config.assets.prefix = '/assets'
+    config.autoload_paths << Rails.root.join('/lib')
 
     def self.load_version
       version_file = "#{config.root}/version.txt"
