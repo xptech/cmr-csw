@@ -16,6 +16,16 @@ RSpec.describe CqlFilter do
       expect(cmr_query_hash['keyword']).to eq('12345')
     end
 
+    it 'is possible to process the ArchiveCenter queryable' do
+      constraint = 'ArchiveCenter=DHL'
+      constraint_language = 'CQL_TEXT'
+      cmr_query_hash = Hash.new
+      cql_filter = CqlFilter.new(constraint, constraint_language, cmr_query_hash)
+      cql_filter.process_constraint
+      expect(cmr_query_hash.size).to_not equal(0)
+      expect(cmr_query_hash['archive_center']).to eq('DHL')
+    end
+
     it 'is possible to process the IsCwic queryable' do
       constraint = 'IsCwic=true'
       constraint_language = 'CQL_TEXT'
@@ -46,6 +56,18 @@ RSpec.describe CqlFilter do
       expect(cmr_query_hash['keyword']).to eq('12?345*')
       expect(cmr_query_hash['options[keyword][pattern]']).to be true
     end
+
+    it 'is possible to process the ArchiveCenter queryable with wildcard support' do
+      constraint = 'ArchiveCenter=12?345*'
+      constraint_language = 'CQL_TEXT'
+      cmr_query_hash = Hash.new
+      cql_filter = CqlFilter.new(constraint, constraint_language, cmr_query_hash)
+      cql_filter.process_constraint
+      expect(cmr_query_hash.size).to_not equal(0)
+      expect(cmr_query_hash['archive_center']).to eq('12?345*')
+      expect(cmr_query_hash['options[archive_center][pattern]']).to be true
+    end
+
 
     it 'is NOT possible to process an invalid CQL queryable' do
       constraint = 'InvalidQueryable=12?345*'

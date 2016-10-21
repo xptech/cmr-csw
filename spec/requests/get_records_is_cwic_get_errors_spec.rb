@@ -1,4 +1,4 @@
-describe "GetRecords IsCwic error cases for POST requests" do
+describe "GetRecords IsCwic error cases for GET requests" do
 
   it 'correctly renders the exception page in response to an invalid IsCwic value in the POST request' do
     VCR.use_cassette 'requests/get_records/gmi/iscwic_error1', :decode_compressed_response => true, :record => :once do

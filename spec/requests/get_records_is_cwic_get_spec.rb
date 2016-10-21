@@ -98,7 +98,6 @@ RSpec.describe "various successful GetRecords GET requests with the IsCwic const
       get '/collections', :request => 'GetRecords', :service => 'CSW', :version => '2.0.2', :ElementSetName => 'full',
           :resultType => 'hits'
       expect(response).to have_http_status(:success)
-      expect(response).to have_http_status(:success)
       expect(response).to render_template('get_records/index.xml.erb')
       records_xml = Nokogiri::XML(response.body)
       expect(records_xml.root.name).to eq 'GetRecordsResponse'
