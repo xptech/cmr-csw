@@ -1,6 +1,6 @@
 class OgcFilterArchiveCenter
   @@ISO_QUERYABLE_NAME = "ArchiveCenter"
-  # AnyText is an ISO queryable
+  # ArchiveCenter / OrganisationName is an ISO queryable
   @@CMR_ARCHIVECENTER_PARAM = ISO_QUERYABLES_TO_CMR_QUERYABLES[@@ISO_QUERYABLE_NAME][1]
 
   def process(ogc_filter)
