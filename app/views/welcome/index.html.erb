@@ -503,6 +503,9 @@
     CSW queryables inside the CQL 'constraint' GET request query parameter:
     <ul>
       <li><span class="emphasis">AnyText</span> with wildcard * and ? support</li>
+      <li><span class="emphasis">ArchiveCenter</span> with wildcard * and ? support</li>
+      <li><span class="emphasis">IsCwic</span> with the only value value of 'true', returns the CMR collection tagged as CWIC</li>
+      <li><span class="emphasis">IsGeoss</span> with the only value value of 'true', returns the CMR collection tagged as GEOSS</li>
       <li><span class="emphasis">BoundingBox</span> specified as a comma (no spaces) separated string (ex. BoundingBox=lower_left_longitude,lower_left_latitude,upper_right_longitude,upper_right_latitude)</li>
       <li><span class="emphasis">TempExtent_begin</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_begin=2008-09-06T23:59:59Z)</li>
       <li><span class="emphasis">TempExtent_end</span> specified as an ISO8601 datetime string yyyy-MM-ddTHH:mm:ssZ (ex. TempExtent_end=2010-09-06T23:59:59Z).  TempExtent_end must be after TempExtent_begin</li>
@@ -550,6 +553,9 @@
     </li>
     <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">AnyText, BoundingBox, TempExtent_begin and TempExtent_end constraints</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS* and BoundingBox=-180.00,-90.00,180.00,90.00 TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z">GET <%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=AnyText=*MO?IS* and BoundingBox=-180.00,-90.00,180.00,90.00 TempExtent_begin=1990-09-03T00:00:01Z and TempExtent_end=2008-09-06T23:59:59Z</a>
+    </li>
+    <li>Search results with <span class="emphasis">CSW</span> output (http://www.opengis.net/cat/csw/2.0.2), full result set and <span class="emphasis">ArchiveCenter constraint</span>:
+      <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=ArchiveCenter=DHS*">GET <%= root_url.chomp '/' %>/collections?request=GetRecords&service=CSW&version=2.0.2&ElementSetName=full&resultType=results&outputSchema=http://www.opengis.net/cat/csw/2.0.2&CONSTRAINTLANGUAGE=CQL_TEXT&constraint=ArchiveCenter=DHS*</a>
     </li>
   </ul>
 </section>
@@ -640,6 +646,7 @@ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
     <li>Allowed values via a GetDomain GET request for the IsCwic (used to search only CWIC datasets) <span class="emphasis">PropertyName</span>:
       <a target="_blank" href="<%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic">GET <%= root_url.chomp '/' %>/collections?request=GetDomain&service=CSW&version=2.0.2&PropertyName=IsCwic</a>
     </li>
+
     <li>Allowed values via a GetDomain POST to <%= root_url.chomp '/' %>/collections for the IsCwic (used to only search CWIC datasets) <span class="emphasis">PropertyName</span> with XML POST request body:
 <pre><code>&lt;GetDomain
    service=&quot;CSW&quot;

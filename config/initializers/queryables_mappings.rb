@@ -76,8 +76,8 @@ ISO_QUERYABLES_TO_CMR_QUERYABLES =
         # Publication date of the resource
         #'PublicationDate' => ['PublicationDate', '', ['MD_Metadata.identificationInfo.AbstractMD_Identification.citation.CI_Citation.date.CI_Date[dateType.CI_DateTypeCo de.@codeListValue='publication'].date.Date']],
 
-        # Name of the organisation providing the resource NOT SURE provider_short_name. archive_center or data_center
-        #'OrganisationName' => ['OrganisationName', 'data_center', ['MD_Metadata.identificationInfo.AbstractMD_Identification.pointOfContact.CI_ResponsibleParty.organisationName']],
+        # Name of the organisation (OrganisationName) providing the resource NOT SURE provider_short_name. archive_center or data_center
+        'ArchiveCenter' => ['ArchiveCenter', 'archive_center', ['MD_Metadata.identificationInfo.AbstractMD_Identification.pointOfContact.CI_ResponsibleParty.organisationName']],
 
         # Are there any security constraints?
         #'HasSecurityConstraints' => ['HasSecurityConstraints', '', ['MD_Metadata.AbstractMD_Identification.resourceConstraints.MD_SecurityConstraints']],

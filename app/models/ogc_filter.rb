@@ -7,6 +7,7 @@ class OgcFilter
                                        OgcFilterPlatform,
                                        OgcFilterInstrument,
                                        OgcFilterScienceKeywords,
+                                       OgcFilterArchiveCenter,
                                        OgcFilterPolygon,
                                        OgcFilterLine,
                                        OgcFilterPoint,

@@ -6,20 +6,21 @@ class GetDomain < BaseCswModel
                           'Platform' => 'DomainPlatform',
                           'Instrument' => 'DomainInstrument',
                           'ScienceKeywords' => 'DomainScienceKeywords',
+                          'ArchiveCenter' => 'DomainArchiveCenter',
                           'IsCwic' => 'DomainIsCwic',
                           'IsGeoss' => 'DomainIsGeoss'
   }
   # TODO Platform, Instrument, ScienceKeywords once we have a way to get the list of values
 
   VALID_PARAMETER_NAMES = {'GetRecords.resultType' => 'DomainGetRecordsResultType',
-                             'GetRecords.outputFormat' => 'DomainGetRecordsOutputFormat',
-                             'GetRecords.outputRecType' => 'DomainGetRecordsOutputRecType',
-                             'GetRecords.typeName' => 'DomainGetRecordsTypeName',
-                             'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
-                             'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraintLanguage',
-                             'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
-                             'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
-                             'DescribeRecord.schemaLanguage' => 'DomainDescribeRecordSchemaLanguage'
+                           'GetRecords.outputFormat' => 'DomainGetRecordsOutputFormat',
+                           'GetRecords.outputRecType' => 'DomainGetRecordsOutputRecType',
+                           'GetRecords.typeName' => 'DomainGetRecordsTypeName',
+                           'GetRecords.ElementSetName' => 'DomainGetRecordsElementSetName',
+                           'GetRecords.CONSTRAINTLANGUAGE' => 'DomainGetRecordsConstraintLanguage',
+                           'GetRecordById.ElementSetName' => 'DomainGetRecordByIdElementSetName',
+                           'DescribeRecord.typeName' => 'DomainDescribeRecordTypeName',
+                           'DescribeRecord.schemaLanguage' => 'DomainDescribeRecordSchemaLanguage'
   }
 
   @request_body_xml
