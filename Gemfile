@@ -54,3 +54,7 @@ end
 gem 'bundler-audit'
 
 gem 'responders', '~> 2.0'
+
+group :sit do
+  gem 'rails_12factor'
+end
