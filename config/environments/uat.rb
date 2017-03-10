@@ -79,6 +79,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
 
+  config.assets.initialize_on_precompile = false
+
   config.cmr_search_endpoint = 'https://cmr.uat.earthdata.nasa.gov/search'
 
 
