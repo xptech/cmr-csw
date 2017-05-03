@@ -102,7 +102,7 @@ describe 'view documentation' do
       within('ul.output-formats') do
         expect(page).to have_content('application/xml')
       end
-      expect(page).to have_link('GET http://www.example.com/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C14758250-LPDAAC_ECS', href: 'http://www.example.com/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C14758250-LPDAAC_ECS')
+      expect(page).to have_link('GET https://www.example.com/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C14758250-LPDAAC_ECS', href: 'https://www.example.com/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C14758250-LPDAAC_ECS')
       expect(page).to have_content('<csw:Id>C14758250-LPDAAC_ECS</csw:Id>')
     end
   end

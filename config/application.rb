@@ -34,6 +34,12 @@ module Csw
 
     config.assets.initialize_on_precompile = false
 
+    # for some reason the root_url rails variable always returns http even when running https
+    # we use https everywhere except the development environment where we'll overwrite this setting with the http protocol
+    config.action_controller.default_url_options = {
+        :protocol => "https"
+    }
+
     config.relative_url_root = '/csw'
     config.assets.prefix = '/assets'
     config.autoload_paths << Rails.root.join('/lib')
