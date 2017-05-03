@@ -38,4 +38,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # for some reason the root_url rails variable always returns http even when running https
+  # overwrite the https setting from application.rb for the development environment
+  config.action_controller.default_url_options = {
+      :protocol => "http"
+  }
+
 end
