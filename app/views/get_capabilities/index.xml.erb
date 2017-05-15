@@ -49,7 +49,7 @@
 			<ows:DCP>
 				<ows:HTTP>
 					<% GetCapability::HTTP_METHODS.each do |method| %>
-					<ows:<%= method %> xlink:href="<%= root_url %>/collections">
+					<ows:<%= method %> xlink:href="<%= root_url %>collections">
 					  <% if method == 'Post' %>
 					  <ows:Constraint name="PostEncoding">
 					    <ows:Value>XML</ows:Value>
@@ -71,7 +71,7 @@
 			<ows:DCP>
 				<ows:HTTP>
 					<% GetRecords::HTTP_METHODS.each do |method| %>
-					<ows:<%= method %> xlink:href="<%= root_url %>/collections">
+					<ows:<%= method %> xlink:href="<%= root_url %>collections">
 						<% if method == 'Post' %>
 						<ows:Constraint name="PostEncoding">
 						  <ows:Value>XML</ows:Value>
@@ -125,7 +125,7 @@
 			<ows:DCP>
 		    <ows:HTTP>
 				<% GetRecordById::HTTP_METHODS.each do |method| %>
-				  <ows:<%= method %> xlink:href="<%= root_url %>/collections">
+				  <ows:<%= method %> xlink:href="<%= root_url %>collections">
 					<% if method == 'Post' %>
 					  <ows:Constraint name="PostEncoding">
 						  <ows:Value>XML</ows:Value>
