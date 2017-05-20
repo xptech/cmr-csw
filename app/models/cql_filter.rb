@@ -3,7 +3,7 @@
 #
 class CqlFilter
   CONSTRAINT_LAGUAGES = %w(CQL_TEXT)
-  SUPPORTED_CQL_QUERYABLES = %w(AnyText ArchiveCenter BoundingBox TempExtent_begin TempExtent_end IsCwic IsGeoss)
+  SUPPORTED_CQL_QUERYABLES = %w(AnyText ArchiveCenter BoundingBox TempExtent_begin TempExtent_end IsCwic IsGeoss Provider)
 
   @constraint
   @constraint_language
@@ -51,6 +51,8 @@ class CqlFilter
           @cmr_query_hash.reverse_merge!(CqlFilterAnyText.process(queryable_value))
         when 'ArchiveCenter'
           @cmr_query_hash.reverse_merge!(CqlFilterArchiveCenter.process(queryable_value))
+        when 'Provider'
+          @cmr_query_hash.reverse_merge!(CqlFilterProvider.process(queryable_value))
         when 'BoundingBox'
           @cmr_query_hash.reverse_merge!(CqlFilterBoundingBox.process(queryable_value))
         when 'TempExtent_begin'
@@ -64,7 +66,7 @@ class CqlFilter
         else
           error_message = "The queryable #{queryable} is not supported by the CMR CSW implementation"
           Rails.logger.error(error_message)
-          raise OwxException.new('constraint', error_message)
+          raise OwsException.new('constraint', error_message)
       end
     end
     if !begin_date.nil? || !end_date.nil?

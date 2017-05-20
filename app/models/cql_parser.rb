@@ -13,13 +13,14 @@ class CqlParser < Parslet::Parser
   rule(:cqlconstraint_tend)     { space? >> str('TempExtent_end').as(:key) >> space? }
   rule(:cqlconstraint_iscwic)   { space? >> str('IsCwic').as(:key) >> space? }
   rule(:cqlconstraint_isgeoss)  { space? >> str('IsGeoss').as(:key) >> space? }
+  rule(:cqlconstraint_provider) { space? >> str('Provider').as(:key) >> space? }
   rule(:equals)                 { space? >> str('=') >> space? }
   rule(:value)                  { space? >> match['[:alnum:]\-\+\*\?\,\:\.'].repeat(1).as(:value) >> space? }
 
   rule(:operator)       { space? >> str('and') >> space? }
   rule(:operator?)      { operator.maybe }
 
-  rule(:cqlquery)       { ((cqlconstraint_bbox |  cqlconstraint_anytext | cqlconstraint_archivecenter |cqlconstraint_tbegin | cqlconstraint_tend | cqlconstraint_iscwic | cqlconstraint_isgeoss) >> equals >> value >> operator?).repeat }
+  rule(:cqlquery)       { ((cqlconstraint_bbox |  cqlconstraint_anytext | cqlconstraint_archivecenter |cqlconstraint_tbegin | cqlconstraint_tend | cqlconstraint_iscwic | cqlconstraint_isgeoss | cqlconstraint_provider) >> equals >> value >> operator?).repeat }
 
   root(:cqlquery)
 

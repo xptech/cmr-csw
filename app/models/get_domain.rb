@@ -8,7 +8,8 @@ class GetDomain < BaseCswModel
                           'ScienceKeywords' => 'DomainScienceKeywords',
                           'ArchiveCenter' => 'DomainArchiveCenter',
                           'IsCwic' => 'DomainIsCwic',
-                          'IsGeoss' => 'DomainIsGeoss'
+                          'IsGeoss' => 'DomainIsGeoss',
+                          'Provider' => 'DomainProvider'
   }
   # TODO Platform, Instrument, ScienceKeywords once we have a way to get the list of values
 
