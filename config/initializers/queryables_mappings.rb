@@ -166,6 +166,7 @@ ADDITIONAL_QUERYABLES_TO_CMR_QUERYABLES =
     # https://cmr.earthdata.nasa.gov/search/collections.json?tag_key=org.ceos.wgiss.cwic.granules.prod&include_tags=org.ceos.wgiss.cwic.*
     'IsCwic' => ['IsCwic', 'IsCwic', ['']],
     'IsGeoss' => ['IsGeoss', 'IsGeoss', ['']],
+    'Provider' => ['', 'provider', ['']]
 }
 
 GCMD_SPECIFIC_QUERYABLES_TO_CMR_QUERYABLES =
