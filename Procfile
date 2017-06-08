@@ -1,1 +1,1 @@
-web: bundle exec unicorn -p 15400 -E $rails_env
+web: bundle exec unicorn -p 15400 -E $RAILS_ENV
