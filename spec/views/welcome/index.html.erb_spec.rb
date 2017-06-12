@@ -20,8 +20,8 @@ describe 'view documentation' do
 
     within('footer') do
       expect(page).to have_link("Release: #{Rails.configuration.version.strip}")
-      expect(page).to have_link('Andrew Mitchell')
-      expect(page).to have_content('NASA Official: Andrew Mitchell')
+      expect(page).to have_link('Stephen Berrick')
+      expect(page).to have_content('NASA Official: Stephen Berrick')
     end
 
   end
