@@ -127,7 +127,7 @@ class GetRecords < BaseCswModel
         Rails.logger.info "RestClient call to CMR endpoint: #{query_url}?#{@cmr_query_hash.to_query}"
         response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{@cmr_query_hash.to_query}",
                                                :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
-                                               :headers => {:client_id => Rails.configuration.client_id,
+                                               :headers => {:client_id => ENV['client_id'],
                                                             :accept => 'application/iso19115+xml'}
       end
       Rails.logger.info "CMR collection search took #{(time.to_f * 1000).round(0)} ms"

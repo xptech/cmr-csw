@@ -4,7 +4,6 @@ require 'rails'
 # Pick the frameworks you want:
 require 'active_model/railtie'
 require 'active_job/railtie'
-# require "active_record/railtie"
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
@@ -56,14 +55,21 @@ module Csw
     end
 
     config.version = load_version
-    # additional config parameters for ALL environments here
+    # Configuration parameters for ALL environments
+
+    # CMR API endpoint
     config.cmr_search_endpoint = 'https://cmr.earthdata.nasa.gov/search'
-    config.client_id = 'cmr_csw'
+    # CMR tag for only CWIC granules
     config.cwic_tag = 'org.ceos.wgiss.cwic.granules.prod'
     config.cwic_descriptive_keyword = 'CWIC > CEOS WGISS Integrated Catalog'
+    # CMR tag for GEOSS granules
     config.geoss_data_core_tag = 'org.geoss.geoss_data-core'
     config.geoss_data_core_descriptive_keyword_1 = 'geossDataCore'
     config.geoss_data_core_descriptive_keyword_2 = 'geossNoMonetaryCharge'
+    # static CMR concept_id identifier for a CMR collection in the CMR PRODUCTION environment
+    # the identifier is used to assemble the sample CMR CSW request in the documentation page:
+    # https://cmr.earthdata.nasa.gov/csw/collections?request=GetRecordById&service=CSW&version=2.0.2&outputSchema=http://www.isotc211.org/2005/gmi&ElementSetName=full&id=C14758250-LPDAAC_ECS
     config.concept_id = 'C14758250-LPDAAC_ECS'
+
   end
 end

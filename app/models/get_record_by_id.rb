@@ -46,7 +46,7 @@ class GetRecordById < BaseCswModel
         query_url = "#{Rails.configuration.cmr_search_endpoint}/collections"
         Rails.logger.info "RestClient call to CMR endpoint: #{query_url}?#{cmr_params.to_query}"
         # RestClient does not support array parameters in a query so we have to inline them in the url parameter. Which sucks...
-        response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{cmr_params.to_query}", :verify_ssl => OpenSSL::SSL::VERIFY_NONE, :headers => {:client_id => Rails.configuration.client_id, :accept => 'application/iso19115+xml'}
+        response = RestClient::Request.execute :method => :get, :url => "#{query_url}?#{cmr_params.to_query}", :verify_ssl => OpenSSL::SSL::VERIFY_NONE, :headers => {:client_id => ENV['client_id'], :accept => 'application/iso19115+xml'}
       end
       Rails.logger.info "CMR collection search took #{(time.to_f * 1000).round(0)} ms"
     rescue RestClient::BadRequest => e
