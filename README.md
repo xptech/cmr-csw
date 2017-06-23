@@ -3,7 +3,7 @@
 Visit NASA's CSW based on the EOSDIS COMMON METADATA REPOSITORY (CMR) at
 [https://cmr.earthdata.nasa.gov/csw](https://cmr.earthdata.nasa.gov/csw)
 
-[![Build Status](https://api.travis-ci.org/xptech/cmr-csw.svg?branch=master)](https://api.travis-ci.org/xptech/cmr-csw.svg?branch=master)
+Travis CI: [![Build Status](https://api.travis-ci.org/xptech/cmr-csw.svg?branch=master)](https://api.travis-ci.org/xptech/cmr-csw.svg?branch=master)
 
 ## About
 The CMR CSW is a web application developed by [NASA](http://nasa.gov) [EOSDIS](https://earthdata.nasa.gov)
@@ -63,6 +63,6 @@ All tests should pass.
 ### Run the application
 Execute the command below in the project root directory:
 
-    bin/rails server
+    rails server
 
-Open `http://localhost:3000` in a local browser.
+Open `http://localhost:3000/csw` in a local browser.
