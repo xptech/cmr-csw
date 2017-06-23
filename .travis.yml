@@ -4,10 +4,7 @@ cache:
 sudo: false
 script:
   - export RAILS_ENV=test
-  - bundle exec rspec --color --format documentation --require spec_helper --require rails_helper
-env:
-  global:
-    - client_id=cmr_csw
+  - bundle exec rspec
 branches:
   only: # Only build master. Pull requests to master also get built.
     - master
